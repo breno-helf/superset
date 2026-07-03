@@ -594,7 +594,7 @@ class AuditMixinNullable(AuditMixin):
     )
 
     @declared_attr
-    def created_by_fk(self) -> sa.Column:  # type: ignore[override]  # pylint: disable=arguments-renamed
+    def created_by_fk(self):  # type: ignore[override]  # pylint: disable=arguments-renamed
         return sa.Column(
             sa.Integer,
             sa.ForeignKey("ab_user.id"),
@@ -603,7 +603,7 @@ class AuditMixinNullable(AuditMixin):
         )
 
     @declared_attr
-    def changed_by_fk(self) -> sa.Column:  # type: ignore[override]  # pylint: disable=arguments-renamed
+    def changed_by_fk(self):  # type: ignore[override]  # pylint: disable=arguments-renamed
         return sa.Column(
             sa.Integer,
             sa.ForeignKey("ab_user.id"),

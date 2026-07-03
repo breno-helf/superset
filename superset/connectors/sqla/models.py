@@ -336,7 +336,7 @@ class BaseDatasource(
         return self.kind == DatasourceKind.VIRTUAL
 
     @declared_attr
-    def slices(self) -> RelationshipProperty:  # type: ignore[override]
+    def slices(self):  # type: ignore[override]
         return relationship(
             "Slice",
             overlaps="table",
