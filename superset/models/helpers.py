@@ -3331,11 +3331,6 @@ class ExploreMixin:  # pylint: disable=too-many-public-methods
             elif col in metrics_exprs_by_label:
                 col = metrics_exprs_by_label[col]
                 need_groupby = True
-            elif isinstance(col, str) and col in adhoc_columns_by_label:
-                col, _unused = self.adhoc_column_to_sqla(
-                    col=adhoc_columns_by_label[col],
-                    template_processor=template_processor,
-                )
             elif col in metrics_by_name:
                 col = metrics_by_name[col].get_sqla_col(
                     template_processor=template_processor
@@ -3344,6 +3339,11 @@ class ExploreMixin:  # pylint: disable=too-many-public-methods
             elif col in columns_by_name:
                 col = self.convert_tbl_column_to_sqla_col(
                     columns_by_name[col], template_processor=template_processor
+                )
+            elif isinstance(col, str) and col in adhoc_columns_by_label:
+                col, _unused = self.adhoc_column_to_sqla(
+                    col=adhoc_columns_by_label[col],
+                    template_processor=template_processor,
                 )
 
             if isinstance(col, ColumnElement):
