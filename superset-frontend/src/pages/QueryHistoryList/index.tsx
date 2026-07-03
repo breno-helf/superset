@@ -79,8 +79,8 @@ const StyledCodeSyntaxHighlighter = styled(CodeSyntaxHighlighter)`
 `;
 
 interface QueryListProps {
-  addDangerToast: (msg: string, config?: any) => any;
-  addSuccessToast: (msg: string, config?: any) => any;
+  addDangerToast: (msg: string, config?: Record<string, unknown>) => void;
+  addSuccessToast: (msg: string, config?: Record<string, unknown>) => void;
 }
 
 const StyledTableLabel = styled.div`
@@ -233,7 +233,9 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { start_time },
           },
-        }: any) => {
+        }: {
+          row: { original: QueryObject };
+        }) => {
           const start = extendedDayjs.utc(start_time).local();
           const formattedStartTimeData = start
             .format(DATETIME_WITH_TIME_ZONE)
@@ -256,7 +258,9 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { status, start_time, start_running_time, end_time },
           },
-        }: any) => {
+        }: {
+          row: { original: QueryObject };
+        }) => {
           const timerType = status === QueryState.Failed ? 'danger' : status;
           // Use start_running_time if available for more accurate duration
           const startTime = start_running_time || start_time;
@@ -302,8 +306,10 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { sql_tables: tables = [] },
           },
-        }: any) => {
-          const names = tables.map((table: any) => table.table);
+        }: {
+          row: { original: QueryObject };
+        }) => {
+          const names = tables.map((table: { table: string }) => table.table);
           const main = names.length > 0 ? names.shift() : '';
 
           if (names.length) {
@@ -344,7 +350,9 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { user },
           },
-        }: any) => getOwnerName(user),
+        }: {
+          row: { original: QueryObject };
+        }) => getOwnerName(user),
         id: QueryObjectColumns.UserFirstName,
       },
       {
@@ -361,7 +369,11 @@ function QueryList({ addDangerToast }: QueryListProps) {
       {
         accessor: QueryObjectColumns.Sql,
         Header: t('SQL'),
-        Cell: ({ row: { original, id } }: any) => (
+        Cell: ({
+          row: { original, id },
+        }: {
+          row: { original: QueryObject; id: string };
+        }) => (
           <div
             tabIndex={0}
             role="button"
@@ -398,7 +410,9 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { id },
           },
-        }: any) => (
+        }: {
+          row: { original: QueryObject };
+        }) => (
           <Tooltip title={t('Open query in SQL Lab')} placement="bottom">
             <Link to={`/sqllab?queryId=${id}`}>
               <Icons.Full iconSize="l" />

@@ -109,8 +109,12 @@ export interface Dashboard {
   changed_by: string;
   changed_on?: string;
   dashboard_title: string;
+  description?: string;
+  certified_by?: string;
+  certification_details?: string;
   id: number;
   published: boolean;
+  status?: string;
   url: string;
   owners: Owner[];
   tags: TagType[];
@@ -166,8 +170,8 @@ const DASHBOARD_COLUMNS_TO_FETCH = [
 
 function DashboardList(props: DashboardListProps) {
   const { addDangerToast, addSuccessToast, user } = props;
-  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
-    state => state.user,
+  const { roles } = useSelector(
+    (state: { user: UserWithPermissionsAndRoles }) => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
 
@@ -341,7 +345,9 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { id },
           },
-        }: any) =>
+        }: {
+          row: { original: Dashboard };
+        }) =>
           user?.userId && (
             <FaveStar
               itemId={id}
@@ -366,7 +372,9 @@ function DashboardList(props: DashboardListProps) {
               description,
             },
           },
-        }: any) => (
+        }: {
+          row: { original: Dashboard };
+        }) => (
           <FlexRowContainer>
             <Link to={url} title={dashboardTitle}>
               {certifiedBy && (
@@ -391,7 +399,9 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { status },
           },
-        }: any) => (
+        }: {
+          row: { original: Dashboard };
+        }) => (
           <PublishedLabel isPublished={status === DashboardStatus.PUBLISHED} />
         ),
         Header: t('Status'),
@@ -433,7 +443,9 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { owners = [] },
           },
-        }: any) => <FacePile users={owners} />,
+        }: {
+          row: { original: Dashboard };
+        }) => <FacePile users={owners} />,
         Header: t('Owners'),
         accessor: 'owners',
         disableSortBy: true,
@@ -447,13 +459,15 @@ function DashboardList(props: DashboardListProps) {
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: {
+          row: { original: Dashboard };
+        }) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: Dashboard } }) => {
           const handleDelete = () =>
             handleDashboardDelete(
               original,

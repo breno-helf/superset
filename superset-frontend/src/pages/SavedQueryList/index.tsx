@@ -350,7 +350,9 @@ function SavedQueryList({
           row: {
             original: { id, label },
           },
-        }: any) => <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>,
+        }: {
+          row: { original: SavedQueryObject };
+        }) => <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>,
         id: 'label',
       },
       {
@@ -382,8 +384,10 @@ function SavedQueryList({
           row: {
             original: { sql_tables: tables = [] },
           },
-        }: any) => {
-          const names = tables.map((table: any) => table.table);
+        }: {
+          row: { original: SavedQueryObject };
+        }) => {
+          const names = tables.map((table: { table: string }) => table.table);
           const main = names?.shift() || '';
 
           if (names.length) {
@@ -421,10 +425,12 @@ function SavedQueryList({
           row: {
             original: { tags = [] },
           },
-        }: any) => (
+        }: {
+          row: { original: SavedQueryObject };
+        }) => (
           // Only show custom type tags
           <TagsList
-            tags={tags.filter(
+            tags={(tags ?? []).filter(
               (tag: TagType) => tag.type === TagTypeEnum.Custom,
             )}
           />
@@ -468,7 +474,11 @@ function SavedQueryList({
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({
+          row: { original },
+        }: {
+          row: { original: SavedQueryObject };
+        }) => {
           const handlePreview = () => {
             handleSavedQueryPreview(original.id);
           };

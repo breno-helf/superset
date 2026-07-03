@@ -159,8 +159,7 @@ export default function sqlLabReducer(
         (qe: QueryEditor) => qe.tabViewId ?? qe.id,
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const queries: any = {};
+      const queries: Record<string, (typeof state.queries)[string]> = {};
       Object.keys(state.queries).forEach(k => {
         const query = state.queries[k];
         if (qeIds.indexOf(query.sqlEditorId) > -1) {
@@ -419,8 +418,7 @@ export default function sqlLabReducer(
       ) {
         return state;
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const alts: any = {
+      const alts: Record<string, unknown> = {
         endDttm: now(),
         progress: 100,
         results: action.results,
@@ -613,8 +611,7 @@ export default function sqlLabReducer(
           ? actionId
           : ((
               getFromArr(state.queryEditors, actionId, 'tabViewId') as
-                | QueryEditor
-                | undefined
+                QueryEditor | undefined
             )?.id ?? actionId);
       if (
         unsavedQueryEditor?.id === normalizedId &&
@@ -721,15 +718,15 @@ export default function sqlLabReducer(
       };
     },
     [actions.SET_DATABASES]() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const databases: any = {};
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (action.databases as any[])!.forEach((db: any) => {
-        databases[db.id] = {
-          ...db,
-          extra_json: JSON.parse(db.extra || ''),
-        };
-      });
+      const databases: Record<string, unknown> = {};
+      (action.databases as { id: string | number; extra?: string }[])!.forEach(
+        (db: { id: string | number; extra?: string }) => {
+          databases[db.id] = {
+            ...db,
+            extra_json: JSON.parse(db.extra || ''),
+          };
+        },
+      );
       return { ...state, databases };
     },
     [actions.REFRESH_QUERIES]() {

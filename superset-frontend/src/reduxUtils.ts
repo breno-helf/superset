@@ -183,8 +183,8 @@ export function areArraysShallowEqual(arr1: unknown[], arr2: unknown[]) {
 }
 
 export function areObjectsEqual(
-  obj1: any,
-  obj2: any,
+  obj1: unknown,
+  obj2: unknown,
   opts: {
     ignoreUndefined?: boolean;
     ignoreNull?: boolean;

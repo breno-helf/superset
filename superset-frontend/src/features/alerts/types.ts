@@ -208,7 +208,7 @@ export enum ContentType {
 }
 
 export type NativeFilterObject = {
-  cascadeParentIds: any[];
+  cascadeParentIds: string[];
   chartsInScope: number[];
   controlValues: {
     defaultToFirstItem: boolean;
@@ -218,20 +218,20 @@ export type NativeFilterObject = {
     searchAllOptions: boolean;
   };
   defaultDataMask: {
-    extraFormData: Record<string, any>;
-    filterState: Record<string, any>;
-    ownState: Record<string, any>;
+    extraFormData: Record<string, unknown>;
+    filterState: Record<string, unknown>;
+    ownState: Record<string, unknown>;
   };
   description: string;
   filterType: string;
   id: string;
   name: string;
   scope: {
-    excluded: any[];
+    excluded: number[];
     rootPath: string[];
   };
   tabsInScope: string[];
-  adhoc_filters: any[];
+  adhoc_filters: Record<string, unknown>[];
   targets: Array<{
     column: {
       name: string;

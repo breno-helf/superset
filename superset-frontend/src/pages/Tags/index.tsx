@@ -148,7 +148,9 @@ function TagList(props: TagListProps) {
           row: {
             original: { id },
           },
-        }: any) =>
+        }: {
+          row: { original: Tag };
+        }) =>
           userId && (
             <FaveStar
               itemId={id}
@@ -167,7 +169,9 @@ function TagList(props: TagListProps) {
           row: {
             original: { id, name: tagName },
           },
-        }: any) => (
+        }: {
+          row: { original: Tag };
+        }) => (
           <AntdTag>
             <Link to={`/all_entities/?id=${id}`}>{tagName}</Link>
           </AntdTag>
@@ -185,14 +189,16 @@ function TagList(props: TagListProps) {
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: {
+          row: { original: Tag };
+        }) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: Tag } }) => {
           const handleEdit = () => handleTagEdit(original);
           return (
             <Actions className="actions">

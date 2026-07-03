@@ -62,7 +62,12 @@ import { OWNER_OPTION_FILTER_PROPS } from 'src/features/owners/OwnerSelectLabel'
 import { isUserAdmin } from 'src/dashboard/util/permissionUtils';
 import Owner from 'src/types/Owner';
 import AlertReportModal from 'src/features/alerts/AlertReportModal';
-import { AlertObject, AlertState } from 'src/features/alerts/types';
+import {
+  AlertObject,
+  AlertState,
+  MetaObject,
+  Recipient,
+} from 'src/features/alerts/types';
 import { useExecuteReportSchedule } from 'src/features/alerts/hooks/useExecuteReportSchedule';
 import { QueryObjectColumns } from 'src/views/CRUD/types';
 import { Icons } from '@superset-ui/core/components/Icons';
@@ -309,7 +314,9 @@ function AlertList({
           row: {
             original: { last_state: lastState },
           },
-        }: any) => (
+        }: {
+          row: { original: AlertObject };
+        }) => (
           <AlertStatusIcon
             state={lastState}
             isReportEnabled={isReportEnabled}
@@ -325,7 +332,9 @@ function AlertList({
           row: {
             original: { last_eval_dttm: lastEvalDttm },
           },
-        }: any) =>
+        }: {
+          row: { original: AlertObject };
+        }) =>
           lastEvalDttm
             ? extendedDayjs
                 .utc(lastEvalDttm)
@@ -351,7 +360,9 @@ function AlertList({
           row: {
             original: { crontab_humanized = '', timezone },
           },
-        }: any) => (
+        }: {
+          row: { original: AlertObject };
+        }) => (
           <Tooltip
             title={`${crontab_humanized} (${timezone})`}
             placement="topLeft"
@@ -366,8 +377,10 @@ function AlertList({
           row: {
             original: { recipients },
           },
-        }: any) =>
-          recipients.map((r: any) => (
+        }: {
+          row: { original: AlertObject };
+        }) =>
+          (recipients ?? []).map((r: Recipient) => (
             <RecipientIcon key={r.id} type={r.type} />
           )),
         accessor: 'recipients',
@@ -381,7 +394,9 @@ function AlertList({
           row: {
             original: { owners = [] },
           },
-        }: any) => <FacePile users={owners} />,
+        }: {
+          row: { original: AlertObject };
+        }) => <FacePile users={owners} />,
         Header: t('Owners'),
         id: 'owners',
         disableSortBy: true,
@@ -395,17 +410,20 @@ function AlertList({
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: {
+          row: { original: AlertObject };
+        }) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: AlertObject } }) => {
           const allowEdit =
-            original.owners.map((o: Owner) => o.id).includes(user.userId) ||
-            isUserAdmin(user);
+            original.owners
+              ?.map((o: Owner | MetaObject) => o.id)
+              .includes(user.userId) || isUserAdmin(user);
 
           return (
             <Switch
@@ -423,7 +441,7 @@ function AlertList({
         size: 'sm',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: AlertObject } }) => {
           const history = useHistory();
           const handleEdit = () => handleAlertEdit(original);
           const handleDelete = () => setCurrentAlertDeleting(original);

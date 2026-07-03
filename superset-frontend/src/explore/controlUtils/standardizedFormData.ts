@@ -167,8 +167,7 @@ export class StandardizedFormData {
     controlsState: Record<string, unknown>,
   ): void {
     const control = controlsState?.time_compare as
-      | { value?: unknown; choices?: unknown }
-      | undefined;
+      { value?: unknown; choices?: unknown } | undefined;
     if (!control || !Array.isArray(control.value)) {
       return;
     }
@@ -226,7 +225,7 @@ export class StandardizedFormData {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     exploreState: Record<string, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): any {
+  ): Record<string, unknown> {
     /*
      * Transform form_data between different viz. Return new form_data and controlsState.
      * 1. get memorized form_data by viz type or get previous form_data

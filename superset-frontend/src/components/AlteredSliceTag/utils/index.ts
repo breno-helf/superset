@@ -78,7 +78,7 @@ export const formatValueHandler = (
   }
 
   if (Array.isArray(value)) {
-    const formattedValue = value.map((v: any) => {
+    const formattedValue = value.map((v: unknown) => {
       if (
         typeof v === 'object' &&
         v !== null &&
