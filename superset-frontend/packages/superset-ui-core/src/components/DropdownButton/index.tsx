@@ -33,8 +33,9 @@ export const DropdownButton = ({
   const { type: buttonType } = rest;
   // divider implementation for default (non-primary) buttons
   const defaultBtnCss = css`
-    ${(!buttonType || buttonType === 'default') &&
-    `.ant-dropdown-trigger {
+    ${
+      (!buttonType || buttonType === 'default') &&
+      `.ant-dropdown-trigger {
       position: relative;
       &:before {
         content: '';
@@ -47,7 +48,8 @@ export const DropdownButton = ({
       .anticon {
         vertical-align: middle;
       }
-    }`}
+    }`
+    }
   `;
   const button = (
     <Dropdown.Button

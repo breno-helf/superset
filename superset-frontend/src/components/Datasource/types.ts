@@ -53,13 +53,13 @@ export interface CRUDCollectionProps {
   emptyMessage?: ReactNode;
   expandFieldset?: ReactNode;
   extraButtons?: ReactNode;
-  itemGenerator?: () => any;
+  itemGenerator?: () => Record<string, unknown>;
   itemCellProps?: Record<
     string,
     (
       val: unknown,
       label: string,
-      record: any,
+      record: Record<string, unknown>,
     ) => DetailedHTMLProps<
       TdHTMLAttributes<HTMLTableCellElement>,
       HTMLTableCellElement
@@ -71,11 +71,11 @@ export interface CRUDCollectionProps {
       val: unknown,
       onChange: (value: unknown) => void,
       label: string,
-      record: any,
+      record: Record<string, unknown>,
     ) => ReactNode
   >;
-  onChange?: (arg0: any) => void;
-  tableColumns: any[];
+  onChange?: (arg0: Record<string, unknown>[]) => void;
+  tableColumns: Record<string, unknown>[];
   tableLayout?: 'fixed' | 'auto';
   sortColumns: string[];
   stickyHeader?: boolean;

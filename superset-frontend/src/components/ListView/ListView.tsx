@@ -276,12 +276,12 @@ const ViewModeToggle = ({
     </Tooltip>
   </ViewModeContainer>
 );
-export interface ListViewProps<T extends object = any> {
-  columns: any[];
+export interface ListViewProps<T extends object = Record<string, unknown>> {
+  columns: Record<string, unknown>[];
   data: T[];
   count: number;
   pageSize: number;
-  fetchData: (conf: FetchDataConfig) => any;
+  fetchData: (conf: FetchDataConfig) => void;
   refreshData: () => void;
   addSuccessToast: (msg: string) => void;
   addDangerToast: (msg: string) => void;
@@ -292,13 +292,13 @@ export interface ListViewProps<T extends object = any> {
   bulkActions?: Array<{
     key: string;
     name: ReactNode;
-    onSelect: (rows: any[]) => any;
+    onSelect: (rows: T[]) => void;
     type?: 'primary' | 'secondary' | 'danger';
-    hidden?: (rows: any[]) => boolean;
+    hidden?: (rows: T[]) => boolean;
   }>;
   bulkSelectEnabled?: boolean;
   disableBulkSelect?: () => void;
-  renderBulkSelectCopy?: (selects: any[]) => ReactNode;
+  renderBulkSelectCopy?: (selects: T[]) => ReactNode;
   renderCard?: (row: T & { loading: boolean }) => ReactNode;
   cardSortSelectOptions?: Array<CardSortSelectOption>;
   defaultViewMode?: ViewModeType;
@@ -319,7 +319,7 @@ export interface ListViewProps<T extends object = any> {
   headerContent?: ReactNode;
 }
 
-export function ListView<T extends object = any>({
+export function ListView<T extends object = Record<string, unknown>>({
   columns,
   data,
   count,
@@ -517,7 +517,9 @@ export function ListView<T extends object = any>({
                         .filter(
                           action =>
                             !action.hidden?.(
-                              selectedFlatRows.map((r: any) => r.original),
+                              selectedFlatRows.map(
+                                (r: { original: T }) => r.original,
+                              ),
                             ),
                         )
                         .map(action => (
@@ -529,7 +531,9 @@ export function ListView<T extends object = any>({
                             cta
                             onClick={() =>
                               action.onSelect(
-                                selectedFlatRows.map((r: any) => r.original),
+                                selectedFlatRows.map(
+                                  (r: { original: T }) => r.original,
+                                ),
                               )
                             }
                           >
@@ -611,10 +615,16 @@ export function ListView<T extends object = any>({
                   bulkSelectEnabled={bulkSelectEnabled}
                   selectedFlatRows={selectedFlatRows}
                   toggleRowSelected={(rowId, value) => {
-                    const row = rows.find((r: any) => r.id === rowId);
+                    const row = rows.find(
+                      (r: { id: string | number }) => r.id === rowId,
+                    );
                     if (row) {
                       prepareRow(row);
-                      (row as any).toggleRowSelected(value);
+                      (
+                        row as unknown as {
+                          toggleRowSelected: (value: boolean) => void;
+                        }
+                      ).toggleRowSelected(value);
                     }
                   }}
                   toggleAllRowsSelected={toggleAllRowsSelected}

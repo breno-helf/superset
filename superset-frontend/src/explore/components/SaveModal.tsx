@@ -904,12 +904,12 @@ const SaveModal = ({
 };
 
 interface StateProps {
-  datasource: any;
-  slice: any;
+  datasource: Record<string, unknown>;
+  slice: Record<string, unknown>;
   can_overwrite: boolean;
   user: UserWithPermissionsAndRoles;
-  dashboards: any;
-  alert: any;
+  dashboards: Record<string, unknown>;
+  alert: Record<string, unknown>;
   isVisible: boolean;
   metadata?: ExplorePageInitialData['metadata'];
 }

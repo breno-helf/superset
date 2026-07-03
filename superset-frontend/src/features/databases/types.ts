@@ -282,8 +282,7 @@ type CustomHTMLTextAreaElement = Omit<
   CustomTextType;
 
 export type CustomParametersChangeType<T = CustomTextType> =
-  | FormEvent<InputProps>
-  | { target: T };
+  FormEvent<InputProps> | { target: T };
 
 export type CustomEventHandlerType = EventHandler<
   ChangeEvent<CustomHTMLInputElement | CustomHTMLTextAreaElement>
@@ -292,22 +291,22 @@ export type CustomEventHandlerType = EventHandler<
 export interface FieldPropTypes {
   required: boolean;
   hasTooltip?: boolean;
-  tooltipText?: (value: any) => string;
+  tooltipText?: (value: unknown) => string;
   placeholder?: string;
   onParametersChange: (event: CustomParametersChangeType) => void;
-  onParametersUploadFileChange: (value: any) => string;
+  onParametersUploadFileChange: (value: unknown) => string;
   changeMethods: {
     onParametersChange: (event: CustomParametersChangeType) => void;
   } & {
-    onChange: (value: any) => string;
+    onChange: (value: unknown) => string;
   } & {
-    onQueryChange: (value: any) => string;
-  } & { onParametersUploadFileChange: (value: any) => string } & {
+    onQueryChange: (value: unknown) => string;
+  } & { onParametersUploadFileChange: (value: unknown) => string } & {
     onAddTableCatalog: () => void;
     onRemoveTableCatalog: (idx: number) => void;
   } & {
-    onExtraInputChange: (value: any) => void;
-    onEncryptedExtraInputChange: (value: any) => void;
+    onExtraInputChange: (value: unknown) => void;
+    onEncryptedExtraInputChange: (value: unknown) => void;
     onClearEncryptedExtraKey: (name: string) => void;
     onSSHTunnelParametersChange: CustomEventHandlerType;
   };
@@ -317,7 +316,7 @@ export interface FieldPropTypes {
   db?: DatabaseObject;
   dbModel?: DatabaseForm;
   field: string;
-  default_value?: any;
+  default_value?: string | number | boolean;
   description?: string;
   isEditMode?: boolean;
   sslForced?: boolean;

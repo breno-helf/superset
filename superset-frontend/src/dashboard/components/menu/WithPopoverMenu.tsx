@@ -43,7 +43,7 @@ interface WithPopoverMenuProps {
   // like it should be React.FocusEvent<>, however from handleClick() we can also
   // derive that type is EventListenerOrEventListenerObject.
   shouldFocus?: (
-    event: any,
+    event: Event | React.SyntheticEvent,
     container: ShouldFocusContainer | null,
     menuRef: HTMLDivElement | null,
   ) => boolean;
@@ -52,7 +52,7 @@ interface WithPopoverMenuProps {
 }
 
 const defaultShouldFocus = (
-  event: any,
+  event: Event | React.SyntheticEvent,
   container: ShouldFocusContainer | null,
   menuRef: HTMLDivElement | null,
 ): boolean => {
@@ -139,7 +139,7 @@ function WithPopoverMenu({
   const focusEventRef = useRef<Event | null>(null);
 
   const handleClick = useCallback(
-    (event: any) => {
+    (event: Event | React.SyntheticEvent) => {
       if (!editMode) {
         return;
       }

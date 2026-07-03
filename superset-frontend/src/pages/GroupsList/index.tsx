@@ -175,7 +175,9 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { name },
           },
-        }: any) => <span>{name}</span>,
+        }: {
+          row: { original: GroupObject };
+        }) => <span>{name}</span>,
       },
       {
         accessor: 'label',
@@ -185,7 +187,9 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { label },
           },
-        }: any) => <span>{label}</span>,
+        }: {
+          row: { original: GroupObject };
+        }) => <span>{label}</span>,
       },
       {
         accessor: 'description',
@@ -195,7 +199,9 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { description },
           },
-        }: any) => <span>{description}</span>,
+        }: {
+          row: { original: GroupObject };
+        }) => <span>{description}</span>,
         hidden: true,
       },
       {
@@ -206,7 +212,9 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { roles },
           },
-        }: any) => (
+        }: {
+          row: { original: GroupObject };
+        }) => (
           <Tooltip
             title={
               roles?.map((role: Role) => role.name).join(', ') || t('No roles')
@@ -225,14 +233,16 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { users },
           },
-        }: any) => (
+        }: {
+          row: { original: GroupObject };
+        }) => (
           <span>{users?.map((user: User) => user.username).join(', ')}</span>
         ),
         disableSortBy: true,
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: GroupObject } }) => {
           const handleEdit = () => {
             setCurrentGroup(original);
             openModal(ModalType.EDIT);

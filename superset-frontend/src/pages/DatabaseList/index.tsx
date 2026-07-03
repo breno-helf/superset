@@ -96,8 +96,8 @@ type ConnectionItem = DatabaseObject & {
 };
 
 interface DatabaseDeleteObject extends DatabaseObject {
-  charts: any;
-  dashboards: any;
+  charts: { chart_name: string; id: number }[];
+  dashboards: { dashboard_title: string; id: number }[];
   sqllab_tab_count: number;
 }
 interface DatabaseListProps {
@@ -415,7 +415,8 @@ function DatabaseList({
       // with allow_file_upload set as True which is not possible from now on
       const allowedDatabasesWithFileUpload =
         json?.result?.filter(
-          (database: any) => database?.engine_information?.supports_file_upload,
+          (database: ConnectionItem) =>
+            database?.engine_information?.supports_file_upload,
         ) || [];
       setAllowUploads(allowedDatabasesWithFileUpload?.length >= 1);
     });

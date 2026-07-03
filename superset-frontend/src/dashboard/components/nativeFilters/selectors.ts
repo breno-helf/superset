@@ -50,15 +50,33 @@ type Datasource = {
   verbose_map?: Record<string, string>;
 };
 
+type FilterScope = {
+  immune: number[];
+  scope: string[];
+};
+
 type Filter = {
   chartId: number;
   columns: { [key: string]: string | string[] };
-  scopes: { [key: string]: any };
+  scopes: { [key: string]: FilterScope };
   labels: { [key: string]: string };
   isDateFilter: boolean;
   directPathToFilter: string[];
   datasourceId: string;
 };
+
+interface QueryFilterMetadata {
+  column: string;
+}
+
+interface ChartQueryResponse {
+  applied_filters?: QueryFilterMetadata[];
+  rejected_filters?: QueryFilterMetadata[];
+}
+
+interface ChartWithQueryResponse {
+  queriesResponse?: ChartQueryResponse[];
+}
 
 export const extractLabel = (filter?: FilterState): string | null => {
   if (filter?.label && !filter?.label?.includes(undefined)) {
@@ -78,7 +96,7 @@ const selectIndicatorValue = (
   columnKey: string,
   filter: Filter,
   datasource: Datasource,
-): any => {
+): string[] => {
   const values = filter.columns[columnKey];
   const arrValues = Array.isArray(values) ? values : [values];
 
@@ -142,20 +160,20 @@ const selectIndicatorsForChartFromFilter = (
 };
 
 const getQueryFilterMetadata = (
-  chart: any,
+  chart: ChartWithQueryResponse,
   metadataKey: 'applied_filters' | 'rejected_filters',
-) =>
+): QueryFilterMetadata[] =>
   ensureIsArray(chart?.queriesResponse).flatMap(
-    queryResponse =>
+    (queryResponse: ChartQueryResponse) =>
       (metadataKey === 'applied_filters'
         ? queryResponse?.applied_filters
         : queryResponse?.rejected_filters) || [],
   );
 
-const getAppliedColumns = (chart: any): Set<string> =>
+const getAppliedColumns = (chart: ChartWithQueryResponse): Set<string> =>
   new Set(
     getQueryFilterMetadata(chart, 'applied_filters').map(
-      (filter: any) => filter.column,
+      (filter: QueryFilterMetadata) => filter.column,
     ),
   );
 
@@ -166,7 +184,7 @@ const getAppliedColumns = (chart: any): Set<string> =>
  * applied_filter_columns populated.
  */
 export const getAppliedColumnsWithFallback = (
-  chart: any,
+  chart: ChartWithQueryResponse,
   nativeFilters?: Filters,
   dataMask?: DataMaskStateWithId,
   chartId?: number,
@@ -174,7 +192,9 @@ export const getAppliedColumnsWithFallback = (
   // First try to get from query response (preferred source of truth)
   const queryAppliedFilters = getQueryFilterMetadata(chart, 'applied_filters');
   if (queryAppliedFilters.length > 0) {
-    return new Set(queryAppliedFilters.map((filter: any) => filter.column));
+    return new Set(
+      queryAppliedFilters.map((filter: QueryFilterMetadata) => filter.column),
+    );
   }
 
   // Fallback: derive from native filters and dataMask when query response is empty
@@ -199,17 +219,17 @@ export const getAppliedColumnsWithFallback = (
   return new Set<string>();
 };
 
-const getRejectedColumns = (chart: any): Set<string> =>
+const getRejectedColumns = (chart: ChartWithQueryResponse): Set<string> =>
   new Set(
-    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: any) =>
-      getColumnLabel(filter.column),
+    getQueryFilterMetadata(chart, 'rejected_filters').map(
+      (filter: QueryFilterMetadata) => getColumnLabel(filter.column),
     ),
   );
 
 export type Indicator = {
   column?: QueryFormColumn;
   name: string;
-  value?: any;
+  value?: string | string[];
   status?: IndicatorStatus;
   path?: string[];
   customColumnLabel?: string;
@@ -262,7 +282,7 @@ export const selectIndicatorsForChart = (
   chartId: number,
   filters: { [key: number]: Filter },
   datasources: { [key: string]: Datasource },
-  chart: any,
+  chart: ChartWithQueryResponse,
 ): Indicator[] => {
   // for now we only need to know which columns are compatible/incompatible,
   // so grab the columns from the applied/rejected filters
@@ -403,7 +423,7 @@ export const selectNativeIndicatorsForChart = (
   nativeFilters: Filters,
   dataMask: DataMaskStateWithId,
   chartId: number,
-  chart: any,
+  chart: ChartWithQueryResponse,
   chartLayoutItems: LayoutItem[],
   chartConfiguration: ChartConfiguration = defaultChartConfig,
 ): Indicator[] => {

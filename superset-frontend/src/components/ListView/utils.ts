@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   useFilters,
   usePagination,
@@ -47,8 +47,8 @@ import {
 
 // Define custom RisonParam for proper encoding/decoding; note that
 // %, &, +, and # must be encoded to avoid breaking the url
-const RisonParam: QueryParamConfig<string, any> = {
-  encode: (data?: any | null) => {
+const RisonParam: QueryParamConfig<string, unknown> = {
+  encode: (data?: unknown | null) => {
     if (data === undefined || data === null) return undefined;
 
     const cleanData = JSON.parse(
@@ -79,12 +79,16 @@ export class ListViewError extends Error {
 }
 
 // removes element from a list, returns new list
-export function removeFromList(list: any[], index: number): any[] {
+export function removeFromList<T>(list: T[], index: number): T[] {
   return list.filter((_, i) => index !== i);
 }
 
 // apply update to elements of object list, returns new list
-function updateInList(list: any[], index: number, update: any): any[] {
+function updateInList<T extends Record<string, unknown>>(
+  list: T[],
+  index: number,
+  update: Partial<T>,
+): T[] {
   const element = list.find((_, i) => index === i);
 
   return [
@@ -143,7 +147,7 @@ export function convertFilters(fts: InternalFilter[]): FilterValue[] {
 
 // convertFilters but to handle new decoded rison format
 export function convertFiltersRison(
-  filterObj: any,
+  filterObj: Record<string, InnerFilterValue>,
   list: Filter[],
 ): FilterValue[] {
   const filters: FilterValue[] = [];
@@ -174,7 +178,10 @@ export function convertFiltersRison(
   return filters;
 }
 
-export function extractInputValue(inputType: Filter['input'], event: any) {
+export function extractInputValue(
+  inputType: Filter['input'],
+  event: React.SyntheticEvent<HTMLInputElement>,
+) {
   if (!inputType || inputType === 'text') {
     return event.currentTarget.value;
   }
@@ -186,9 +193,9 @@ export function extractInputValue(inputType: Filter['input'], event: any) {
 }
 
 interface UseListViewConfig {
-  fetchData: (conf: FetchDataConfig) => any;
-  columns: any[];
-  data: any[];
+  fetchData: (conf: FetchDataConfig) => void;
+  columns: Record<string, unknown>[];
+  data: Record<string, unknown>[];
   count: number;
   initialPageSize: number;
   initialSort?: SortColumn[];
@@ -311,7 +318,7 @@ export function useListViewState({
       }
     });
 
-    const queryParams: any = {
+    const queryParams: Record<string, unknown> = {
       filters: Object.keys(filterObj).length ? filterObj : undefined,
       pageIndex,
     };
@@ -341,7 +348,7 @@ export function useListViewState({
     }
   }, [query]);
 
-  const applyFilterValue = (index: number, value: any) => {
+  const applyFilterValue = (index: number, value: InnerFilterValue) => {
     setInternalFilters(currentInternalFilters => {
       // skip redundant updates
       if (currentInternalFilters[index].value === value) {

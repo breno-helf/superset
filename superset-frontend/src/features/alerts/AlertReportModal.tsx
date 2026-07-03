@@ -717,7 +717,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     columnName: string,
     datasetId: number | string | null,
     vizType = 'filter_select',
-    adhocFilters: any[] = [],
+    adhocFilters: Record<string, unknown>[] = [],
   ) => {
     if (vizType === 'filter_time') {
       return;
@@ -745,10 +745,12 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
       if (vizType === 'filter_timecolumn') {
         // filter for time columns types
-        filteredData = rawData.filter((item: any) => item.dtype === 2);
+        filteredData = rawData.filter(
+          (item: Record<string, unknown>) => item.dtype === 2,
+        );
       }
 
-      return filteredData.map((item: any) => {
+      return filteredData.map((item: Record<string, unknown>) => {
         if (vizType === 'filter_timegrain') {
           return {
             value: item.duration,
@@ -857,7 +859,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     setNotificationAddState('active');
   };
 
-  const updateAnchorState = (value: any) => {
+  const updateAnchorState = (value: string) => {
     setCurrentAlert(currentAlertData => {
       const dashboardState = currentAlertData?.extra?.dashboard;
       const extra = {
@@ -942,7 +944,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
       );
     }
 
-    const data: any = {
+    const data: Record<string, unknown> = {
       ...currentAlert,
       type: isReport ? 'Report' : 'Alert',
       force_screenshot: shouldEnableForceScreenshot || forceScreenshot,
@@ -1071,7 +1073,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
   );
 
   // Updating alert/report state
-  const updateAlertState = (name: string, value: any) => {
+  const updateAlertState = (name: string, value: unknown) => {
     setCurrentAlert(currentAlertData => ({
       ...currentAlertData,
       [name]: value,
@@ -1598,10 +1600,12 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     }
 
     getChartDataRequest(filterValues).then(response => {
-      const newFilterValues = response.json.result[0].data.map((item: any) => ({
-        value: item[columnName],
-        label: item[columnName],
-      }));
+      const newFilterValues = response.json.result[0].data.map(
+        (item: Record<string, unknown>) => ({
+          value: item[columnName],
+          label: item[columnName],
+        }),
+      );
 
       setNativeFilterData(
         nativeFilterData.map((filter, index) =>
@@ -1625,14 +1629,10 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
   const onChangeDashboardFilterValue = (
     idx: number,
     filterValues:
-      | SelectValue
-      | SelectValue[]
-      | string
-      | string[]
-      | number
-      | number[],
+      SelectValue | SelectValue[] | string | string[] | number | number[],
   ) => {
-    let values: any;
+    let values:
+      SelectValue | SelectValue[] | string | string[] | number | number[];
     if (typeof filterValues === 'string') {
       values = [filterValues];
     } else {
@@ -1698,7 +1698,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           name="time_range"
           onChange={timeRange => {
             setNativeFilterData(
-              nativeFilterData.map((f: any) =>
+              nativeFilterData.map((f: ExtraNativeFilter) =>
                 filter.nativeFilterId === f.nativeFilterId
                   ? {
                       ...f,
@@ -1722,7 +1722,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
               value={min}
               onChange={value => {
                 setNativeFilterData(
-                  nativeFilterData.map((f: any) =>
+                  nativeFilterData.map((f: ExtraNativeFilter) =>
                     f.nativeFilterId === filter.nativeFilterId
                       ? { ...f, filterValues: [value, filterValues?.[1]] }
                       : f,
@@ -1735,7 +1735,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
               value={max}
               onChange={value => {
                 setNativeFilterData(
-                  nativeFilterData.map((f: any) =>
+                  nativeFilterData.map((f: ExtraNativeFilter) =>
                     f.nativeFilterId === filter.nativeFilterId
                       ? { ...f, filterValues: [filterValues?.[0], value] }
                       : f,
@@ -1799,12 +1799,10 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
   };
   const validateContentSection = () => {
     const errors = [];
-    if (
-      !(
-        (contentType === ContentType.Dashboard && !!currentAlert?.dashboard) ||
-        (contentType === ContentType.Chart && !!currentAlert?.chart)
-      )
-    ) {
+    if (!(
+      (contentType === ContentType.Dashboard && !!currentAlert?.dashboard) ||
+      (contentType === ContentType.Chart && !!currentAlert?.chart)
+    )) {
       errors.push(TRANSLATIONS.CONTENT_ERROR_TEXT);
     }
 
@@ -1839,13 +1837,11 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     if (!currentAlert?.sql?.length) {
       errors.push(TRANSLATIONS.SQL_ERROR_TEXT);
     }
-    if (
-      !(
-        (conditionNotNull || !!currentAlert?.validator_config_json?.op) &&
-        (conditionNotNull ||
-          currentAlert?.validator_config_json?.threshold !== undefined)
-      )
-    ) {
+    if (!(
+      (conditionNotNull || !!currentAlert?.validator_config_json?.op) &&
+      (conditionNotNull ||
+        currentAlert?.validator_config_json?.threshold !== undefined)
+    )) {
       errors.push(TRANSLATIONS.ALERT_CONDITION_ERROR_TEXT);
     }
     updateValidationStatus(Sections.Alert, errors);

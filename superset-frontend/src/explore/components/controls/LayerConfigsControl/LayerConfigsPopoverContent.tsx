@@ -301,8 +301,7 @@ export const LayerConfigsPopoverContent: FC<
       const wfsParser = new WfsDataParser();
       try {
         let requestParams: RequestParams1_1_0 | RequestParams2_0_0 = {} as
-          | RequestParams1_1_0
-          | RequestParams2_0_0;
+          RequestParams1_1_0 | RequestParams2_0_0;
         if (conf.version.startsWith('1.')) {
           requestParams = {
             version: conf.version as RequestParams1_1_0['version'],
@@ -363,9 +362,9 @@ export const LayerConfigsPopoverContent: FC<
   const attributionDescription = t('The layer attribution');
   const attributionPlaceholder = t('© Layer attribution');
 
-  const wmsVersionOptions: { value: any; label: string }[] =
+  const wmsVersionOptions: { value: string; label: string }[] =
     serviceVersions.WMS.map(version => ({ value: version, label: version }));
-  const wfsVersionOptions: { value: any; label: string }[] =
+  const wfsVersionOptions: { value: string; label: string }[] =
     serviceVersions.WFS.map(version => ({ value: version, label: version }));
 
   return (
