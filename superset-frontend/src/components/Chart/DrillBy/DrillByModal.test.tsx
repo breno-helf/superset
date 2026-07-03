@@ -100,7 +100,7 @@ const dataset = {
 
 const renderModal = async (
   modalProps: Partial<DrillByModalProps> = {},
-  overrideState: Record<string, any> = {},
+  overrideState: Record<string, unknown> = {},
 ) => {
   const DrillByModalWrapper = () => {
     const [showModal, setShowModal] = useState(false);

@@ -78,7 +78,7 @@ export const EmbeddedContextProviders: React.FC<{
                 adapter={ReactRouter5Adapter}
                 options={{
                   searchStringToObject: querystring.parse,
-                  objectToSearchString: (object: Record<string, any>) =>
+                  objectToSearchString: (object: Record<string, unknown>) =>
                     querystring.stringify(object, { encode: false }),
                 }}
               >

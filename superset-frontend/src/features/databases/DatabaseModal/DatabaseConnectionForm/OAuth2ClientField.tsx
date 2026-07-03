@@ -97,7 +97,7 @@ export const OAuth2ClientField = ({
     return null;
   }
 
-  const handleChange = (key: any) => (e: any) => {
+  const handleChange = (key: unknown) => (e: unknown) => {
     const updatedInfo = {
       ...oauth2ClientInfo,
       [key]: e.target.value,

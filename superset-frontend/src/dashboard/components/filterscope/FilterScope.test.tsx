@@ -28,7 +28,7 @@ import FilterScopeSelectorComponent from './FilterScopeSelector';
 
 // Cast to accept partial mock props in tests
 const FilterScopeSelector = FilterScopeSelectorComponent as unknown as React.FC<
-  Record<string, any>
+  Record<string, unknown>
 >;
 
 // Add afterEach cleanup

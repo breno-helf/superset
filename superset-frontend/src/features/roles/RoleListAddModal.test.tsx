@@ -37,7 +37,7 @@ const mockUpdateRolePermissions = jest.mocked(updateRolePermissions);
 
 jest.mock('src/components/MessageToasts/withToasts', () => ({
   __esModule: true,
-  default: (Component: any) => Component,
+  default: (Component: unknown) => Component,
   useToasts: () => mockToasts,
 }));
 
@@ -110,7 +110,7 @@ describe('RoleListAddModal', () => {
       json: { id: 42 },
       response: {} as Response,
     } as Awaited<ReturnType<typeof createRole>>);
-    mockUpdateRolePermissions.mockResolvedValue({} as any);
+    mockUpdateRolePermissions.mockResolvedValue({} as unknown);
 
     render(<RoleListAddModal {...mockProps} />);
 

@@ -73,7 +73,7 @@ let getSpy: jest.SpyInstance;
 beforeEach(() => {
   getSpy = jest
     .spyOn(SupersetClient, 'get')
-    .mockResolvedValue(MOCK_TIME_RANGE_RESULT as any);
+    .mockResolvedValue(MOCK_TIME_RANGE_RESULT as unknown);
 });
 
 afterEach(() => {
@@ -186,7 +186,7 @@ test('Apply calls onClose but not onSubmit when the API call throws', async () =
 
   // fetchTimeRange succeeds (for validTimeRange), but the Apply API call fails
   getSpy
-    .mockResolvedValueOnce(MOCK_TIME_RANGE_RESULT as any) // fetchTimeRange in useEffect
+    .mockResolvedValueOnce(MOCK_TIME_RANGE_RESULT as unknown) // fetchTimeRange in useEffect
     .mockRejectedValueOnce(new Error('network')); // Apply button API call
 
   renderFilter({ onSubmit, onClose });

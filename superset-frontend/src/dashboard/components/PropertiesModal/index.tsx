@@ -66,11 +66,11 @@ import { parseSelectedOwners, type OwnerOption } from './utils';
 type PropertiesModalProps = {
   dashboardId: number;
   dashboardTitle?: string;
-  dashboardInfo?: Record<string, any>;
+  dashboardInfo?: Record<string, unknown>;
   show?: boolean;
   onHide?: () => void;
   colorScheme?: string;
-  onSubmit?: (params: Record<string, any>) => void;
+  onSubmit?: (params: Record<string, unknown>) => void;
   addSuccessToast: (message: string) => void;
   addDangerToast: (message: string) => void;
   onlyApply?: boolean;
@@ -91,7 +91,7 @@ type DashboardInfo = {
   certifiedBy: string;
   certificationDetails: string;
   isManagedExternally: boolean;
-  metadata: Record<string, any>;
+  metadata: Record<string, unknown>;
   common?: {
     conf?: {
       SUPERSET_DASHBOARD_PERIODICAL_REFRESH_LIMIT?: number;
@@ -140,7 +140,7 @@ const PropertiesModal = ({
     }>
   >([]);
   const categoricalSchemeRegistry = getCategoricalSchemeRegistry();
-  const originalDashboardMetadata = useRef<Record<string, any>>({});
+  const originalDashboardMetadata = useRef<Record<string, unknown>>({});
   const originalCss = useRef<string | null>(null);
   const cssDebounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -165,7 +165,7 @@ const PropertiesModal = ({
   };
 
   const handleDashboardData = useCallback(
-    (dashboardData: Record<string, any>) => {
+    (dashboardData: Record<string, unknown>) => {
       const {
         id,
         dashboard_title,
@@ -545,7 +545,7 @@ const PropertiesModal = ({
   };
 
   // Section handlers for extracted components
-  const handleThemeChange = (value: any) => setSelectedThemeId(value || null);
+  const handleThemeChange = (value: unknown) => setSelectedThemeId(value || null);
   const handleRefreshFrequencyChange = (value: number) =>
     setRefreshFrequency(value);
 

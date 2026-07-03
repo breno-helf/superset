@@ -89,7 +89,7 @@ export class Database implements coreType.Database {
 export class Disposable implements coreType.Disposable {
   static from(
     ...disposableLikes: {
-      dispose: () => any;
+      dispose: () => unknown;
     }[]
   ): Disposable {
     return new Disposable(() => {
@@ -99,11 +99,11 @@ export class Disposable implements coreType.Disposable {
     });
   }
 
-  constructor(callOnDispose: () => any) {
+  constructor(callOnDispose: () => unknown) {
     this.dispose = callOnDispose;
   }
 
-  dispose(): any {
+  dispose(): void {
     this.dispose();
   }
 }

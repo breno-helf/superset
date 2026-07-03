@@ -424,7 +424,7 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
 
   useEffect(() => {
     if (
-      filterState.value?.every((value?: any) =>
+      filterState.value?.every((value?: unknown) =>
         data.some(row => row[col] === value),
       )
     )

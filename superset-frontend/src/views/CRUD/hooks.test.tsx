@@ -462,7 +462,7 @@ test('useSingleViewResource: createResource posts to correct endpoint', async ()
   await act(async () => {
     createdId = await result.current.createResource({
       name: 'New Chart',
-    } as any);
+    } as unknown);
   });
 
   expect(postSpy).toHaveBeenCalledWith({
@@ -487,7 +487,7 @@ test('useSingleViewResource: updateResource puts to correct endpoint', async () 
   );
 
   await act(async () => {
-    await result.current.updateResource(42, { name: 'Updated' } as any);
+    await result.current.updateResource(42, { name: 'Updated' } as unknown);
   });
 
   expect(putSpy).toHaveBeenCalledWith({
@@ -535,7 +535,7 @@ test('useSingleViewResource: setResource updates the resource', () => {
   );
 
   act(() => {
-    result.current.setResource({ id: 1, name: 'Manual' } as any);
+    result.current.setResource({ id: 1, name: 'Manual' } as unknown);
   });
 
   expect(result.current.state.resource).toEqual({ id: 1, name: 'Manual' });

@@ -37,10 +37,10 @@ const mockClosestCenter = closestCenter as jest.Mock;
 
 const collision = (id: string): CollisionDescriptor => ({
   id,
-  data: { droppableContainer: { id } as any, value: 0 },
+  data: { droppableContainer: { id } as unknown, value: 0 },
 });
 
-const dummyArgs = {} as any;
+const dummyArgs = {} as unknown;
 
 test('returns rectIntersection when activeId is null', () => {
   const detector = getCollisionDetection(null);

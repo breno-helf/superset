@@ -64,7 +64,7 @@ describe('cachedSupersetGet', () => {
     test('handles null dataset ID gracefully', () => {
       supersetGetCache.set('/api/v1/dataset/123', { data: 'dataset123' });
 
-      clearDatasetCache(null as any);
+      clearDatasetCache(null as unknown);
 
       expect(supersetGetCache.has('/api/v1/dataset/123')).toBe(true);
     });
@@ -72,7 +72,7 @@ describe('cachedSupersetGet', () => {
     test('handles undefined dataset ID gracefully', () => {
       supersetGetCache.set('/api/v1/dataset/123', { data: 'dataset123' });
 
-      clearDatasetCache(undefined as any);
+      clearDatasetCache(undefined as unknown);
 
       expect(supersetGetCache.has('/api/v1/dataset/123')).toBe(true);
     });

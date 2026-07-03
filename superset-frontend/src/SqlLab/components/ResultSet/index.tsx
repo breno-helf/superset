@@ -104,7 +104,7 @@ enum LimitingFactor {
 export interface ResultSetProps {
   cache?: boolean;
   csv?: boolean;
-  database?: Record<string, any>;
+  database?: Record<string, unknown>;
   displayLimit: number;
   height?: number;
   queryId: string;

@@ -61,7 +61,7 @@ const ExtensionsList: FunctionComponent<ExtensionsListProps> = ({
           row: {
             original: { name },
           },
-        }: any) => name,
+        }: unknown) => name,
       },
     ],
     [loading], // We need to monitor loading to avoid stale state in actions

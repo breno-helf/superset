@@ -318,10 +318,10 @@ const FiltersConfigForm = (
   );
   const [undoFormValues, setUndoFormValues] = useState<Record<
     string,
-    any
+    unknown
   > | null>(null);
   const forceUpdate = useForceUpdate(isActive);
-  const [datasetDetails, setDatasetDetails] = useState<Record<string, any>>();
+  const [datasetDetails, setDatasetDetails] = useState<Record<string, unknown>>();
   const defaultFormFilter = useMemo(() => ({}), []);
   const filters = form.getFieldValue('filters');
   const formValues = filters?.[filterId];

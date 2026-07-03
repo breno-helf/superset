@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-let scrollTopDashboardInterval: any;
+let scrollTopDashboardInterval: ReturnType<typeof setInterval> | undefined;
 const SCROLL_STEP = 120;
 const INTERVAL_DELAY = 50;
 

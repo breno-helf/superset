@@ -538,7 +538,7 @@ test('checkUploadExtensions should return valid upload extensions', () => {
   const uploadExtensionTest = ['a', 'b', 'c'];
   const randomExtension = ['a', 'c'];
   const randomExtensionTwo = ['c'];
-  const randomExtensionThree: Array<any> = [];
+  const randomExtensionThree: unknown[] = [];
   expect(
     checkUploadExtensions(randomExtension, uploadExtensionTest),
   ).toBeTruthy();

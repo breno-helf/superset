@@ -337,7 +337,7 @@ const validAlert: AlertObject = {
     id: 1,
     value: 1,
     database_name: 'test_db',
-  } as any,
+  } as unknown,
   sql: 'SELECT COUNT(*) FROM test_table',
   validator_config_json: {
     op: '>',
@@ -350,7 +350,7 @@ const validAlert: AlertObject = {
     label: 'Test Chart',
     slice_name: 'Test Chart',
     viz_type: 'table',
-  } as any,
+  } as unknown,
 };
 
 jest.mock('./buildErrorTooltipMessage', () => ({
@@ -1268,7 +1268,7 @@ test('dashboard tabs fetch failure shows error toast', async () => {
 
   // Verify danger toast was dispatched for the fetch failure
   await waitFor(() => {
-    const toasts = (store.getState() as any).messageToasts;
+    const toasts = (store.getState() as unknown).messageToasts;
     expect(toasts.length).toBeGreaterThan(0);
     expect(
       toasts.some((t: { text: string }) =>
@@ -1675,8 +1675,8 @@ test('dashboard content type submits dashboard id and null chart', async () => {
       value: 1,
       label: 'Test Dashboard',
       dashboard_title: 'Test Dashboard',
-    } as any,
-    chart: undefined as any,
+    } as unknown,
+    chart: undefined as unknown,
   };
 
   fetchMock.put(

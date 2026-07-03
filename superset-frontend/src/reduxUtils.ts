@@ -23,9 +23,9 @@ import { isEqual, omitBy, omit, isEqualWith } from 'lodash-es';
 import { ensureIsArray } from '@superset-ui/core';
 
 export function addToObject(
-  state: Record<string, any>,
+  state: Record<string, unknown>,
   arrKey: string,
-  obj: Record<string, any>,
+  obj: Record<string, unknown>,
 ) {
   const newObject = { ...state[arrKey] };
   const copiedObject = { ...obj };
@@ -38,10 +38,10 @@ export function addToObject(
 }
 
 export function alterInObject(
-  state: Record<string, any>,
+  state: Record<string, unknown>,
   arrKey: string,
-  obj: Record<string, any>,
-  alterations: Record<string, any>,
+  obj: Record<string, unknown>,
+  alterations: Record<string, unknown>,
 ) {
   const newObject = { ...state[arrKey] };
   newObject[obj.id] = { ...newObject[obj.id], ...alterations };
@@ -49,16 +49,16 @@ export function alterInObject(
 }
 
 export function alterInArr(
-  state: Record<string, any>,
+  state: Record<string, unknown>,
   arrKey: string,
-  obj: Record<string, any>,
-  alterations: Record<string, any>,
+  obj: Record<string, unknown>,
+  alterations: Record<string, unknown>,
   idKey = 'id',
 ) {
   // Finds an item in an array in the state and replaces it with a
   // new object with an altered property
   const newArr: unknown[] = [];
-  state[arrKey].forEach((arrItem: Record<string, any>) => {
+  state[arrKey].forEach((arrItem: Record<string, unknown>) => {
     if (obj[idKey] === arrItem[idKey]) {
       newArr.push({ ...arrItem, ...alterations });
     } else {
@@ -69,13 +69,13 @@ export function alterInArr(
 }
 
 export function removeFromArr(
-  state: Record<string, any>,
+  state: Record<string, unknown>,
   arrKey: string,
-  obj: Record<string, any>,
+  obj: Record<string, unknown>,
   idKey = 'id',
 ) {
   const newArr: unknown[] = [];
-  state[arrKey].forEach((arrItem: Record<string, any>) => {
+  state[arrKey].forEach((arrItem: Record<string, unknown>) => {
     if (!(obj[idKey] === arrItem[idKey])) {
       newArr.push(arrItem);
     }
@@ -84,7 +84,7 @@ export function removeFromArr(
 }
 
 export function getFromArr(
-  arr: Record<string, any>[],
+  arr: Record<string, unknown>[],
   id: string,
   idKey = 'id',
 ) {
@@ -98,16 +98,16 @@ export function getFromArr(
 }
 
 export function addToArr(
-  state: Record<string, any>,
+  state: Record<string, unknown>,
   arrKey: string,
-  obj: Record<string, any>,
+  obj: Record<string, unknown>,
   prepend = false,
 ) {
   const newObj = { ...obj };
   if (!newObj.id) {
     newObj.id = nanoid();
   }
-  const newState: Record<string, any[]> = {};
+  const newState: Record<string, unknown[]> = {};
   if (prepend) {
     newState[arrKey] = [newObj, ...state[arrKey]];
   } else {
@@ -117,9 +117,9 @@ export function addToArr(
 }
 
 export function extendArr(
-  state: Record<string, any>,
+  state: Record<string, unknown>,
   arrKey: string,
-  arr: Record<string, any>[],
+  arr: Record<string, unknown>[],
   prepend = false,
 ) {
   const newArr = [...arr];
@@ -129,7 +129,7 @@ export function extendArr(
       el.id = nanoid();
     }
   });
-  const newState: Record<string, any[]> = {};
+  const newState: Record<string, unknown[]> = {};
   if (prepend) {
     newState[arrKey] = [...newArr, ...state[arrKey]];
   } else {
@@ -183,8 +183,8 @@ export function areArraysShallowEqual(arr1: unknown[], arr2: unknown[]) {
 }
 
 export function areObjectsEqual(
-  obj1: any,
-  obj2: any,
+  obj1: unknown,
+  obj2: unknown,
   opts: {
     ignoreUndefined?: boolean;
     ignoreNull?: boolean;

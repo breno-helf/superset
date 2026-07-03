@@ -22,7 +22,7 @@ import { createContext, useContext, FC, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export type LocationState = {
-  requestedQuery?: Record<string, any>;
+  requestedQuery?: Record<string, unknown>;
   isDataset?: boolean;
 };
 

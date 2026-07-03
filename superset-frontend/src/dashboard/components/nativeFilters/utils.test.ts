@@ -76,7 +76,7 @@ test('findTabsWithChartsInScope should handle a recursive layout structure', () 
       parents: ['ROOT_ID'],
       type: 'TABS',
     },
-  } as any as DashboardLayout;
+  } as unknown as DashboardLayout;
 
   const chartLayoutItems = Object.values(dashboardLayout).filter(
     item => item.type === CHART_TYPE,
@@ -91,12 +91,12 @@ test('getFormData should include persisted time_grains for time grain filters', 
     dashboardId: 10,
     id: 'NATIVE_FILTER-1',
     filterType: 'filter_timegrain',
-    type: 'NATIVE_FILTER' as any,
+    type: 'NATIVE_FILTER' as unknown,
     controlValues: {},
     defaultDataMask: {},
     datasetId: 11,
     time_grains: ['PT1H', 'P1D', 'P1W'],
   });
 
-  expect((formData as any).time_grains).toEqual(['PT1H', 'P1D', 'P1W']);
+  expect((formData as unknown).time_grains).toEqual(['PT1H', 'P1D', 'P1W']);
 });

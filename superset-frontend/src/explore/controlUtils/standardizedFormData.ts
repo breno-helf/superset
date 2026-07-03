@@ -223,10 +223,8 @@ export class StandardizedFormData {
 
   transform(
     targetVizType: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    exploreState: Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): any {
+    exploreState: Record<string, unknown>,
+  ): unknown {
     /*
      * Transform form_data between different viz. Return new form_data and controlsState.
      * 1. get memorized form_data by viz type or get previous form_data
@@ -238,22 +236,20 @@ export class StandardizedFormData {
      * 7. to refresh validator message
      * */
     const latestFormData = this.getLatestFormData(targetVizType);
-    const publicFormData: Record<string, any> = {};
+    const publicFormData: Record<string, unknown> = {};
     publicControls.forEach(key => {
       if (key in exploreState.form_data) {
         publicFormData[key] = exploreState.form_data[key];
       }
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const targetControlsState = getControlsState(exploreState as any, {
+    const targetControlsState = getControlsState(exploreState as Record<string, unknown>, {
       ...latestFormData,
       ...publicFormData,
       viz_type: targetVizType,
     });
     StandardizedFormData.dropUnsupportedTimeShifts(targetControlsState);
     const targetFormData = {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ...getFormDataFromControls(targetControlsState as any),
+      ...getFormDataFromControls(targetControlsState as Record<string, unknown>),
       // Preserve dashboard context when switching viz types.
       ...(publicFormData.dashboardId && {
         dashboardId: publicFormData.dashboardId,
@@ -279,18 +275,14 @@ export class StandardizedFormData {
       getStandardizedControls().clear();
       rv = {
         formData: transformed,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        controlsState: getControlsState(exploreState as any, transformed),
+        controlsState: getControlsState(exploreState as Record<string, unknown>, transformed),
       };
     }
 
     // refresh validator message
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     rv.controlsState = getControlsState(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      { ...exploreState, controls: rv.controlsState } as any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      rv.formData as any,
+      { ...exploreState, controls: rv.controlsState } as Record<string, unknown>,
+      rv.formData as Record<string, unknown>,
     );
     return rv;
   }

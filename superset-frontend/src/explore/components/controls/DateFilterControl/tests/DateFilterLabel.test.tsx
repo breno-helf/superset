@@ -37,7 +37,7 @@ const defaultProps = {
 
 function setup(
   props: Omit<DateFilterControlProps, 'name'> = defaultProps,
-  store: any = mockStore({}),
+  store: unknown = mockStore({}),
 ) {
   return (
     <Provider store={store}>

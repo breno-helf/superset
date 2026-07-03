@@ -68,7 +68,7 @@ afterAll(() => {
   getCategoricalSchemeRegistry().clear();
 });
 
-const setup = (overrides?: Record<string, any>) =>
+const setup = (overrides?: Record<string, unknown>) =>
   render(<ColorSchemeControl {...defaultProps()} {...overrides} />);
 
 test('should render', async () => {
@@ -225,7 +225,7 @@ test('should show tooltip on hover when text overflows', async () => {
         originalScrollWidthDescriptor,
       );
     } else {
-      delete (HTMLElement.prototype as any).scrollWidth;
+      delete (HTMLElement.prototype as unknown).scrollWidth;
     }
 
     if (originalOffsetWidthDescriptor) {
@@ -235,7 +235,7 @@ test('should show tooltip on hover when text overflows', async () => {
         originalOffsetWidthDescriptor,
       );
     } else {
-      delete (HTMLElement.prototype as any).offsetWidth;
+      delete (HTMLElement.prototype as unknown).offsetWidth;
     }
   }
 });

@@ -70,7 +70,7 @@ export interface DrillControlsProps {
 }
 
 export interface TableControlsProps extends DrillControlsProps {
-  data: Record<string, any>[];
+  data: Record<string, unknown>[];
   // {datasource.id}__{datasource.type}, eg: 1__table
   datasourceId?: string;
   onInputChange: (input: string) => void;
@@ -88,7 +88,7 @@ export interface QueryResultInterface {
   colnames: string[];
   coltypes: GenericDataType[];
   rowcount: number;
-  data: Record<string, any>[][];
+  data: Record<string, unknown>[][];
 }
 
 export interface SingleQueryResultPaneProp

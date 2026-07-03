@@ -196,7 +196,7 @@ test('dispatches setDatabases action on getDbList', () => {
   };
 
   act(() => {
-    result.current.getDbList(newDatabase as any);
+    result.current.getDbList(newDatabase as unknown);
   });
 
   const actions = store.getActions();

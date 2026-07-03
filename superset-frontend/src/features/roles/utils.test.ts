@@ -43,7 +43,7 @@ test('fetchPermissionOptions fetches all results on page 0 with large page_size'
         },
       ],
     },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
 
   const result = await fetchPermissionOptions('dataset', 0, 50, addDangerToast);
@@ -94,9 +94,9 @@ test('fetchPermissionOptions serves cached slices on subsequent pages', async ()
             { id: 3, permission: { name: 'c' }, view_menu: { name: 'Z' } },
           ],
         },
-      } as any);
+      } as unknown);
     }
-    return Promise.resolve({ json: { count: 0, result: [] } } as any);
+    return Promise.resolve({ json: { count: 0, result: [] } } as unknown);
   });
   const addDangerToast = jest.fn();
 
@@ -118,7 +118,7 @@ test('fetchPermissionOptions serves cached slices on subsequent pages', async ()
 test('fetchPermissionOptions makes single request when search term is empty', async () => {
   getMock.mockResolvedValue({
     json: { count: 0, result: [] },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
 
   await fetchPermissionOptions('', 0, 100, addDangerToast);
@@ -176,12 +176,12 @@ test('fetchPermissionOptions deduplicates results from both columns', async () =
       // view_menu.name search returns shared + viewMenuOnly
       return Promise.resolve({
         json: { count: 2, result: [sharedResult, viewMenuOnly] },
-      } as any);
+      } as unknown);
     }
     // permission.name search returns shared + permissionOnly
     return Promise.resolve({
       json: { count: 2, result: [sharedResult, permissionOnly] },
-    } as any);
+    } as unknown);
   });
 
   const addDangerToast = jest.fn();
@@ -204,14 +204,14 @@ test('fetchPermissionOptions preserves cache across empty searches', async () =>
       count: 1,
       result: [{ id: 1, permission: { name: 'a' }, view_menu: { name: 'X' } }],
     },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
   await fetchPermissionOptions('test', 0, 50, addDangerToast);
   expect(getMock).toHaveBeenCalledTimes(2);
   getMock.mockReset();
 
   // Empty search makes a fresh request but does NOT clear search cache
-  getMock.mockResolvedValue({ json: { count: 0, result: [] } } as any);
+  getMock.mockResolvedValue({ json: { count: 0, result: [] } } as unknown);
   await fetchPermissionOptions('', 0, 50, addDangerToast);
   expect(getMock).toHaveBeenCalledTimes(1);
   getMock.mockReset();
@@ -231,7 +231,7 @@ test('fetchGroupOptions sends filters array with search term', async () => {
         { id: 2, name: 'Analytics' },
       ],
     },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
 
   const result = await fetchGroupOptions('eng', 1, 25, addDangerToast);
@@ -259,7 +259,7 @@ test('fetchGroupOptions sends filters array with search term', async () => {
 test('fetchGroupOptions omits filters when search term is empty', async () => {
   getMock.mockResolvedValue({
     json: { count: 0, result: [] },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
 
   await fetchGroupOptions('', 0, 100, addDangerToast);
@@ -308,14 +308,14 @@ test('fetchPermissionOptions fetches multiple pages when results exceed PAGE_SIZ
     if (query.page === 0) {
       return Promise.resolve({
         json: { count: totalCount, result: page0Items },
-      } as any);
+      } as unknown);
     }
     if (query.page === 1) {
       return Promise.resolve({
         json: { count: totalCount, result: page1Items },
-      } as any);
+      } as unknown);
     }
-    return Promise.resolve({ json: { count: 0, result: [] } } as any);
+    return Promise.resolve({ json: { count: 0, result: [] } } as unknown);
   });
 
   const addDangerToast = jest.fn();
@@ -353,7 +353,7 @@ test('fetchPermissionOptions handles backend capping page_size below requested',
     }
     return Promise.resolve({
       json: { count: totalCount, result: items },
-    } as any);
+    } as unknown);
   });
 
   const addDangerToast = jest.fn();
@@ -378,7 +378,7 @@ test('fetchPermissionOptions shares cache across case variants', async () => {
         },
       ],
     },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
 
   await fetchPermissionOptions('Dataset', 0, 50, addDangerToast);
@@ -395,7 +395,7 @@ test('fetchPermissionOptions shares cache across case variants', async () => {
 
 test('fetchPermissionOptions evicts oldest cache entry when MAX_CACHE_ENTRIES is reached', async () => {
   getMock.mockImplementation(({ endpoint }: { endpoint: string }) => {
-    const query = rison.decode(endpoint.split('?q=')[1]) as Record<string, any>;
+    const query = rison.decode(endpoint.split('?q=')[1]) as Record<string, unknown>;
     const searchVal = query.filters?.[0]?.value || 'unknown';
     return Promise.resolve({
       json: {
@@ -408,7 +408,7 @@ test('fetchPermissionOptions evicts oldest cache entry when MAX_CACHE_ENTRIES is
           },
         ],
       },
-    } as any);
+    } as unknown);
   });
 
   const addDangerToast = jest.fn();
@@ -454,7 +454,7 @@ test('fetchPermissionOptions handles variable page sizes from backend', async ()
     }));
     return Promise.resolve({
       json: { count: totalCount, result: items },
-    } as any);
+    } as unknown);
   });
 
   const addDangerToast = jest.fn();
@@ -496,7 +496,7 @@ test('fetchPermissionOptions respects concurrency limit for parallel page fetche
                   view_menu: { name: `v${page * 1000 + i}` },
                 }))
               : [];
-          resolve({ json: { count: totalCount, result: items } } as any);
+          resolve({ json: { count: totalCount, result: items } } as unknown);
         },
       });
     });
@@ -535,7 +535,7 @@ test('fetchPermissionOptions normalizes whitespace and case for cache keys', asy
         },
       ],
     },
-  } as any);
+  } as unknown);
   const addDangerToast = jest.fn();
 
   // Seed cache with "Dataset"

@@ -271,8 +271,8 @@ export const createHandleCustomizationSave =
         description: (formInputs.description || '').trim(),
         removed: false,
         chartId:
-          (formInputs as any).chartId ||
-          (customizationsConfigMap[id] as any)?.chartId,
+          (formInputs as Record<string, unknown>).chartId ||
+          (customizationsConfigMap[id] as Record<string, unknown>)?.chartId,
         customization: {
           name: formInputs.name || '',
           dataset: datasetValue,

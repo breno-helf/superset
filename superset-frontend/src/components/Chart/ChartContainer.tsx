@@ -31,7 +31,7 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
         ...actions,
         updateDataMask,
         logEvent,
-      } as any,
+      } as unknown,
       dispatch,
     ),
   };

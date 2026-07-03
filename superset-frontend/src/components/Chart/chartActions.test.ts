@@ -773,8 +773,7 @@ describe('chart actions timeout', () => {
         timeout,
         formData: formData as QueryFormData,
         key,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }) as any,
+      }) as unknown,
     );
 
     const expectedPayload = {
@@ -810,8 +809,7 @@ describe('chart actions timeout', () => {
         timeout: undefined,
         formData: formData as QueryFormData,
         key,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }) as any,
+      }) as unknown,
     );
 
     const expectedPayload = {

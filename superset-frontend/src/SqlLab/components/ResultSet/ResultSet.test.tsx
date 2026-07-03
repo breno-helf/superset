@@ -166,7 +166,7 @@ beforeEach(() => {
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
-const setup = (props?: any, store?: Store) =>
+const setup = (props?: unknown, store?: Store) =>
   render(<ResultSet {...props} />, {
     useRedux: true,
     ...(store && { store }),

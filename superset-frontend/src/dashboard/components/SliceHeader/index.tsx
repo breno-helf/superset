@@ -187,7 +187,7 @@ const SliceHeader = forwardRef<HTMLDivElement, SliceHeaderProps>(
     const [headerTooltip, setHeaderTooltip] = useState<ReactNode | null>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     // TODO: change to indicator field after it will be implemented
-    const crossFilterValue = useSelector<RootState, any>(
+    const crossFilterValue = useSelector<RootState, unknown>(
       state => state.dataMask[slice?.slice_id]?.filterState?.value,
     );
     const isCrossFiltersEnabled = useSelector<RootState, boolean>(

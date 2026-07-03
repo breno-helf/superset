@@ -29,7 +29,7 @@ interface AdhocFilterPopoverTriggerProps {
   operators?: Operators[];
   adhocFilter: AdhocFilter;
   options: OptionSortType[];
-  datasource: Record<string, any>;
+  datasource: Record<string, unknown>;
   onFilterEdit: (editedFilter: AdhocFilter) => void;
   partitionColumn?: string;
   isControlledComponent?: boolean;

@@ -69,7 +69,7 @@ test('renders dataset metadata bar with minimal dataset', async () => {
     table_name: `This is dataset's name`,
     description: undefined,
     owners: [],
-  } as any;
+  } as unknown;
 
   const { result } = renderHook(
     () => useDatasetMetadataBar({ dataset: minimalDataset }),

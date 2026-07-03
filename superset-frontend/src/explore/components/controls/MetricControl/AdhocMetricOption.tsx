@@ -77,8 +77,7 @@ function AdhocMetricOption({
       datasource={datasource!}
     >
       <OptionControlLabel
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        savedMetric={savedMetric as any}
+        savedMetric={savedMetric as unknown}
         adhocMetric={adhocMetric}
         label={adhocMetric.label}
         onRemove={() => handleRemoveMetric()}

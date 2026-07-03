@@ -22,7 +22,7 @@ import { api, JsonResponse } from './queryApi';
 
 export type EditorMutationParams = {
   queryEditor: QueryEditor;
-  extra?: Record<string, any>;
+  extra?: Record<string, unknown>;
 };
 
 const sqlEditorApi = api.injectEndpoints({

@@ -31,12 +31,14 @@ import {
 import MetricDefinitionValue from './MetricDefinitionValue';
 import AdhocMetric, { dedupeAdhocMetricOptionName } from './AdhocMetric';
 import AdhocMetricPopoverTrigger from './AdhocMetricPopoverTrigger';
+import type { savedMetricType } from './types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type MetricValue = string | AdhocMetric | Record<string, unknown>;
+type SavedMetricInput = savedMetricType[] | unknown[];
 function getOptionsForSavedMetrics(
-  savedMetrics: any,
-  currentMetricValues: any,
-  currentMetric: any,
+  savedMetrics: SavedMetricInput,
+  currentMetricValues: unknown,
+  currentMetric: unknown,
 ) {
   return (
     savedMetrics?.filter((savedMetric: { metric_name: string }) =>
@@ -47,16 +49,19 @@ function getOptionsForSavedMetrics(
     ) ?? []
   );
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isDictionaryForAdhocMetric(value: any) {
-  return value && !(value instanceof AdhocMetric) && value.expressionType;
+function isDictionaryForAdhocMetric(value: unknown): value is Record<string, unknown> & { expressionType: string } {
+  return (
+    !!value &&
+    typeof value === 'object' &&
+    !(value instanceof AdhocMetric) &&
+    'expressionType' in value &&
+    !!(value as Record<string, unknown>).expressionType
+  );
 }
 
 // adhoc metrics are stored as dictionaries in URL params. We convert them back into the
 // AdhocMetric class for typechecking, consistency and instance method access.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function coerceAdhocMetrics(value: any) {
+function coerceAdhocMetrics(value: unknown): MetricValue[] {
   if (!value) {
     return [];
   }
@@ -64,43 +69,38 @@ function coerceAdhocMetrics(value: any) {
     if (isDictionaryForAdhocMetric(value)) {
       return [new AdhocMetric(value)];
     }
-    return [value];
+    return [value as MetricValue];
   }
   // Metrics are identified by optionName when editing; regenerate any that
   // collide so each keeps a unique identity (see dedupeAdhocMetricOptionName).
   const seenOptionNames = new Set<string>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return value.map((val: any) => {
+  return value.map((val: unknown) => {
     if (isDictionaryForAdhocMetric(val)) {
       return dedupeAdhocMetricOptionName(new AdhocMetric(val), seenOptionNames);
     }
-    return val;
+    return val as MetricValue;
   });
 }
 
 const emptySavedMetric = { metric_name: '', expression: '' };
 
 // TODO: use typeguards to distinguish saved metrics from adhoc metrics
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getMetricsMatchingCurrentDataset = (
-  value: any,
-  columns: any,
-  savedMetrics: any,
+  value: unknown,
+  columns: unknown[],
+  savedMetrics: SavedMetricInput,
 ) =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ensureIsArray(value).filter((metric: any) => {
+  ensureIsArray(value).filter((metric: Record<string, unknown>) => {
     if (typeof metric === 'string' || metric.metric_name) {
-      return savedMetrics?.some(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (savedMetric: any) =>
+      return (savedMetrics as savedMetricType[])?.some(
+        (savedMetric: savedMetricType) =>
           savedMetric.metric_name === metric ||
           savedMetric.metric_name === metric.metric_name,
       );
     }
-    return columns?.some(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (column: any) =>
-        !metric.column || metric.column.column_name === column.column_name,
+    return (columns as Record<string, unknown>[])?.some(
+      (column: Record<string, unknown>) =>
+        !metric.column || (metric.column as Record<string, unknown>).column_name === column.column_name,
     );
   });
 
@@ -131,8 +131,7 @@ const MetricsControl = ({
   const prevSavedMetrics = usePrevious(savedMetrics);
 
   const handleChange = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (opts: any) => {
+    (opts: MetricValue[] | MetricValue | null) => {
       // if clear out options
       if (opts === null) {
         onChange(null);
@@ -141,8 +140,7 @@ const MetricsControl = ({
 
       const transformedOpts = ensureIsArray(opts);
       const optionValues = transformedOpts
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map((option: any) => {
+        .map((option: Record<string, unknown>) => {
           // pre-defined metric
           if (option.metric_name) {
             return option.metric_name;
@@ -165,10 +163,8 @@ const MetricsControl = ({
   );
 
   const onMetricEdit = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (changedMetric: any, oldMetric: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const newValue = value.map((val: any) => {
+    (changedMetric: MetricValue, oldMetric: Record<string, unknown>) => {
+      const newValue = value.map((val: MetricValue) => {
         if (
           // compare saved metrics
           val === oldMetric.metric_name ||
@@ -232,12 +228,10 @@ const MetricsControl = ({
         <AdhocMetricPopoverTrigger
           adhocMetric={newAdhocMetric}
           onMetricEdit={onNewMetric}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          columns={columns as any}
+          columns={columns as unknown[]}
           savedMetricsOptions={savedMetricOptions}
           savedMetric={emptySavedMetric}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          datasource={datasource as any}
+          datasource={datasource as Record<string, unknown>}
           isNew
         >
           {trigger}
@@ -287,16 +281,12 @@ const MetricsControl = ({
       <MetricDefinitionValue
         key={index}
         index={index}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        option={option as any}
+        option={option as MetricValue}
         onMetricEdit={onMetricEdit}
         onRemoveMetric={onRemoveMetric}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        columns={columns as any}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        datasource={datasource as any}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        savedMetrics={savedMetrics as any}
+        columns={columns as unknown[]}
+        datasource={datasource as Record<string, unknown>}
+        savedMetrics={savedMetrics as savedMetricType[]}
         savedMetricsOptions={getOptionsForSavedMetrics(
           savedMetrics,
           value,

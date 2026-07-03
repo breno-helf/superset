@@ -30,7 +30,7 @@ export default function AggregateOption({
 }: AggregateOptionProps) {
   return (
     <div>
-      {showType && <ColumnTypeLabel type={'aggregate' as any} />}
+      {showType && <ColumnTypeLabel type={'aggregate' as unknown} />}
       <span className="option-label">{aggregate.aggregate_name}</span>
     </div>
   );

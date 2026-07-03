@@ -159,7 +159,7 @@ export interface DrillByModalProps {
   column?: Column;
   dataset: Dataset;
   drillByConfig: Required<ContextMenuFilters>['drillBy'];
-  formData: BaseFormData & { [key: string]: any };
+  formData: BaseFormData & { [key: string]: unknown };
   onHideModal: () => void;
   canDownload: boolean;
 }
@@ -228,7 +228,7 @@ export default function DrillByModal({
 
   const getFormDataChangesFromConfigs = useCallback(
     (configs: DrillByConfigs) =>
-      configs.reduce<Record<string, any>>(
+      configs.reduce<Record<string, unknown>>(
         (acc, config) => {
           if (config?.groupbyFieldName && config.column) {
             acc.formData[config.groupbyFieldName] = getNewGroupby(

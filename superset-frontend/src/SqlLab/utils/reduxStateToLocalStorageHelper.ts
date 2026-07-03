@@ -135,7 +135,7 @@ export function clearQueryEditors(queryEditors: QueryEditor[]) {
 }
 
 export function rehydratePersistedState(
-  dispatch: ThunkDispatch<SqlLabRootState, unknown, any>,
+  dispatch: ThunkDispatch<SqlLabRootState, unknown, unknown>,
   state: SqlLabRootState,
 ) {
   // Rehydrate server side persisted table metadata

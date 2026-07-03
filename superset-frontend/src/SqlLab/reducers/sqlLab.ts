@@ -69,8 +69,7 @@ export default function sqlLabReducer(
   state: SqlLabState = {} as SqlLabState,
   action: SqlLabAction,
 ): SqlLabState {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const actionHandlers: Record<string, () => any> = {
+  const actionHandlers: Record<string, () => unknown> = {
     [actions.ADD_QUERY_EDITOR]() {
       const mergeUnsavedState = alterInArr(
         state,
@@ -95,8 +94,7 @@ export default function sqlLabReducer(
       return alterInArr(
         state,
         'queryEditors',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        existing as any,
+        existing as unknown,
         {
           remoteId: result!.remoteId,
           name: (query as { name: string }).name,
@@ -134,8 +132,7 @@ export default function sqlLabReducer(
         autorun: true,
         sql: action.query!.sql,
         queryLimit: action.query!.queryLimit,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        maxRow: (action.query as any)?.maxRow,
+        maxRow: (action.query as unknown)?.maxRow,
       };
       const stateWithoutUnsavedState = {
         ...state,
@@ -143,8 +140,7 @@ export default function sqlLabReducer(
       };
       return sqlLabReducer(
         stateWithoutUnsavedState,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        actions.addQueryEditor(qe as any),
+        actions.addQueryEditor(qe as unknown),
       );
     },
     [actions.REMOVE_QUERY_EDITOR]() {
@@ -158,9 +154,7 @@ export default function sqlLabReducer(
       const qeIds = newState.queryEditors.map(
         (qe: QueryEditor) => qe.tabViewId ?? qe.id,
       );
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const queries: any = {};
+      const queries: Record<string, unknown> = {};
       Object.keys(state.queries).forEach(k => {
         const query = state.queries[k];
         if (qeIds.indexOf(query.sqlEditorId) > -1) {
@@ -397,8 +391,7 @@ export default function sqlLabReducer(
       });
     },
     [actions.CLEAR_QUERY_RESULTS]() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const newResults = { ...(action.query as any).results };
+      const newResults = { ...(action.query as unknown).results };
       newResults.data = [];
       return alterInObject(state, 'queries', action.query!, {
         results: newResults,
@@ -419,8 +412,7 @@ export default function sqlLabReducer(
       ) {
         return state;
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const alts: any = {
+      const alts: Record<string, unknown> = {
         endDttm: now(),
         progress: 100,
         results: action.results,
@@ -721,10 +713,8 @@ export default function sqlLabReducer(
       };
     },
     [actions.SET_DATABASES]() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const databases: any = {};
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (action.databases as any[])!.forEach((db: any) => {
+      const databases: Record<string, unknown> = {};
+      (action.databases as unknown[])!.forEach((db: unknown) => {
         databases[db.id] = {
           ...db,
           extra_json: JSON.parse(db.extra || ''),
@@ -737,9 +727,8 @@ export default function sqlLabReducer(
       // Fetch the updates to the queries present in the store.
       let change = false;
       let { queriesLastUpdate } = state;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Object.entries(action.alteredQueries!).forEach(
-        ([id, changedQuery]: [string, any]) => {
+        ([id, changedQuery]: [string, unknown]) => {
           if (
             !state.queries.hasOwnProperty(id) ||
             (state.queries[id].state !== QueryState.Stopped &&
@@ -814,8 +803,7 @@ export default function sqlLabReducer(
             }
             return true;
           })
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .map(([id, query]: [string, any]) => [
+          .map(([id, query]: [string, unknown]) => [
             id,
             {
               ...query,

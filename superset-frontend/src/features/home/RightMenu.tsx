@@ -128,7 +128,7 @@ const RightMenu = ({
   }) => void;
 }) => {
   const theme = useTheme();
-  const user = useSelector<any, UserWithPermissionsAndRoles>(
+  const user = useSelector<unknown, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const dashboardId = useSelector<RootState, number | undefined>(
@@ -143,7 +143,7 @@ const RightMenu = ({
     ALLOWED_EXTENSIONS,
     HAS_GSHEETS_INSTALLED,
     SCARF_ANALYTICS,
-  } = useSelector<any, ExtensionConfigs>(state => state.common.conf);
+  } = useSelector<unknown, ExtensionConfigs>(state => state.common.conf);
   const [showDatabaseModal, setShowDatabaseModal] = useState<boolean>(false);
   const [showCSVUploadModal, setShowCSVUploadModal] = useState<boolean>(false);
   const [showExcelUploadModal, setShowExcelUploadModal] =
@@ -259,12 +259,12 @@ const RightMenu = ({
     };
     SupersetClient.get({
       endpoint: `/api/v1/database/?q=${rison.encode(payload)}`,
-    }).then(({ json }: Record<string, any>) => {
+    }).then(({ json }: Record<string, unknown>) => {
       // There might be some existing Gsheets and Clickhouse DBs
       // with allow_file_upload set as True which is not possible from now on
       const allowedDatabasesWithFileUpload =
         json?.result?.filter(
-          (database: any) => database?.engine_information?.supports_file_upload,
+          (database: unknown) => database?.engine_information?.supports_file_upload,
         ) || [];
       setAllowUploads(allowedDatabasesWithFileUpload?.length >= 1);
     });
@@ -276,7 +276,7 @@ const RightMenu = ({
     };
     SupersetClient.get({
       endpoint: `/api/v1/database/?q=${rison.encode(payload)}`,
-    }).then(({ json }: Record<string, any>) => {
+    }).then(({ json }: Record<string, unknown>) => {
       setNonExamplesDBConnected(json.count >= 1);
     });
   };
@@ -293,7 +293,7 @@ const RightMenu = ({
     }
   }, [canDatabase, canDataset]);
 
-  const handleMenuSelection = (itemChose: any) => {
+  const handleMenuSelection = (itemChose: unknown) => {
     if (itemChose.key === GlobalMenuDataOptions.DbConnection) {
       setShowDatabaseModal(true);
     } else if (itemChose.key === GlobalMenuDataOptions.GoogleSheets) {

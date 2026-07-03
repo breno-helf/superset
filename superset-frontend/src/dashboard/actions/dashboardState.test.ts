@@ -105,7 +105,7 @@ describe('dashboardState actions', () => {
   beforeEach(() => {
     postStub = jest
       .spyOn(SupersetClient, 'post')
-      .mockResolvedValue('the value you want to return' as any);
+      .mockResolvedValue('the value you want to return' as unknown);
     getStub = jest.spyOn(SupersetClient, 'get').mockResolvedValue({
       json: {
         result: {
@@ -113,12 +113,12 @@ describe('dashboardState actions', () => {
           css: updatedCss,
         },
       },
-    } as any);
+    } as unknown);
     putStub = jest.spyOn(SupersetClient, 'put').mockResolvedValue({
       json: {
         result: mockDashboardData,
       },
-    } as any);
+    } as unknown);
   });
   afterEach(() => {
     postStub.mockRestore();
@@ -128,7 +128,7 @@ describe('dashboardState actions', () => {
 
   function setup(stateOverrides: Record<string, unknown> = {}) {
     const state = { ...mockState, ...stateOverrides };
-    const getState = jest.fn(() => state) as unknown as () => any;
+    const getState = jest.fn(() => state) as unknown as () => unknown;
     const dispatch = jest.fn();
     return { getState, dispatch, state };
   }
@@ -155,13 +155,13 @@ describe('dashboardState actions', () => {
 
       // start with mockDashboardData, it didn't have parents attr
       expect(
-        (newDashboardData.positions[DASHBOARD_GRID_ID] as any).parents,
+        (newDashboardData.positions[DASHBOARD_GRID_ID] as unknown).parents,
       ).not.toBeDefined();
 
       // mock redux work: dispatch an event, cause modify redux state
       const mockParentsList = ['ROOT_ID'];
       dispatch.mockImplementation(() => {
-        (mockState.dashboardLayout.present[DASHBOARD_GRID_ID] as any).parents =
+        (mockState.dashboardLayout.present[DASHBOARD_GRID_ID] as unknown).parents =
           mockParentsList;
       });
 
@@ -243,7 +243,7 @@ describe('dashboardState actions', () => {
             id: newDashboardId,
           },
         },
-      } as any);
+      } as unknown);
 
       const thunk = saveDashboardRequest(
         newDashboardData,
@@ -281,7 +281,7 @@ describe('dashboardState actions', () => {
           result: { ...mockDashboardData, id: updatedId, slug: null },
           last_modified_time: 0,
         },
-      } as any);
+      } as unknown);
 
       const thunk = saveDashboardRequest(
         newDashboardData,

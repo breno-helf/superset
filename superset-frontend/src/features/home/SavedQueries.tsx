@@ -52,7 +52,7 @@ import { WelcomeTable } from './types';
 
 interface Query {
   id?: number;
-  sql_tables?: Array<any>;
+  sql_tables?: unknown[];
   database?: {
     database_name: string;
   };

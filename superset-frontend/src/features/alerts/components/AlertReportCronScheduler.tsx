@@ -31,7 +31,7 @@ import { StyledInputContainer } from '../AlertReportModal';
 
 export interface AlertReportCronSchedulerProps {
   value: string;
-  onChange: (change: string) => any;
+  onChange: (change: string) => unknown;
 }
 
 enum ScheduleType {

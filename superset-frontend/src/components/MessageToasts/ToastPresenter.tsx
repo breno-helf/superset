@@ -133,7 +133,7 @@ const StyledToastPresenter = styled.div<VisualProps>(
 
 type ToastPresenterProps = Partial<VisualProps> & {
   toasts: Array<ToastMeta>;
-  removeToast: () => any;
+  removeToast: () => unknown;
 };
 
 export default function ToastPresenter({

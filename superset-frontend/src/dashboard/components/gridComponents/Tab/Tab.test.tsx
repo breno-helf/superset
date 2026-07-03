@@ -225,7 +225,7 @@ test('Drop on a tab', async () => {
         component={{
           ...props.component,
           id: 'TAB-Next-',
-          meta: { text: 'Next Tab' } as any,
+          meta: { text: 'Next Tab' } as unknown,
         }}
         handleComponentDrop={mockOnDropOnTab}
         editMode
@@ -240,7 +240,7 @@ test('Drop on a tab', async () => {
             parents: ['ROOT_ID'],
             children: [],
             meta: {},
-          } as any
+          } as unknown
         }
         depth={0}
         editMode
@@ -251,7 +251,7 @@ test('Drop on a tab', async () => {
           ...props.component,
           type: 'MARKDOWN',
           id: 'MARKDOWN-1',
-          meta: { code: 'Dashboard Component' } as any,
+          meta: { code: 'Dashboard Component' } as unknown,
         }}
         logEvent={jest.fn()}
         deleteComponent={jest.fn()}

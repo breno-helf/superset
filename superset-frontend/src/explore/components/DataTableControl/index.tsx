@@ -95,7 +95,7 @@ export const FilterInput = ({
   onChangeHandler(filterText: string): void;
   shouldFocus?: boolean;
 }) => {
-  const inputRef: RefObject<any> = useRef(null);
+  const inputRef: RefObject<unknown> = useRef(null);
 
   useEffect(() => {
     if (inputRef.current && shouldFocus) {
@@ -124,7 +124,7 @@ export const FilterInput = ({
     <Input
       prefix={<Icons.SearchOutlined iconSize="l" />}
       placeholder={t('Search')}
-      onChange={(event: any) => {
+      onChange={(event: unknown) => {
         const filterText = event.target.value;
         debouncedChangeHandler(filterText);
       }}
@@ -139,11 +139,11 @@ export const FilterInput = ({
 
 export const useFilteredTableData = (
   filterText: string,
-  data?: Record<string, any>[],
+  data?: Record<string, unknown>[],
 ) => {
   const rowsAsStrings = useMemo(
     () =>
-      data?.map((row: Record<string, any>) =>
+      data?.map((row: Record<string, unknown>) =>
         Object.values(row).map(value =>
           value ? value.toString().toLowerCase() : t('N/A'),
         ),

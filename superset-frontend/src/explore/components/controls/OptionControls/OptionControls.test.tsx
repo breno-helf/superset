@@ -41,7 +41,7 @@ const defaultProps = {
   index: 0,
 };
 
-const setup = (overrides?: Record<string, any>) =>
+const setup = (overrides?: Record<string, unknown>) =>
   render(<OptionControlLabel {...defaultProps} {...overrides} />, {
     useDndKit: true,
   });

@@ -49,7 +49,7 @@ function createMockExtension(overrides: Partial<Extension> = {}): Extension {
 }
 
 beforeEach(() => {
-  (ExtensionsLoader as any).instance = undefined;
+  (ExtensionsLoader as unknown).instance = undefined;
   mockApplicationRoot.mockReturnValue('');
 });
 
@@ -132,7 +132,7 @@ test('handles initialization errors gracefully', async () => {
     .mockImplementation((element: Node) => {
       if (element instanceof HTMLScriptElement && element.onerror) {
         setTimeout(() => {
-          (element.onerror as any)('Script load error');
+          (element.onerror as unknown)('Script load error');
         }, 0);
       }
       return element;
@@ -161,7 +161,7 @@ test('logs success after initializeExtensions completes', async () => {
   const infoSpy = jest.spyOn(logging, 'info').mockImplementation();
   jest.spyOn(SupersetClient, 'get').mockResolvedValue({
     json: { result: [] },
-  } as any);
+  } as unknown);
 
   await loader.initializeExtensions();
 

@@ -46,7 +46,7 @@ export function dashboardInfoChanged(newInfo: Partial<DashboardInfo>) {
   return { type: DASHBOARD_INFO_UPDATED, newInfo };
 }
 
-export function nativeFiltersConfigChanged(newInfo: Record<string, any>) {
+export function nativeFiltersConfigChanged(newInfo: Record<string, unknown>) {
   return { type: DASHBOARD_INFO_FILTERS_CHANGED, newInfo };
 }
 

@@ -336,7 +336,7 @@ export function parseUrl(url: string) {
   return url;
 }
 
-export function toQueryString(params: Record<string, any>): string {
+export function toQueryString(params: Record<string, unknown>): string {
   const queryParts: string[] = [];
   Object.keys(params).forEach(key => {
     const value = params[key];

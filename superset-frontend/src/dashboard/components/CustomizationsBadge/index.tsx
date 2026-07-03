@@ -30,7 +30,7 @@ import { RootState } from '../../types';
 import { isChartWithoutGroupBy } from '../../util/charts/chartTypeLimitations';
 
 const getCustomizationDataset = (
-  item: ChartCustomization | any,
+  item: ChartCustomization | unknown,
 ): string | number | null => {
   if (item.targets?.[0]?.datasetId !== undefined) {
     return item.targets[0].datasetId;

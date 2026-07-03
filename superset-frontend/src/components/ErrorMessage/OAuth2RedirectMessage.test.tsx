@@ -61,7 +61,7 @@ jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(mockDispatch);
 // Capture the channel instance created by the component so tests can drive its
 // onmessage handler and assert it gets closed on unmount.
 let capturedChannel: {
-  onmessage: ((event: any) => void) | null;
+  onmessage: ((event: unknown) => void) | null;
   close: jest.Mock;
 };
 const channelCloseMock = jest.fn();
@@ -69,16 +69,16 @@ const channelCloseMock = jest.fn();
 beforeEach(() => {
   jest.clearAllMocks();
   capturedChannel = { onmessage: null, close: channelCloseMock };
-  (global as any).BroadcastChannel = jest
+  (global as unknown).BroadcastChannel = jest
     .fn()
     .mockImplementation(() => capturedChannel);
 });
 
-function simulateBroadcastMessage(data: any) {
+function simulateBroadcastMessage(data: unknown) {
   capturedChannel.onmessage?.({ data });
 }
 
-function simulateStorageMessage(data: any) {
+function simulateStorageMessage(data: unknown) {
   window.dispatchEvent(
     new StorageEvent('storage', {
       key: 'oauth2_auth_complete',
@@ -127,7 +127,7 @@ describe('OAuth2RedirectMessage Component', () => {
   test('closes the BroadcastChannel on unmount', () => {
     const { unmount } = render(setup());
 
-    expect((global as any).BroadcastChannel).toHaveBeenCalledWith('oauth');
+    expect((global as unknown).BroadcastChannel).toHaveBeenCalledWith('oauth');
     unmount();
     expect(channelCloseMock).toHaveBeenCalled();
   });

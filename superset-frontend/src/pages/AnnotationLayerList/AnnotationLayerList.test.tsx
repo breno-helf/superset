@@ -34,7 +34,7 @@ import AnnotationLayersListComponent from 'src/pages/AnnotationLayerList';
 
 // Cast to accept partial mock props in tests
 const AnnotationLayersList =
-  AnnotationLayersListComponent as unknown as React.FC<Record<string, any>>;
+  AnnotationLayersListComponent as unknown as React.FC<Record<string, unknown>>;
 
 const mockStore = configureStore([thunk]);
 const store = mockStore({});

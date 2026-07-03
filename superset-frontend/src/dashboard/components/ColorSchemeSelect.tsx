@@ -128,17 +128,17 @@ const ColorSchemeSelect = ({
         [ColorSchemeGroup.Custom]: {
           title: ColorSchemeGroup.Custom,
           label: t('Custom color palettes'),
-          options: [] as any,
+          options: [] as unknown,
         },
         [ColorSchemeGroup.Featured]: {
           title: ColorSchemeGroup.Featured,
           label: t('Featured color palettes'),
-          options: [] as any,
+          options: [] as unknown,
         },
         [ColorSchemeGroup.Other]: {
           title: ColorSchemeGroup.Other,
           label: t('Other color palettes'),
-          options: [] as any,
+          options: [] as unknown,
         },
       },
     );

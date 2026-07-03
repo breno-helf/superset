@@ -44,7 +44,7 @@ import { DashboardState, RootState } from '../types';
 // Type the reducer function properly since it's imported from JS
 type DashboardStateReducer = (
   state: Partial<DashboardState> | undefined,
-  action: any,
+  action: unknown,
 ) => Partial<DashboardState>;
 const typedDashboardStateReducer =
   dashboardStateReducer as DashboardStateReducer;

@@ -30,7 +30,7 @@ import handleResourceExport from 'src/utils/export';
 
 // Cast to accept partial mock props in tests
 const DashboardList = DashboardListComponent as unknown as React.FC<
-  Record<string, any>
+  Record<string, unknown>
 >;
 
 export const mockHandleResourceExport =
@@ -206,7 +206,7 @@ export const API_ENDPOINTS = {
 };
 
 interface StoreState {
-  user?: any;
+  user?: unknown;
   common?: {
     conf?: {
       SUPERSET_WEBSERVER_TIMEOUT?: number;
@@ -232,7 +232,7 @@ export const createMockStore = (initialState: Partial<StoreState> = {}) =>
       }),
   });
 
-export const createDefaultStoreState = (user: any): StoreState => ({
+export const createDefaultStoreState = (user: unknown): StoreState => ({
   user,
   common: {
     conf: {
@@ -245,8 +245,8 @@ export const createDefaultStoreState = (user: any): StoreState => ({
 });
 
 export const renderDashboardList = (
-  user: any,
-  props: Record<string, any> = {},
+  user: unknown,
+  props: Record<string, unknown> = {},
   storeState: Partial<StoreState> = {},
 ) => {
   const defaultStoreState = createDefaultStoreState(user);
@@ -326,7 +326,7 @@ export const setupMocks = (
 
   fetchMock.get(
     API_ENDPOINTS.CATCH_ALL,
-    (callLog: any) => {
+    (callLog: unknown) => {
       const reqUrl =
         typeof callLog === 'string' ? callLog : callLog?.url || callLog;
       throw new Error(`[fetchMock catch-all] Unmatched GET: ${reqUrl}`);
@@ -339,7 +339,7 @@ export const setupMocks = (
  * Parse the rison-encoded `q` query parameter from a fetch-mock call URL.
  * Returns the decoded object, or null if parsing fails.
  */
-export const parseQueryFromUrl = (url: string): Record<string, any> | null => {
+export const parseQueryFromUrl = (url: string): Record<string, unknown> | null => {
   const match = url.match(/[?&]q=(.+?)(?:&|$)/);
   if (!match) return null;
   return rison.decode(decodeURIComponent(match[1]));

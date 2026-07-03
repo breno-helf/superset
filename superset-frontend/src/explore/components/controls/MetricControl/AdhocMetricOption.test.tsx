@@ -60,8 +60,7 @@ function setup(overrides: Record<string, unknown> = {}) {
     ...defaultProps,
     ...overrides,
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return render(<AdhocMetricOption {...(props as any)} />, {
+  return render(<AdhocMetricOption {...(props as unknown)} />, {
     useDnd: true,
     useRedux: true,
     initialState: { explore: {} },

@@ -63,7 +63,7 @@ export function saveDataset({
   datasourceName,
   columns,
 }: Omit<SaveDatasetRequest['data'], 'dbId'> & { database: { id: number } }) {
-  return async function (dispatch: ThunkDispatch<any, undefined, AnyAction>) {
+  return async function (dispatch: ThunkDispatch<unknown, undefined, AnyAction>) {
     // Create a dataset object
     try {
       const {

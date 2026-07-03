@@ -43,7 +43,7 @@ const drillToDetailModalState = {
   },
 };
 
-const renderModal = async (overrideState: Record<string, any> = {}) => {
+const renderModal = async (overrideState: Record<string, unknown> = {}) => {
   const DrillDetailModalWrapper = () => {
     const [showModal, setShowModal] = useState(false);
     return (

@@ -24,13 +24,13 @@ export type FilterItemType = {
 };
 
 export type DiffItemType<
-  T = FilterItemType | number | string | Record<string | number, any>,
+  T = FilterItemType | number | string | Record<string | number, unknown>,
 > =
   | T[]
   | boolean
   | number
   | string
-  | Record<string | number, any>
+  | Record<string | number, unknown>
   | null
   | undefined;
 

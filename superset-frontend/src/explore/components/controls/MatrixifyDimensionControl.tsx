@@ -30,13 +30,13 @@ import {
 
 export interface MatrixifyDimensionControlValue {
   dimension: string;
-  values: any[];
+  values: unknown[];
   topNValues?: TopNValue[]; // Store topN values with their metric values
   totalValueCount?: number; // Total number of distinct values for this dimension
 }
 
 interface MatrixifyDimensionControlProps {
-  datasource: any;
+  datasource: unknown;
   value?: MatrixifyDimensionControlValue;
   onChange: (val: MatrixifyDimensionControlValue) => void;
   label?: string;
@@ -48,7 +48,7 @@ interface MatrixifyDimensionControlProps {
   topNValue?: number;
   topNOrder?: 'ASC' | 'DESC';
   allSortBy?: 'a_to_z' | 'z_to_a' | 'metric';
-  formData?: any; // For access to filters and time range
+  formData?: unknown; // For access to filters and time range
   validationErrors?: string[];
 }
 
@@ -75,7 +75,7 @@ export default function MatrixifyDimensionControl(
     Array<[string, string]>
   >([]);
   const [valueOptions, setValueOptions] = useState<
-    Array<{ label: string; value: any }>
+    Array<{ label: string; value: unknown }>
   >([]);
   const [loadingValues, setLoadingValues] = useState(false);
   const [topNError, setTopNError] = useState<string | null>(null);
@@ -104,7 +104,7 @@ export default function MatrixifyDimensionControl(
   // Initialize dimension options from datasource
   useEffect(() => {
     if (datasource?.columns) {
-      const options = datasource.columns.map((col: any) => [
+      const options = datasource.columns.map((col: unknown) => [
         col.column_name,
         getColumnLabel(col.column_name),
       ]);
@@ -154,7 +154,7 @@ export default function MatrixifyDimensionControl(
         // Sort alphabetically for 'all' mode
         if (selectionMode === 'all') {
           const descending = allSortBy === 'z_to_a';
-          values = [...values].sort((a: any, b: any) => {
+          values = [...values].sort((a: unknown, b: unknown) => {
             const strA = String(a).toLowerCase();
             const strB = String(b).toLowerCase();
             if (strA < strB) return descending ? 1 : -1;
@@ -164,7 +164,7 @@ export default function MatrixifyDimensionControl(
         }
 
         setValueOptions(
-          values.map((v: any) => ({
+          values.map((v: unknown) => ({
             label: optionLabel(v),
             value: v,
           })),
@@ -260,7 +260,7 @@ export default function MatrixifyDimensionControl(
             topNValues: values,
           });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (!signal.aborted) {
           setTopNError(error.message || t('Failed to load top values'));
           onChange({
@@ -297,7 +297,7 @@ export default function MatrixifyDimensionControl(
     });
   };
 
-  const handleValuesChange = (values: any[]) => {
+  const handleValuesChange = (values: unknown[]) => {
     onChange({
       dimension: value?.dimension || '',
       values,

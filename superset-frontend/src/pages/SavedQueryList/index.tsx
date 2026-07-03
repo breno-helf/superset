@@ -135,7 +135,7 @@ function SavedQueryList({
     t('Saved queries'),
     addDangerToast,
   );
-  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
+  const { roles } = useSelector<unknown, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
@@ -350,7 +350,7 @@ function SavedQueryList({
           row: {
             original: { id, label },
           },
-        }: any) => <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>,
+        }: CellProps<SavedQueryObject>) => <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>,
         id: 'label',
       },
       {
@@ -382,8 +382,8 @@ function SavedQueryList({
           row: {
             original: { sql_tables: tables = [] },
           },
-        }: any) => {
-          const names = tables.map((table: any) => table.table);
+        }: CellProps<SavedQueryObject>) => {
+          const names = tables.map((table: unknown) => table.table);
           const main = names?.shift() || '';
 
           if (names.length) {
@@ -421,7 +421,7 @@ function SavedQueryList({
           row: {
             original: { tags = [] },
           },
-        }: any) => (
+        }: CellProps<SavedQueryObject>) => (
           // Only show custom type tags
           <TagsList
             tags={tags.filter(
@@ -468,7 +468,7 @@ function SavedQueryList({
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<SavedQueryObject>) => {
           const handlePreview = () => {
             handleSavedQueryPreview(original.id);
           };

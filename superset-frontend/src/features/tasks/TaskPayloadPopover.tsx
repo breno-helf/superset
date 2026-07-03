@@ -46,7 +46,7 @@ const InfoIconWrapper = styled.span`
 `;
 
 interface TaskPayloadPopoverProps {
-  payload: Record<string, any>;
+  payload: Record<string, unknown>;
 }
 
 export default function TaskPayloadPopover({

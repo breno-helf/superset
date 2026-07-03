@@ -53,7 +53,7 @@ const getJSONSchema = () => {
   // parse date-time into usable value (eg, 'today' => `new Date()`)
   if (jsonSchema) {
     Object.entries(jsonSchema.properties).forEach(
-      ([key, value]: [string, any]) => {
+      ([key, value]: [string, unknown]) => {
         if (value.default && value.format === 'date-time') {
           const parsedDate = parseDate(value.default);
           jsonSchema.properties[key] = {
@@ -73,9 +73,9 @@ const getUISchema = () => scheduledQueriesConf?.UISCHEMA;
 const getValidationRules = () => scheduledQueriesConf?.VALIDATION || [];
 
 const getValidator = () => {
-  const rules: any = getValidationRules();
-  return (formData: Record<string, any>, errors: FormValidation) => {
-    rules.forEach((rule: any) => {
+  const rules: Record<string, unknown>[] = getValidationRules();
+  return (formData: Record<string, unknown>, errors: FormValidation) => {
+    rules.forEach((rule: unknown) => {
       const test = validators[rule.name as keyof typeof validators];
       const args = rule.arguments.map((name: string) => formData[name]);
       const container = rule.container || rule.arguments.slice(-1)[0];
@@ -157,7 +157,7 @@ const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
   const onScheduleSubmit = ({
     formData,
   }: {
-    formData?: Omit<FormProps<Record<string, any>>, 'schema'>;
+    formData?: Omit<FormProps<Record<string, unknown>>, 'schema'>;
   }) => {
     const query = {
       label,

@@ -53,7 +53,7 @@ export function GridTable<RecordType extends object>({
     [externalFilter],
   );
   const rowIndexLength = `${data.length}}`.length;
-  const onKeyDown: AgGridReactProps<Record<string, any>>['onCellKeyDown'] =
+  const onKeyDown: AgGridReactProps<Record<string, unknown>>['onCellKeyDown'] =
     useCallback(({ event, column, data, value, api }: CellKeyDownEvent) => {
       const keyEvent = event as KeyboardEvent | undefined;
       if (

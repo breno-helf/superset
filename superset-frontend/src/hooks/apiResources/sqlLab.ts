@@ -40,7 +40,7 @@ export type InitialState = {
           longType: string;
         }[];
         dataPreviewQueryId?: string;
-      } & Record<string, any>;
+      } & Record<string, unknown>;
       catalog?: string | null;
       schema?: string;
       tab_state_id: number;
@@ -54,7 +54,7 @@ export type InitialState = {
     template_params: string | null;
     hide_left_bar?: boolean;
     saved_query: { id: number } | null;
-    extra_json?: Record<string, any>;
+    extra_json?: Record<string, unknown>;
   };
   databases: object[];
   queries: Record<

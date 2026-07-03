@@ -55,11 +55,11 @@ beforeEach(() => {
   // depends on the global feature-flag state and the assertions become
   // non-deterministic, meaning a reverted fix may go undetected.
   mockIsFeatureEnabled.mockReturnValue(false);
-  jest.spyOn(SupersetClient, 'post').mockResolvedValue({} as any);
-  jest.spyOn(SupersetClient, 'get').mockResolvedValue({} as any);
+  jest.spyOn(SupersetClient, 'post').mockResolvedValue({} as unknown);
+  jest.spyOn(SupersetClient, 'get').mockResolvedValue({} as unknown);
   putStub = jest.spyOn(SupersetClient, 'put').mockResolvedValue({
     json: { result: mockDashboardData },
-  } as any);
+  } as unknown);
 });
 
 afterEach(() => {
@@ -67,7 +67,7 @@ afterEach(() => {
 });
 
 function setup() {
-  const getState = jest.fn(() => mockState) as unknown as () => any;
+  const getState = jest.fn(() => mockState) as unknown as () => unknown;
   const dispatch = jest.fn();
   return { getState, dispatch };
 }

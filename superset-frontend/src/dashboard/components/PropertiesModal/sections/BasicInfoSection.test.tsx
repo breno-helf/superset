@@ -23,7 +23,7 @@ import BasicInfoSection from './BasicInfoSection';
 const defaultProps = {
   form: {
     getFieldValue: jest.fn(() => 'Test Dashboard'),
-  } as any,
+  } as unknown,
   validationStatus: {
     basic: { hasErrors: false, errors: [], name: 'Basic' },
   },
@@ -69,7 +69,7 @@ test('shows error message when name is empty and has validation errors', () => {
     <Form>
       <BasicInfoSection
         {...defaultProps}
-        form={mockForm as any}
+        form={mockForm as unknown}
         validationStatus={validationStatus}
       />
     </Form>,
@@ -91,7 +91,7 @@ test('does not show error when name is provided', () => {
     <Form>
       <BasicInfoSection
         {...defaultProps}
-        form={mockForm as any}
+        form={mockForm as unknown}
         validationStatus={validationStatus}
       />
     </Form>,

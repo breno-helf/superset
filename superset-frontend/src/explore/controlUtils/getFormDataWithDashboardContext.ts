@@ -84,7 +84,7 @@ const mergeFilterBoxToFormData = (
     __time_grain: 'time_grain_sqla',
     __granularity: 'granularity',
   };
-  const appliedTimeExtras: Record<string, any> = {};
+  const appliedTimeExtras: Record<string, unknown> = {};
 
   const filterBoxData: JsonObject = {};
   ensureIsArray(dashboardFormData.extra_filters).forEach(filter => {

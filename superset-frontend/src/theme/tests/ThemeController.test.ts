@@ -94,7 +94,7 @@ const createMockBootstrapData = (
     menu_data: {},
     d3_format: {},
     d3_time_format: {},
-  } as any as CommonBootstrapData,
+  } as unknown as CommonBootstrapData,
 });
 
 const mockThemeObject = {
@@ -142,7 +142,7 @@ beforeEach(() => {
   mockThemeFromConfig.mockReturnValue(mockThemeObject);
 
   // Mock Theme constructor
-  (Theme as any).fromConfig = mockThemeFromConfig;
+  (Theme as unknown).fromConfig = mockThemeFromConfig;
 
   // Reset localStorage mocks
   mockLocalStorage.getItem.mockReturnValue(null);
@@ -377,7 +377,7 @@ test('ThemeController handles missing theme object', () => {
       menu_data: {},
       d3_format: {},
       d3_time_format: {},
-    } as any,
+    } as unknown,
   });
 
   createController({ defaultTheme: fallbackTheme });
@@ -586,7 +586,7 @@ test('ThemeController handles invalid saved theme mode', () => {
     }),
   );
 
-  mockLocalStorage.getItem.mockReturnValue('invalid-mode' as any);
+  mockLocalStorage.getItem.mockReturnValue('invalid-mode' as unknown);
 
   const controller = createController();
 
@@ -739,7 +739,7 @@ test('ThemeController handles invalid algorithm combinations', () => {
 
   const themeWithInvalidAlgorithm = {
     ...DEFAULT_THEME,
-    algorithm: ['invalid', 'combination'] as any as ThemeAlgorithm[],
+    algorithm: ['invalid', 'combination'] as unknown as ThemeAlgorithm[],
   };
 
   jest.clearAllMocks();
@@ -818,10 +818,10 @@ test('ThemeController handles theme application errors', () => {
     throw new Error('Theme application error');
   });
 
-  const fallbackSpy = jest.spyOn(controller as any, 'fallbackToDefaultMode');
+  const fallbackSpy = jest.spyOn(controller as unknown, 'fallbackToDefaultMode');
   fallbackSpy.mockImplementation(() => {
-    (controller as any).customizations = DEFAULT_THEME;
-    (controller as any).currentMode = ThemeMode.DEFAULT;
+    (controller as unknown).customizations = DEFAULT_THEME;
+    (controller as unknown).currentMode = ThemeMode.DEFAULT;
   });
 
   controller.setThemeMode(ThemeMode.DARK);
@@ -910,7 +910,7 @@ test('recovery flow: fetchSystemDefaultTheme returns theme → applies fetched t
     });
 
     // Trigger fallbackToDefaultMode (simulates what happens after applyTheme fails)
-    await (controller as any).fallbackToDefaultMode();
+    await (controller as unknown).fallbackToDefaultMode();
 
     // Verify API was called to fetch system default theme
     expect(mockFetch).toHaveBeenCalledWith(
@@ -952,7 +952,7 @@ test('recovery flow: both API fetches fail → falls back to cached default them
     });
 
     // Trigger fallbackToDefaultMode
-    await (controller as any).fallbackToDefaultMode();
+    await (controller as unknown).fallbackToDefaultMode();
 
     // Verify fetch was attempted
     expect(mockFetch).toHaveBeenCalled();
@@ -1002,7 +1002,7 @@ test('recovery flow: fetched theme fails to apply → falls back to cached defau
     });
 
     // Trigger fallbackToDefaultMode
-    await (controller as any).fallbackToDefaultMode();
+    await (controller as unknown).fallbackToDefaultMode();
 
     // Verify fetch was called
     expect(mockFetch).toHaveBeenCalled();
@@ -1887,7 +1887,7 @@ test('fallback fetch: uses custom guest token header from SupersetClient when cl
 
   try {
     const controller = createController();
-    const result = await (controller as any).fetchSystemDefaultTheme();
+    const result = await (controller as unknown).fetchSystemDefaultTheme();
 
     expect(mockGet).toHaveBeenCalled();
     expect(mockFetch).toHaveBeenCalledWith(
@@ -1933,7 +1933,7 @@ test('fallback fetch: uses bootstrap config for guest token header when Superset
     config: {
       GUEST_TOKEN_HEADER_NAME: 'X-Bootstrap-Custom-Header',
     },
-  } as any);
+  } as unknown);
 
   const mockFetch = jest.fn().mockResolvedValue({
     ok: true,
@@ -1951,7 +1951,7 @@ test('fallback fetch: uses bootstrap config for guest token header when Superset
 
   try {
     const controller = createController();
-    const result = await (controller as any).fetchSystemDefaultTheme();
+    const result = await (controller as unknown).fetchSystemDefaultTheme();
 
     expect(mockFetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/v1/theme/'),
@@ -1996,7 +1996,7 @@ test('ThemeController cleans up injected fonts on destroy', () => {
   const controller = createController();
 
   // Inject some fonts
-  (controller as any).loadFonts(['https://fonts.example.com/font-test.css']);
+  (controller as unknown).loadFonts(['https://fonts.example.com/font-test.css']);
 
   let fontStyle = document.querySelector('style[data-superset-fonts]');
   expect(fontStyle).not.toBeNull();
@@ -2034,7 +2034,7 @@ test('fallback fetch: uses bootstrap GUEST_TOKEN_HEADER_NAME when guestTokenHead
     config: {
       GUEST_TOKEN_HEADER_NAME: 'X-Bootstrap-Header',
     },
-  } as any);
+  } as unknown);
 
   const mockFetch = jest.fn().mockResolvedValue({
     ok: true,
@@ -2052,7 +2052,7 @@ test('fallback fetch: uses bootstrap GUEST_TOKEN_HEADER_NAME when guestTokenHead
 
   try {
     const controller = createController();
-    const result = await (controller as any).fetchSystemDefaultTheme();
+    const result = await (controller as unknown).fetchSystemDefaultTheme();
 
     // Verify the bootstrap header was used instead of SupersetClient.guestTokenHeaderName
     expect(mockFetch).toHaveBeenCalledWith(
@@ -2103,7 +2103,7 @@ test('fetchSystemDefaultTheme: second named-theme fallback fetch succeeds when f
 
   try {
     const controller = createController();
-    const result = await (controller as any).fetchSystemDefaultTheme();
+    const result = await (controller as unknown).fetchSystemDefaultTheme();
 
     // Both fetches should have been called
     expect(mockFetch).toHaveBeenCalledTimes(2);

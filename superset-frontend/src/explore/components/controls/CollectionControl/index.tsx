@@ -99,7 +99,7 @@ function SortableItem({
     transform: CSS.Transform.toString(transform),
     transition: transition ?? undefined,
   };
-  const Control = (controlMap as Record<string, React.ComponentType<any>>)[
+  const Control = (controlMap as Record<string, React.ComponentType<Record<string, unknown>>>)[
     controlProps.controlName
   ];
 

@@ -198,7 +198,7 @@ const FilterBar: FC<FiltersBarProps> = ({
     () => filterValues.filter(isNativeFilter),
     [filterValues],
   );
-  const dashboardId = useSelector<any, number>(
+  const dashboardId = useSelector<unknown, number>(
     ({ dashboardInfo }) => dashboardInfo?.id,
   );
   const previousDashboardId = usePrevious(dashboardId);

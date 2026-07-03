@@ -35,7 +35,7 @@ const defaultResponse = {
 };
 
 jest.mock('@superset-ui/core', () => ({
-  ...jest.requireActual<any>('@superset-ui/core'),
+  ...jest.requireActual<unknown>('@superset-ui/core'),
   makeApi: jest.fn(),
 }));
 
@@ -46,13 +46,13 @@ const defaultProps = {
   onHide: mockOnHide,
 };
 const resetMockApi = () => {
-  (makeApi as any).mockReturnValue(
+  (makeApi as unknown).mockReturnValue(
     jest.fn().mockResolvedValue(defaultResponse),
   );
 };
 const setMockApiNotFound = () => {
   const notFound = new SupersetApiError({ message: 'Not found', status: 404 });
-  (makeApi as any).mockReturnValue(jest.fn().mockRejectedValue(notFound));
+  (makeApi as unknown).mockReturnValue(jest.fn().mockRejectedValue(notFound));
 };
 
 const setup = () => {

@@ -133,7 +133,7 @@ describe('updateComponentParentsList with bad inputs', () => {
     expect(() =>
       updateComponentParentsList({
         currentComponent: { id: '' },
-        layout: null as any,
+        layout: null as unknown,
       }),
     ).not.toThrow();
 

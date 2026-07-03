@@ -89,7 +89,7 @@ const defaultProps = {
     },
   ],
   onChange: () => {},
-} as any;
+} as unknown;
 
 test('renders with default props', () => {
   render(<DndColumnMetricSelect {...defaultProps} />, {
@@ -139,7 +139,7 @@ test('can drop columns and metrics', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Column,
-    value: { column_name: 'column_b' } as any,
+    value: { column_name: 'column_b' } as unknown,
   });
   expect(onChange).toHaveBeenLastCalledWith([
     'column_a',
@@ -149,7 +149,7 @@ test('can drop columns and metrics', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_b' } as any,
+    value: { metric_name: 'metric_b' } as unknown,
   });
   expect(onChange).toHaveBeenLastCalledWith([
     'column_a',
@@ -172,11 +172,11 @@ test('cannot drop duplicate items', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Column,
-    value: { column_name: 'column_a' } as any,
+    value: { column_name: 'column_a' } as unknown,
   });
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as any,
+    value: { metric_name: 'metric_a' } as unknown,
   });
 
   expect(onChange).not.toHaveBeenCalled();
@@ -197,14 +197,14 @@ test('can drop only selected metrics', () => {
   // metric_c is not in selectedMetrics -> rejected
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_c' } as any,
+    value: { metric_name: 'metric_c' } as unknown,
   });
   expect(onChange).not.toHaveBeenCalled();
 
   // metric_a is in selectedMetrics -> accepted
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as any,
+    value: { metric_name: 'metric_a' } as unknown,
   });
   expect(onChange).toHaveBeenLastCalledWith(['column_a', 'metric_a']);
 });

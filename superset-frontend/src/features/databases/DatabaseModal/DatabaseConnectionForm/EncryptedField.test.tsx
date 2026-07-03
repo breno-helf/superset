@@ -24,7 +24,7 @@ import { EncryptedField, encryptedCredentialsMap } from './EncryptedField';
 // Mock the useToasts hook
 jest.mock('src/components/MessageToasts/withToasts', () => ({
   __esModule: true,
-  default: (Component: any) => Component,
+  default: (Component: unknown) => Component,
   useToasts: () => ({
     addDangerToast: jest.fn(),
     addSuccessToast: jest.fn(),
@@ -38,7 +38,7 @@ describe('EncryptedField', () => {
   // Test utilities
   const createMockDb = (
     engine: string | null | undefined,
-    parameters: Record<string, any> = {},
+    parameters: Record<string, unknown> = {},
   ): DatabaseObject => ({
     configuration_method: ConfigurationMethod.DynamicForm,
     database_name: 'test-db',

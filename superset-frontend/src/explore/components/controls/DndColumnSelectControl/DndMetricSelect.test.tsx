@@ -122,7 +122,7 @@ test('coerceMetrics regenerates duplicate optionNames so each metric stays uniqu
         aggregate: AGGREGATES.AVG,
         optionName: dup,
       },
-    ] as any,
+    ] as unknown,
     defaultProps.savedMetrics as unknown as Metric[],
     defaultProps.columns,
   ) as AdhocMetric[];
@@ -154,7 +154,7 @@ test('coerceMetrics regenerates duplicate optionNames for SQL adhoc metrics too'
         label: 'total',
         optionName: dup,
       },
-    ] as any,
+    ] as unknown,
     defaultProps.savedMetrics as unknown as Metric[],
     defaultProps.columns,
   ) as AdhocMetric[];
@@ -200,7 +200,7 @@ test('render selected metrics correctly', () => {
 
 test('warn selected custom metric when metric gets removed from dataset', async () => {
   let metricValues = ['metric_a', 'metric_b', adhocMetricA, adhocMetricB];
-  const onChange = (val: any[]) => {
+  const onChange = (val: unknown[]) => {
     metricValues = val;
   };
 
@@ -253,7 +253,7 @@ test('warn selected custom metric when metric gets removed from dataset', async 
 test('warn selected custom metric when metric gets removed from dataset for single-select metric control', async () => {
   let metricValue = 'metric_b';
 
-  const onChange = (val: any) => {
+  const onChange = (val: unknown) => {
     metricValue = val;
   };
 
@@ -312,7 +312,7 @@ test('warn selected custom metric when metric gets removed from dataset for sing
 
 test('remove selected adhoc metric when column gets removed from dataset', async () => {
   let metricValues = ['metric_a', 'metric_b', adhocMetricA, adhocMetricB];
-  const onChange = (val: any[]) => {
+  const onChange = (val: unknown[]) => {
     metricValues = val;
   };
 
@@ -355,7 +355,7 @@ test('remove selected adhoc metric when column gets removed from dataset', async
 
 test('update adhoc metric name when column label in dataset changes', () => {
   let metricValues = ['metric_a', 'metric_b', adhocMetricA, adhocMetricB];
-  const onChange = (val: any[]) => {
+  const onChange = (val: unknown[]) => {
     metricValues = val;
   };
 
@@ -451,7 +451,7 @@ test('cannot drop a duplicated item', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as any,
+    value: { metric_name: 'metric_a' } as unknown,
   });
 
   expect(onChange).not.toHaveBeenCalled();
@@ -465,14 +465,14 @@ test('can drop a saved metric when disallow_adhoc_metrics', () => {
       value={['metric_b']}
       onChange={onChange}
       multi
-      datasource={{ extra: '{ "disallow_adhoc_metrics": true }' } as any}
+      datasource={{ extra: '{ "disallow_adhoc_metrics": true }' } as unknown}
     />,
     { useDndKit: true, useRedux: true },
   );
 
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as any,
+    value: { metric_name: 'metric_a' } as unknown,
   });
 
   expect(onChange).toHaveBeenLastCalledWith(['metric_b', 'metric_a']);
@@ -486,7 +486,7 @@ test('cannot drop non-saved metrics when disallow_adhoc_metrics', () => {
       value={['metric_b']}
       onChange={onChange}
       multi
-      datasource={{ extra: '{ "disallow_adhoc_metrics": true }' } as any}
+      datasource={{ extra: '{ "disallow_adhoc_metrics": true }' } as unknown}
     />,
     { useDndKit: true, useRedux: true },
   );
@@ -494,28 +494,28 @@ test('cannot drop non-saved metrics when disallow_adhoc_metrics', () => {
   // Non-saved metric -> rejected.
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_c' } as any,
+    value: { metric_name: 'metric_c' } as unknown,
   });
   expect(onChange).not.toHaveBeenCalled();
 
   // Column type -> rejected when adhoc metrics are disallowed.
   simulateDrop(captured, {
     type: DndItemType.Column,
-    value: { column_name: 'column_a' } as any,
+    value: { column_name: 'column_a' } as unknown,
   });
   expect(onChange).not.toHaveBeenCalled();
 
   // Saved metric -> accepted.
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as any,
+    value: { metric_name: 'metric_a' } as unknown,
   });
   expect(onChange).toHaveBeenLastCalledWith(['metric_b', 'metric_a']);
 });
 
 test('title changes on custom SQL text change', async () => {
   let metricValues = [adhocMetricA, 'metric_b'];
-  const onChange = (val: any[]) => {
+  const onChange = (val: unknown[]) => {
     metricValues = [...val];
   };
 

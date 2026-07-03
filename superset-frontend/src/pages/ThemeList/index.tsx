@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -145,7 +146,7 @@ function ThemesList({
   const themeData = bootstrapData?.common?.theme || {};
 
   const canSetSystemThemes =
-    canEdit && (themeData as any)?.enableUiThemeAdministration;
+    canEdit && (themeData as unknown)?.enableUiThemeAdministration;
 
   const [themeCurrentlyDeleting, setThemeCurrentlyDeleting] =
     useState<ThemeObject | null>(null);
@@ -284,7 +285,7 @@ function ThemesList({
             addSuccessToast(
               t('"%s" is now the system default theme', theme.theme_name),
             );
-          } catch (err: any) {
+          } catch (err: unknown) {
             addDangerToast(
               t('Failed to set system default theme: %s', err.message),
             );
@@ -310,7 +311,7 @@ function ThemesList({
             addSuccessToast(
               t('"%s" is now the system dark theme', theme.theme_name),
             );
-          } catch (err: any) {
+          } catch (err: unknown) {
             addDangerToast(
               t('Failed to set system dark theme: %s', err.message),
             );
@@ -332,7 +333,7 @@ function ThemesList({
           await unsetSystemDefaultTheme();
           refreshData();
           addSuccessToast(t('System default theme removed'));
-        } catch (err: any) {
+        } catch (err: unknown) {
           addDangerToast(
             t('Failed to remove system default theme: %s', err.message),
           );
@@ -352,7 +353,7 @@ function ThemesList({
           await unsetSystemDarkTheme();
           refreshData();
           addSuccessToast(t('System dark theme removed'));
-        } catch (err: any) {
+        } catch (err: unknown) {
           addDangerToast(
             t('Failed to remove system dark theme: %s', err.message),
           );
@@ -365,7 +366,7 @@ function ThemesList({
   const columns = useMemo(
     () => [
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<ThemeObject>) => {
           const isCurrentTheme =
             hasDevOverride() &&
             appliedThemeId &&
@@ -415,7 +416,7 @@ function ThemesList({
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<ThemeObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
@@ -423,7 +424,7 @@ function ThemesList({
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<ThemeObject>) => {
           const handleEdit = () => handleThemeEdit(original);
           const handleDelete = () => {
             if (original.is_system_default || original.is_system_dark) {

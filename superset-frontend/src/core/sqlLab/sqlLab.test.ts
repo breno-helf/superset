@@ -89,7 +89,7 @@ function createMockStore() {
       getDefault({ serializableCheck: false, immutableCheck: false }).prepend(
         mockListenerMiddleware.middleware,
       ),
-    preloadedState: { sqlLab: makeInitialSqlLabState() as any },
+    preloadedState: { sqlLab: makeInitialSqlLabState() as unknown },
   });
 }
 

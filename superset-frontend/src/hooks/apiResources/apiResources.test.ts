@@ -30,13 +30,13 @@ const fakeApiResult = {
   name: 'fake api result',
 };
 
-const nameToAllCaps = (thing: any) => ({
+const nameToAllCaps = (thing: unknown) => ({
   ...thing,
   name: thing.name.toUpperCase(),
 });
 
 jest.mock('@superset-ui/core', () => ({
-  ...jest.requireActual<any>('@superset-ui/core'),
+  ...jest.requireActual<unknown>('@superset-ui/core'),
   makeApi: jest
     .fn()
     .mockReturnValue(jest.fn().mockResolvedValue(fakeApiResult)),
@@ -84,7 +84,7 @@ describe('apiResource hooks', () => {
 
     test('handles api errors', async () => {
       const fakeError = new Error('fake api error');
-      (makeApi as any).mockReturnValue(jest.fn().mockRejectedValue(fakeError));
+      (makeApi as unknown).mockReturnValue(jest.fn().mockRejectedValue(fakeError));
       const { result } = renderHook(() =>
         useApiResourceFullBody('/test/endpoint'),
       );
@@ -123,7 +123,7 @@ describe('apiResource hooks', () => {
     });
 
     test('works while loading', () => {
-      const nameToAllCaps = (thing: any) => ({
+      const nameToAllCaps = (thing: unknown) => ({
         ...thing,
         name: thing.name.toUpperCase(),
       });
@@ -148,7 +148,7 @@ describe('apiResource hooks', () => {
   // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
   describe('useApiV1Endpoint', () => {
     test('resolves to the value from the api', async () => {
-      (makeApi as any).mockReturnValue(
+      (makeApi as unknown).mockReturnValue(
         jest.fn().mockResolvedValue({
           meta: 'data',
           count: 1,

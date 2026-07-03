@@ -104,7 +104,7 @@ holiday("Easter Monday", datetime("2019"), "UK")`}</code>
   </>
 );
 
-const StyledTooltip = (props: any) => {
+const StyledTooltip = (props: Record<string, unknown>) => {
   const theme = useTheme();
   return (
     <ClassNames>
@@ -142,6 +142,6 @@ const StyledTooltip = (props: any) => {
   );
 };
 
-export default function DateFunctionTooltip(props: any) {
+export default function DateFunctionTooltip(props: Record<string, unknown>) {
   return <StyledTooltip title={TIME_PICKER_HELPER} {...props} />;
 }

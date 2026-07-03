@@ -38,10 +38,10 @@ function MetricDefinitionOption({
   addWarningToast,
 }: MetricDefinitionOptionProps) {
   if (option.metric_name) {
-    return <StyledMetricOption metric={option as any} showType />;
+    return <StyledMetricOption metric={option as unknown} showType />;
   }
   if (option.column_name) {
-    return <StyledColumnOption column={option as any} showType />;
+    return <StyledColumnOption column={option as unknown} showType />;
   }
   if (option.aggregate_name) {
     return (

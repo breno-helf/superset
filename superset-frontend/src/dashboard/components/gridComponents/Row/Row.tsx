@@ -341,7 +341,7 @@ const Row = memo((props: RowProps) => {
             </Droppable>
           )}
           {rowItems.length === 0 && (
-            <div css={emptyRowContentStyles as any}>{t('Empty row')}</div>
+            <div css={emptyRowContentStyles as unknown}>{t('Empty row')}</div>
           )}
           {rowItems.length > 0 &&
             rowItems.map((componentId, itemIndex) => (

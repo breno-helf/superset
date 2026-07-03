@@ -73,7 +73,7 @@ afterAll(() => {
 
 test('Should render', async () => {
   const props = createProps();
-  const { container } = render(<ColumnSelect {...(props as any)} />, {
+  const { container } = render(<ColumnSelect {...(props as unknown)} />, {
     useRedux: true,
   });
   expect(container.children).toHaveLength(1);
@@ -95,13 +95,13 @@ test('Should render', async () => {
 
 test('Should call "setFields" when "datasetId" changes', () => {
   const props = createProps();
-  const { rerender } = render(<ColumnSelect {...(props as any)} />, {
+  const { rerender } = render(<ColumnSelect {...(props as unknown)} />, {
     useRedux: true,
   });
   expect(props.form.setFields).not.toHaveBeenCalled();
 
   props.datasetId = 456;
-  rerender(<ColumnSelect {...(props as any)} />);
+  rerender(<ColumnSelect {...(props as unknown)} />);
 
   expect(props.form.setFields).toHaveBeenCalled();
 });
@@ -112,7 +112,7 @@ test('Should call "getClientErrorObject" when api returns an error', async () =>
   props.datasetId = 789;
 
   expect(mockedGetClientErrorObject).not.toHaveBeenCalled();
-  render(<ColumnSelect {...(props as any)} />, {
+  render(<ColumnSelect {...(props as unknown)} />, {
     useRedux: true,
   });
   await waitFor(() => {
@@ -124,7 +124,7 @@ test('Should filter results', async () => {
   const props = createProps({
     filterValues: (column: Column) => column.is_dttm,
   });
-  const { container } = render(<ColumnSelect {...(props as any)} />, {
+  const { container } = render(<ColumnSelect {...(props as unknown)} />, {
     useRedux: true,
   });
   expect(container.children).toHaveLength(1);

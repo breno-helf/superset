@@ -97,7 +97,7 @@ test('validateTheme errors on empty theme object', () => {
 });
 
 test('validateTheme errors on null theme config', () => {
-  const result = validateTheme(null as any);
+  const result = validateTheme(null as unknown);
 
   expect(result.valid).toBe(false);
   expect(result.errors).toHaveLength(1);
@@ -106,7 +106,7 @@ test('validateTheme errors on null theme config', () => {
 
 test('validateTheme allows theme with only algorithm', () => {
   const theme: AnyThemeConfig = {
-    algorithm: 'dark' as any,
+    algorithm: 'dark' as unknown,
   };
 
   const result = validateTheme(theme);

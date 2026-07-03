@@ -96,8 +96,8 @@ type ConnectionItem = DatabaseObject & {
 };
 
 interface DatabaseDeleteObject extends DatabaseObject {
-  charts: any;
-  dashboards: any;
+  charts: unknown;
+  dashboards: unknown;
   sqllab_tab_count: number;
 }
 interface DatabaseListProps {
@@ -233,10 +233,10 @@ function DatabaseList({
   const fetchData = showSemanticLayers ? combinedFetchData : dbFetchData;
   const refreshData = showSemanticLayers ? combinedRefreshData : dbRefreshData;
 
-  const fullUser = useSelector<any, UserWithPermissionsAndRoles>(
+  const fullUser = useSelector<unknown, UserWithPermissionsAndRoles>(
     state => state.user,
   );
-  const shouldSyncPermsInAsyncMode = useSelector<any, boolean>(
+  const shouldSyncPermsInAsyncMode = useSelector<unknown, boolean>(
     state => state.common?.conf.SYNC_DB_PERMISSIONS_IN_ASYNC_MODE,
   );
   const showDatabaseModal = getUrlParam(URL_PARAMS.showDatabaseModal);
@@ -278,7 +278,7 @@ function DatabaseList({
     COLUMNAR_EXTENSIONS,
     EXCEL_EXTENSIONS,
     ALLOWED_EXTENSIONS,
-  } = useSelector<any, ExtensionConfigs>(state => state.common.conf);
+  } = useSelector<unknown, ExtensionConfigs>(state => state.common.conf);
 
   useEffect(() => {
     if (query?.databaseAdded) {
@@ -410,12 +410,12 @@ function DatabaseList({
     };
     SupersetClient.get({
       endpoint: `/api/v1/database/?q=${rison.encode(payload)}`,
-    }).then(({ json }: Record<string, any>) => {
+    }).then(({ json }: Record<string, unknown>) => {
       // There might be some existing Gsheets and Clickhouse DBs
       // with allow_file_upload set as True which is not possible from now on
       const allowedDatabasesWithFileUpload =
         json?.result?.filter(
-          (database: any) => database?.engine_information?.supports_file_upload,
+          (database: unknown) => database?.engine_information?.supports_file_upload,
         ) || [];
       setAllowUploads(allowedDatabasesWithFileUpload?.length >= 1);
     });

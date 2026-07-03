@@ -53,7 +53,7 @@ type Datasource = {
 type Filter = {
   chartId: number;
   columns: { [key: string]: string | string[] };
-  scopes: { [key: string]: any };
+  scopes: { [key: string]: Record<string, unknown> };
   labels: { [key: string]: string };
   isDateFilter: boolean;
   directPathToFilter: string[];
@@ -78,7 +78,7 @@ const selectIndicatorValue = (
   columnKey: string,
   filter: Filter,
   datasource: Datasource,
-): any => {
+): string[] | string => {
   const values = filter.columns[columnKey];
   const arrValues = Array.isArray(values) ? values : [values];
 
@@ -142,7 +142,7 @@ const selectIndicatorsForChartFromFilter = (
 };
 
 const getQueryFilterMetadata = (
-  chart: any,
+  chart: Record<string, unknown>,
   metadataKey: 'applied_filters' | 'rejected_filters',
 ) =>
   ensureIsArray(chart?.queriesResponse).flatMap(
@@ -152,10 +152,10 @@ const getQueryFilterMetadata = (
         : queryResponse?.rejected_filters) || [],
   );
 
-const getAppliedColumns = (chart: any): Set<string> =>
+const getAppliedColumns = (chart: Record<string, unknown>): Set<string> =>
   new Set(
     getQueryFilterMetadata(chart, 'applied_filters').map(
-      (filter: any) => filter.column,
+      (filter: Record<string, unknown>) => filter.column,
     ),
   );
 
@@ -166,7 +166,7 @@ const getAppliedColumns = (chart: any): Set<string> =>
  * applied_filter_columns populated.
  */
 export const getAppliedColumnsWithFallback = (
-  chart: any,
+  chart: Record<string, unknown>,
   nativeFilters?: Filters,
   dataMask?: DataMaskStateWithId,
   chartId?: number,
@@ -174,7 +174,7 @@ export const getAppliedColumnsWithFallback = (
   // First try to get from query response (preferred source of truth)
   const queryAppliedFilters = getQueryFilterMetadata(chart, 'applied_filters');
   if (queryAppliedFilters.length > 0) {
-    return new Set(queryAppliedFilters.map((filter: any) => filter.column));
+    return new Set(queryAppliedFilters.map((filter: Record<string, unknown>) => filter.column));
   }
 
   // Fallback: derive from native filters and dataMask when query response is empty
@@ -199,9 +199,9 @@ export const getAppliedColumnsWithFallback = (
   return new Set<string>();
 };
 
-const getRejectedColumns = (chart: any): Set<string> =>
+const getRejectedColumns = (chart: Record<string, unknown>): Set<string> =>
   new Set(
-    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: any) =>
+    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: Record<string, unknown>) =>
       getColumnLabel(filter.column),
     ),
   );
@@ -209,7 +209,7 @@ const getRejectedColumns = (chart: any): Set<string> =>
 export type Indicator = {
   column?: QueryFormColumn;
   name: string;
-  value?: any;
+  value?: string | string[] | null;
   status?: IndicatorStatus;
   path?: string[];
   customColumnLabel?: string;
@@ -262,7 +262,7 @@ export const selectIndicatorsForChart = (
   chartId: number,
   filters: { [key: number]: Filter },
   datasources: { [key: string]: Datasource },
-  chart: any,
+  chart: Record<string, unknown>,
 ): Indicator[] => {
   // for now we only need to know which columns are compatible/incompatible,
   // so grab the columns from the applied/rejected filters
@@ -386,7 +386,7 @@ export const selectChartCrossFilters = (
   return crossFilterIndicators;
 };
 
-const cachedNativeIndicatorsForChart: Record<number, any> = {};
+const cachedNativeIndicatorsForChart: Record<number, Indicator[]> = {};
 const cachedNativeFilterDataForChart: Record<
   number,
   {
@@ -403,7 +403,7 @@ export const selectNativeIndicatorsForChart = (
   nativeFilters: Filters,
   dataMask: DataMaskStateWithId,
   chartId: number,
-  chart: any,
+  chart: Record<string, unknown>,
   chartLayoutItems: LayoutItem[],
   chartConfiguration: ChartConfiguration = defaultChartConfig,
 ): Indicator[] => {

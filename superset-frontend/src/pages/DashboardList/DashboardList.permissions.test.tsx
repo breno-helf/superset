@@ -33,7 +33,7 @@ import {
 
 // Cast to accept partial mock props in tests
 const DashboardList = DashboardListComponent as unknown as React.FC<
-  Record<string, any>
+  Record<string, unknown>
 >;
 
 jest.setTimeout(30000);
@@ -73,12 +73,12 @@ const createMockUser = (overrides = {}) => ({
   ...overrides,
 });
 
-const createMockStore = (initialState: any = {}) =>
+const createMockStore = (initialState: Record<string, unknown> = {}) =>
   configureStore({
     reducer: {
-      user: (state = initialState.user || {}, action: any) => state,
-      common: (state = initialState.common || {}, action: any) => state,
-      dashboards: (state = initialState.dashboards || {}, action: any) => state,
+      user: (state = initialState.user || {}, action: unknown) => state,
+      common: (state = initialState.common || {}, action: unknown) => state,
+      dashboards: (state = initialState.dashboards || {}, action: unknown) => state,
     },
     preloadedState: initialState,
     middleware: getDefaultMiddleware =>

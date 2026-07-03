@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -156,32 +157,32 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
           row: {
             original: { name },
           },
-        }: any) => <span>{name}</span>,
+        }: CellProps<RoleObject>) => <span>{name}</span>,
       },
       {
         accessor: 'user_ids',
         id: 'user_ids',
         Header: t('Users'),
         hidden: true,
-        Cell: ({ row: { original } }: any) => original.user_ids.join(', '),
+        Cell: ({ row: { original } }: CellProps<RoleObject>) => original.user_ids.join(', '),
       },
       {
         accessor: 'group_ids',
         id: 'group_ids',
         Header: t('Groups'),
         hidden: true,
-        Cell: ({ row: { original } }: any) => original.group_ids.join(', '),
+        Cell: ({ row: { original } }: CellProps<RoleObject>) => original.group_ids.join(', '),
       },
       {
         accessor: 'permission_ids',
         id: 'permission_ids',
         Header: t('Permissions'),
         hidden: true,
-        Cell: ({ row: { original } }: any) =>
+        Cell: ({ row: { original } }: CellProps<RoleObject>) =>
           original.permission_ids.join(', '),
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<RoleObject>) => {
           const handleEdit = () => {
             setCurrentRole(original);
             openModal(ModalType.EDIT);

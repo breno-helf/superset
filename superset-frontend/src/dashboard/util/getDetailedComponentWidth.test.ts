@@ -25,7 +25,7 @@ import {
 
 // Cast to accept partial mock data in tests
 const getDetailedComponentWidth = getDetailedComponentWidthOriginal as (
-  params: Record<string, any>,
+  params: Record<string, unknown>,
 ) => {
   width: number | undefined;
   occupiedWidth: number | undefined;

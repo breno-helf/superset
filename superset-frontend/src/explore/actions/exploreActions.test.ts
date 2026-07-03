@@ -293,13 +293,13 @@ test('fetchCompatibility ignores stale async responses', async () => {
     7,
     ['m1'],
     ['d1'],
-  )(dispatch as any);
+  )(dispatch as unknown);
   const secondThunk = actions.fetchCompatibility(
     'semantic_view',
     7,
     ['m2'],
     ['d2'],
-  )(dispatch as any);
+  )(dispatch as unknown);
 
   resolveSecond!({
     json: {

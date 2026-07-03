@@ -126,7 +126,7 @@ const ChartHolder = ({
     useState(0);
 
   const infoFromPath = useMemo(
-    () => getChartAndLabelComponentIdFromPath(directPathToChild ?? []) as any,
+    () => getChartAndLabelComponentIdFromPath(directPathToChild ?? []) as unknown,
     [directPathToChild],
   );
 

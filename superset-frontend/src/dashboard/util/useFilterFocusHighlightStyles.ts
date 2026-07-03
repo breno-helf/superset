@@ -54,7 +54,7 @@ const useFilterFocusHighlightStyles = (chartId: number) => {
 
   const highlightedFilterId =
     nativeFilters?.focusedFilterId || nativeFilters?.hoveredFilterId;
-  const highlightedChartCustomizationId = (nativeFilters as any)
+  const highlightedChartCustomizationId = (nativeFilters as unknown)
     ?.hoveredChartCustomizationId;
 
   if (!highlightedFilterId && !highlightedChartCustomizationId) {

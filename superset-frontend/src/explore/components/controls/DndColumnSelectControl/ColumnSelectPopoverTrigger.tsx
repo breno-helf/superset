@@ -52,7 +52,7 @@ interface ColumnSelectPopoverTriggerProps {
 }
 
 interface ColumnSelectPopoverTriggerInnerProps extends ColumnSelectPopoverTriggerProps {
-  datasource?: any;
+  datasource?: unknown;
 }
 
 const ColumnSelectPopoverTriggerInner = ({
@@ -213,7 +213,7 @@ const ColumnSelectPopoverTriggerWrapper = (
   props: ColumnSelectPopoverTriggerProps,
 ) => {
   const datasource = useSelector(
-    (state: any) => state?.explore?.datasource || null,
+    (state: unknown) => state?.explore?.datasource || null,
   );
 
   return <ColumnSelectPopoverTriggerInner {...props} datasource={datasource} />;

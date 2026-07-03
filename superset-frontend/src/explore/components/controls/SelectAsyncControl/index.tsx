@@ -37,7 +37,7 @@ interface SelectAsyncControlProps extends SelectAsyncProps {
   dataEndpoint: string;
   default?: SelectValue;
   mutator?: (
-    response: Record<string, any>,
+    response: Record<string, unknown>,
     value: SelectValue | undefined,
   ) => SelectOptionsType;
   multi?: boolean;

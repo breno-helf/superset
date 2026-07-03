@@ -105,13 +105,13 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
     },
     string[]
   >(state => state.common?.currencies);
-  const [errors, setErrors] = useState<any[]>([]);
+  const [errors, setErrors] = useState<unknown[]>([]);
   const [isSaving, setIsSaving] = useState(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [modal, contextHolder] = Modal.useModal();
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-  const buildPayload = (datasource: Record<string, any>) => {
-    const payload: Record<string, any> = {
+  const buildPayload = (datasource: Record<string, unknown>) => {
+    const payload: Record<string, unknown> = {
       table_name: datasource.table_name,
       database_id: datasource.database?.id,
       sql: datasource.sql,
@@ -137,7 +137,7 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
       external_url: datasource.external_url,
       metrics: datasource?.metrics?.map(
         (metric: DatasetObject['metrics'][0]) => {
-          const metricBody: any = {
+          const metricBody: Record<string, unknown> = {
             expression: metric.expression,
             description: metric.description,
             metric_name: metric.metric_name,
@@ -237,7 +237,7 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
     }
   };
 
-  const onDatasourceChange = (data: DatasetObject, err: Array<any>) => {
+  const onDatasourceChange = (data: DatasetObject, err: unknown[]) => {
     setCurrentDatasource({
       ...data,
       metrics: data?.metrics.map((metric: DatasetObject['metrics'][0]) => ({

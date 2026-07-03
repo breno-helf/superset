@@ -89,7 +89,7 @@ export function CustomFrame(props: FrameComponentProps) {
     }
   }
 
-  function onAnchorMode(option: any) {
+  function onAnchorMode(option: unknown) {
     const radioValue = option.target.value;
     if (radioValue === 'now') {
       props.onChange(

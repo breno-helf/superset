@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -193,7 +194,7 @@ function ChartList(props: ChartListProps) {
   } = useListViewResource<Chart>('chart', t('chart'), addDangerToast);
 
   const chartIds = useMemo(() => charts.map(c => c.id), [charts]);
-  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
+  const { roles } = useSelector<unknown, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
@@ -341,7 +342,7 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { id },
           },
-        }: any) =>
+        }: CellProps<ChartObject>) =>
           userId && (
             <FaveStar
               itemId={id}
@@ -366,7 +367,7 @@ function ChartList(props: ChartListProps) {
               description,
             },
           },
-        }: any) => (
+        }: CellProps<ChartObject>) => (
           <FlexRowContainer>
             <Link to={url} data-test={`${sliceName}-list-chart-title`}>
               {certifiedBy && (
@@ -391,7 +392,7 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { viz_type: vizType, form_data: formData },
           },
-        }: any) => (
+        }: CellProps<ChartObject>) => (
           <>
             {registry.get(vizType)?.name || vizType}
             {formData && isMatrixifyEnabled(formData) && (
@@ -417,7 +418,7 @@ function ChartList(props: ChartListProps) {
               datasource_url: dsUrl,
             },
           },
-        }: any) => {
+        }: CellProps<ChartObject>) => {
           // Extract dataset name from datasource_name_text
           // Format can be "schema.name" or just "name"
           const displayName = dsNameTxt
@@ -443,7 +444,7 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { dashboards },
           },
-        }: any) => <DashboardCrossLinks dashboards={dashboards} />,
+        }: CellProps<ChartObject>) => <DashboardCrossLinks dashboards={dashboards} />,
         Header: t('On dashboards'),
         accessor: 'dashboards',
         disableSortBy: true,
@@ -455,7 +456,7 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { tags = [] },
           },
-        }: any) => (
+        }: CellProps<ChartObject>) => (
           // Only show custom type tags
           <TagsList
             tags={tags.filter((tag: TagType) =>
@@ -478,7 +479,7 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { owners = [] },
           },
-        }: any) => <FacePile users={owners} />,
+        }: CellProps<ChartObject>) => <FacePile users={owners} />,
         Header: t('Owners'),
         accessor: 'owners',
         disableSortBy: true,
@@ -493,14 +494,14 @@ function ChartList(props: ChartListProps) {
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<ChartObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<ChartObject>) => {
           const handleDelete = () =>
             handleChartDelete(
               original,

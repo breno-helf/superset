@@ -126,7 +126,7 @@ export default function AllEntitiesTable({
               row: {
                 original: { owners = [] },
               },
-            }: any) => <FacePile users={owners} />,
+            }: unknown) => <FacePile users={owners} />,
             Header: t('Owners'),
             accessor: 'owners',
             disableSortBy: true,

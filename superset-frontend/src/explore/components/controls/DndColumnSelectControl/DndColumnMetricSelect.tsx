@@ -100,7 +100,7 @@ export type DndColumnMetricSelectProps = DndControlProps<ColumnMetricValue> & {
   selectedMetrics?: QueryFormMetric[];
   isTemporal?: boolean;
   disabledTabs?: Set<string>;
-  formData?: any;
+  formData?: unknown;
 };
 
 const isDictionaryForAdhocMetric = (
@@ -347,8 +347,7 @@ function DndColumnMetricSelect(props: DndColumnMetricSelectProps) {
           <MetricDefinitionValue
             key={`metric-${idx}`}
             index={idx}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            option={item as any}
+            option={item as unknown}
             onMetricEdit={(changedMetric: Metric | AdhocMetric) => {
               const newValues = [...coercedValue];
               if (changedMetric instanceof AdhocMetric) {
@@ -359,14 +358,10 @@ function DndColumnMetricSelect(props: DndColumnMetricSelectProps) {
               onChange(multi ? newValues : newValues[0]);
             }}
             onRemoveMetric={onClickClose}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            columns={columns as any}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            savedMetrics={savedMetrics as any}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            savedMetricsOptions={savedMetrics as any}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            datasource={datasource as any}
+            columns={columns as unknown}
+            savedMetrics={savedMetrics as unknown}
+            savedMetricsOptions={savedMetrics as unknown}
+            datasource={datasource as unknown}
             onMoveLabel={onShiftOptions}
             onDropLabel={() => {}}
             type={`${DndItemType.AdhocMetricOption}_${name}_${label}`}

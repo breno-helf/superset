@@ -130,8 +130,8 @@ export const getColorSchemeDomain = (colorScheme: string) =>
  * @returns true if the labels color map is the same as fresh
  */
 export const isLabelsColorMapSynced = (
-  storedLabelsColors: Record<string, any>,
-  freshLabelsColors: Record<string, any>,
+  storedLabelsColors: Record<string, unknown>,
+  freshLabelsColors: Record<string, unknown>,
   customLabelColors: Record<string, string>,
 ): boolean => {
   const freshLabelsCount = Object.keys(freshLabelsColors).length;
@@ -203,7 +203,7 @@ export const refreshLabelsColorMap = (
  * @param metadata - the dashboard metadata object
  */
 export const applyColors = (
-  metadata: Record<string, any>,
+  metadata: Record<string, unknown>,
   // Create a fresh color map by changing color scheme
   fresh: boolean | string[] = false,
   // Catch new labels in the color map as they appear
@@ -246,7 +246,7 @@ export const applyColors = (
     refreshLabelsColorMap(metadata?.color_namespace, colorScheme, merge);
   }
 
-  let applicableColorMapEntries: Record<string, any> = fullLabelsColor;
+  let applicableColorMapEntries: Record<string, unknown> = fullLabelsColor;
   if (fresh) {
     // requires a new map all together
     applicableColorMapEntries = {

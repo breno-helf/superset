@@ -34,7 +34,7 @@ import CssTemplatesListComponent from 'src/pages/CssTemplateList';
 
 // Cast to accept partial mock props in tests
 const CssTemplatesList = CssTemplatesListComponent as unknown as React.FC<
-  Record<string, any>
+  Record<string, unknown>
 >;
 
 const mockStore = configureStore([thunk]);

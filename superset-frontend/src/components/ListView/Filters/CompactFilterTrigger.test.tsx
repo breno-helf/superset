@@ -93,7 +93,7 @@ test('toggles aria-expanded when pill is clicked', async () => {
 
 test('calls onClear when clear icon is clicked', async () => {
   const onClear = jest.fn();
-  renderTrigger({ hasValue: true, onClear } as any);
+  renderTrigger({ hasValue: true, onClear } as unknown);
   const clearIcon = screen.getByTestId('compact-filter-clear');
   await userEvent.click(clearIcon);
   expect(onClear).toHaveBeenCalledTimes(1);

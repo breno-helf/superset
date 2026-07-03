@@ -55,7 +55,7 @@ const mockExportCurrentViewBehavior = () => {
   const registry = getChartMetadataRegistry();
   return jest.spyOn(registry, 'get').mockReturnValue({
     behaviors: ['EXPORT_CURRENT_VIEW'],
-  } as any);
+  } as unknown);
 };
 
 const createProps = (additionalProps = {}) =>
@@ -648,7 +648,7 @@ describe('Additional actions tests', () => {
     const registry = getChartMetadataRegistry();
     const getSpy = jest.spyOn(registry, 'get').mockReturnValue({
       behaviors: ['EXPORT_CURRENT_VIEW'],
-    } as any);
+    } as unknown);
 
     render(<ExploreHeader {...props} />, { useRedux: true });
 

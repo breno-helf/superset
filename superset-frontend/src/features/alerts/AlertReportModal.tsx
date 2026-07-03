@@ -516,7 +516,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     'filter.dateFilterControl',
   );
   const DateFilterComponent = DateFilterControlExtension ?? DateFilterControl;
-  const currentUser = useSelector<any, UserWithPermissionsAndRoles>(
+  const currentUser = useSelector<unknown, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   // Check config for alternate notification methods setting
@@ -682,7 +682,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     ALERT_REPORTS_DEFAULT_WORKING_TIMEOUT,
     ALERT_REPORTS_DEFAULT_CRON_VALUE,
     ALERT_REPORTS_DEFAULT_RETENTION,
-  } = useSelector<any, AlertsReportsConfig>(state => {
+  } = useSelector<unknown, AlertsReportsConfig>(state => {
     const conf = state.common?.conf;
     return {
       ALERT_REPORTS_DEFAULT_WORKING_TIMEOUT:
@@ -717,7 +717,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     columnName: string,
     datasetId: number | string | null,
     vizType = 'filter_select',
-    adhocFilters: any[] = [],
+    adhocFilters: unknown[] = [],
   ) => {
     if (vizType === 'filter_time') {
       return;
@@ -745,10 +745,10 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
       if (vizType === 'filter_timecolumn') {
         // filter for time columns types
-        filteredData = rawData.filter((item: any) => item.dtype === 2);
+        filteredData = rawData.filter((item: Record<string, unknown>) => item.dtype === 2);
       }
 
-      return filteredData.map((item: any) => {
+      return filteredData.map((item: Record<string, unknown>) => {
         if (vizType === 'filter_timegrain') {
           return {
             value: item.duration,
@@ -857,7 +857,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     setNotificationAddState('active');
   };
 
-  const updateAnchorState = (value: any) => {
+  const updateAnchorState = (value: unknown) => {
     setCurrentAlert(currentAlertData => {
       const dashboardState = currentAlertData?.extra?.dashboard;
       const extra = {
@@ -942,7 +942,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
       );
     }
 
-    const data: any = {
+    const data: Record<string, unknown> = {
       ...currentAlert,
       type: isReport ? 'Report' : 'Alert',
       force_screenshot: shouldEnableForceScreenshot || forceScreenshot,
@@ -1071,7 +1071,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
   );
 
   // Updating alert/report state
-  const updateAlertState = (name: string, value: any) => {
+  const updateAlertState = (name: string, value: unknown) => {
     setCurrentAlert(currentAlertData => ({
       ...currentAlertData,
       [name]: value,
@@ -1598,7 +1598,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     }
 
     getChartDataRequest(filterValues).then(response => {
-      const newFilterValues = response.json.result[0].data.map((item: any) => ({
+      const newFilterValues = response.json.result[0].data.map((item: Record<string, unknown>) => ({
         value: item[columnName],
         label: item[columnName],
       }));
@@ -1632,7 +1632,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
       | number
       | number[],
   ) => {
-    let values: any;
+    let values: unknown;
     if (typeof filterValues === 'string') {
       values = [filterValues];
     } else {
@@ -1698,7 +1698,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           name="time_range"
           onChange={timeRange => {
             setNativeFilterData(
-              nativeFilterData.map((f: any) =>
+              nativeFilterData.map((f: Record<string, unknown>) =>
                 filter.nativeFilterId === f.nativeFilterId
                   ? {
                       ...f,
@@ -1722,7 +1722,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
               value={min}
               onChange={value => {
                 setNativeFilterData(
-                  nativeFilterData.map((f: any) =>
+                  nativeFilterData.map((f: Record<string, unknown>) =>
                     f.nativeFilterId === filter.nativeFilterId
                       ? { ...f, filterValues: [value, filterValues?.[1]] }
                       : f,
@@ -1735,7 +1735,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
               value={max}
               onChange={value => {
                 setNativeFilterData(
-                  nativeFilterData.map((f: any) =>
+                  nativeFilterData.map((f: Record<string, unknown>) =>
                     f.nativeFilterId === filter.nativeFilterId
                       ? { ...f, filterValues: [filterValues?.[0], value] }
                       : f,
@@ -2123,7 +2123,7 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     >
       <div
         css={AdditionalStyles}
-        style={{ ['--open-btn-gap' as any]: `${theme.sizeUnit}px` }}
+        style={{ ['--open-btn-gap' as unknown]: `${theme.sizeUnit}px` }}
       >
         <Collapse
           expandIconPosition="end"

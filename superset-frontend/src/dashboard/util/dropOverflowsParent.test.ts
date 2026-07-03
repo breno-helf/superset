@@ -62,7 +62,7 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(true);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(true);
   });
 
   test('returns false if a parent DOES have adequate width for child', () => {
@@ -90,7 +90,7 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
   });
 
   test('returns false if a child CAN shrink to available parent space', () => {
@@ -118,7 +118,7 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
   });
 
   test('returns true if a child CANNOT shrink to available parent space', () => {
@@ -147,7 +147,7 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(true);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(true);
   });
 
   test('returns true if a column has children that CANNOT shrink to available parent space', () => {
@@ -185,13 +185,13 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(true);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(true);
     // remove children
     expect(
       dropOverflowsParent(dropResult, {
         ...layout,
-        dragging: { ...layout.dragging, children: [] } as any,
-      } as any),
+        dragging: { ...layout.dragging, children: [] } as unknown,
+      } as unknown),
     ).toBe(false);
   });
 
@@ -206,11 +206,11 @@ describe('dropOverflowsParent', () => {
       a: {
         id: 'a',
         type: ROW_TYPE,
-        children: [] as any,
+        children: [] as unknown,
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
   });
 
   test('source/destination without widths should not overflow parent', () => {
@@ -231,6 +231,6 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
+    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
   });
 });

@@ -20,7 +20,7 @@ import { GenericDataType } from '@apache-superset/core/common';
 
 export type ResultsPage = {
   total: number;
-  data: Record<string, any>[];
+  data: Record<string, unknown>[];
   colNames: string[];
   colTypes: GenericDataType[];
 };

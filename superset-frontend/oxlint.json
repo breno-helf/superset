@@ -227,7 +227,7 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -281,6 +281,17 @@
       ],
       "rules": {
         "jsx-a11y/no-redundant-roles": "off"
+      }
+    },
+    {
+      "files": [
+        "packages/**/*.ts",
+        "packages/**/*.tsx",
+        "plugins/**/*.ts",
+        "plugins/**/*.tsx"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
       }
     }
   ],

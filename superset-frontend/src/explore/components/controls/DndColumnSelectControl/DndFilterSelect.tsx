@@ -195,7 +195,7 @@ const DndFilterSelect = (props: DndFilterSelectProps) => {
             },
           )}`,
         })
-          .then(({ json }: { json: Record<string, any> }) => {
+          .then(({ json }: { json: Record<string, unknown> }) => {
             if (json?.partitions) {
               const { partitions } = json;
               // for now only show latest_partition option
@@ -208,7 +208,7 @@ const DndFilterSelect = (props: DndFilterSelectProps) => {
               }
             }
           })
-          .catch((error: Record<string, any>) => {
+          .catch((error: Record<string, unknown>) => {
             logging.error('fetch extra_table_metadata:', error.statusText);
           });
       }
@@ -277,7 +277,7 @@ const DndFilterSelect = (props: DndFilterSelectProps) => {
       if (option instanceof AdhocFilter) {
         return option;
       }
-      const filterOptions = option as Record<string, any>;
+      const filterOptions = option as Record<string, unknown>;
       // via datasource saved metric
       if (filterOptions.saved_metric_name) {
         return new AdhocFilter({

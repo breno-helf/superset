@@ -46,7 +46,7 @@ const mockUpdateRoleUsers = jest.mocked(updateRoleUsers);
 
 jest.mock('src/components/MessageToasts/withToasts', () => ({
   __esModule: true,
-  default: (Component: any) => Component,
+  default: (Component: unknown) => Component,
   useToasts: () => mockToasts,
 }));
 

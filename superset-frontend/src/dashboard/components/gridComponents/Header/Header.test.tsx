@@ -35,13 +35,13 @@ describe('Header', () => {
     id: string;
     dashboardId: string;
     parentId: string;
-    component: any;
+    component: unknown;
     depth: number;
-    parentComponent: any;
+    parentComponent: unknown;
     index: number;
     editMode: boolean;
     embeddedMode: boolean;
-    filters: Record<string, any>;
+    filters: Record<string, unknown>;
     handleComponentDrop: () => void;
     deleteComponent: jest.Mock;
     updateComponents: jest.Mock;
@@ -130,7 +130,7 @@ describe('Header', () => {
     expect(updateComponents).toHaveBeenCalledTimes(1);
     const componentUpdates = updateComponents.mock.calls[0][0] as Record<
       string,
-      any
+      unknown
     >;
     expect(componentUpdates[headerId].meta.text).toBe('New title');
   });

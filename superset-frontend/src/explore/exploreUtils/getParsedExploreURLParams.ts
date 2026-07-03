@@ -79,9 +79,9 @@ const EXPLORE_URL_PATH_PARAMS = {
 // we need to "flatten" the search params to use them with /v1/explore endpoint
 const getParsedExploreURLSearchParams = (
   search: string,
-): Record<string, any> => {
+): Record<string, unknown> => {
   const urlSearchParams = new URLSearchParams(search);
-  return Array.from(urlSearchParams.keys()).reduce<Record<string, any>>(
+  return Array.from(urlSearchParams.keys()).reduce<Record<string, unknown>>(
     (acc, currentParam) => {
       const paramValue = urlSearchParams.get(currentParam);
       if (paramValue === null) {

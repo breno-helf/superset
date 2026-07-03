@@ -116,7 +116,7 @@ export function useKeywords(
     const tables: { value: string; label: string; schema: string }[] = [];
     const seen = new Set<string>();
     const queries = apiState.queries ?? {};
-    for (const entry of Object.values(queries) as any[]) {
+    for (const entry of Object.values(queries) as unknown[]) {
       const arg = entry?.originalArgs;
       if (
         arg?.dbId === dbId &&
@@ -146,7 +146,7 @@ export function useKeywords(
     if (skipFetch || !dbId || !apiState) return [];
     const columns = new Set<string>();
     const queries = apiState.queries ?? {};
-    for (const entry of Object.values(queries) as any[]) {
+    for (const entry of Object.values(queries) as unknown[]) {
       const arg = entry?.originalArgs;
       if (
         entry?.status === 'fulfilled' &&
@@ -162,7 +162,7 @@ export function useKeywords(
     return [...columns];
   }, [dbId, normalizedCatalog, apiState, skipFetch]);
 
-  const insertMatch = useEffectEvent((editor: Editor, data: any) => {
+  const insertMatch = useEffectEvent((editor: Editor, data: unknown) => {
     if (data.meta === 'table') {
       dispatch(
         addTable(

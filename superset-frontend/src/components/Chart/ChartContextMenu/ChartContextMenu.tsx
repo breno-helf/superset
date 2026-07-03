@@ -65,12 +65,12 @@ export enum ContextMenuItem {
 export interface ChartContextMenuProps {
   id: number;
   formData: QueryFormData;
-  onSelection: (args?: any) => void;
+  onSelection: (args?: unknown) => void;
   onClose: () => void;
   additionalConfig?: {
-    crossFilter?: Record<string, any>;
-    drillToDetail?: Record<string, any>;
-    drillBy?: Record<string, any>;
+    crossFilter?: Record<string, unknown>;
+    drillToDetail?: Record<string, unknown>;
+    drillBy?: Record<string, unknown>;
   };
   displayedItems?: ContextMenuItem[] | ContextMenuItem;
 }
@@ -126,7 +126,7 @@ const ChartContextMenu = (
     if (!filters) return filters;
 
     // Check if this is from a matrixified cell
-    const matrixifyContext = (filters as any)?.matrixifyContext;
+    const matrixifyContext = (filters as unknown)?.matrixifyContext;
     if (!matrixifyContext) return filters;
 
     // Merge cell filters with drill filters
@@ -148,7 +148,7 @@ const ChartContextMenu = (
 
   // Use cell's formData for drill-to-detail if from matrixified cell
   const drillFormData = useMemo(() => {
-    const matrixifyContext = (filters as any)?.matrixifyContext;
+    const matrixifyContext = (filters as unknown)?.matrixifyContext;
     // If this is from a matrixified cell, use the cell's formData which includes adhoc_filters
     return matrixifyContext?.cellFormData || formData;
   }, [filters, formData]);

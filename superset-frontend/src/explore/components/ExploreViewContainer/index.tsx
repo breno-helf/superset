@@ -362,8 +362,7 @@ interface StateProps {
 // Note: These modules export both action creators AND action type constants,
 // Using a callable signature to allow TypeScript to understand these are functions
 interface DispatchProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  actions: Record<string, (...args: any[]) => any>;
+  actions: Record<string, (...args: unknown[]) => unknown>;
 }
 
 type ExploreViewContainerProps = StateProps & DispatchProps & OwnProps;
@@ -893,7 +892,7 @@ function ExploreViewContainer(props: ExploreViewContainerProps) {
           setForceQuery: props.actions.setForceQuery,
           postChartFormData: props.actions.postChartFormData,
           updateQueryFormData: props.actions.updateQueryFormData,
-          setControlValue: (controlName: string, value: any, chartId: number) =>
+          setControlValue: (controlName: string, value: unknown, chartId: number) =>
             props.actions.setControlValue(controlName, value),
         }}
         can_overwrite={props.can_overwrite}
@@ -1260,7 +1259,7 @@ function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   };
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Action modules export mixed types (creators + constants)
-    actions: bindActionCreators(actions as any, dispatch),
+    actions: bindActionCreators(actions as unknown, dispatch),
   };
 }
 

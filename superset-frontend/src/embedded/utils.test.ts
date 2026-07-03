@@ -149,7 +149,7 @@ const mockState: Partial<RootState> = {
 beforeEach(() => {
   jest.clearAllMocks();
   (getFormDataWithExtraFilters as jest.Mock).mockImplementation(
-    ({ chart }: any) => chart.form_data,
+    ({ chart }: unknown) => chart.form_data,
   );
   (getAppliedFilterValues as jest.Mock).mockReturnValue({});
 });
@@ -181,8 +181,7 @@ test('getChartDataPayloads generates payloads for charts with state converters',
 
   jest
     .spyOn(exploreUtils, 'buildV1ChartDataPayload')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .mockResolvedValue(mockPayload as any);
+    .mockResolvedValue(mockPayload as unknown);
 
   const result = await getChartDataPayloads(mockState as RootState);
 
@@ -212,8 +211,7 @@ test('getChartDataPayloads filters by specific chartId when provided', async () 
 
   jest
     .spyOn(exploreUtils, 'buildV1ChartDataPayload')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .mockResolvedValue(mockPayload as any);
+    .mockResolvedValue(mockPayload as unknown);
 
   const result = await getChartDataPayloads(mockState as RootState, {
     chartId: 123,
@@ -256,12 +254,11 @@ test('getChartDataPayloads handles errors during payload generation gracefully',
 
   jest
     .spyOn(exploreUtils, 'buildV1ChartDataPayload')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .mockImplementation((params: any) => {
+    .mockImplementation((params: unknown) => {
       if (params.formData.viz_type === 'ag-grid-table') {
         return Promise.reject(new Error('Failed to build payload'));
       }
-      return Promise.resolve(mockPayload as any);
+      return Promise.resolve(mockPayload as unknown);
     });
 
   const result = await getChartDataPayloads(mockState as RootState);
@@ -290,8 +287,7 @@ test('getChartDataPayloads merges baseOwnState with converted chart state', asyn
 
   const mockBuildPayload = jest
     .spyOn(exploreUtils, 'buildV1ChartDataPayload')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .mockResolvedValue(mockPayload as any);
+    .mockResolvedValue(mockPayload as unknown);
 
   await getChartDataPayloads(mockState as RootState, { chartId: 123 });
 

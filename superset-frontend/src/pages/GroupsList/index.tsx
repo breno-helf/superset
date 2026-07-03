@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -175,7 +176,7 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { name },
           },
-        }: any) => <span>{name}</span>,
+        }: CellProps<GroupObject>) => <span>{name}</span>,
       },
       {
         accessor: 'label',
@@ -185,7 +186,7 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { label },
           },
-        }: any) => <span>{label}</span>,
+        }: CellProps<GroupObject>) => <span>{label}</span>,
       },
       {
         accessor: 'description',
@@ -195,7 +196,7 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { description },
           },
-        }: any) => <span>{description}</span>,
+        }: CellProps<GroupObject>) => <span>{description}</span>,
         hidden: true,
       },
       {
@@ -206,7 +207,7 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { roles },
           },
-        }: any) => (
+        }: CellProps<GroupObject>) => (
           <Tooltip
             title={
               roles?.map((role: Role) => role.name).join(', ') || t('No roles')
@@ -225,14 +226,14 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { users },
           },
-        }: any) => (
+        }: CellProps<GroupObject>) => (
           <span>{users?.map((user: User) => user.username).join(', ')}</span>
         ),
         disableSortBy: true,
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<GroupObject>) => {
           const handleEdit = () => {
             setCurrentGroup(original);
             openModal(ModalType.EDIT);

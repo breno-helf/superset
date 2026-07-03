@@ -47,7 +47,7 @@ const setup = ({
 }: {
   onSelection?: () => void;
   displayedItems?: ContextMenuItem | ContextMenuItem[];
-  additionalConfig?: Record<string, any>;
+  additionalConfig?: Record<string, unknown>;
   roles?: Record<string, string[][]>;
 } = {}) => {
   const { result } = renderHook(() =>

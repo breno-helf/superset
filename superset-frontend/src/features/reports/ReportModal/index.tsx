@@ -83,7 +83,7 @@ interface ReportProps {
   dashboardId?: number;
   dashboardName?: string;
   creationMethod: ReportCreationMethod;
-  props: any;
+  props: Record<string, unknown>;
 }
 
 const TEXT_BASED_VISUALIZATION_TYPES = [
@@ -159,7 +159,7 @@ function ReportModal({
 
   const dispatch = useDispatch();
   // Report fetch logic
-  const report = useSelector<any, ReportObject>(state => {
+  const report = useSelector<unknown, ReportObject>(state => {
     const resourceType = dashboardId
       ? CreationMethod.Dashboards
       : CreationMethod.Charts;

@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -309,7 +310,7 @@ function AlertList({
           row: {
             original: { last_state: lastState },
           },
-        }: any) => (
+        }: CellProps<AlertObject>) => (
           <AlertStatusIcon
             state={lastState}
             isReportEnabled={isReportEnabled}
@@ -325,7 +326,7 @@ function AlertList({
           row: {
             original: { last_eval_dttm: lastEvalDttm },
           },
-        }: any) =>
+        }: CellProps<AlertObject>) =>
           lastEvalDttm
             ? extendedDayjs
                 .utc(lastEvalDttm)
@@ -351,7 +352,7 @@ function AlertList({
           row: {
             original: { crontab_humanized = '', timezone },
           },
-        }: any) => (
+        }: CellProps<AlertObject>) => (
           <Tooltip
             title={`${crontab_humanized} (${timezone})`}
             placement="topLeft"
@@ -366,8 +367,8 @@ function AlertList({
           row: {
             original: { recipients },
           },
-        }: any) =>
-          recipients.map((r: any) => (
+        }: CellProps<AlertObject>) =>
+          recipients.map((r: unknown) => (
             <RecipientIcon key={r.id} type={r.type} />
           )),
         accessor: 'recipients',
@@ -381,7 +382,7 @@ function AlertList({
           row: {
             original: { owners = [] },
           },
-        }: any) => <FacePile users={owners} />,
+        }: CellProps<AlertObject>) => <FacePile users={owners} />,
         Header: t('Owners'),
         id: 'owners',
         disableSortBy: true,
@@ -395,14 +396,14 @@ function AlertList({
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<AlertObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<AlertObject>) => {
           const allowEdit =
             original.owners.map((o: Owner) => o.id).includes(user.userId) ||
             isUserAdmin(user);
@@ -423,7 +424,7 @@ function AlertList({
         size: 'sm',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<AlertObject>) => {
           const history = useHistory();
           const handleEdit = () => handleAlertEdit(original);
           const handleDelete = () => setCurrentAlertDeleting(original);

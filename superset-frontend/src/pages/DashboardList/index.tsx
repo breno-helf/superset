@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -166,7 +167,7 @@ const DASHBOARD_COLUMNS_TO_FETCH = [
 
 function DashboardList(props: DashboardListProps) {
   const { addDangerToast, addSuccessToast, user } = props;
-  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
+  const { roles } = useSelector<unknown, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
@@ -341,7 +342,7 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { id },
           },
-        }: any) =>
+        }: CellProps<DashboardObject>) =>
           user?.userId && (
             <FaveStar
               itemId={id}
@@ -366,7 +367,7 @@ function DashboardList(props: DashboardListProps) {
               description,
             },
           },
-        }: any) => (
+        }: CellProps<DashboardObject>) => (
           <FlexRowContainer>
             <Link to={url} title={dashboardTitle}>
               {certifiedBy && (
@@ -391,7 +392,7 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { status },
           },
-        }: any) => (
+        }: CellProps<DashboardObject>) => (
           <PublishedLabel isPublished={status === DashboardStatus.PUBLISHED} />
         ),
         Header: t('Status'),
@@ -433,7 +434,7 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { owners = [] },
           },
-        }: any) => <FacePile users={owners} />,
+        }: CellProps<DashboardObject>) => <FacePile users={owners} />,
         Header: t('Owners'),
         accessor: 'owners',
         disableSortBy: true,
@@ -447,13 +448,13 @@ function DashboardList(props: DashboardListProps) {
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<DashboardObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<DashboardObject>) => {
           const handleDelete = () =>
             handleDashboardDelete(
               original,

@@ -189,14 +189,14 @@ export const addChartToDashboard = async (
 
 interface SaveModalProps {
   addDangerToast: (msg: string) => void;
-  actions: Record<string, any>;
-  form_data?: Record<string, any>;
+  actions: Record<string, unknown>;
+  form_data?: Record<string, unknown>;
   user: UserWithPermissionsAndRoles;
   alert?: string;
   sliceName?: string;
-  slice?: Record<string, any>;
+  slice?: Record<string, unknown>;
   can_overwrite?: boolean;
-  datasource?: Record<string, any>;
+  datasource?: Record<string, unknown>;
   dashboardId: '' | number | null;
   isVisible: boolean;
   dispatch: Dispatch;
@@ -904,12 +904,12 @@ const SaveModal = ({
 };
 
 interface StateProps {
-  datasource: any;
-  slice: any;
+  datasource: unknown;
+  slice: unknown;
   can_overwrite: boolean;
   user: UserWithPermissionsAndRoles;
-  dashboards: any;
-  alert: any;
+  dashboards: unknown;
+  alert: unknown;
   isVisible: boolean;
   metadata?: ExplorePageInitialData['metadata'];
 }
@@ -918,7 +918,7 @@ function mapStateToProps({
   explore,
   saveModal,
   user,
-}: Record<string, any>): StateProps {
+}: Record<string, unknown>): StateProps {
   return {
     datasource: explore.datasource,
     slice: explore.slice,

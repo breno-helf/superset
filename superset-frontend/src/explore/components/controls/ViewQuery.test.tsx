@@ -50,7 +50,7 @@ const mockState = (
       isAnonymous: false,
       lastName: 'User',
       username: 'testuser',
-      permissions: {} as Record<string, any>,
+      permissions: {} as Record<string, unknown>,
       roles,
     },
   }) as Partial<RootState>;
@@ -204,7 +204,7 @@ test('hides View in SQL Lab button when user does not have SQL Lab access', () =
 test('handles undefined datasource without crashing', () => {
   const propsWithUndefinedDatasource = {
     ...mockProps,
-    datasource: undefined as any,
+    datasource: undefined as unknown,
   };
 
   expect(() => setup(propsWithUndefinedDatasource)).not.toThrow();

@@ -171,7 +171,7 @@ export function getAllControlsState(
   state: ControlPanelState | null,
   formData: QueryFormData,
 ) {
-  const controlsState: Record<string, ControlState<any> | null> = {};
+  const controlsState: Record<string, ControlState<unknown> | null> = {};
   getSectionsToRender(vizType, datasourceType).forEach(section => {
     if (!section || !section.controlSetRows) return;
     section.controlSetRows.forEach(fieldsetRow =>
@@ -184,10 +184,10 @@ export function getAllControlsState(
             formData[name],
           );
         } else if (React.isValidElement(field)) {
-          const props = field.props as { name: string; [key: string]: any };
+          const props = field.props as { name: string; [key: string]: unknown };
           const { name, ...configProps } = props;
           controlsState[name] = getControlStateFromControlConfig(
-            configProps as ControlConfig<any>,
+            configProps as ControlConfig<unknown>,
             state,
             formData[name],
           );

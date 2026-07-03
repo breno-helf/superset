@@ -52,4 +52,4 @@ export type DndControlProps<ValueType extends JsonValue> =
     onChange: (value: ValueType | ValueType[] | null | undefined) => void;
   };
 
-export type OptionValueType = Record<string, any>;
+export type OptionValueType = Record<string, unknown>;

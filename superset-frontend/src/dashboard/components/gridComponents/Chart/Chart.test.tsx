@@ -169,15 +169,15 @@ test('should call refreshChart when SliceHeader calls forceRefresh', () => {
 /* oxlint-disable-next-line jest/no-disabled-tests */
 test.skip('should call changeFilter when ChartContainer calls changeFilter', () => {
   const mockChangeFilter = jest.fn();
-  const wrapper = setup({ changeFilter: mockChangeFilter }) as any;
+  const wrapper = setup({ changeFilter: mockChangeFilter }) as unknown;
   wrapper.instance().changeFilter();
-  expect((mockChangeFilter as any).callCount).toBe(1);
+  expect((mockChangeFilter as unknown).callCount).toBe(1);
 });
 
 test('should call exportChart when exportCSV is clicked', async () => {
   const stubbedExportCSV = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as any);
+    .mockImplementation((() => {}) as unknown);
   const { findByText, getByRole } = setup(
     {},
     {
@@ -202,12 +202,12 @@ test('should call exportChart when exportCSV is clicked', async () => {
 });
 
 test('should call exportChart with row_limit props.maxRows when exportFullCSV is clicked', async () => {
-  (global as any).featureFlags = {
+  (global as unknown).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   const stubbedExportCSV = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as any);
+    .mockImplementation((() => {}) as unknown);
   const { findByText, getByRole } = setup(
     {},
     {
@@ -235,7 +235,7 @@ test('should call exportChart with row_limit props.maxRows when exportFullCSV is
 test('should call exportChart when exportXLSX is clicked', async () => {
   const stubbedExportXLSX = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as any);
+    .mockImplementation((() => {}) as unknown);
   const { findByText, getByRole } = setup(
     {},
     {
@@ -257,12 +257,12 @@ test('should call exportChart when exportXLSX is clicked', async () => {
 });
 
 test('should call exportChart with row_limit props.maxRows when exportFullXLSX is clicked', async () => {
-  (global as any).featureFlags = {
+  (global as unknown).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   const stubbedExportXLSX = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as any);
+    .mockImplementation((() => {}) as unknown);
   const { findByText, getByRole } = setup(
     {},
     {

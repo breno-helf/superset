@@ -110,7 +110,7 @@ export function useAutoScroll({
     // Animation frame callback - uses time-based scrolling for consistent speed
     const scrollFrame = (currentTime: number) => {
       const list = listRef.current;
-      const outerElement = (list as any)?._outerRef;
+      const outerElement = (list as unknown)?._outerRef;
 
       if (!list || !outerElement || !state.direction) {
         // Restore pointer events when scrolling stops

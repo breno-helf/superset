@@ -101,8 +101,8 @@ export interface Table {
 export type SqlLabRootState = {
   sqlLab: {
     activeSouthPaneTab: string | number; // default is string; action.newQuery.id is number
-    alerts: any[];
-    databases: Record<string, any>;
+    alerts: unknown[];
+    databases: Record<string, unknown>;
     dbConnect: boolean;
     offline: boolean;
     queries: Record<string, QueryResponse & { inLocalStorage?: boolean }>;
@@ -156,6 +156,6 @@ export interface SchemaOption {
 
 export interface QueryCostEstimate {
   completed: string;
-  cost: Record<string, any>[];
+  cost: Record<string, unknown>[];
   error: string;
 }

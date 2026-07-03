@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -89,36 +90,36 @@ export default function UserRegistrations() {
         accessor: 'username',
         id: 'username',
         Header: t('Username'),
-        Cell: ({ row: { original } }: any) => original.username,
+        Cell: ({ row: { original } }: CellProps<UserRegistrationObject>) => original.username,
       },
       {
         accessor: 'first_name',
         id: 'first_name',
         Header: t('First name'),
-        Cell: ({ row: { original } }: any) => original.first_name,
+        Cell: ({ row: { original } }: CellProps<UserRegistrationObject>) => original.first_name,
       },
       {
         accessor: 'last_name',
         id: 'last_name',
         Header: t('Last name'),
-        Cell: ({ row: { original } }: any) => original.last_name,
+        Cell: ({ row: { original } }: CellProps<UserRegistrationObject>) => original.last_name,
       },
       {
         accessor: 'email',
         id: 'email',
         Header: t('Email'),
-        Cell: ({ row: { original } }: any) => original.email,
+        Cell: ({ row: { original } }: CellProps<UserRegistrationObject>) => original.email,
       },
       {
         accessor: 'registration_date',
         id: 'registration_date',
         Header: t('Registration date'),
-        Cell: ({ row: { original } }: any) => original.registration_date,
+        Cell: ({ row: { original } }: CellProps<UserRegistrationObject>) => original.registration_date,
       },
       {
         id: 'actions',
         Header: t('Actions'),
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<UserRegistrationObject>) => {
           const actions = [
             {
               label: 'registrations-list-delete-action',

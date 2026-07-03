@@ -44,7 +44,7 @@ export const chart: ChartState = {
 
 type ChartActionHandler = (state: ChartState) => ChartState;
 
-type AnyChartAction = Record<string, any>;
+type AnyChartAction = Record<string, unknown>;
 
 export default function chartReducer(
   charts: Record<string, ChartState> = {},

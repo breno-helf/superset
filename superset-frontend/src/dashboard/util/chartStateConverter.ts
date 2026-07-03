@@ -145,7 +145,7 @@ export function hasChartStateConverter(vizType: string): boolean {
  * ```
  */
 export function hasStatefulCharts(
-  sliceEntities: Record<string, any> | null | undefined,
+  sliceEntities: Record<string, unknown> | null | undefined,
 ): boolean {
   if (!sliceEntities) {
     return false;

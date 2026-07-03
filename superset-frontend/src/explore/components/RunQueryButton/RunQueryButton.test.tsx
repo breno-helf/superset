@@ -20,7 +20,7 @@
 import { render, screen, userEvent } from 'spec/helpers/testing-library';
 import { RunQueryButton } from './index';
 
-const createProps = (overrides: Record<string, any> = {}) => ({
+const createProps = (overrides: Record<string, unknown> = {}) => ({
   loading: false,
   onQuery: jest.fn(),
   onStop: jest.fn(),

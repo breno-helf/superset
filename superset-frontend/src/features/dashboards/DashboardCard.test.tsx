@@ -117,7 +117,7 @@ describe('thumbnail URL construction', () => {
     render(
       <MemoryRouter>
         <DashboardCard
-          dashboard={dashboard as any}
+          dashboard={dashboard as unknown}
           hasPerm={() => true}
           bulkSelectEnabled={false}
           loading={false}

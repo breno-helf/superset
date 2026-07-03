@@ -38,7 +38,7 @@ test('fetches table metadata for schema-less database without schema', async () 
       name: 'my_table',
       columns: [{ name: 'id', type: 'INTEGER', longType: 'INTEGER' }],
     },
-  } as any);
+  } as unknown);
 
   render(
     <DatasetPanelWrapper

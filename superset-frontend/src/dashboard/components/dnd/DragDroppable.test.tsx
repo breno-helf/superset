@@ -39,19 +39,19 @@ describe('DragDroppable', () => {
     isDragging: false,
     isDraggingOver: false,
     isDraggingOverShallow: false,
-    droppableRef: (() => {}) as any,
-    dragSourceRef: (() => {}) as any,
-    dragPreviewRef: (() => {}) as any,
+    droppableRef: (() => {}) as unknown,
+    dragSourceRef: (() => {}) as unknown,
+    dragPreviewRef: (() => {}) as unknown,
   };
 
-  function setup(overrideProps: Record<string, any> = {}) {
+  function setup(overrideProps: Record<string, unknown> = {}) {
     const defaultChildren = (provided: Record<string, unknown>) => (
       <div data-test="child-content" {...provided}>
         Test Content
       </div>
     );
 
-    const allProps = { ...props, ...overrideProps } as any;
+    const allProps = { ...props, ...overrideProps } as unknown;
 
     const utils = render(
       <DragDroppable {...allProps}>
@@ -115,13 +115,13 @@ describe('DragDroppable', () => {
     class MockDragDroppable extends DragDroppable {
       constructor(mockProps: ConstructorParameters<typeof DragDroppable>[0]) {
         super(mockProps);
-        this.state = { dropIndicator: 'DROP_TOP' as any };
+        this.state = { dropIndicator: 'DROP_TOP' as unknown };
       }
     }
 
     render(
       <MockDragDroppable
-        {...(props as any)}
+        {...(props as unknown)}
         editMode
         isDraggingOver
         component={newComponentFactory(TAB_TYPE)}
@@ -164,7 +164,7 @@ describe('DragDroppable', () => {
 
     render(
       <MockDragDroppable
-        {...(props as any)}
+        {...(props as unknown)}
         editMode
         isDraggingOver
         component={newComponentFactory(TAB_TYPE)}
@@ -200,13 +200,13 @@ describe('DragDroppable', () => {
     class MockDragDroppable extends DragDroppable {
       constructor(mockProps: ConstructorParameters<typeof DragDroppable>[0]) {
         super(mockProps);
-        this.state = { dropIndicator: 'DROP_TOP' as any };
+        this.state = { dropIndicator: 'DROP_TOP' as unknown };
       }
     }
 
     render(
       <MockDragDroppable
-        {...(props as any)}
+        {...(props as unknown)}
         editMode
         isDraggingOver
         disableDragDrop
@@ -250,7 +250,7 @@ describe('DragDroppable', () => {
 
     rerender(
       <DragDroppable
-        {...(props as any)}
+        {...(props as unknown)}
         component={newComponentFactory(TAB_TYPE)}
         onDropIndicatorChange={onDropIndicatorChange}
         isDraggingOver

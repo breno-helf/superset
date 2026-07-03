@@ -302,7 +302,7 @@ function mapStateToProps({
 }
 
 function mapDispatchToProps(
-  dispatch: ThunkDispatch<any, undefined, AnyAction>,
+  dispatch: ThunkDispatch<unknown, undefined, AnyAction>,
 ) {
   return {
     // Note: There's a type mismatch between the local Annotation interface

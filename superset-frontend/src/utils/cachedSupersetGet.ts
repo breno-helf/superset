@@ -20,7 +20,7 @@
 import { SupersetClient } from '@superset-ui/core';
 import { cacheWrapper } from './cacheWrapper';
 
-export const supersetGetCache = new Map<string, any>();
+export const supersetGetCache = new Map<string, unknown>();
 
 export const cachedSupersetGet = cacheWrapper(
   SupersetClient.get,

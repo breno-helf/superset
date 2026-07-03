@@ -29,7 +29,7 @@ import {
 import { Constants } from '@superset-ui/core/components';
 
 export const dispatchHoverAction = debounce(
-  (dispatch: Dispatch<any>, id?: string) => {
+  (dispatch: Dispatch<unknown>, id?: string) => {
     if (id) {
       dispatch(setHoveredNativeFilter(id));
     } else {
@@ -40,7 +40,7 @@ export const dispatchHoverAction = debounce(
 );
 
 export const dispatchFocusAction = debounce(
-  (dispatch: Dispatch<any>, id?: string) => {
+  (dispatch: Dispatch<unknown>, id?: string) => {
     if (id) {
       dispatch(setFocusedNativeFilter(id));
     } else {
@@ -51,7 +51,7 @@ export const dispatchFocusAction = debounce(
 );
 
 export const dispatchChartCustomizationHoverAction = debounce(
-  (dispatch: Dispatch<any>, id?: string) => {
+  (dispatch: Dispatch<unknown>, id?: string) => {
     if (id) {
       dispatch(setHoveredChartCustomization(id));
     } else {

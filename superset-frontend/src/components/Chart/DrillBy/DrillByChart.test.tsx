@@ -41,7 +41,7 @@ const dataset = {
   ],
 };
 
-const setup = (overrides: Record<string, any> = {}, result?: any) =>
+const setup = (overrides: Record<string, unknown> = {}, result?: unknown) =>
   render(
     <DrillByChart
       formData={{ ...chart.form_data, ...overrides }}
@@ -55,7 +55,7 @@ const setup = (overrides: Record<string, any> = {}, result?: any) =>
     },
   );
 
-const waitForRender = (overrides: Record<string, any> = {}) =>
+const waitForRender = (overrides: Record<string, unknown> = {}) =>
   waitFor(() => setup(overrides));
 
 test('should render', async () => {

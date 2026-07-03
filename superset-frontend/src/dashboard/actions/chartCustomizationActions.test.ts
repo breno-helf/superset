@@ -41,7 +41,7 @@ function setup(stateOverrides: Record<string, unknown> = {}) {
     },
     ...stateOverrides,
   };
-  const getState = jest.fn(() => state) as unknown as () => any;
+  const getState = jest.fn(() => state) as unknown as () => unknown;
   const dispatch = jest.fn();
   return { getState, dispatch, state };
 }

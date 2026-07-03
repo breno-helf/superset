@@ -71,10 +71,10 @@ const StyledModal = styled(Modal)`
 
 interface QueryPreviewModalProps extends ToastProps {
   onHide: () => void;
-  openInSqlLab: (id: number) => any;
+  openInSqlLab: (id: number) => unknown;
   queries: QueryObject[];
   query: QueryObject;
-  fetchData: (id: number) => any;
+  fetchData: (id: number) => unknown;
   show: boolean;
 }
 

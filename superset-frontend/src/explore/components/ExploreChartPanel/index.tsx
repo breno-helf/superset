@@ -74,14 +74,14 @@ export interface ExploreChartPanelProps {
       ownState?: JsonObject,
     ) => void;
     updateQueryFormData: (formData: QueryFormData, chartId: number) => void;
-    setControlValue: (controlName: string, value: any, chartId: number) => void;
+    setControlValue: (controlName: string, value: unknown, chartId: number) => void;
   };
   onQuery?: () => void;
   can_overwrite: boolean;
   can_download: boolean;
   datasource: Datasource;
   dashboardId?: number;
-  column_formats?: Record<string, any>;
+  column_formats?: Record<string, unknown>;
   containerId: string;
   isStarred: boolean;
   slice?: Slice;

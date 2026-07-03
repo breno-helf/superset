@@ -24,8 +24,8 @@ import Field from '../Field';
 
 export interface FieldsetProps {
   children: ReactNode;
-  onChange?: (updatedItem: Record<string, any>) => void;
-  item?: Record<string, any>;
+  onChange?: (updatedItem: Record<string, unknown>) => void;
+  item?: Record<string, unknown>;
   title?: ReactNode;
   compact?: boolean;
 }
@@ -40,7 +40,7 @@ export default function Fieldset({
   compact = false,
 }: FieldsetProps) {
   const handleChange = useCallback(
-    (fieldKey: fieldKeyType, val: any) => {
+    (fieldKey: fieldKeyType, val: unknown) => {
       onChange?.({
         ...item,
         [fieldKey]: val,

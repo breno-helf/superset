@@ -285,7 +285,7 @@ function getState(
   };
 }
 
-function useResetOnChangeRef(initialValue: () => any, resetOnChangeValue: any) {
+function useResetOnChangeRef(initialValue: () => unknown, resetOnChangeValue: unknown) {
   const value = useRef(initialValue());
   const prevResetOnChangeValue = useRef(resetOnChangeValue);
   if (prevResetOnChangeValue.current !== resetOnChangeValue) {
@@ -506,7 +506,7 @@ export const ControlPanelsContainer = (props: ControlPanelsContainerProps) => {
       description: baseDescription,
       ...restProps
     } = controlData as ControlState & {
-      validationErrors?: any[];
+      validationErrors?: unknown[];
     };
 
     const isVisible = visibility
@@ -530,10 +530,10 @@ export const ControlPanelsContainer = (props: ControlPanelsContainerProps) => {
 
     if (name.includes('adhoc_filters')) {
       restProps.canDelete = (
-        valueToBeDeleted: Record<string, any>,
-        values: Record<string, any>[],
+        valueToBeDeleted: Record<string, unknown>,
+        values: Record<string, unknown>[],
       ) => {
-        const isTemporalRange = (filter: Record<string, any>) =>
+        const isTemporalRange = (filter: Record<string, unknown>) =>
           filter.operator === Operators.TemporalRange;
         if (!controls?.time_range?.value && isTemporalRange(valueToBeDeleted)) {
           const count = values.filter(isTemporalRange).length;

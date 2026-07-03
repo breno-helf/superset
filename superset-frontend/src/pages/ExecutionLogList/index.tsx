@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -65,7 +66,7 @@ function ExecutionLog({
   addSuccessToast,
   isReportEnabled,
 }: ExecutionLogProps) {
-  const { alertId }: any = useParams();
+  const { alertId } = useParams<{ alertId: string }>();
   const {
     state: { loading, resourceCount: logCount, resourceCollection: logs },
     fetchData,
@@ -98,7 +99,7 @@ function ExecutionLog({
           row: {
             original: { state },
           },
-        }: any) => (
+        }: CellProps<ExecutionLogObject>) => (
           <AlertStatusIcon state={state} isReportEnabled={isReportEnabled} />
         ),
         accessor: 'state',
@@ -112,7 +113,7 @@ function ExecutionLog({
           row: {
             original: { uuid: executionId },
           },
-        }: any) => (executionId ? executionId.slice(0, 6) : 'none'),
+        }: CellProps<ExecutionLogObject>) => (executionId ? executionId.slice(0, 6) : 'none'),
         accessor: 'uuid',
         Header: t('Execution ID'),
         size: 'xs',
@@ -124,7 +125,7 @@ function ExecutionLog({
           row: {
             original: { scheduled_dttm: scheduledDttm },
           },
-        }: any) =>
+        }: CellProps<ExecutionLogObject>) =>
           dayjs(new Date(scheduledDttm)).format('YYYY-MM-DD hh:mm:ss a'),
         accessor: 'scheduled_dttm',
         Header: t('Scheduled at (UTC)'),
@@ -173,7 +174,7 @@ function ExecutionLog({
           row: {
             original: { error_message = '' },
           },
-        }: any) => (
+        }: CellProps<ExecutionLogObject>) => (
           <Tooltip title={error_message} placement="topLeft">
             <span>{error_message}</span>
           </Tooltip>

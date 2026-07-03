@@ -31,7 +31,7 @@ export interface DndAdhocFilterOptionProps {
   onClickClose: (index: number) => void;
   onShiftOptions: (dragIndex: number, hoverIndex: number) => void;
   options: OptionSortType[];
-  datasource: Record<string, any>;
+  datasource: Record<string, unknown>;
   partitionColumn?: string;
   index: number;
 }

@@ -25,7 +25,7 @@ interface CardCollectionProps {
   bulkSelectEnabled?: boolean;
   loading: boolean;
   prepareRow: TableInstance['prepareRow'];
-  renderCard?: (row: any) => ReactNode;
+  renderCard?: (row: unknown) => ReactNode;
   rows: TableInstance['rows'];
   showThumbnails?: boolean;
 }
@@ -91,14 +91,14 @@ export default function CardCollection({
               className={cx({
                 'card-selected':
                   bulkSelectEnabled &&
-                  (row as Row & UseRowSelectRowProps<any>).isSelected,
+                  (row as Row & UseRowSelectRowProps<unknown>).isSelected,
                 'bulk-select': bulkSelectEnabled,
               })}
               key={row.id}
               onClick={e =>
                 handleClick(
                   e,
-                  (row as Row & UseRowSelectRowProps<any>).toggleRowSelected,
+                  (row as Row & UseRowSelectRowProps<unknown>).toggleRowSelected,
                 )
               }
               role="none"

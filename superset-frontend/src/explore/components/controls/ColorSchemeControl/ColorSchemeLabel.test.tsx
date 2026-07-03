@@ -38,7 +38,7 @@ const defaultProps = {
   id: 'colorScheme',
 };
 
-const setup = (overrides?: Record<string, any>) =>
+const setup = (overrides?: Record<string, unknown>) =>
   render(<ColorSchemeLabel {...defaultProps} {...overrides} />);
 
 test('should render', async () => {

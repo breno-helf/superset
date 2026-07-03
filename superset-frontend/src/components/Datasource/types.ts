@@ -30,7 +30,7 @@ export interface DatasourceModalProps {
   addDangerToast: (msg: string) => void;
   datasource: DatasetObject;
   onChange: () => {};
-  onDatasourceSave: (datasource: object, errors?: Array<any>) => {};
+  onDatasourceSave: (datasource: object, errors?: unknown[]) => {};
   onHide: () => {};
   show: boolean;
 }
@@ -39,7 +39,7 @@ export interface ChangeDatasourceModalProps {
   addDangerToast: (msg: string) => void;
   addSuccessToast: (msg: string) => void;
   onChange: (uid: string) => void;
-  onDatasourceSave: (datasource: object, errors?: Array<any>) => {};
+  onDatasourceSave: (datasource: object, errors?: unknown[]) => {};
   onHide: () => void;
   show: boolean;
 }
@@ -47,19 +47,19 @@ export interface ChangeDatasourceModalProps {
 export interface CRUDCollectionProps {
   allowAddItem?: boolean;
   allowDeletes?: boolean;
-  collection: Record<PropertyKey, any>[];
-  columnLabels?: Record<PropertyKey, any>;
-  columnLabelTooltips?: Record<PropertyKey, any>;
+  collection: Record<PropertyKey, unknown>[];
+  columnLabels?: Record<PropertyKey, unknown>;
+  columnLabelTooltips?: Record<PropertyKey, unknown>;
   emptyMessage?: ReactNode;
   expandFieldset?: ReactNode;
   extraButtons?: ReactNode;
-  itemGenerator?: () => any;
+  itemGenerator?: () => unknown;
   itemCellProps?: Record<
     string,
     (
       val: unknown,
       label: string,
-      record: any,
+      record: Record<string, unknown>,
     ) => DetailedHTMLProps<
       TdHTMLAttributes<HTMLTableCellElement>,
       HTMLTableCellElement
@@ -71,11 +71,11 @@ export interface CRUDCollectionProps {
       val: unknown,
       onChange: (value: unknown) => void,
       label: string,
-      record: any,
+      record: Record<string, unknown>,
     ) => ReactNode
   >;
-  onChange?: (arg0: any) => void;
-  tableColumns: any[];
+  onChange?: (arg0: unknown) => void;
+  tableColumns: unknown[];
   tableLayout?: 'fixed' | 'auto';
   sortColumns: string[];
   stickyHeader?: boolean;
@@ -90,7 +90,7 @@ export interface CRUDCollectionProps {
   filterFields?: string[];
 }
 
-export type Sort = number | string | boolean | any;
+export type Sort = number | string | boolean | unknown;
 
 export enum SortOrder {
   Asc = 1,
@@ -99,9 +99,9 @@ export enum SortOrder {
 }
 
 export interface CRUDCollectionState {
-  collection: Record<PropertyKey, any>;
-  collectionArray: Record<PropertyKey, any>[];
-  expandedColumns: Record<PropertyKey, any>;
+  collection: Record<PropertyKey, unknown>;
+  collectionArray: Record<PropertyKey, unknown>[];
+  expandedColumns: Record<PropertyKey, unknown>;
   sortColumn: string;
   sort: SortOrder;
   currentPage: number;

@@ -37,7 +37,7 @@ const StyledTree = styled(Tree)`
 
 type ScopingTreeProps = {
   forceUpdate: Function;
-  updateFormValues: (values: any) => void;
+  updateFormValues: (values: unknown) => void;
   formScope?: NativeFilterScope;
   initialScope: NativeFilterScope;
   chartId?: number;
@@ -193,7 +193,7 @@ const ScopingTree: FC<ScopingTreeProps> = ({
       getTreeCheckedItems(
         { ...(formScope || initialScope) },
         layout,
-        ((formScope || initialScope) as any)?.selectedLayers,
+        ((formScope || initialScope) as Record<string, unknown>)?.selectedLayers as string[] | undefined,
       ),
     [formScope, initialScope, layout],
   );

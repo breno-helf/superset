@@ -35,7 +35,7 @@ export const ViewResultsModalTrigger = ({
   triggerNode: ReactChild;
   modalTitle: string;
   modalBody: ReactChild;
-  modalRef?: RefObject<any>;
+  modalRef?: RefObject<unknown>;
 }) => {
   const history = useHistory();
   const exploreChart = () => history.push(exploreUrl);

@@ -303,8 +303,7 @@ const SqlEditor: FC<Props> = ({
 
       dispatch(
         runQueryFromSqlEditor(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          database as any,
+          database as unknown,
           queryEditor,
           defaultQueryLimit,
           ctasArg ? ctas : '',

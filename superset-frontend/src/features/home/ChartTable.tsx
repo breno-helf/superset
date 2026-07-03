@@ -54,7 +54,7 @@ interface ChartTableProps {
   addDangerToast: (message: string) => void;
   addSuccessToast: (message: string) => void;
   user?: User;
-  mine: Array<any>;
+  mine: unknown[];
   showThumbnails: boolean;
   otherTabData?: Array<object>;
   otherTabFilters: Filter[];

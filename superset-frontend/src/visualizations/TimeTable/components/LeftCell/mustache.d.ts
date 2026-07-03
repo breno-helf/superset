@@ -19,7 +19,7 @@
 
 declare module 'mustache' {
   interface MustacheStatic {
-    render(template: string, view: any, partials?: any, config?: any): string;
+    render(template: string, view: unknown, partials?: unknown, config?: unknown): string;
   }
   const Mustache: MustacheStatic;
   export = Mustache;

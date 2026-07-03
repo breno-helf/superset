@@ -172,8 +172,8 @@ const SliceHeaderControls = (
   );
   const history = useHistory();
 
-  const queryMenuRef: RefObject<any> = useRef(null);
-  const resultsMenuRef: RefObject<any> = useRef(null);
+  const queryMenuRef: RefObject<unknown> = useRef(null);
+  const resultsMenuRef: RefObject<unknown> = useRef(null);
 
   const [modalFilters, setFilters] = useState<BinaryQueryObjectFilterClause[]>(
     [],
@@ -376,10 +376,10 @@ const SliceHeaderControls = (
   const isTable = slice.viz_type === VizType.Table;
   const isPivotTable = slice.viz_type === VizType.PivotTable;
   const cachedWhen = (cachedDttm || []).map(itemCachedDttm =>
-    (extendedDayjs.utc(itemCachedDttm) as any).fromNow(),
+    (extendedDayjs.utc(itemCachedDttm) as unknown).fromNow(),
   );
   const updatedWhen = updatedDttm
-    ? (extendedDayjs.utc(updatedDttm) as any).fromNow()
+    ? (extendedDayjs.utc(updatedDttm) as unknown).fromNow()
     : '';
   const getCachedTitle = (itemCached: boolean, index: number) => {
     if (itemCached) {
@@ -439,7 +439,7 @@ const SliceHeaderControls = (
       disabled: props.chartStatus === 'loading',
       style: { height: 'auto', lineHeight: 'initial' },
       'data-test': 'refresh-chart-menu-item', // Typescript hack to get around MenuItem type
-    } as any,
+    } as unknown,
     {
       key: MenuKeys.Fullscreen,
       label: fullscreenLabel,
@@ -467,7 +467,7 @@ const SliceHeaderControls = (
         </Tooltip>
       ),
       'data-test-edit-chart-name': slice.slice_name,
-    } as any);
+    } as unknown);
   }
 
   if (canEditCrossFilters) {

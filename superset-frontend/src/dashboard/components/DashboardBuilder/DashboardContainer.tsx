@@ -319,7 +319,7 @@ const DashboardContainer: FC<DashboardContainerProps> = ({ topLevelTabs }) => {
     // 'beforeunload' event interferes with Cypress data cleanup process.
     // This code prevents 'beforeunload' from triggering in Cypress tests,
     // as it is not required for end-to-end testing scenarios.
-    if (!(window as any).Cypress) {
+    if (!(window as unknown).Cypress) {
       window.addEventListener('beforeunload', onBeforeUnload);
     }
 

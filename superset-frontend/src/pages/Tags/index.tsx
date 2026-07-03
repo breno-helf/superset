@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -148,7 +149,7 @@ function TagList(props: TagListProps) {
           row: {
             original: { id },
           },
-        }: any) =>
+        }: CellProps<TagObject>) =>
           userId && (
             <FaveStar
               itemId={id}
@@ -167,7 +168,7 @@ function TagList(props: TagListProps) {
           row: {
             original: { id, name: tagName },
           },
-        }: any) => (
+        }: CellProps<TagObject>) => (
           <AntdTag>
             <Link to={`/all_entities/?id=${id}`}>{tagName}</Link>
           </AntdTag>
@@ -185,14 +186,14 @@ function TagList(props: TagListProps) {
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<TagObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<TagObject>) => {
           const handleEdit = () => handleTagEdit(original);
           return (
             <Actions className="actions">

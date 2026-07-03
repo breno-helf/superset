@@ -46,7 +46,7 @@ const Code = styled.code`
 export type TemplateParamsEditorProps = {
   queryEditorId: string;
   language: 'yaml' | 'json';
-  onChange: (params: any) => void;
+  onChange: (params: unknown) => void;
 };
 
 const TemplateParamsEditor = ({
@@ -65,7 +65,7 @@ const TemplateParamsEditor = ({
       setParsedJSON(JSON.parse(code));
       setIsValid(true);
     } catch {
-      setParsedJSON({} as any);
+      setParsedJSON({} as unknown);
       setIsValid(false);
     }
   }, [code]);

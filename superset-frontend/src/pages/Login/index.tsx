@@ -143,7 +143,7 @@ export default function Login() {
       return undefined;
     }
     const iconComponentName = `${capitalize(providerName)}Outlined`;
-    const IconComponent = (Icons as Record<string, React.ComponentType<any>>)[
+    const IconComponent = (Icons as Record<string, React.ComponentType<Record<string, unknown>>>)[
       iconComponentName
     ];
 

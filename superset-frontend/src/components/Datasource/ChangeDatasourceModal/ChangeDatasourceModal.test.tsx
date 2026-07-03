@@ -100,9 +100,9 @@ test('does not show success toast or close modal when datasource request fails',
     addSuccessToast: jest.fn(),
     onHide: jest.fn(),
   };
-  (fetchMock.removeRoutes as any)(DATASOURCE_ENDPOINT);
-  (fetchMock.removeRoutes as any)(DATASOURCES_ENDPOINT);
-  (fetchMock.removeRoutes as any)(INFO_ENDPOINT);
+  (fetchMock.removeRoutes as unknown)(DATASOURCE_ENDPOINT);
+  (fetchMock.removeRoutes as unknown)(DATASOURCES_ENDPOINT);
+  (fetchMock.removeRoutes as unknown)(INFO_ENDPOINT);
   fetchMock.get(DATASOURCES_ENDPOINT, { result: [mockDatasource['7__table']] });
   fetchMock.get(INFO_ENDPOINT, {});
   fetchMock.get(DATASOURCE_ENDPOINT, 500);
@@ -118,9 +118,9 @@ test('does not show success toast or close modal when datasource request fails',
   expect(props.addSuccessToast).not.toHaveBeenCalled();
   expect(props.onHide).not.toHaveBeenCalled();
 
-  (fetchMock.removeRoutes as any)(DATASOURCE_ENDPOINT);
-  (fetchMock.removeRoutes as any)(DATASOURCES_ENDPOINT);
-  (fetchMock.removeRoutes as any)(INFO_ENDPOINT);
+  (fetchMock.removeRoutes as unknown)(DATASOURCE_ENDPOINT);
+  (fetchMock.removeRoutes as unknown)(DATASOURCES_ENDPOINT);
+  (fetchMock.removeRoutes as unknown)(INFO_ENDPOINT);
   fetchMock.get(DATASOURCES_ENDPOINT, { result: [mockDatasource['7__table']] });
   fetchMock.get(INFO_ENDPOINT, {});
   fetchMock.get(DATASOURCE_ENDPOINT, DATASOURCE_PAYLOAD);

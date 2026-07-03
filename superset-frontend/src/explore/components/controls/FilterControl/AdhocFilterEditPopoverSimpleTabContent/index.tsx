@@ -274,7 +274,7 @@ const AdhocFilterEditPopoverSimpleTabContent: FC<Props> = props => {
   const [comparator, setComparator] = useState(props.adhocFilter.comparator);
   const comparatorInputRef = useRef<InputRef | null>(null);
   const [suggestions, setSuggestions] = useState<
-    Record<'label' | 'value', any>[]
+    Record<'label' | 'value', unknown>[]
   >([]);
   const [loadingComparatorSuggestions, setLoadingComparatorSuggestions] =
     useState<boolean>(false);

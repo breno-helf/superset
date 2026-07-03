@@ -48,9 +48,9 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
     {
       fetchSlices,
       updateSlices,
-    } as any,
+    } as unknown,
     dispatch,
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SliceAdder as any);
+export default connect(mapStateToProps, mapDispatchToProps)(SliceAdder as unknown);

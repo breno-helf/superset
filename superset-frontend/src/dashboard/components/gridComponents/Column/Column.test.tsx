@@ -181,16 +181,16 @@ test.skip('should render a BackgroundStyleDropdown when focused', () => {
   let wrapper: ReturnType<typeof setup> = setup({
     component: columnWithoutChildren,
   });
-  expect((wrapper as any).find(BackgroundStyleDropdown)).toBeFalsy();
+  expect((wrapper as unknown).find(BackgroundStyleDropdown)).toBeFalsy();
 
   // we cannot set props on the Row because of the WithDragDropContext wrapper
   wrapper = setup({ component: columnWithoutChildren, editMode: true });
-  (wrapper as any)
+  (wrapper as unknown)
     .find(IconButton)
     .at(1) // first one is delete button
     .simulate('click');
 
-  expect((wrapper as any).find(BackgroundStyleDropdown)).toBeTruthy();
+  expect((wrapper as unknown).find(BackgroundStyleDropdown)).toBeTruthy();
 });
 
 test('should call deleteComponent when deleted', () => {

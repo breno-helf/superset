@@ -51,7 +51,7 @@ describe('sparklineHelpers', () => {
     });
 
     test('should return false for invalid values', () => {
-      expect(isValidBoundValue(null as any)).toBe(false);
+      expect(isValidBoundValue(null as unknown)).toBe(false);
       expect(isValidBoundValue(undefined)).toBe(false);
       expect(isValidBoundValue('')).toBe(false);
       expect(isValidBoundValue(NaN)).toBe(false);

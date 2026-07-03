@@ -34,8 +34,8 @@ interface FilterScopeMap {
 }
 
 interface FilterScopeTreeEntry {
-  nodes: any[];
-  nodesFiltered: any[];
+  nodes: unknown[];
+  nodesFiltered: unknown[];
   checked: string[];
   expanded: string[];
 }

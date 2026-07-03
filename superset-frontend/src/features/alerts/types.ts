@@ -103,9 +103,9 @@ export type ExtraNativeFilter = {
   filterType?: string;
   columnName?: string;
   columnLabel?: string;
-  filterValues?: Array<any> | [];
+  filterValues?: unknown[] | [];
   nativeFilterId?: string | null;
-  optionFilterValues?: Array<any> | [];
+  optionFilterValues?: unknown[] | [];
 };
 
 export type Extra = {
@@ -208,7 +208,7 @@ export enum ContentType {
 }
 
 export type NativeFilterObject = {
-  cascadeParentIds: any[];
+  cascadeParentIds: unknown[];
   chartsInScope: number[];
   controlValues: {
     defaultToFirstItem: boolean;
@@ -218,20 +218,20 @@ export type NativeFilterObject = {
     searchAllOptions: boolean;
   };
   defaultDataMask: {
-    extraFormData: Record<string, any>;
-    filterState: Record<string, any>;
-    ownState: Record<string, any>;
+    extraFormData: Record<string, unknown>;
+    filterState: Record<string, unknown>;
+    ownState: Record<string, unknown>;
   };
   description: string;
   filterType: string;
   id: string;
   name: string;
   scope: {
-    excluded: any[];
+    excluded: unknown[];
     rootPath: string[];
   };
   tabsInScope: string[];
-  adhoc_filters: any[];
+  adhoc_filters: unknown[];
   targets: Array<{
     column: {
       name: string;

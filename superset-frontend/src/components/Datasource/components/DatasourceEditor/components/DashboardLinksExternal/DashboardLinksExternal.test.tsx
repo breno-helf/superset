@@ -52,7 +52,7 @@ test('renders empty state when no dashboards provided', () => {
 });
 
 test('renders empty state when dashboards is null/undefined', () => {
-  render(<DashboardLinksExternal dashboards={null as any} />, {
+  render(<DashboardLinksExternal dashboards={null as unknown as never[]} />, {
     wrapper: createWrapper({
       useRedux: true,
       useRouter: true,

@@ -51,7 +51,7 @@ export interface ColorSchemeControlProps {
   hasDashboardColorScheme?: boolean;
   hasSharedLabelsColor?: boolean;
   sharedLabelsColors?: string[];
-  mapLabelsColors?: Record<string, any>;
+  mapLabelsColors?: Record<string, unknown>;
   colorNamespace?: string;
   chartId?: number;
   dashboardId?: number;

@@ -35,7 +35,7 @@ const buildFilter = (id: string, name: string): Filter =>
 const baseProps = {
   overflowedCrossFilters: [],
   filtersInScope: [buildFilter('filter-1', 'In Scope Filter')],
-  renderer: (filter: any) => <div key={filter.id}>{filter.name}</div>,
+  renderer: (filter: unknown) => <div key={filter.id}>{filter.name}</div>,
   rendererCrossFilter: () => null,
   showCollapsePanel: true,
   forceRenderOutOfScope: false,

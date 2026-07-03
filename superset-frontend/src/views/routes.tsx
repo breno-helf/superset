@@ -149,14 +149,14 @@ const RolesList = lazy(
   () => import(/* webpackChunkName: "RolesList" */ 'src/pages/RolesList'),
 );
 
-const UsersList: LazyExoticComponent<any> = lazy(
+const UsersList: LazyExoticComponent<unknown> = lazy(
   () => import(/* webpackChunkName: "UsersList" */ 'src/pages/UsersList'),
 );
 
 const UserInfo = lazy(
   () => import(/* webpackChunkName: "UserInfo" */ 'src/pages/UserInfo'),
 );
-const ActionLogList: LazyExoticComponent<any> = lazy(
+const ActionLogList: LazyExoticComponent<unknown> = lazy(
   () => import(/* webpackChunkName: "ActionLogList" */ 'src/pages/ActionLog'),
 );
 
@@ -168,7 +168,7 @@ const Register = lazy(
   () => import(/* webpackChunkName: "Register" */ 'src/pages/Register'),
 );
 
-const GroupsList: LazyExoticComponent<any> = lazy(
+const GroupsList: LazyExoticComponent<unknown> = lazy(
   () => import(/* webpackChunkName: "GroupsList" */ 'src/pages/GroupsList'),
 );
 const UserRegistrations = lazy(
@@ -191,9 +191,9 @@ const RedirectWarning = lazy(
 
 type Routes = {
   path: string;
-  Component: ComponentType<any>;
-  Fallback?: ComponentType<any>;
-  props?: ComponentProps<any>;
+  Component: ComponentType<Record<string, unknown>>;
+  Fallback?: ComponentType<Record<string, unknown>>;
+  props?: ComponentProps<unknown>;
 }[];
 
 export const routes: Routes = [

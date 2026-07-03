@@ -57,7 +57,7 @@ const mockedProps = {
   ],
 };
 
-const setup = (overrides: Record<string, any> = {}) => {
+const setup = (overrides: Record<string, unknown> = {}) => {
   const props = {
     ...mockedProps,
     ...overrides,

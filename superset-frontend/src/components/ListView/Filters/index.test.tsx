@@ -179,7 +179,7 @@ test('select pill tooltip falls back to static selects on cold URL load (no cach
         {
           id: 'owner',
           operator: ListViewFilterOperator.RelationOneMany,
-          value: { value: 1 } as any,
+          value: { value: 1 } as unknown,
         },
       ]}
       updateFilterValue={mockUpdateFilterValue}

@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -147,7 +148,7 @@ function ActionLogList() {
           row: {
             original: { action },
           },
-        }: any) => <span>{action}</span>,
+        }: CellProps<ActionLogObject>) => <span>{action}</span>,
       },
       {
         accessor: 'user',
@@ -156,7 +157,7 @@ function ActionLogList() {
           row: {
             original: { user },
           },
-        }: any) => {
+        }: CellProps<ActionLogObject>) => {
           const username = user?.username ?? '';
           const fullName = [user?.first_name, user?.last_name]
             .filter(Boolean)
@@ -182,7 +183,7 @@ function ActionLogList() {
           row: {
             original: { duration_ms },
           },
-        }: any) => <span>{duration_ms}</span>,
+        }: CellProps<ActionLogObject>) => <span>{duration_ms}</span>,
       },
       {
         accessor: 'dashboard_id',
@@ -192,7 +193,7 @@ function ActionLogList() {
           row: {
             original: { dashboard_id },
           },
-        }: any) => <span>{dashboard_id}</span>,
+        }: CellProps<ActionLogObject>) => <span>{dashboard_id}</span>,
       },
       {
         accessor: 'slice_id',
@@ -202,7 +203,7 @@ function ActionLogList() {
           row: {
             original: { slice_id },
           },
-        }: any) => <span>{slice_id}</span>,
+        }: CellProps<ActionLogObject>) => <span>{slice_id}</span>,
       },
       {
         accessor: 'json',
@@ -212,7 +213,7 @@ function ActionLogList() {
           row: {
             original: { json },
           },
-        }: any) => (
+        }: CellProps<ActionLogObject>) => (
           <Typography.Text
             css={css`
               .ant-typography-copy {
@@ -240,7 +241,7 @@ function ActionLogList() {
           row: {
             original: { referrer },
           },
-        }: any) => (
+        }: CellProps<ActionLogObject>) => (
           <Typography.Text
             css={css`
               .ant-typography-copy {
@@ -269,7 +270,7 @@ function ActionLogList() {
           row: {
             original: { dttm },
           },
-        }: any) => <span>{dttm}</span>,
+        }: CellProps<ActionLogObject>) => <span>{dttm}</span>,
       },
     ],
     [],

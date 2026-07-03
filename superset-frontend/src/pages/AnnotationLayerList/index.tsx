@@ -1,3 +1,4 @@
+import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -139,7 +140,7 @@ function AnnotationLayersList({
           row: {
             original: { id, name },
           },
-        }: any) => {
+        }: CellProps<AnnotationLayerObject>) => {
           let hasHistory = true;
 
           try {
@@ -178,14 +179,14 @@ function AnnotationLayersList({
               changed_by: changedBy,
             },
           },
-        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<AnnotationLayerObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on',
         size: 'xl',
         id: 'changed_on',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: CellProps<AnnotationLayerObject>) => {
           const handleEdit = () => handleAnnotationLayerEdit(original);
           const handleDelete = () => setLayerCurrentlyDeleting(original);
 

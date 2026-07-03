@@ -288,14 +288,13 @@ test('returns column keywords among selected tables', async () => {
         },
       ),
     );
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     storeWithSqlLab.dispatch(
       addTable(
-        { id: expectQueryEditorId } as any,
+        { id: expectQueryEditorId } as unknown,
         expectTable,
         expectCatalog,
         expectSchema,
-      ) as any,
+      ) as unknown,
     );
   });
 

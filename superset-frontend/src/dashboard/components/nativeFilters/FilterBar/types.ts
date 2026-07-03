@@ -51,7 +51,7 @@ interface VerticalBarConfig {
   filtersOpen: boolean;
   height: number | string;
   offset: number;
-  toggleFiltersBar: any;
+  toggleFiltersBar: unknown;
   width: number;
 }
 

@@ -37,15 +37,14 @@ import { EMPTY_STATE_QE_ID } from 'src/SqlLab/hooks/useQueryEditor';
 import { ToastType } from '../../components/MessageToasts/types';
 
 const isFeatureEnabledMock = isFeatureEnabled as unknown as jest.Mock;
-const query = { ...queryFixture, id: queryId } as any;
+const query = { ...queryFixture, id: queryId } as unknown;
 // Cast fixture to satisfy SqlLabRootState for getState callbacks in thunk tests
 const typedInitialState = initialState as unknown as SqlLabRootState;
 
 type DispatchExts = ThunkDispatch<SqlLabRootState, undefined, AnyAction>;
 
 const middlewares = [thunk];
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mockStore = configureMockStore<any, DispatchExts>(middlewares);
+const mockStore = configureMockStore<unknown, DispatchExts>(middlewares);
 
 jest.mock('nanoid', () => ({
   nanoid: () => 'abcd',
@@ -783,7 +782,7 @@ describe('async actions', () => {
     test('calls API endpint with correct params', async () => {
       supersetClientGetSpy.mockResolvedValue({
         json: { result: mockSavedQueryApiResponse },
-      } as any);
+      } as unknown);
 
       await makeRequest(123);
 
@@ -795,7 +794,7 @@ describe('async actions', () => {
     test('dispatches addQueryEditor with correct params on successful API call', async () => {
       supersetClientGetSpy.mockResolvedValue({
         json: { result: mockSavedQueryApiResponse },
-      } as any);
+      } as unknown);
 
       const expectedParams = {
         name: 'Query 1',
@@ -820,7 +819,7 @@ describe('async actions', () => {
     });
 
     test('should dispatch addDangerToast on API error', async () => {
-      supersetClientGetSpy.mockResolvedValue(new Error() as any);
+      supersetClientGetSpy.mockResolvedValue(new Error() as unknown);
 
       await makeRequest(1);
 
@@ -881,7 +880,7 @@ describe('async actions', () => {
               schema: defaultQueryEditor.schema,
               autorun: false,
               queryLimit:
-                (defaultQueryEditor as any).queryLimit ||
+                (defaultQueryEditor as unknown).queryLimit ||
                 initialState.common.conf.DEFAULT_SQLLAB_LIMIT,
               inLocalStorage: true,
               loaded: true,
