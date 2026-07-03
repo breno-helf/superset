@@ -49,6 +49,7 @@ from superset.utils import json
 warnings.filterwarnings(
     "ignore",
     message=r"pkg_resources is deprecated as an API",
+    category=UserWarning,
 )
 
 logger = logging.getLogger()
