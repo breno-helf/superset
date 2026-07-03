@@ -61,7 +61,9 @@ export function setQueryError(error: string) {
   };
 }
 export function executeQuery(payload: QueryExecutePayload) {
-  return async function (dispatch: ThunkDispatch<unknown, undefined, AnyAction>) {
+  return async function (
+    dispatch: ThunkDispatch<unknown, undefined, AnyAction>,
+  ) {
     try {
       dispatch(setQueryIsLoading(true));
       const result = await executeQueryApi(payload);

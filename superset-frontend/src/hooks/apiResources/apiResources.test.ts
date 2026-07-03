@@ -84,7 +84,9 @@ describe('apiResource hooks', () => {
 
     test('handles api errors', async () => {
       const fakeError = new Error('fake api error');
-      (makeApi as Record<string, unknown>).mockReturnValue(jest.fn().mockRejectedValue(fakeError));
+      (makeApi as Record<string, unknown>).mockReturnValue(
+        jest.fn().mockRejectedValue(fakeError),
+      );
       const { result } = renderHook(() =>
         useApiResourceFullBody('/test/endpoint'),
       );

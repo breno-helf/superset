@@ -96,11 +96,15 @@ test('sets up global superset object when user is logged in', async () => {
   await waitFor(() => {
     // Verify the global superset object is set up
     expect((window as Record<string, unknown>).superset).toBeDefined();
-    expect((window as Record<string, unknown>).superset.authentication).toBeDefined();
+    expect(
+      (window as Record<string, unknown>).superset.authentication,
+    ).toBeDefined();
     expect((window as Record<string, unknown>).superset.chat).toBeDefined();
     expect((window as Record<string, unknown>).superset.core).toBeDefined();
     expect((window as Record<string, unknown>).superset.commands).toBeDefined();
-    expect((window as Record<string, unknown>).superset.extensions).toBeDefined();
+    expect(
+      (window as Record<string, unknown>).superset.extensions,
+    ).toBeDefined();
     expect((window as Record<string, unknown>).superset.menus).toBeDefined();
     expect((window as Record<string, unknown>).superset.views).toBeDefined();
     expect((window as Record<string, unknown>).superset.sqlLab).toBeDefined();

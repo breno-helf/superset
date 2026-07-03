@@ -321,7 +321,8 @@ const FiltersConfigForm = (
     unknown
   > | null>(null);
   const forceUpdate = useForceUpdate(isActive);
-  const [datasetDetails, setDatasetDetails] = useState<Record<string, unknown>>();
+  const [datasetDetails, setDatasetDetails] =
+    useState<Record<string, unknown>>();
   const defaultFormFilter = useMemo(() => ({}), []);
   const filters = form.getFieldValue('filters');
   const formValues = filters?.[filterId];
@@ -1898,10 +1899,12 @@ const FiltersConfigForm = (
                                             iconSize="xl"
                                             iconColor={theme.colorPrimary}
                                             css={css`
-                                              margin-left: ${theme.sizeUnit *
-                                              2}px;
-                                              margin-top: ${theme.sizeUnit *
-                                              1.5}px;
+                                              margin-left: ${
+                                                theme.sizeUnit * 2
+                                              }px;
+                                              margin-top: ${
+                                                theme.sizeUnit * 1.5
+                                              }px;
                                             `}
                                             onClick={() => refreshHandler(true)}
                                           />

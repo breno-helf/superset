@@ -179,7 +179,9 @@ function AnnotationLayersList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<AnnotationLayerObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<AnnotationLayerObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on',
         size: 'xl',

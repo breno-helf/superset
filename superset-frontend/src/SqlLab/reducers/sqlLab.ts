@@ -391,7 +391,9 @@ export default function sqlLabReducer(
       });
     },
     [actions.CLEAR_QUERY_RESULTS]() {
-      const newResults = { ...(action.query as Record<string, unknown>).results };
+      const newResults = {
+        ...(action.query as Record<string, unknown>).results,
+      };
       newResults.data = [];
       return alterInObject(state, 'queries', action.query!, {
         results: newResults,
@@ -605,8 +607,7 @@ export default function sqlLabReducer(
           ? actionId
           : ((
               getFromArr(state.queryEditors, actionId, 'tabViewId') as
-                | QueryEditor
-                | undefined
+                QueryEditor | undefined
             )?.id ?? actionId);
       if (
         unsavedQueryEditor?.id === normalizedId &&

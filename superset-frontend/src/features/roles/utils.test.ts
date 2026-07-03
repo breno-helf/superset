@@ -395,7 +395,10 @@ test('fetchPermissionOptions shares cache across case variants', async () => {
 
 test('fetchPermissionOptions evicts oldest cache entry when MAX_CACHE_ENTRIES is reached', async () => {
   getMock.mockImplementation(({ endpoint }: { endpoint: string }) => {
-    const query = rison.decode(endpoint.split('?q=')[1]) as Record<string, unknown>;
+    const query = rison.decode(endpoint.split('?q=')[1]) as Record<
+      string,
+      unknown
+    >;
     const searchVal = query.filters?.[0]?.value || 'unknown';
     return Promise.resolve({
       json: {

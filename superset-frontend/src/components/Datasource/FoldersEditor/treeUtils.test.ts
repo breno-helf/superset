@@ -290,8 +290,12 @@ test('serializeForAPI preserves nested folder structure', () => {
   expect(serialized).toHaveLength(1);
   expect(serialized[0].uuid).toBe('parent');
   expect(serialized[0].children).toHaveLength(1);
-  expect((serialized[0].children![0] as Record<string, unknown>).uuid).toBe('child');
-  expect((serialized[0].children![0] as Record<string, unknown>).children).toHaveLength(1);
+  expect((serialized[0].children![0] as Record<string, unknown>).uuid).toBe(
+    'child',
+  );
+  expect(
+    (serialized[0].children![0] as Record<string, unknown>).children,
+  ).toHaveLength(1);
 });
 
 test('serializeForAPI excludes nested empty folders', () => {

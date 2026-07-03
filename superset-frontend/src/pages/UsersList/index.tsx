@@ -288,14 +288,16 @@ function UsersList({ user }: UsersListProps) {
         id: 'login_count',
         Header: t('Login count'),
         hidden: true,
-        Cell: ({ row: { original } }: CellProps<UserObject>) => original.login_count ?? 0,
+        Cell: ({ row: { original } }: CellProps<UserObject>) =>
+          original.login_count ?? 0,
       },
       {
         accessor: 'fail_login_count',
         id: 'fail_login_count',
         Header: t('Fail login count'),
         hidden: true,
-        Cell: ({ row: { original } }: CellProps<UserObject>) => original.fail_login_count ?? 0,
+        Cell: ({ row: { original } }: CellProps<UserObject>) =>
+          original.fail_login_count ?? 0,
       },
       {
         accessor: 'created_on',

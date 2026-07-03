@@ -145,7 +145,9 @@ function CssTemplatesList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<CssTemplateObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<CssTemplateObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',

@@ -98,5 +98,9 @@ test('getFormData should include persisted time_grains for time grain filters', 
     time_grains: ['PT1H', 'P1D', 'P1W'],
   });
 
-  expect((formData as Record<string, unknown>).time_grains).toEqual(['PT1H', 'P1D', 'P1W']);
+  expect((formData as Record<string, unknown>).time_grains).toEqual([
+    'PT1H',
+    'P1D',
+    'P1W',
+  ]);
 });

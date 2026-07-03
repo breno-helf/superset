@@ -285,7 +285,10 @@ function getState(
   };
 }
 
-function useResetOnChangeRef(initialValue: () => unknown, resetOnChangeValue: unknown) {
+function useResetOnChangeRef(
+  initialValue: () => unknown,
+  resetOnChangeValue: unknown,
+) {
   const value = useRef(initialValue());
   const prevResetOnChangeValue = useRef(resetOnChangeValue);
   if (prevResetOnChangeValue.current !== resetOnChangeValue) {

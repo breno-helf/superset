@@ -316,17 +316,21 @@ describe('buildExtraJsonObject', () => {
   });
 
   test('drops warning_markdown when its value is null', () => {
-    expect(buildExtraJsonObject({ warning_markdown: null } as unknown)).toBe('{}');
+    expect(buildExtraJsonObject({ warning_markdown: null } as unknown)).toBe(
+      '{}',
+    );
   });
 
   test('drops warning_markdown when its value is an empty string', () => {
-    expect(buildExtraJsonObject({ warning_markdown: '' } as unknown)).toBe('{}');
+    expect(buildExtraJsonObject({ warning_markdown: '' } as unknown)).toBe(
+      '{}',
+    );
   });
 
   test('preserves a non-empty warning_markdown verbatim', () => {
-    expect(buildExtraJsonObject({ warning_markdown: '⚠ caveat' } as unknown)).toBe(
-      '{"warning_markdown":"⚠ caveat"}',
-    );
+    expect(
+      buildExtraJsonObject({ warning_markdown: '⚠ caveat' } as unknown),
+    ).toBe('{"warning_markdown":"⚠ caveat"}');
   });
 
   test('preserves certification and drops null warning_markdown', () => {

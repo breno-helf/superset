@@ -193,7 +193,8 @@ const ScopingTree: FC<ScopingTreeProps> = ({
       getTreeCheckedItems(
         { ...(formScope || initialScope) },
         layout,
-        ((formScope || initialScope) as Record<string, unknown>)?.selectedLayers as string[] | undefined,
+        ((formScope || initialScope) as Record<string, unknown>)
+          ?.selectedLayers as string[] | undefined,
       ),
     [formScope, initialScope, layout],
   );

@@ -529,7 +529,9 @@ export function ListView<T extends object = unknown>({
                             cta
                             onClick={() =>
                               action.onSelect(
-                                selectedFlatRows.map((r: unknown) => r.original),
+                                selectedFlatRows.map(
+                                  (r: unknown) => r.original,
+                                ),
                               )
                             }
                           >

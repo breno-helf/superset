@@ -43,7 +43,9 @@ jest.mock('@superset-ui/core', () => ({
 // Mock fetchTopNValues utility
 jest.mock('./MatrixifyControl/utils/fetchTopNValues', () => ({
   fetchTopNValues: jest.fn(),
-  extractDimensionValues: jest.fn(values => values.map((v: unknown) => v.value)),
+  extractDimensionValues: jest.fn(values =>
+    values.map((v: unknown) => v.value),
+  ),
 }));
 
 // Mock ControlHeader

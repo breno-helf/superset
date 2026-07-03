@@ -27,7 +27,9 @@ export interface RegistryMetadata {
 
 export interface ComponentItem<Metadata = RegistryMetadata> {
   metadata: Metadata;
-  loadComponent: () => Promise<{ default: ComponentType<Record<string, unknown>> }>;
+  loadComponent: () => Promise<{
+    default: ComponentType<Record<string, unknown>>;
+  }>;
 }
 
 export interface ComponentRegistry<Metadata = RegistryMetadata> {

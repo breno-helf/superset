@@ -102,7 +102,10 @@ describe('ChartHolder', () => {
       compose(applyMiddleware(thunk)),
     );
 
-  const renderWrapper = (store = createMockStore(), props: Record<string, unknown> = {}) =>
+  const renderWrapper = (
+    store = createMockStore(),
+    props: Record<string, unknown> = {},
+  ) =>
     render(<ChartHolder {...defaultProps} {...props} />, {
       useRouter: true,
       useDnd: true,

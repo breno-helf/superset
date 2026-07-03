@@ -339,7 +339,9 @@ export const setupMocks = (
  * Parse the rison-encoded `q` query parameter from a fetch-mock call URL.
  * Returns the decoded object, or null if parsing fails.
  */
-export const parseQueryFromUrl = (url: string): Record<string, unknown> | null => {
+export const parseQueryFromUrl = (
+  url: string,
+): Record<string, unknown> | null => {
   const match = url.match(/[?&]q=(.+?)(?:&|$)/);
   if (!match) return null;
   return rison.decode(decodeURIComponent(match[1]));

@@ -41,7 +41,9 @@ const memoizedControls = memoizeOne(
                 if (typeof control === 'string') {
                   // For now, we have to look in controls.jsx to get the config for some controls.
                   // Once everything is migrated out, delete this if statement.
-                  const controlConfig = (controls as Record<string, unknown>)[control];
+                  const controlConfig = (controls as Record<string, unknown>)[
+                    control
+                  ];
                   if (controlConfig) {
                     controlsMap[control] = controlConfig;
                   }

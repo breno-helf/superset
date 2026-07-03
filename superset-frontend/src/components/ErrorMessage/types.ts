@@ -20,14 +20,15 @@
 import type { ReactNode, ComponentType } from 'react';
 import type { ErrorSource, SupersetError } from '@superset-ui/core';
 
-export type ErrorMessageComponentProps<ExtraType = Record<string, unknown> | null> =
-  {
-    error: SupersetError<ExtraType>;
-    source?: ErrorSource;
-    subtitle?: ReactNode;
-    compact?: boolean;
-    closable?: boolean;
-  };
+export type ErrorMessageComponentProps<
+  ExtraType = Record<string, unknown> | null,
+> = {
+  error: SupersetError<ExtraType>;
+  source?: ErrorSource;
+  subtitle?: ReactNode;
+  compact?: boolean;
+  closable?: boolean;
+};
 
 export type ErrorMessageComponent = ComponentType<ErrorMessageComponentProps>;
 

@@ -328,7 +328,9 @@ test('Should sync local state after entering fullscreen', async () => {
     fullscreenElement = mockDiv;
   });
   const originalExitFullscreen = document.exitFullscreen;
-  (document as Record<string, unknown>).exitFullscreen = jest.fn().mockResolvedValue(undefined);
+  (document as Record<string, unknown>).exitFullscreen = jest
+    .fn()
+    .mockResolvedValue(undefined);
   const props = {
     ...createProps(),
     chartHolderRef: { current: mockDiv },
@@ -354,9 +356,11 @@ test('Should sync local state after exiting fullscreen', async () => {
   let fullscreenElement: Element | null = mockDiv;
   mockFullscreenElement(() => fullscreenElement);
   const originalExitFullscreen = document.exitFullscreen;
-  (document as Record<string, unknown>).exitFullscreen = jest.fn().mockImplementation(async () => {
-    fullscreenElement = null;
-  });
+  (document as Record<string, unknown>).exitFullscreen = jest
+    .fn()
+    .mockImplementation(async () => {
+      fullscreenElement = null;
+    });
   const props = {
     ...createProps(),
     isFullSize: true,

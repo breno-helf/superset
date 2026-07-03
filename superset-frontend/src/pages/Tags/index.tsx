@@ -186,7 +186,9 @@ function TagList(props: TagListProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<TagObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<TagObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',

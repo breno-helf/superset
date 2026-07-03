@@ -396,7 +396,9 @@ function AlertList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<AlertObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<AlertObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',

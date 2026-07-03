@@ -113,7 +113,8 @@ function ExecutionLog({
           row: {
             original: { uuid: executionId },
           },
-        }: CellProps<ExecutionLogObject>) => (executionId ? executionId.slice(0, 6) : 'none'),
+        }: CellProps<ExecutionLogObject>) =>
+          executionId ? executionId.slice(0, 6) : 'none',
         accessor: 'uuid',
         Header: t('Execution ID'),
         size: 'xs',

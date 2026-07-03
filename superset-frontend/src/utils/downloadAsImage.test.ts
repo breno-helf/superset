@@ -74,7 +74,8 @@ function attachMockApi(
 ) {
   const api = { setGridOption: jest.fn() };
   (agContainer as Record<string, unknown>)._agGridApi = api;
-  (agContainer as Record<string, unknown>)._agGridFirstDataRendered = firstDataRendered;
+  (agContainer as Record<string, unknown>)._agGridFirstDataRendered =
+    firstDataRendered;
   return api;
 }
 
@@ -406,7 +407,9 @@ test('restores column pixel widths via applyColumnState with flex stripped after
   await exportPromise;
 
   // flex must be stripped (set to null) so pixel width is used, not flex ratio
-  expect((api as Record<string, unknown>).applyColumnState).toHaveBeenCalledWith({
+  expect(
+    (api as Record<string, unknown>).applyColumnState,
+  ).toHaveBeenCalledWith({
     state: [
       { colId: 'col1', width: 300, flex: null },
       { colId: 'col2', width: 400, flex: null },
@@ -436,7 +439,9 @@ test('restores original column state with flex in finally after capture', async 
   await exportPromise;
 
   // Last call must restore the original state (with flex) so the live grid is unaffected
-  expect((api as Record<string, unknown>).applyColumnState.mock.calls.at(-1)[0]).toEqual({
+  expect(
+    (api as Record<string, unknown>).applyColumnState.mock.calls.at(-1)[0],
+  ).toEqual({
     state: savedState,
     applyOrder: false,
   });

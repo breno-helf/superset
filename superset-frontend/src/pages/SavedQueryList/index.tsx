@@ -350,7 +350,9 @@ function SavedQueryList({
           row: {
             original: { id, label },
           },
-        }: CellProps<SavedQueryObject>) => <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>,
+        }: CellProps<SavedQueryObject>) => (
+          <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>
+        ),
         id: 'label',
       },
       {

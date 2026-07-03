@@ -2005,9 +2005,10 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               value: target.value,
             })
           }
-          onEditorChange={(payload: { name: string; json: Record<string, unknown> }) =>
-            handleChangeWithValidation(ActionType.EditorChange, payload)
-          }
+          onEditorChange={(payload: {
+            name: string;
+            json: Record<string, unknown>;
+          }) => handleChangeWithValidation(ActionType.EditorChange, payload)}
           onExtraInputChange={(
             e: CheckboxChangeEvent | React.ChangeEvent<HTMLInputElement>,
           ) => {
@@ -2019,7 +2020,10 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               value: target.value,
             });
           }}
-          onExtraEditorChange={(payload: { name: string; json: Record<string, unknown> }) =>
+          onExtraEditorChange={(payload: {
+            name: string;
+            json: Record<string, unknown>;
+          }) =>
             handleChangeWithValidation(ActionType.ExtraEditorChange, payload)
           }
         />
@@ -2254,7 +2258,10 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                     value: target.value,
                   })
                 }
-                onEditorChange={(payload: { name: string; json: Record<string, unknown> }) =>
+                onEditorChange={(payload: {
+                  name: string;
+                  json: Record<string, unknown>;
+                }) =>
                   handleChangeWithValidation(ActionType.EditorChange, payload)
                 }
                 onExtraInputChange={(
@@ -2268,7 +2275,10 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                     value: target.value,
                   });
                 }}
-                onExtraEditorChange={(payload: { name: string; json: Record<string, unknown> }) =>
+                onExtraEditorChange={(payload: {
+                  name: string;
+                  json: Record<string, unknown>;
+                }) =>
                   handleChangeWithValidation(
                     ActionType.ExtraEditorChange,
                     payload,

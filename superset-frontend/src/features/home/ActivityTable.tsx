@@ -48,11 +48,7 @@ interface RecentDashboard extends RecentActivity {
  * Recent activity objects fetched by `getRecentActivityObjs`.
  */
 type ActivityObject =
-  | RecentSlice
-  | RecentDashboard
-  | Chart
-  | Dashboard
-  | SavedQueryObject;
+  RecentSlice | RecentDashboard | Chart | Dashboard | SavedQueryObject;
 
 interface ActivityProps {
   user: {
@@ -101,7 +97,10 @@ const getEntityUrl = (entity: ActivityObject) => {
 
 const getEntityLastActionOn = (entity: ActivityObject) => {
   if ('time' in entity) {
-    return t('Viewed %s', (extendedDayjs(entity.time) as Record<string, unknown>).fromNow());
+    return t(
+      'Viewed %s',
+      (extendedDayjs(entity.time) as Record<string, unknown>).fromNow(),
+    );
   }
 
   let time: number | string | undefined | null;
@@ -112,7 +111,9 @@ const getEntityLastActionOn = (entity: ActivityObject) => {
   if ('changed_on_utc' in entity) time = entity.changed_on_utc;
   return t(
     'Modified %s',
-    time == null ? UNKNOWN_TIME : (extendedDayjs(time) as Record<string, unknown>).fromNow(),
+    time == null
+      ? UNKNOWN_TIME
+      : (extendedDayjs(time) as Record<string, unknown>).fromNow(),
   );
 };
 

@@ -174,7 +174,11 @@ export const getAppliedColumnsWithFallback = (
   // First try to get from query response (preferred source of truth)
   const queryAppliedFilters = getQueryFilterMetadata(chart, 'applied_filters');
   if (queryAppliedFilters.length > 0) {
-    return new Set(queryAppliedFilters.map((filter: Record<string, unknown>) => filter.column));
+    return new Set(
+      queryAppliedFilters.map(
+        (filter: Record<string, unknown>) => filter.column,
+      ),
+    );
   }
 
   // Fallback: derive from native filters and dataMask when query response is empty
@@ -201,8 +205,8 @@ export const getAppliedColumnsWithFallback = (
 
 const getRejectedColumns = (chart: Record<string, unknown>): Set<string> =>
   new Set(
-    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: Record<string, unknown>) =>
-      getColumnLabel(filter.column),
+    getQueryFilterMetadata(chart, 'rejected_filters').map(
+      (filter: Record<string, unknown>) => getColumnLabel(filter.column),
     ),
   );
 

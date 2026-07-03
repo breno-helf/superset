@@ -22,7 +22,9 @@ type BaseQueryObject = {
   id: number;
 };
 
-export default function useQueryPreviewState<D extends BaseQueryObject = unknown>({
+export default function useQueryPreviewState<
+  D extends BaseQueryObject = unknown,
+>({
   queries,
   fetchData,
   currentQueryId,

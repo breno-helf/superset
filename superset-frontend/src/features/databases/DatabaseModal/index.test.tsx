@@ -1900,7 +1900,10 @@ test('handleChangeWithValidation function clears validation errors when called',
   });
 
   // Test the handleChangeWithValidation function behavior
-  const handleChangeWithValidation = (actionType: unknown, payload: unknown) => {
+  const handleChangeWithValidation = (
+    actionType: unknown,
+    payload: unknown,
+  ) => {
     mockOnChange(actionType, payload);
     handleClearValidationErrors();
   };
@@ -1935,7 +1938,10 @@ test('validates fix by testing all form field types clear validation errors', ()
     mockClearError();
   };
 
-  const handleChangeWithValidation = (actionType: unknown, payload: unknown) => {
+  const handleChangeWithValidation = (
+    actionType: unknown,
+    payload: unknown,
+  ) => {
     handleClearValidationErrors();
   };
 

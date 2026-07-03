@@ -78,7 +78,8 @@ const createMockStore = (initialState: Record<string, unknown> = {}) =>
     reducer: {
       user: (state = initialState.user || {}, action: unknown) => state,
       common: (state = initialState.common || {}, action: unknown) => state,
-      dashboards: (state = initialState.dashboards || {}, action: unknown) => state,
+      dashboards: (state = initialState.dashboards || {}, action: unknown) =>
+        state,
     },
     preloadedState: initialState,
     middleware: getDefaultMiddleware =>

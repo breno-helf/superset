@@ -167,8 +167,7 @@ export class StandardizedFormData {
     controlsState: Record<string, unknown>,
   ): void {
     const control = controlsState?.time_compare as
-      | { value?: unknown; choices?: unknown }
-      | undefined;
+      { value?: unknown; choices?: unknown } | undefined;
     if (!control || !Array.isArray(control.value)) {
       return;
     }
@@ -242,14 +241,19 @@ export class StandardizedFormData {
         publicFormData[key] = exploreState.form_data[key];
       }
     });
-    const targetControlsState = getControlsState(exploreState as Record<string, unknown>, {
-      ...latestFormData,
-      ...publicFormData,
-      viz_type: targetVizType,
-    });
+    const targetControlsState = getControlsState(
+      exploreState as Record<string, unknown>,
+      {
+        ...latestFormData,
+        ...publicFormData,
+        viz_type: targetVizType,
+      },
+    );
     StandardizedFormData.dropUnsupportedTimeShifts(targetControlsState);
     const targetFormData = {
-      ...getFormDataFromControls(targetControlsState as Record<string, unknown>),
+      ...getFormDataFromControls(
+        targetControlsState as Record<string, unknown>,
+      ),
       // Preserve dashboard context when switching viz types.
       ...(publicFormData.dashboardId && {
         dashboardId: publicFormData.dashboardId,
@@ -275,13 +279,19 @@ export class StandardizedFormData {
       getStandardizedControls().clear();
       rv = {
         formData: transformed,
-        controlsState: getControlsState(exploreState as Record<string, unknown>, transformed),
+        controlsState: getControlsState(
+          exploreState as Record<string, unknown>,
+          transformed,
+        ),
       };
     }
 
     // refresh validator message
     rv.controlsState = getControlsState(
-      { ...exploreState, controls: rv.controlsState } as Record<string, unknown>,
+      { ...exploreState, controls: rv.controlsState } as Record<
+        string,
+        unknown
+      >,
       rv.formData as Record<string, unknown>,
     );
     return rv;

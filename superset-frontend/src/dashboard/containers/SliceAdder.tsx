@@ -53,4 +53,7 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SliceAdder as unknown);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SliceAdder as unknown);

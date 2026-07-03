@@ -416,7 +416,9 @@ function ThemesList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<ThemeObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<ThemeObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',

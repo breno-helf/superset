@@ -35,11 +35,26 @@ import {
 } from '../styles';
 
 interface DatasetLayoutProps {
-  header?: ReactElement<unknown, string | JSXElementConstructor<unknown>> | null;
-  leftPanel?: ReactElement<unknown, string | JSXElementConstructor<unknown>> | null;
-  datasetPanel?: ReactElement<unknown, string | JSXElementConstructor<unknown>> | null;
-  rightPanel?: ReactElement<unknown, string | JSXElementConstructor<unknown>> | null;
-  footer?: ReactElement<unknown, string | JSXElementConstructor<unknown>> | null;
+  header?: ReactElement<
+    unknown,
+    string | JSXElementConstructor<unknown>
+  > | null;
+  leftPanel?: ReactElement<
+    unknown,
+    string | JSXElementConstructor<unknown>
+  > | null;
+  datasetPanel?: ReactElement<
+    unknown,
+    string | JSXElementConstructor<unknown>
+  > | null;
+  rightPanel?: ReactElement<
+    unknown,
+    string | JSXElementConstructor<unknown>
+  > | null;
+  footer?: ReactElement<
+    unknown,
+    string | JSXElementConstructor<unknown>
+  > | null;
 }
 
 export default function DatasetLayout({

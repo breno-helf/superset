@@ -159,7 +159,9 @@ function RowLevelSecurityList(props: RLSProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<RowLevelSecurityObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<RowLevelSecurityObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',

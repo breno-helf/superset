@@ -818,7 +818,10 @@ test('ThemeController handles theme application errors', () => {
     throw new Error('Theme application error');
   });
 
-  const fallbackSpy = jest.spyOn(controller as unknown, 'fallbackToDefaultMode');
+  const fallbackSpy = jest.spyOn(
+    controller as unknown,
+    'fallbackToDefaultMode',
+  );
   fallbackSpy.mockImplementation(() => {
     (controller as Record<string, unknown>).customizations = DEFAULT_THEME;
     (controller as Record<string, unknown>).currentMode = ThemeMode.DEFAULT;
@@ -1887,7 +1890,9 @@ test('fallback fetch: uses custom guest token header from SupersetClient when cl
 
   try {
     const controller = createController();
-    const result = await (controller as Record<string, unknown>).fetchSystemDefaultTheme();
+    const result = await (
+      controller as Record<string, unknown>
+    ).fetchSystemDefaultTheme();
 
     expect(mockGet).toHaveBeenCalled();
     expect(mockFetch).toHaveBeenCalledWith(
@@ -1951,7 +1956,9 @@ test('fallback fetch: uses bootstrap config for guest token header when Superset
 
   try {
     const controller = createController();
-    const result = await (controller as Record<string, unknown>).fetchSystemDefaultTheme();
+    const result = await (
+      controller as Record<string, unknown>
+    ).fetchSystemDefaultTheme();
 
     expect(mockFetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/v1/theme/'),
@@ -1996,7 +2003,9 @@ test('ThemeController cleans up injected fonts on destroy', () => {
   const controller = createController();
 
   // Inject some fonts
-  (controller as Record<string, unknown>).loadFonts(['https://fonts.example.com/font-test.css']);
+  (controller as Record<string, unknown>).loadFonts([
+    'https://fonts.example.com/font-test.css',
+  ]);
 
   let fontStyle = document.querySelector('style[data-superset-fonts]');
   expect(fontStyle).not.toBeNull();
@@ -2052,7 +2061,9 @@ test('fallback fetch: uses bootstrap GUEST_TOKEN_HEADER_NAME when guestTokenHead
 
   try {
     const controller = createController();
-    const result = await (controller as Record<string, unknown>).fetchSystemDefaultTheme();
+    const result = await (
+      controller as Record<string, unknown>
+    ).fetchSystemDefaultTheme();
 
     // Verify the bootstrap header was used instead of SupersetClient.guestTokenHeaderName
     expect(mockFetch).toHaveBeenCalledWith(
@@ -2103,7 +2114,9 @@ test('fetchSystemDefaultTheme: second named-theme fallback fetch succeeds when f
 
   try {
     const controller = createController();
-    const result = await (controller as Record<string, unknown>).fetchSystemDefaultTheme();
+    const result = await (
+      controller as Record<string, unknown>
+    ).fetchSystemDefaultTheme();
 
     // Both fetches should have been called
     expect(mockFetch).toHaveBeenCalledTimes(2);

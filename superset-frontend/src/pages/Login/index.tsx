@@ -143,9 +143,9 @@ export default function Login() {
       return undefined;
     }
     const iconComponentName = `${capitalize(providerName)}Outlined`;
-    const IconComponent = (Icons as Record<string, React.ComponentType<Record<string, unknown>>>)[
-      iconComponentName
-    ];
+    const IconComponent = (
+      Icons as Record<string, React.ComponentType<Record<string, unknown>>>
+    )[iconComponentName];
 
     if (IconComponent && typeof IconComponent === 'function') {
       return <IconComponent />;

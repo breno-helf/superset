@@ -436,16 +436,16 @@ const UploadDataModal: FunctionComponent<UploadDataModalProps> = ({
     );
   };
 
-  const appendFormData = (formData: FormData, data: Record<string, unknown>) => {
+  const appendFormData = (
+    formData: FormData,
+    data: Record<string, unknown>,
+  ) => {
     const allFieldsNotInType = getAllFieldsNotInType();
     Object.entries(data).forEach(([key, value]) => {
-      if (
-        !(
-          allFieldsNotInType.includes(key) ||
-          (NonNullFields.includes(key) &&
-            (value === undefined || value === null))
-        )
-      ) {
+      if (!(
+        allFieldsNotInType.includes(key) ||
+        (NonNullFields.includes(key) && (value === undefined || value === null))
+      )) {
         formData.append(key, value);
       }
     });

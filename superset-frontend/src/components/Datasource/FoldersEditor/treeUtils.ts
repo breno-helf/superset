@@ -176,7 +176,8 @@ function flatten(
       parentId,
       depth,
       index,
-      collapsed: 'children' in item && (item as Record<string, unknown>).collapsed,
+      collapsed:
+        'children' in item && (item as Record<string, unknown>).collapsed,
     };
 
     result.push(flatItem);
@@ -305,8 +306,8 @@ export function serializeForAPI(items: TreeItem[]): DatasourceFolder[] {
         (
           child,
         ): child is
-          | DatasourceFolder
-          | { uuid: string; type: FoldersEditorItemType } => child !== null,
+          DatasourceFolder | { uuid: string; type: FoldersEditorItemType } =>
+          child !== null,
       );
   };
 

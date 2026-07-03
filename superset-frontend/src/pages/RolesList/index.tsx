@@ -164,14 +164,16 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
         id: 'user_ids',
         Header: t('Users'),
         hidden: true,
-        Cell: ({ row: { original } }: CellProps<RoleObject>) => original.user_ids.join(', '),
+        Cell: ({ row: { original } }: CellProps<RoleObject>) =>
+          original.user_ids.join(', '),
       },
       {
         accessor: 'group_ids',
         id: 'group_ids',
         Header: t('Groups'),
         hidden: true,
-        Cell: ({ row: { original } }: CellProps<RoleObject>) => original.group_ids.join(', '),
+        Cell: ({ row: { original } }: CellProps<RoleObject>) =>
+          original.group_ids.join(', '),
       },
       {
         accessor: 'permission_ids',

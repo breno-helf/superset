@@ -52,7 +52,9 @@ const resetMockApi = () => {
 };
 const setMockApiNotFound = () => {
   const notFound = new SupersetApiError({ message: 'Not found', status: 404 });
-  (makeApi as Record<string, unknown>).mockReturnValue(jest.fn().mockRejectedValue(notFound));
+  (makeApi as Record<string, unknown>).mockReturnValue(
+    jest.fn().mockRejectedValue(notFound),
+  );
 };
 
 const setup = () => {

@@ -107,9 +107,11 @@ function AnnotationList({
         });
         setAnnotationLayerName(response.json.result.name);
       } catch (response) {
-        await getClientErrorObject(response).then(({ error }: CellProps<AnnotationObject>) => {
-          addDangerToast(error.error || error.statusText || error);
-        });
+        await getClientErrorObject(response).then(
+          ({ error }: CellProps<AnnotationObject>) => {
+            addDangerToast(error.error || error.statusText || error);
+          },
+        );
       }
     },
     [annotationLayerId],

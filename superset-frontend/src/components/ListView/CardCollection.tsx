@@ -98,7 +98,8 @@ export default function CardCollection({
               onClick={e =>
                 handleClick(
                   e,
-                  (row as Row & UseRowSelectRowProps<unknown>).toggleRowSelected,
+                  (row as Row & UseRowSelectRowProps<unknown>)
+                    .toggleRowSelected,
                 )
               }
               role="none"

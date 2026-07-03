@@ -104,10 +104,12 @@ const StyledMenuItem = styled.div<{ disabled?: boolean }>`
       color: ${!disabled && theme.colorPrimary};
       cursor: ${!disabled ? 'pointer' : 'not-allowed'};
     }
-    ${disabled &&
-    css`
-      color: ${theme.colorTextDisabled};
-    `}
+    ${
+      disabled &&
+      css`
+        color: ${theme.colorTextDisabled};
+      `
+    }
   `}
 `;
 
@@ -264,7 +266,8 @@ const RightMenu = ({
       // with allow_file_upload set as True which is not possible from now on
       const allowedDatabasesWithFileUpload =
         json?.result?.filter(
-          (database: unknown) => database?.engine_information?.supports_file_upload,
+          (database: unknown) =>
+            database?.engine_information?.supports_file_upload,
         ) || [];
       setAllowUploads(allowedDatabasesWithFileUpload?.length >= 1);
     });

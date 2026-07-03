@@ -321,7 +321,9 @@ test('switching to Reports refetches and renders only report rows', async () => 
   // API called with Report filter
   const listCalls = fetchMock.callHistory.calls('list');
   expect(listCalls.length).toBeGreaterThanOrEqual(1);
-  const reportCall = listCalls.find((c: unknown) => c.url.includes('value:Report'));
+  const reportCall = listCalls.find((c: unknown) =>
+    c.url.includes('value:Report'),
+  );
   expect(reportCall).toBeDefined();
 });
 

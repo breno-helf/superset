@@ -84,7 +84,11 @@ export function removeFromList(list: unknown[], index: number): unknown[] {
 }
 
 // apply update to elements of object list, returns new list
-function updateInList(list: unknown[], index: number, update: unknown): unknown[] {
+function updateInList(
+  list: unknown[],
+  index: number,
+  update: unknown,
+): unknown[] {
   const element = list.find((_, i) => index === i);
 
   return [
@@ -174,7 +178,10 @@ export function convertFiltersRison(
   return filters;
 }
 
-export function extractInputValue(inputType: Filter['input'], event: { currentTarget: { value: unknown; checked: boolean } }) {
+export function extractInputValue(
+  inputType: Filter['input'],
+  event: { currentTarget: { value: unknown; checked: boolean } },
+) {
   if (!inputType || inputType === 'text') {
     return event.currentTarget.value;
   }

@@ -444,7 +444,9 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { dashboards },
           },
-        }: CellProps<ChartObject>) => <DashboardCrossLinks dashboards={dashboards} />,
+        }: CellProps<ChartObject>) => (
+          <DashboardCrossLinks dashboards={dashboards} />
+        ),
         Header: t('On dashboards'),
         accessor: 'dashboards',
         disableSortBy: true,
@@ -494,7 +496,9 @@ function ChartList(props: ChartListProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<ChartObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<ChartObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',

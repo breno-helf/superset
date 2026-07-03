@@ -179,7 +179,10 @@ test('getControlsState round-trip: pre-revamp form_data produces no matrixify va
     matrixify_mode_columns: 'metrics',
   };
 
-  const result = getControlsState(state as unknown, preRevampFormData as unknown);
+  const result = getControlsState(
+    state as unknown,
+    preRevampFormData as unknown,
+  );
 
   // Every matrixify control should have zero validation errors
   const matrixifyControlEntries = Object.entries(result).filter(([name]) =>

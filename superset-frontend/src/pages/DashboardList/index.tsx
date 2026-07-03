@@ -448,7 +448,9 @@ function DashboardList(props: DashboardListProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<DashboardObject>) => <ModifiedInfo date={changedOn} user={changedBy} />,
+        }: CellProps<DashboardObject>) => (
+          <ModifiedInfo date={changedOn} user={changedBy} />
+        ),
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         id: 'changed_on_delta_humanized',

@@ -49,7 +49,9 @@ function getOptionsForSavedMetrics(
     ) ?? []
   );
 }
-function isDictionaryForAdhocMetric(value: unknown): value is Record<string, unknown> & { expressionType: string } {
+function isDictionaryForAdhocMetric(
+  value: unknown,
+): value is Record<string, unknown> & { expressionType: string } {
   return (
     !!value &&
     typeof value === 'object' &&
@@ -100,7 +102,9 @@ const getMetricsMatchingCurrentDataset = (
     }
     return (columns as Record<string, unknown>[])?.some(
       (column: Record<string, unknown>) =>
-        !metric.column || (metric.column as Record<string, unknown>).column_name === column.column_name,
+        !metric.column ||
+        (metric.column as Record<string, unknown>).column_name ===
+          column.column_name,
     );
   });
 

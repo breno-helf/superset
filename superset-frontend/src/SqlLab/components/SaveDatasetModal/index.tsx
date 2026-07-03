@@ -400,7 +400,10 @@ export const SaveDatasetModal = ({
       });
   };
 
-  const handleOverwriteDatasetOption = (value: SelectValue, option: unknown) => {
+  const handleOverwriteDatasetOption = (
+    value: SelectValue,
+    option: unknown,
+  ) => {
     setDatasetToOverwrite(option);
     setSelectedDatasetToOverwrite(value);
   };
