@@ -59,13 +59,19 @@ from markupsafe import escape, Markup
 from pandas import DateOffset
 from sqlalchemy import and_, Column, or_, UniqueConstraint
 from sqlalchemy.exc import MultipleResultsFound
-from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import Mapped, Mapper, Session, validates, with_loader_criteria
+from sqlalchemy.orm import (
+    declared_attr,
+    Mapped,
+    Mapper,
+    Session,
+    validates,
+    with_loader_criteria,
+)
 from sqlalchemy.orm.session import ORMExecuteState
 from sqlalchemy.sql.elements import ColumnElement, Grouping, literal_column, TextClause
-from sqlalchemy.sql.expression import Label, Select, TextAsFrom
-from sqlalchemy.sql.selectable import Alias, TableClause
+from sqlalchemy.sql.expression import Label, Select
+from sqlalchemy.sql.selectable import Alias, Subquery, TableClause
 from sqlalchemy_utils import UUIDType
 
 from superset import db, is_feature_enabled
@@ -2509,7 +2515,7 @@ class ExploreMixin:  # pylint: disable=too-many-public-methods
 
     def get_from_clause(
         self, template_processor: Optional[BaseTemplateProcessor] = None
-    ) -> tuple[Union[TableClause, Alias], Optional[str]]:
+    ) -> tuple[Union[TableClause, Alias, Subquery], Optional[str]]:
         """
         Return where to select the columns and metrics from. Either a physical table
         or a virtual table with it's own subquery. If the FROM is referencing a
@@ -2560,7 +2566,7 @@ class ExploreMixin:  # pylint: disable=too-many-public-methods
         from_clause = (
             sa.table(self.db_engine_spec.cte_alias)
             if cte
-            else TextAsFrom(self.text(from_sql), []).alias(VIRTUAL_TABLE_ALIAS)
+            else self.text(from_sql).columns().subquery(VIRTUAL_TABLE_ALIAS)
         )
 
         return from_clause, cte
