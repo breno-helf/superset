@@ -84,7 +84,10 @@ jobs:
           yarn install --check-cache
       - name: yarn audit
         run: |
-          yarn audit --level critical
+          # yarn audit exit code is a bitmask: 1=info,2=low,4=moderate,8=high,16=critical.
+          # --level filters display output only, not the exit code.
+          # Fail this step only when critical-severity advisories are present.
+          yarn audit --level critical; rc=$?; [ $((rc & 16)) -eq 0 ]
 
   build-on-pr:
     # Build docs when PR changes docs/** (uses committed databases.json)
