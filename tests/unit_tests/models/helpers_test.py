@@ -2057,11 +2057,12 @@ def test_orderby_adhoc_column(database: Database) -> None:
     assert "ORDER BY" in sql.upper()
 
 
-def test_orderby_adhoc_column_label_takes_precedence_over_saved_metric(
+def test_orderby_saved_metric_takes_precedence_over_adhoc_column_label(
     database: Database,
 ) -> None:
     """
-    Test that orderby by an adhoc column label resolves to the selected column.
+    Test that orderby resolves to the stored metric when a stored metric and
+    an adhoc column share the same label.
     """
     from superset.connectors.sqla.models import SqlaTable, SqlMetric, TableColumn
 
@@ -2093,7 +2094,7 @@ def test_orderby_adhoc_column_label_takes_precedence_over_saved_metric(
 
     sql = str(result.sqla_query).upper()
     assert "ORDER BY" in sql
-    assert "SUM(A)" not in sql
+    assert "SUM(A)" in sql
 
 
 @pytest.mark.parametrize("aggregate", [None, "MEDIAN", ["SUM"], {"op": "SUM"}])
