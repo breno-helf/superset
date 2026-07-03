@@ -50,10 +50,10 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.engine.base import Connection
-from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import (
     backref,
+    declared_attr,
     foreign,
     Mapped,
     Query,
@@ -66,7 +66,7 @@ from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql import column, ColumnElement, literal_column, quoted_name, table
 from sqlalchemy.sql.elements import ColumnClause, TextClause
 from sqlalchemy.sql.expression import Label
-from sqlalchemy.sql.selectable import Alias, TableClause
+from sqlalchemy.sql.selectable import Alias, Subquery, TableClause
 from sqlalchemy.types import JSON
 from superset_core.common.models import Dataset as CoreDataset
 
@@ -336,7 +336,7 @@ class BaseDatasource(
         return self.kind == DatasourceKind.VIRTUAL
 
     @declared_attr
-    def slices(self) -> Mapped[list["Slice"]]:
+    def slices(self):  # type: ignore[override]
         return relationship(
             "Slice",
             overlaps="table",
@@ -1660,7 +1660,7 @@ class SqlaTable(
     def get_from_clause(
         self,
         template_processor: BaseTemplateProcessor | None = None,
-    ) -> tuple[TableClause | Alias, str | None]:
+    ) -> tuple[TableClause | Alias | Subquery, str | None]:
         if not self.is_virtual:
             return self.get_sqla_table(), None
 
