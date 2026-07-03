@@ -598,7 +598,6 @@ export const useExploreAdditionalActionsMenu = (
     URL.revokeObjectURL(link.href);
   };
 
-  // Client-side XLSX for "Current View" (uses 'xlsx' already in deps)
   const downloadClientXLSX = async (
     rows: ClientViewRow[],
     columns: ClientViewColumn[],
@@ -606,42 +605,50 @@ export const useExploreAdditionalActionsMenu = (
   ) => {
     if (!rows?.length || !columns?.length) return;
     try {
-      const XLSX = (await import(/* webpackChunkName: "xlsx" */ 'xlsx'))
-        .default;
+      const ExcelJS = (
+        await import(/* webpackChunkName: "exceljs" */ 'exceljs')
+      ).default;
 
-      // Build a flat array of objects keyed by backend column key
-      const data = rows.map(r => {
-        const o: Record<string, unknown> = {};
-        columns.forEach(c => {
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('Current View');
+
+      const headers = columns.map(c => c.label ?? c.key);
+      worksheet.addRow(headers);
+
+      rows.forEach(r => {
+        const rowValues = columns.map(c => {
           const v = r[c.key];
           if (v && typeof v === 'object' && 'input' in v && 'formatter' in v) {
             const typedV = v as { input?: unknown; value?: unknown };
-            o[c.label ?? c.key] =
-              typedV.input instanceof Date
-                ? typedV.input.toISOString()
-                : (typedV.input ?? typedV.value ?? '');
-          } else if (v instanceof Date) {
-            o[c.label ?? c.key] = v.toISOString();
-          } else {
-            o[c.label ?? c.key] = v;
+            return typedV.input instanceof Date
+              ? typedV.input.toISOString()
+              : (typedV.input ?? typedV.value ?? '');
           }
+          if (v instanceof Date) {
+            return v.toISOString();
+          }
+          return v ?? '';
         });
-        return o;
+        worksheet.addRow(rowValues);
       });
 
-      const ws = XLSX.utils.json_to_sheet(data, { skipHeader: false });
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Current View');
-
-      // Autosize columns (roughly) by header length
-      const colWidths = Object.keys(data[0] || {}).map(h => ({
-        wch: Math.max(10, String(h).length + 2),
+      worksheet.columns = headers.map(h => ({
+        width: Math.max(10, String(h).length + 2),
       }));
-      ws['!cols'] = colWidths;
 
-      XLSX.writeFile(wb, `${filename || 'current_view'}.xlsx`);
+      const buffer = await workbook.xlsx.writeBuffer();
+      const blob = new Blob([buffer], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${filename || 'current_view'}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch {
-      // If xlsx isn't available for some reason, fall back to CSV
       downloadClientCSV(rows, columns, filename || 'current_view');
       addDangerToast?.(
         t('Falling back to CSV; Excel export library not available.'),

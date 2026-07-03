@@ -16,13 +16,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { utils, writeFile } from 'xlsx';
+import ExcelJS from 'exceljs';
 
-export default function exportPivotExcel(
+export default async function exportPivotExcel(
   tableSelector: string,
   fileName: string,
 ) {
   const table = document.querySelector(tableSelector);
-  const workbook = utils.table_to_book(table);
-  writeFile(workbook, `${fileName}.xlsx`);
+  if (!table) return;
+
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Sheet1');
+
+  const rows = table.querySelectorAll('tr');
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('th, td');
+    const values: string[] = [];
+    cells.forEach(cell => {
+      values.push(cell.textContent?.trim() ?? '');
+    });
+    worksheet.addRow(values);
+  });
+
+  const buffer = await workbook.xlsx.writeBuffer();
+  const blob = new Blob([buffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${fileName}.xlsx`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
