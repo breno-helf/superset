@@ -391,7 +391,7 @@ export default function sqlLabReducer(
       });
     },
     [actions.CLEAR_QUERY_RESULTS]() {
-      const newResults = { ...(action.query as unknown).results };
+      const newResults = { ...(action.query as Record<string, unknown>).results };
       newResults.data = [];
       return alterInObject(state, 'queries', action.query!, {
         results: newResults,

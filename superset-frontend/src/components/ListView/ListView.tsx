@@ -614,7 +614,7 @@ export function ListView<T extends object = unknown>({
                     const row = rows.find((r: unknown) => r.id === rowId);
                     if (row) {
                       prepareRow(row);
-                      (row as unknown).toggleRowSelected(value);
+                      (row as Record<string, unknown>).toggleRowSelected(value);
                     }
                   }}
                   toggleAllRowsSelected={toggleAllRowsSelected}

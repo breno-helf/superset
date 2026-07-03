@@ -144,8 +144,8 @@ test('buildTree reconstructs tree from flattened items', () => {
 
   expect(tree).toHaveLength(2);
   expect(tree[0].uuid).toBe('folder1');
-  expect((tree[0] as unknown).children).toHaveLength(1);
-  expect((tree[0] as unknown).children[0].uuid).toBe('metric1');
+  expect((tree[0] as Record<string, unknown>).children).toHaveLength(1);
+  expect((tree[0] as Record<string, unknown>).children[0].uuid).toBe('metric1');
   expect(tree[1].uuid).toBe('folder2');
 });
 
@@ -290,8 +290,8 @@ test('serializeForAPI preserves nested folder structure', () => {
   expect(serialized).toHaveLength(1);
   expect(serialized[0].uuid).toBe('parent');
   expect(serialized[0].children).toHaveLength(1);
-  expect((serialized[0].children![0] as unknown).uuid).toBe('child');
-  expect((serialized[0].children![0] as unknown).children).toHaveLength(1);
+  expect((serialized[0].children![0] as Record<string, unknown>).uuid).toBe('child');
+  expect((serialized[0].children![0] as Record<string, unknown>).children).toHaveLength(1);
 });
 
 test('serializeForAPI excludes nested empty folders', () => {

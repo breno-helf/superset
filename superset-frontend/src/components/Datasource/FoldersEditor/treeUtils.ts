@@ -176,7 +176,7 @@ function flatten(
       parentId,
       depth,
       index,
-      collapsed: 'children' in item && (item as unknown).collapsed,
+      collapsed: 'children' in item && (item as Record<string, unknown>).collapsed,
     };
 
     result.push(flatItem);

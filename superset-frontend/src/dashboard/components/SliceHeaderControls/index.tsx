@@ -376,10 +376,10 @@ const SliceHeaderControls = (
   const isTable = slice.viz_type === VizType.Table;
   const isPivotTable = slice.viz_type === VizType.PivotTable;
   const cachedWhen = (cachedDttm || []).map(itemCachedDttm =>
-    (extendedDayjs.utc(itemCachedDttm) as unknown).fromNow(),
+    (extendedDayjs.utc(itemCachedDttm) as Record<string, unknown>).fromNow(),
   );
   const updatedWhen = updatedDttm
-    ? (extendedDayjs.utc(updatedDttm) as unknown).fromNow()
+    ? (extendedDayjs.utc(updatedDttm) as Record<string, unknown>).fromNow()
     : '';
   const getCachedTitle = (itemCached: boolean, index: number) => {
     if (itemCached) {

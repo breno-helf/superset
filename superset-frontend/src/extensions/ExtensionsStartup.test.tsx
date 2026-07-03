@@ -43,10 +43,10 @@ const mockInitialStateNoUser = {
 // Clean up global state before each test
 beforeEach(() => {
   // Clear the window.superset object
-  delete (window as unknown).superset;
+  delete (window as Record<string, unknown>).superset;
 
   // Clear any existing ExtensionsLoader instance
-  (ExtensionsLoader as unknown).instance = undefined;
+  (ExtensionsLoader as Record<string, unknown>).instance = undefined;
 
   // Reset feature flag mock to enabled by default
   mockIsFeatureEnabled.mockReset();
@@ -61,8 +61,8 @@ beforeEach(() => {
 
 afterEach(() => {
   // Clean up after each test
-  delete (window as unknown).superset;
-  (ExtensionsLoader as unknown).instance = undefined;
+  delete (window as Record<string, unknown>).superset;
+  (ExtensionsLoader as Record<string, unknown>).instance = undefined;
 
   // Reset mocks
   mockIsFeatureEnabled.mockReset();
@@ -95,15 +95,15 @@ test('sets up global superset object when user is logged in', async () => {
 
   await waitFor(() => {
     // Verify the global superset object is set up
-    expect((window as unknown).superset).toBeDefined();
-    expect((window as unknown).superset.authentication).toBeDefined();
-    expect((window as unknown).superset.chat).toBeDefined();
-    expect((window as unknown).superset.core).toBeDefined();
-    expect((window as unknown).superset.commands).toBeDefined();
-    expect((window as unknown).superset.extensions).toBeDefined();
-    expect((window as unknown).superset.menus).toBeDefined();
-    expect((window as unknown).superset.views).toBeDefined();
-    expect((window as unknown).superset.sqlLab).toBeDefined();
+    expect((window as Record<string, unknown>).superset).toBeDefined();
+    expect((window as Record<string, unknown>).superset.authentication).toBeDefined();
+    expect((window as Record<string, unknown>).superset.chat).toBeDefined();
+    expect((window as Record<string, unknown>).superset.core).toBeDefined();
+    expect((window as Record<string, unknown>).superset.commands).toBeDefined();
+    expect((window as Record<string, unknown>).superset.extensions).toBeDefined();
+    expect((window as Record<string, unknown>).superset.menus).toBeDefined();
+    expect((window as Record<string, unknown>).superset.views).toBeDefined();
+    expect((window as Record<string, unknown>).superset.sqlLab).toBeDefined();
   });
 
   initializeSpy.mockRestore();
@@ -118,7 +118,7 @@ test('does not set up global superset object when user is not logged in', async 
 
   // Wait for the useEffect to complete and verify the global object is not set up
   await waitFor(() => {
-    expect((window as unknown).superset).toBeUndefined();
+    expect((window as Record<string, unknown>).superset).toBeUndefined();
   });
 });
 
@@ -252,7 +252,7 @@ test('does not initialize ExtensionsLoader when EnableExtensions feature flag is
       FeatureFlag.EnableExtensions,
     );
     // Verify the global superset object is still set up
-    expect((window as unknown).superset).toBeDefined();
+    expect((window as Record<string, unknown>).superset).toBeDefined();
     // But extensions should not be initialized
     expect(initializeSpy).not.toHaveBeenCalled();
   });

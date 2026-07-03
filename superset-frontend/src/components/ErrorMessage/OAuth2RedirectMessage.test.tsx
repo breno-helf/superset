@@ -69,7 +69,7 @@ const channelCloseMock = jest.fn();
 beforeEach(() => {
   jest.clearAllMocks();
   capturedChannel = { onmessage: null, close: channelCloseMock };
-  (global as unknown).BroadcastChannel = jest
+  (global as Record<string, unknown>).BroadcastChannel = jest
     .fn()
     .mockImplementation(() => capturedChannel);
 });
@@ -127,7 +127,7 @@ describe('OAuth2RedirectMessage Component', () => {
   test('closes the BroadcastChannel on unmount', () => {
     const { unmount } = render(setup());
 
-    expect((global as unknown).BroadcastChannel).toHaveBeenCalledWith('oauth');
+    expect((global as Record<string, unknown>).BroadcastChannel).toHaveBeenCalledWith('oauth');
     unmount();
     expect(channelCloseMock).toHaveBeenCalled();
   });

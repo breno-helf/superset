@@ -157,7 +157,7 @@ export function applyDefaultFormData(
 }
 const defaultControls: Record<string, unknown> = { ...controls };
 Object.keys(controls).forEach(f => {
-  defaultControls[f].value = (controls as unknown)[f].default;
+  defaultControls[f].value = (controls as Record<string, unknown>)[f].default;
 });
 
 const defaultState = {

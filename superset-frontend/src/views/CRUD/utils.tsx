@@ -544,7 +544,7 @@ export const getEncryptedExtraFieldsNeeded = (
       .filter(([, payload]) => isNeedsEncryptedExtraField(payload))
       .map(([fileName, payload]) => ({
         fileName,
-        fields: (payload as unknown)._schema
+        fields: (payload as Record<string, unknown>)._schema
           .filter((e: string) => ENCRYPTED_EXTRA_FIELD_REGEX.test(e))
           .map((e: string) => {
             const match = e.match(ENCRYPTED_EXTRA_FIELD_REGEX);

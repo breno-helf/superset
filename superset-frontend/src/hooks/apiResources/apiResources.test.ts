@@ -84,7 +84,7 @@ describe('apiResource hooks', () => {
 
     test('handles api errors', async () => {
       const fakeError = new Error('fake api error');
-      (makeApi as unknown).mockReturnValue(jest.fn().mockRejectedValue(fakeError));
+      (makeApi as Record<string, unknown>).mockReturnValue(jest.fn().mockRejectedValue(fakeError));
       const { result } = renderHook(() =>
         useApiResourceFullBody('/test/endpoint'),
       );
@@ -148,7 +148,7 @@ describe('apiResource hooks', () => {
   // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
   describe('useApiV1Endpoint', () => {
     test('resolves to the value from the api', async () => {
-      (makeApi as unknown).mockReturnValue(
+      (makeApi as Record<string, unknown>).mockReturnValue(
         jest.fn().mockResolvedValue({
           meta: 'data',
           count: 1,

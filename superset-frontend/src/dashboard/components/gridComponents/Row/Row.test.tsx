@@ -275,7 +275,7 @@ describe('visibility handling for intersection observers', () => {
   });
 
   afterAll(() => {
-    delete (window as unknown).IntersectionObserver;
+    delete (window as Record<string, unknown>).IntersectionObserver;
   });
 
   test('should handle visibility prop changes without crashing', () => {

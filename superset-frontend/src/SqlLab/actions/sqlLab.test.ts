@@ -880,7 +880,7 @@ describe('async actions', () => {
               schema: defaultQueryEditor.schema,
               autorun: false,
               queryLimit:
-                (defaultQueryEditor as unknown).queryLimit ||
+                (defaultQueryEditor as Record<string, unknown>).queryLimit ||
                 initialState.common.conf.DEFAULT_SQLLAB_LIMIT,
               inLocalStorage: true,
               loaded: true,

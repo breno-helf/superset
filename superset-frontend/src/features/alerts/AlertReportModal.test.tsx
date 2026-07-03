@@ -1268,7 +1268,7 @@ test('dashboard tabs fetch failure shows error toast', async () => {
 
   // Verify danger toast was dispatched for the fetch failure
   await waitFor(() => {
-    const toasts = (store.getState() as unknown).messageToasts;
+    const toasts = (store.getState() as Record<string, unknown>).messageToasts;
     expect(toasts.length).toBeGreaterThan(0);
     expect(
       toasts.some((t: { text: string }) =>

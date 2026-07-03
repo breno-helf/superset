@@ -73,8 +73,8 @@ function attachMockApi(
   { firstDataRendered = true } = {},
 ) {
   const api = { setGridOption: jest.fn() };
-  (agContainer as unknown)._agGridApi = api;
-  (agContainer as unknown)._agGridFirstDataRendered = firstDataRendered;
+  (agContainer as Record<string, unknown>)._agGridApi = api;
+  (agContainer as Record<string, unknown>)._agGridFirstDataRendered = firstDataRendered;
   return api;
 }
 
@@ -261,7 +261,7 @@ test('still captures image when _agGridApi is absent (graceful degradation)', as
   jest.useFakeTimers();
   const { container, agContainer, cleanup } = buildAgGridElement();
   // No API — only the first-data-rendered flag
-  (agContainer as unknown)._agGridFirstDataRendered = true;
+  (agContainer as Record<string, unknown>)._agGridFirstDataRendered = true;
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -359,13 +359,13 @@ test('derives image width from getColumnState by summing visible column pixel wi
   const api = attachMockApi(agContainer);
 
   // 3 visible columns (200 + 350 + 150 = 700 px) plus one hidden column excluded from sum
-  (api as unknown).getColumnState = jest.fn(() => [
+  (api as Record<string, unknown>).getColumnState = jest.fn(() => [
     { colId: 'col1', width: 200, hide: false },
     { colId: 'col2', width: 350, hide: false },
     { colId: 'col3', width: 150, hide: false },
     { colId: 'col4', width: 999, hide: true },
   ]);
-  (api as unknown).applyColumnState = jest.fn();
+  (api as Record<string, unknown>).applyColumnState = jest.fn();
 
   let capturedWidth: number | undefined;
   mockToJpeg.mockImplementation(
@@ -382,7 +382,7 @@ test('derives image width from getColumnState by summing visible column pixel wi
 
   // Width passed to toJpeg is the sum of visible column widths, not agRootWrapper.offsetWidth
   expect(capturedWidth).toBe(700);
-  expect((api as unknown).getColumnState).toHaveBeenCalled();
+  expect((api as Record<string, unknown>).getColumnState).toHaveBeenCalled();
 
   cleanup();
   jest.useRealTimers();
@@ -397,8 +397,8 @@ test('restores column pixel widths via applyColumnState with flex stripped after
     { colId: 'col1', width: 300, flex: 1, hide: false },
     { colId: 'col2', width: 400, flex: 1.5, hide: false },
   ];
-  (api as unknown).getColumnState = jest.fn(() => savedState);
-  (api as unknown).applyColumnState = jest.fn();
+  (api as Record<string, unknown>).getColumnState = jest.fn(() => savedState);
+  (api as Record<string, unknown>).applyColumnState = jest.fn();
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -406,7 +406,7 @@ test('restores column pixel widths via applyColumnState with flex stripped after
   await exportPromise;
 
   // flex must be stripped (set to null) so pixel width is used, not flex ratio
-  expect((api as unknown).applyColumnState).toHaveBeenCalledWith({
+  expect((api as Record<string, unknown>).applyColumnState).toHaveBeenCalledWith({
     state: [
       { colId: 'col1', width: 300, flex: null },
       { colId: 'col2', width: 400, flex: null },
@@ -427,8 +427,8 @@ test('restores original column state with flex in finally after capture', async 
     { colId: 'col1', width: 300, flex: 1, hide: false },
     { colId: 'col2', width: 400, flex: 1.5, hide: false },
   ];
-  (api as unknown).getColumnState = jest.fn(() => savedState);
-  (api as unknown).applyColumnState = jest.fn();
+  (api as Record<string, unknown>).getColumnState = jest.fn(() => savedState);
+  (api as Record<string, unknown>).applyColumnState = jest.fn();
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -436,7 +436,7 @@ test('restores original column state with flex in finally after capture', async 
   await exportPromise;
 
   // Last call must restore the original state (with flex) so the live grid is unaffected
-  expect((api as unknown).applyColumnState.mock.calls.at(-1)[0]).toEqual({
+  expect((api as Record<string, unknown>).applyColumnState.mock.calls.at(-1)[0]).toEqual({
     state: savedState,
     applyOrder: false,
   });
@@ -452,10 +452,10 @@ test('falls back to agRootWrapper.offsetWidth when getColumnState returns no vis
   const api = attachMockApi(agContainer);
 
   // All columns hidden → visible sum is 0 → fall back to offsetWidth
-  (api as unknown).getColumnState = jest.fn(() => [
+  (api as Record<string, unknown>).getColumnState = jest.fn(() => [
     { colId: 'col1', width: 500, hide: true },
   ]);
-  (api as unknown).applyColumnState = jest.fn();
+  (api as Record<string, unknown>).applyColumnState = jest.fn();
 
   Object.defineProperty(agRootWrapper, 'offsetWidth', {
     get: () => 600,
@@ -518,7 +518,7 @@ test('calls resetRowHeights after print layout to force ag-grid to re-measure ro
   jest.useFakeTimers();
   const { container, agContainer, cleanup } = buildAgGridElement();
   const api = attachMockApi(agContainer);
-  (api as unknown).resetRowHeights = jest.fn();
+  (api as Record<string, unknown>).resetRowHeights = jest.fn();
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -526,7 +526,7 @@ test('calls resetRowHeights after print layout to force ag-grid to re-measure ro
   await exportPromise;
 
   expect(api.setGridOption).toHaveBeenCalledWith('domLayout', 'print');
-  expect((api as unknown).resetRowHeights).toHaveBeenCalled();
+  expect((api as Record<string, unknown>).resetRowHeights).toHaveBeenCalled();
   expect(api.setGridOption).toHaveBeenCalledWith('domLayout', 'normal');
 
   cleanup();
@@ -556,7 +556,7 @@ test('falls through to clone path for dashboard export with a single ag-grid cha
   const agRootWrapper = document.createElement('div');
   agRootWrapper.className = 'ag-root-wrapper';
   agContainer.appendChild(agRootWrapper);
-  (agContainer as unknown)._agGridFirstDataRendered = true;
+  (agContainer as Record<string, unknown>)._agGridFirstDataRendered = true;
   dashboard.appendChild(agContainer);
   document.body.appendChild(dashboard);
 
@@ -582,7 +582,7 @@ test('falls through to clone path for dashboard export with multiple ag-grid cha
     const agRootWrapper = document.createElement('div');
     agRootWrapper.className = 'ag-root-wrapper';
     agContainer.appendChild(agRootWrapper);
-    (agContainer as unknown)._agGridFirstDataRendered = true;
+    (agContainer as Record<string, unknown>)._agGridFirstDataRendered = true;
     dashboard.appendChild(agContainer);
   }
   document.body.appendChild(dashboard);

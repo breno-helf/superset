@@ -189,7 +189,7 @@ test('disable menu when enableFilterButton is false', () => {
 
 test('hide display name for PIVOT_COL_ID', () => {
   const pivotColumn = new MockColumn();
-  (pivotColumn as unknown).getColId = () => PIVOT_COL_ID;
+  (pivotColumn as Record<string, unknown>).getColId = () => PIVOT_COL_ID;
 
   const { queryByText } = render(
     <Header {...mockedProps} column={pivotColumn as unknown as Column} />,

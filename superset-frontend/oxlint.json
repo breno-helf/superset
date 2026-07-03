@@ -288,7 +288,11 @@
         "packages/**/*.ts",
         "packages/**/*.tsx",
         "plugins/**/*.ts",
-        "plugins/**/*.tsx"
+        "plugins/**/*.tsx",
+        "spec/**/*.ts",
+        "spec/**/*.tsx",
+        "playwright/**/*.ts",
+        "playwright/**/*.tsx"
       ],
       "rules": {
         "@typescript-eslint/no-explicit-any": "off"

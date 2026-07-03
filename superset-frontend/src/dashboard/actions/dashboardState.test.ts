@@ -155,13 +155,13 @@ describe('dashboardState actions', () => {
 
       // start with mockDashboardData, it didn't have parents attr
       expect(
-        (newDashboardData.positions[DASHBOARD_GRID_ID] as unknown).parents,
+        (newDashboardData.positions[DASHBOARD_GRID_ID] as Record<string, unknown>).parents,
       ).not.toBeDefined();
 
       // mock redux work: dispatch an event, cause modify redux state
       const mockParentsList = ['ROOT_ID'];
       dispatch.mockImplementation(() => {
-        (mockState.dashboardLayout.present[DASHBOARD_GRID_ID] as unknown).parents =
+        (mockState.dashboardLayout.present[DASHBOARD_GRID_ID] as Record<string, unknown>).parents =
           mockParentsList;
       });
 

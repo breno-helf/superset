@@ -49,7 +49,7 @@ function createMockExtension(overrides: Partial<Extension> = {}): Extension {
 }
 
 beforeEach(() => {
-  (ExtensionsLoader as unknown).instance = undefined;
+  (ExtensionsLoader as Record<string, unknown>).instance = undefined;
   mockApplicationRoot.mockReturnValue('');
 });
 

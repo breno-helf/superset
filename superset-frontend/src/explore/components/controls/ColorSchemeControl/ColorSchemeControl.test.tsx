@@ -225,7 +225,7 @@ test('should show tooltip on hover when text overflows', async () => {
         originalScrollWidthDescriptor,
       );
     } else {
-      delete (HTMLElement.prototype as unknown).scrollWidth;
+      delete (HTMLElement.prototype as Record<string, unknown>).scrollWidth;
     }
 
     if (originalOffsetWidthDescriptor) {
@@ -235,7 +235,7 @@ test('should show tooltip on hover when text overflows', async () => {
         originalOffsetWidthDescriptor,
       );
     } else {
-      delete (HTMLElement.prototype as unknown).offsetWidth;
+      delete (HTMLElement.prototype as Record<string, unknown>).offsetWidth;
     }
   }
 });

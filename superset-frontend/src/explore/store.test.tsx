@@ -22,7 +22,8 @@ import {
   getControlsState,
   handleDeprecatedControls,
 } from 'src/explore/store';
-(window as unknown).featureFlags = {};
+
+(window as Record<string, unknown>).featureFlags = {};
 
 beforeAll(() => {
   getChartControlPanelRegistry().registerValue('test-chart', {

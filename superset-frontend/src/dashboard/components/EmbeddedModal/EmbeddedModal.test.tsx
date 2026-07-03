@@ -46,13 +46,13 @@ const defaultProps = {
   onHide: mockOnHide,
 };
 const resetMockApi = () => {
-  (makeApi as unknown).mockReturnValue(
+  (makeApi as Record<string, unknown>).mockReturnValue(
     jest.fn().mockResolvedValue(defaultResponse),
   );
 };
 const setMockApiNotFound = () => {
   const notFound = new SupersetApiError({ message: 'Not found', status: 404 });
-  (makeApi as unknown).mockReturnValue(jest.fn().mockRejectedValue(notFound));
+  (makeApi as Record<string, unknown>).mockReturnValue(jest.fn().mockRejectedValue(notFound));
 };
 
 const setup = () => {
