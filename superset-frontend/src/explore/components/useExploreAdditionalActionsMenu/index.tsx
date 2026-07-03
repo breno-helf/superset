@@ -62,6 +62,7 @@ import {
   LOG_ACTIONS_CHART_DOWNLOAD_AS_XLS,
 } from 'src/logger/LogUtils';
 import exportPivotExcel from 'src/utils/downloadAsPivotExcel';
+import { downloadBlob } from 'src/utils/export';
 import {
   useStreamingExport,
   StreamingProgress,
@@ -598,7 +599,7 @@ export const useExploreAdditionalActionsMenu = (
     URL.revokeObjectURL(link.href);
   };
 
-  // Client-side XLSX for "Current View" (uses 'xlsx' already in deps)
+  // Client-side XLSX for "Current View" (uses 'exceljs' from npm)
   const downloadClientXLSX = async (
     rows: ClientViewRow[],
     columns: ClientViewColumn[],
@@ -606,8 +607,9 @@ export const useExploreAdditionalActionsMenu = (
   ) => {
     if (!rows?.length || !columns?.length) return;
     try {
-      const XLSX = (await import(/* webpackChunkName: "xlsx" */ 'xlsx'))
-        .default;
+      const ExcelJS = (
+        await import(/* webpackChunkName: "exceljs" */ 'exceljs')
+      ).default;
 
       // Build a flat array of objects keyed by backend column key
       const data = rows.map(r => {
@@ -629,19 +631,30 @@ export const useExploreAdditionalActionsMenu = (
         return o;
       });
 
-      const ws = XLSX.utils.json_to_sheet(data, { skipHeader: false });
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Current View');
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('Current View');
 
-      // Autosize columns (roughly) by header length
-      const colWidths = Object.keys(data[0] || {}).map(h => ({
-        wch: Math.max(10, String(h).length + 2),
+      // Add header row
+      const headers = Object.keys(data[0] || {});
+      worksheet.addRow(headers);
+
+      // Set column widths (roughly by header length)
+      worksheet.columns = headers.map(h => ({
+        width: Math.max(10, String(h).length + 2),
       }));
-      ws['!cols'] = colWidths;
 
-      XLSX.writeFile(wb, `${filename || 'current_view'}.xlsx`);
+      // Add data rows
+      data.forEach(row => {
+        worksheet.addRow(headers.map(h => row[h] ?? ''));
+      });
+
+      const buffer = await workbook.xlsx.writeBuffer();
+      const blob = new Blob([buffer], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      downloadBlob(blob, `${filename || 'current_view'}.xlsx`);
     } catch {
-      // If xlsx isn't available for some reason, fall back to CSV
+      // If exceljs isn't available for some reason, fall back to CSV
       downloadClientCSV(rows, columns, filename || 'current_view');
       addDangerToast?.(
         t('Falling back to CSV; Excel export library not available.'),
