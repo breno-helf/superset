@@ -27,7 +27,7 @@ interface DatasourceInput {
 
   // Optional properties that may exist on different datasource variants
   datasource_name?: string | null; // Allow null for compatibility
-  columns?: { column_name?: string; name?: string; type?: string }[];
+  columns?: any[]; // Can be ColumnMeta[], DatasourcePanelColumn[], ISimpleColumn[], etc.
   database?: { id?: number };
   dbId?: number;
   sql?: string | null; // Allow null for compatibility

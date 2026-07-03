@@ -41,7 +41,7 @@ export type ControlProps = {
   rightNode?: ReactNode;
   formData?: QueryFormData | null;
   value?: JsonValue;
-  validationErrors?: string[];
+  validationErrors?: any[];
   hidden?: boolean;
   renderTrigger?: boolean;
   default?: JsonValue;
@@ -72,7 +72,7 @@ export default function Control(props: ControlProps) {
   const [hovered, setHovered] = useState(false);
   const wasVisible = usePrevious(isVisible);
   const onChange = useCallback(
-    (value: unknown, errors: string[]) => setControlValue(name, value, errors),
+    (value: any, errors: any[]) => setControlValue(name, value, errors),
     [name, setControlValue],
   );
 

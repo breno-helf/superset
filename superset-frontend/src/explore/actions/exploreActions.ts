@@ -96,8 +96,8 @@ export function saveFaveStar(sliceId: string, isStarred: boolean) {
 export const SET_FIELD_VALUE = 'SET_FIELD_VALUE';
 export function setControlValue(
   controlName: string,
-  value: unknown,
-  validationErrors?: string[],
+  value: any,
+  validationErrors?: any[],
 ) {
   return { type: SET_FIELD_VALUE, controlName, value, validationErrors };
 }
