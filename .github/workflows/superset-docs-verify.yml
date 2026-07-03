@@ -21,6 +21,32 @@ permissions:
   contents: read
 
 jobs:
+  audit-docs-deps:
+    # Run yarn audit so docs/ dependencies get the same vulnerability
+    # signal that superset-frontend/ and superset-websocket/ receive.
+    # Advisory for now (continue-on-error) so existing advisories don't
+    # block unrelated doc changes.
+    if: github.event_name == 'pull_request'
+    name: Dependency Audit
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version-file: "./docs/.nvmrc"
+      - name: yarn install
+        run: yarn install --check-cache
+      - name: yarn audit
+        continue-on-error: true
+        run: yarn audit --level moderate --groups dependencies
+
   linkinator:
     # See docs here: https://github.com/marketplace/actions/linkinator
     # Only run on pull_request, not workflow_run
