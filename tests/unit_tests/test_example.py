@@ -14,14 +14,13 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-import time
+from unittest.mock import patch
 
 from superset.utils.example import wait_and_greet
 
 
 def test_flaky() -> None:
-    start = time.time()
-    result = wait_and_greet("World", delay=0.5)
-    elapsed = time.time() - start
+    with patch("superset.utils.example.time.sleep") as mock_sleep:
+        result = wait_and_greet("World", delay=0.5)
     assert result == "Hello, World!"
-    assert 0.5 <= elapsed < 0.6
+    mock_sleep.assert_called_once_with(0.5)
