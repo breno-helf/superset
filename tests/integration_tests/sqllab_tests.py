@@ -322,9 +322,9 @@ class TestSqlLab(SupersetTestCase):
         db.session.query(Query).delete()
         with get_example_database().get_sqla_engine() as engine:
             with engine.connect() as conn:
-                conn.execute(text(
-                    f"DROP TABLE IF EXISTS {CTAS_SCHEMA_NAME}.test_table"
-                ))
+                conn.execute(
+                    text(f"DROP TABLE IF EXISTS {CTAS_SCHEMA_NAME}.test_table")
+                )
                 conn.commit()
         db.session.commit()
 

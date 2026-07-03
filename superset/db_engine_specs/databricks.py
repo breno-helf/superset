@@ -739,8 +739,7 @@ class DatabricksNativeEngineSpec(DatabricksDynamicBaseEngineSpec):
         with database.get_sqla_engine() as engine:
             with engine.connect() as conn:
                 catalogs = {
-                    catalog
-                    for (catalog,) in conn.execute(text("SHOW CATALOGS"))
+                    catalog for (catalog,) in conn.execute(text("SHOW CATALOGS"))
                 }
                 if len(catalogs) == 1:
                     return catalogs.pop()

@@ -896,10 +896,12 @@ class TestDatasetApi(SupersetTestCase):
         example_db = get_example_database()
         with example_db.get_sqla_engine() as engine:
             with engine.connect() as conn:
-                conn.execute(text(
-                    f"CREATE TABLE {CTAS_SCHEMA_NAME}.birth_names"
-                    " AS SELECT 2 as two"
-                ))
+                conn.execute(
+                    text(
+                        f"CREATE TABLE {CTAS_SCHEMA_NAME}.birth_names"
+                        " AS SELECT 2 as two"
+                    )
+                )
                 conn.commit()
 
         self.login(ADMIN_USERNAME)
