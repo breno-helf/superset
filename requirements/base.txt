@@ -272,6 +272,7 @@ packaging==25.0
     #   apispec
     #   deprecation
     #   gunicorn
+    #   kombu
     #   limits
     #   shillelagh
 pandas==2.1.4
@@ -323,7 +324,7 @@ pyjwt==2.13.0
     #   redis
 pynacl==1.6.2
     # via paramiko
-pyopenssl==26.2.0
+pyopenssl==26.3.0
     # via
     #   -r requirements/base.in
     #   shillelagh
@@ -444,6 +445,8 @@ tzdata==2025.2
     # via
     #   kombu
     #   pandas
+tzlocal==5.4.4
+    # via celery
 url-normalize==2.2.1
     # via requests-cache
 urllib3==2.7.0
