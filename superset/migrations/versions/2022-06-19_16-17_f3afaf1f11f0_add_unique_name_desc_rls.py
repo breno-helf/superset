@@ -28,8 +28,10 @@ down_revision = "e09b4ae78457"
 
 import sqlalchemy as sa  # noqa: E402
 from alembic import op  # noqa: E402
-from sqlalchemy.orm import declarative_base  # noqa: E402
-from sqlalchemy.orm import Session  # noqa: E402
+from sqlalchemy.orm import (
+    declarative_base,  # noqa: E402
+    Session,  # noqa: E402
+)
 
 Base = declarative_base()
 
