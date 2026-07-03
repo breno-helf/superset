@@ -306,8 +306,8 @@ export function serializeForAPI(items: TreeItem[]): DatasourceFolder[] {
         (
           child,
         ): child is
-          DatasourceFolder | { uuid: string; type: FoldersEditorItemType } =>
-          child !== null,
+          | DatasourceFolder
+          | { uuid: string; type: FoldersEditorItemType } => child !== null,
       );
   };
 

@@ -27,7 +27,8 @@ export interface StrictBroadcastChannel<T> extends EventTarget {
   readonly name: string;
   onmessage: ((this: BroadcastChannel, ev: MessageEvent<T>) => unknown) | null;
   onmessageerror:
-    ((this: BroadcastChannel, ev: MessageEvent<T>) => unknown) | null;
+    | ((this: BroadcastChannel, ev: MessageEvent<T>) => unknown)
+    | null;
   close(): void;
   postMessage(message: T): void;
   addEventListener<K extends keyof StrictBroadcastChannelEventMap<T>>(
