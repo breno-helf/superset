@@ -22,4 +22,5 @@ export type OnlyKeyWithType<T, V> = keyof {
 };
 
 export const isIterable = (obj: unknown): obj is Iterable<unknown> =>
-  obj != null && typeof (obj as Record<symbol, unknown>)[Symbol.iterator] === 'function';
+  obj != null &&
+  typeof (obj as Record<symbol, unknown>)[Symbol.iterator] === 'function';

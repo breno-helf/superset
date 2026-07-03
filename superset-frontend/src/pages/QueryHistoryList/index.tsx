@@ -361,7 +361,7 @@ function QueryList({ addDangerToast }: QueryListProps) {
       {
         accessor: QueryObjectColumns.Sql,
         Header: t('SQL'),
-        Cell: ({ row: { original, id } }: { row: { original: Record<string, unknown>; id: string } }) => (
+        Cell: ({ row: { original, id } }: any) => (
           <div
             tabIndex={0}
             role="button"

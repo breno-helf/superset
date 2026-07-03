@@ -152,7 +152,7 @@ function CssTemplatesList({
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => handleCssTemplateEdit(original);
           const handleDelete = () => setTemplateCurrentlyDeleting(original);
 

@@ -453,7 +453,7 @@ function DashboardList(props: DashboardListProps) {
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const handleDelete = () =>
             handleDashboardDelete(
               original,

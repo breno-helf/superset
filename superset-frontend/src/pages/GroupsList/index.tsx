@@ -232,7 +232,7 @@ function GroupsList({ user }: GroupsListProps) {
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => {
             setCurrentGroup(original);
             openModal(ModalType.EDIT);

@@ -162,7 +162,7 @@ export function useKeywords(
     return [...columns];
   }, [dbId, normalizedCatalog, apiState, skipFetch]);
 
-  const insertMatch = useEffectEvent((editor: Editor, data: { meta: string; value: string; schema?: string }) => {
+  const insertMatch = useEffectEvent((editor: Editor, data: any) => {
     if (data.meta === 'table') {
       dispatch(
         addTable(

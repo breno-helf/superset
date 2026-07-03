@@ -165,7 +165,7 @@ function RowLevelSecurityList(props: RLSProps) {
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const handleDelete = () =>
             handleRuleDelete(
               original,

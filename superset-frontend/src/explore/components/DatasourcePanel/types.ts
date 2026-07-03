@@ -28,20 +28,13 @@ export interface DatasourcePanelDndItem {
 }
 
 export function isDatasourcePanelDndItem(
-  item: unknown,
+  item: any,
 ): item is DatasourcePanelDndItem {
-  return (
-    typeof item === 'object' &&
-    item !== null &&
-    'value' in item &&
-    'type' in item &&
-    !!(item as DatasourcePanelDndItem).value &&
-    !!(item as DatasourcePanelDndItem).type
-  );
+  return item?.value && item?.type;
 }
 
-export function isSavedMetric(item: unknown): item is Metric {
-  return typeof item === 'object' && item !== null && 'metric_name' in item && !!(item as Metric).metric_name;
+export function isSavedMetric(item: any): item is Metric {
+  return item?.metric_name;
 }
 
 export type DatasourcePanelColumn = {

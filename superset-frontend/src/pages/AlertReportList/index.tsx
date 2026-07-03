@@ -402,7 +402,7 @@ function AlertList({
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const allowEdit =
             original.owners.map((o: Owner) => o.id).includes(user.userId) ||
             isUserAdmin(user);
@@ -423,7 +423,7 @@ function AlertList({
         size: 'sm',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const history = useHistory();
           const handleEdit = () => handleAlertEdit(original);
           const handleDelete = () => setCurrentAlertDeleting(original);

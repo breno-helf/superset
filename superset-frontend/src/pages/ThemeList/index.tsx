@@ -365,7 +365,7 @@ function ThemesList({
   const columns = useMemo(
     () => [
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const isCurrentTheme =
             hasDevOverride() &&
             appliedThemeId &&
@@ -423,7 +423,7 @@ function ThemesList({
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => handleThemeEdit(original);
           const handleDelete = () => {
             if (original.is_system_default || original.is_system_dark) {

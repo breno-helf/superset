@@ -169,7 +169,7 @@ const ContourPopoverControl = ({
     if (sectionIsComplete !== isComplete) setIsComplete(sectionIsComplete);
   }, [contour, currentTab]);
 
-  const onTabChange = (activeKey: string) => {
+  const onTabChange = (activeKey: any) => {
     setCurrentTab(activeKey);
   };
 

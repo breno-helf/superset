@@ -500,7 +500,7 @@ function ChartList(props: ChartListProps) {
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
+        Cell: ({ row: { original } }: any) => {
           const handleDelete = () =>
             handleChartDelete(
               original,

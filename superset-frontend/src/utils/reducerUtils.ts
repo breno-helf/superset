@@ -20,15 +20,15 @@ import { nanoid } from 'nanoid';
 
 interface ObjectWithId {
   id?: string;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 interface StateWithObject {
-  [key: string]: { [id: string]: ObjectWithId } | unknown;
+  [key: string]: { [id: string]: ObjectWithId } | any;
 }
 
 interface StateWithArray {
-  [key: string]: ObjectWithId[] | unknown;
+  [key: string]: ObjectWithId[] | any;
 }
 
 export function addToObject<T extends ObjectWithId>(

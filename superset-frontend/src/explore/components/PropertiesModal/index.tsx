@@ -141,7 +141,15 @@ function PropertiesModal({
   }, [tags.length]);
 
   const showError = useCallback(
-    ({ error, statusText, message }: { error?: string; statusText?: string; message?: string }) => {
+    ({
+      error,
+      statusText,
+      message,
+    }: {
+      error?: string;
+      statusText?: string;
+      message?: string;
+    }) => {
       let errorText = error || statusText || t('An error has occurred');
       if (message === 'Forbidden') {
         errorText = t('You do not have permission to edit this chart');

@@ -216,7 +216,7 @@ export const getUserOwnedObjects = (
   }).then(res => res.json?.result);
 
 export const getFilteredChartsandDashboards = (
-  addDangerToast: (arg1: string, arg2: unknown) => void,
+  addDangerToast: (arg1: string, arg2: any) => any,
   filters: Filter[],
   dashboardSelectColumns?: string[],
   chartSelectColumns?: string[],
@@ -248,11 +248,11 @@ export const getFilteredChartsandDashboards = (
 export const getRecentActivityObjs = (
   userId: string | number,
   recent: string,
-  addDangerToast: (arg1: string, arg2: unknown) => void,
+  addDangerToast: (arg1: string, arg2: any) => any,
   filters: Filter[],
 ) =>
   SupersetClient.get({ endpoint: recent }).then(recentsRes => {
-    const res: Record<string, unknown> = {};
+    const res: any = {};
     const distinctRes = lruCache<RecentActivity>(6);
     recentsRes.json.result.reverse().forEach((record: RecentActivity) => {
       distinctRes.set(record.item_url, record);
@@ -450,64 +450,58 @@ export const CardStyles = styled.div`
   }
 `;
 
-interface SchemaPayload {
-  _schema?: string[];
-}
-
-const hasSchema = (payload: unknown): payload is SchemaPayload =>
-  typeof payload === 'object' &&
-  payload !== null &&
-  '_schema' in payload &&
-  Array.isArray((payload as SchemaPayload)._schema);
-
 export /* eslint-disable no-underscore-dangle */
-const isNeedsPassword = (payload: unknown) =>
-  hasSchema(payload) &&
+const isNeedsPassword = (payload: any) =>
+  typeof payload === 'object' &&
+  Array.isArray(payload._schema) &&
   !!payload._schema?.find(
     (e: string) => e === 'Must provide a password for the database',
   );
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsSSHPassword = (payload: unknown) =>
-  hasSchema(payload) &&
+const isNeedsSSHPassword = (payload: any) =>
+  typeof payload === 'object' &&
+  Array.isArray(payload._schema) &&
   !!payload._schema?.find(
     (e: string) => e === 'Must provide a password for the ssh tunnel',
   );
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsSSHPrivateKey = (payload: unknown) =>
-  hasSchema(payload) &&
+const isNeedsSSHPrivateKey = (payload: any) =>
+  typeof payload === 'object' &&
+  Array.isArray(payload._schema) &&
   !!payload._schema?.find(
     (e: string) => e === 'Must provide a private key for the ssh tunnel',
   );
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsSSHPrivateKeyPassword = (payload: unknown) =>
-  hasSchema(payload) &&
+const isNeedsSSHPrivateKeyPassword = (payload: any) =>
+  typeof payload === 'object' &&
+  Array.isArray(payload._schema) &&
   !!payload._schema?.find(
     (e: string) =>
       e === 'Must provide a private key password for the ssh tunnel',
   );
 
-export const isAlreadyExists = (payload: unknown) =>
+export const isAlreadyExists = (payload: any) =>
   typeof payload === 'string' &&
   payload.includes('already exists and `overwrite=true` was not passed');
 
-export const getPasswordsNeeded = (errors: Record<string, unknown>[]) =>
+export const getPasswordsNeeded = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsPassword(payload))
       .map(([fileName]) => fileName),
   );
 
-export const getSSHPasswordsNeeded = (errors: Record<string, unknown>[]) =>
+export const getSSHPasswordsNeeded = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsSSHPassword(payload))
       .map(([fileName]) => fileName),
   );
 
-export const getSSHPrivateKeysNeeded = (errors: Record<string, unknown>[]) =>
+export const getSSHPrivateKeysNeeded = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsSSHPrivateKey(payload))
@@ -515,7 +509,7 @@ export const getSSHPrivateKeysNeeded = (errors: Record<string, unknown>[]) =>
   );
 
 export const getSSHPrivateKeyPasswordsNeeded = (
-  errors: Record<string, unknown>[],
+  errors: Record<string, any>[],
 ) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
@@ -523,7 +517,7 @@ export const getSSHPrivateKeyPasswordsNeeded = (
       .map(([fileName]) => fileName),
   );
 
-export const getAlreadyExists = (errors: Record<string, unknown>[]) =>
+export const getAlreadyExists = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isAlreadyExists(payload))
@@ -537,12 +531,13 @@ const ENCRYPTED_EXTRA_FIELD_REGEX =
   /^Must provide value for masked_encrypted_extra field: (.+?)(?:\s+\((.+)\))?$/;
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsEncryptedExtraField = (payload: unknown) =>
-  hasSchema(payload) &&
+const isNeedsEncryptedExtraField = (payload: any) =>
+  typeof payload === 'object' &&
+  Array.isArray(payload._schema) &&
   payload._schema?.some((e: string) => ENCRYPTED_EXTRA_FIELD_REGEX.test(e));
 
 export const getEncryptedExtraFieldsNeeded = (
-  errors: Record<string, unknown>[],
+  errors: Record<string, any>[],
 ): FileEncryptedExtraFields[] =>
   errors.flatMap(error =>
     Object.entries(error.extra)
@@ -561,7 +556,7 @@ export const getEncryptedExtraFieldsNeeded = (
       })),
   );
 
-export const hasTerminalValidation = (errors: Record<string, unknown>[]) =>
+export const hasTerminalValidation = (errors: Record<string, any>[]) =>
   errors.some(error => {
     const noIssuesCodes = Object.entries(error.extra).filter(
       ([key]) => key !== 'issue_codes',

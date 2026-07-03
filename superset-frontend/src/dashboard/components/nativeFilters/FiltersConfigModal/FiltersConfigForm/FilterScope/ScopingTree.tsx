@@ -37,7 +37,7 @@ const StyledTree = styled(Tree)`
 
 type ScopingTreeProps = {
   forceUpdate: Function;
-  updateFormValues: (values: Record<string, unknown>) => void;
+  updateFormValues: (values: any) => void;
   formScope?: NativeFilterScope;
   initialScope: NativeFilterScope;
   chartId?: number;

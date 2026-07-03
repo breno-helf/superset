@@ -285,7 +285,7 @@ function getState(
   };
 }
 
-function useResetOnChangeRef(initialValue: () => unknown, resetOnChangeValue: unknown) {
+function useResetOnChangeRef(initialValue: () => any, resetOnChangeValue: any) {
   const value = useRef(initialValue());
   const prevResetOnChangeValue = useRef(resetOnChangeValue);
   if (prevResetOnChangeValue.current !== resetOnChangeValue) {
@@ -506,7 +506,7 @@ export const ControlPanelsContainer = (props: ControlPanelsContainerProps) => {
       description: baseDescription,
       ...restProps
     } = controlData as ControlState & {
-      validationErrors?: string[];
+      validationErrors?: any[];
     };
 
     const isVisible = visibility

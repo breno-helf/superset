@@ -26,7 +26,7 @@ import { getDefaultScopeValue } from './utils';
 
 type FilterScopeProps = {
   pathToFormValue?: string[];
-  updateFormValues: (values: Record<string, unknown>, triggerFormChange?: boolean) => void;
+  updateFormValues: (values: any, triggerFormChange?: boolean) => void;
   formFilterScope?: NativeFilterScope;
   forceUpdate: Function;
   filterScope?: NativeFilterScope;
@@ -63,7 +63,7 @@ const FilterScope: FC<FilterScopeProps> = ({
   const [hasScopeBeenModified, setHasScopeBeenModified] = useState(false);
 
   const onUpdateFormValues = useCallback(
-    (formValues: Record<string, unknown>) => {
+    (formValues: any) => {
       updateFormValues(formValues);
       setHasScopeBeenModified(true);
     },
@@ -71,7 +71,7 @@ const FilterScope: FC<FilterScopeProps> = ({
   );
 
   const updateScopes = useCallback(
-    (updatedFormValues: Record<string, unknown>) => {
+    (updatedFormValues: Record<string, any>) => {
       if (hasScopeBeenModified) {
         return;
       }

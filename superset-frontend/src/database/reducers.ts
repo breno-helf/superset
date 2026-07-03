@@ -26,14 +26,9 @@ const initialState: QueryAdhocState = {
   error: null,
 };
 
-interface DatabaseAction {
-  type: string;
-  payload?: string | boolean | QueryAdhocState['queryResult'];
-}
-
 export default function databaseReducer(
   state: QueryAdhocState = initialState,
-  action: DatabaseAction,
+  action: any,
 ): QueryAdhocState {
   switch (action.type) {
     case 'SET_QUERY':
