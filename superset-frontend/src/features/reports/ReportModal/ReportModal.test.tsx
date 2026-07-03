@@ -326,7 +326,8 @@ test('submit failure dispatches danger toast and keeps modal open', async () => 
 
   // The addReport action catches 500 errors, dispatches a danger toast, and re-throws
   await waitFor(() => {
-    const toasts = (store.getState() as Record<string, unknown>).messageToasts;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const toasts = (store.getState() as any).messageToasts;
     expect(toasts.length).toBeGreaterThan(0);
     expect(
       toasts.some((t: { text: string }) =>

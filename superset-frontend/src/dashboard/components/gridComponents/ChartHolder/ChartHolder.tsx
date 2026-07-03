@@ -126,8 +126,8 @@ const ChartHolder = ({
     useState(0);
 
   const infoFromPath = useMemo(
-    () =>
-      getChartAndLabelComponentIdFromPath(directPathToChild ?? []) as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => getChartAndLabelComponentIdFromPath(directPathToChild ?? []) as any,
     [directPathToChild],
   );
 

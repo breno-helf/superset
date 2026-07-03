@@ -64,12 +64,14 @@ interface CachedFormData {
     [filterId: string]: number[];
   };
   filter_data_mapping?: {
-    [filterId: string]: unknown[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [filterId: string]: any[];
   };
 }
 
 export type CachedFormDataWithExtraControls = CachedFormData & {
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 const cachedFiltersByChart: Record<number, DataRecordFilters> = {};
@@ -105,8 +107,10 @@ export interface GetFormDataWithExtraFiltersArguments {
 const createFilterDataMapping = (
   dataMask: DataMaskStateWithId,
   filterIdsAppliedOnChart: string[],
-): { [filterId: string]: unknown[] } => {
-  const filterDataMapping: { [filterId: string]: unknown[] } = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): { [filterId: string]: any[] } => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const filterDataMapping: { [filterId: string]: any[] } = {};
 
   filterIdsAppliedOnChart.forEach(filterId => {
     const filterFormData = getExtraFormData(dataMask, [filterId]);
@@ -148,7 +152,8 @@ function buildExistingColumnsSet(chart: ChartQueryPayload): Set<string> {
   }
 
   const metrics = chart.form_data?.metrics || [];
-  metrics.forEach((metric: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metrics.forEach((metric: any) => {
     if (typeof metric === 'string') {
       existingColumns.add(metric);
     } else if (metric && typeof metric === 'object' && 'column' in metric) {
@@ -194,8 +199,10 @@ function applyChartSpecificGroupBy(
   groupByColumns: string[],
   existingGroupBy: string[],
   xAxisColumn?: string,
-): Record<string, unknown> {
-  const groupByFormData: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const groupByFormData: any = {};
 
   if (groupByColumns.length === 0) return groupByFormData;
 

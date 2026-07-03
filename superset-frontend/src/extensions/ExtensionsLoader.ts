@@ -145,9 +145,10 @@ class ExtensionsLoader {
     // @ts-expect-error
     await __webpack_init_sharing__('default');
     // Use moduleFederationName (camelCase) for webpack container access, fallback to id for compatibility
-    const containerName =
-      (extension as Record<string, unknown>).moduleFederationName || id;
-    const container = (window as Record<string, unknown>)[containerName];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const containerName = (extension as any).moduleFederationName || id;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const container = (window as any)[containerName];
 
     // @ts-expect-error
     await container.init(__webpack_share_scopes__.default);

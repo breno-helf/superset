@@ -341,7 +341,8 @@ const Row = memo((props: RowProps) => {
             </Droppable>
           )}
           {rowItems.length === 0 && (
-            <div css={emptyRowContentStyles as unknown}>{t('Empty row')}</div>
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            <div css={emptyRowContentStyles as any}>{t('Empty row')}</div>
           )}
           {rowItems.length > 0 &&
             rowItems.map((componentId, itemIndex) => (

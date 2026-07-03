@@ -23,7 +23,8 @@ import BasicInfoSection from './BasicInfoSection';
 const defaultProps = {
   form: {
     getFieldValue: jest.fn(() => 'Test Dashboard'),
-  } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any,
   validationStatus: {
     basic: { hasErrors: false, errors: [], name: 'Basic' },
   },
@@ -69,7 +70,8 @@ test('shows error message when name is empty and has validation errors', () => {
     <Form>
       <BasicInfoSection
         {...defaultProps}
-        form={mockForm as unknown}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        form={mockForm as any}
         validationStatus={validationStatus}
       />
     </Form>,
@@ -91,7 +93,8 @@ test('does not show error when name is provided', () => {
     <Form>
       <BasicInfoSection
         {...defaultProps}
-        form={mockForm as unknown}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        form={mockForm as any}
         validationStatus={validationStatus}
       />
     </Form>,

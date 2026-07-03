@@ -20,15 +20,18 @@ import { nanoid } from 'nanoid';
 
 interface ObjectWithId {
   id?: string;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 interface StateWithObject {
-  [key: string]: { [id: string]: ObjectWithId } | unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: { [id: string]: ObjectWithId } | any;
 }
 
 interface StateWithArray {
-  [key: string]: ObjectWithId[] | unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: ObjectWithId[] | any;
 }
 
 export function addToObject<T extends ObjectWithId>(

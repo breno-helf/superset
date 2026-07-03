@@ -41,7 +41,8 @@ export type ControlProps = {
   rightNode?: ReactNode;
   formData?: QueryFormData | null;
   value?: JsonValue;
-  validationErrors?: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  validationErrors?: any[];
   hidden?: boolean;
   renderTrigger?: boolean;
   default?: JsonValue;
@@ -72,7 +73,8 @@ export default function Control(props: ControlProps) {
   const [hovered, setHovered] = useState(false);
   const wasVisible = usePrevious(isVisible);
   const onChange = useCallback(
-    (value: unknown, errors: unknown[]) => setControlValue(name, value, errors),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (value: any, errors: any[]) => setControlValue(name, value, errors),
     [name, setControlValue],
   );
 

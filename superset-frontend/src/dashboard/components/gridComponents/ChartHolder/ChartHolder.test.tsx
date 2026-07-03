@@ -46,7 +46,8 @@ const DEFAULT_HEADER_HEIGHT = 22;
 
 // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
 describe('ChartHolder', () => {
-  let scrollViewBase: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let scrollViewBase: any;
 
   const defaultProps = {
     component: {
@@ -95,17 +96,17 @@ describe('ChartHolder', () => {
     window.HTMLElement.prototype.scrollIntoView = scrollViewBase;
   });
 
-  const createMockStore = (customState: Record<string, unknown> = {}) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const createMockStore = (customState: any = {}) =>
     createStore(
       combineReducers(reducerIndex),
-      { ...mockState, ...(initialState as unknown), ...customState },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      { ...mockState, ...(initialState as any), ...customState },
       compose(applyMiddleware(thunk)),
     );
 
-  const renderWrapper = (
-    store = createMockStore(),
-    props: Record<string, unknown> = {},
-  ) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const renderWrapper = (store = createMockStore(), props: any = {}) =>
     render(<ChartHolder {...defaultProps} {...props} />, {
       useRouter: true,
       useDnd: true,

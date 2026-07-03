@@ -54,7 +54,8 @@ const mockedProps = {
   onCancel: jest.fn(),
   onSave: jest.fn(),
 };
-function setup(overridesProps?: unknown) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function setup(overridesProps?: any) {
   return render(<FiltersConfigModal {...mockedProps} {...overridesProps} />, {
     useDnd: true,
     useRedux: true,

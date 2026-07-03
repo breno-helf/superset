@@ -133,7 +133,8 @@ describe('updateComponentParentsList with bad inputs', () => {
     expect(() =>
       updateComponentParentsList({
         currentComponent: { id: '' },
-        layout: null as unknown,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        layout: null as any,
       }),
     ).not.toThrow();
 

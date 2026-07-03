@@ -98,7 +98,8 @@ export const dragConfig: [
     canDrag: (props: DragDroppableProps) => boolean;
     beginDrag: (props: DragDroppableProps) => DragItem;
   },
-  (connect: unknown, monitor: DragSourceMonitor) => DragStateProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (connect: any, monitor: DragSourceMonitor) => DragStateProps,
 ] = [
   TYPE,
   {
@@ -120,7 +121,8 @@ export const dragConfig: [
     },
   },
   function dragStateToProps(
-    connect: unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    connect: any,
     monitor: DragSourceMonitor,
   ): DragStateProps {
     return {
@@ -148,7 +150,8 @@ export const dropConfig: [
       component: DragDroppableComponent,
     ) => DropResult | undefined;
   },
-  (connect: unknown, monitor: DropTargetMonitor) => DropStateProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (connect: any, monitor: DropTargetMonitor) => DropStateProps,
 ] = [
   TYPE,
   {
@@ -180,7 +183,8 @@ export const dropConfig: [
     },
   },
   function dropStateToProps(
-    connect: unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    connect: any,
     monitor: DropTargetMonitor,
   ): DropStateProps {
     return {

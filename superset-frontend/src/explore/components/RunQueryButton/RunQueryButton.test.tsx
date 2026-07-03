@@ -20,7 +20,8 @@
 import { render, screen, userEvent } from 'spec/helpers/testing-library';
 import { RunQueryButton } from './index';
 
-const createProps = (overrides: Record<string, unknown> = {}) => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createProps = (overrides: Record<string, any> = {}) => ({
   loading: false,
   onQuery: jest.fn(),
   onStop: jest.fn(),

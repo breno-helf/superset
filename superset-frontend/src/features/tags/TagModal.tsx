@@ -167,7 +167,8 @@ const TagModal: FC<TagModalProps> = ({
     const { result, count } = json;
 
     return {
-      data: result.map((item: Record<string, unknown> & { id: number }) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: result.map((item: Record<string, any> & { id: number }) => ({
         value: item.id,
         label: item[filterColumn],
       })),
@@ -212,7 +213,8 @@ const TagModal: FC<TagModalProps> = ({
       'saved_query',
     );
 
-  const handleOptionChange = (resource: TaggableResources, data: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOptionChange = (resource: TaggableResources, data: any) => {
     if (resource === TaggableResources.Dashboard) setDashboardsToTag(data);
     else if (resource === TaggableResources.Chart) setChartsToTag(data);
     else if (resource === TaggableResources.SavedQuery)

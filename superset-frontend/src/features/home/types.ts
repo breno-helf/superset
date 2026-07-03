@@ -31,10 +31,14 @@ export enum WelcomeTable {
 export type WelcomePageLastTab = 'examples' | 'all' | [string, Filter[]];
 
 export interface ExtensionConfigs {
-  ALLOWED_EXTENSIONS: unknown[];
-  CSV_EXTENSIONS: unknown[];
-  COLUMNAR_EXTENSIONS: unknown[];
-  EXCEL_EXTENSIONS: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ALLOWED_EXTENSIONS: Array<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  CSV_EXTENSIONS: Array<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  COLUMNAR_EXTENSIONS: Array<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  EXCEL_EXTENSIONS: Array<any>;
   HAS_GSHEETS_INSTALLED: boolean;
   SCARF_ANALYTICS?: boolean;
 }

@@ -66,11 +66,13 @@ import { parseSelectedOwners, type OwnerOption } from './utils';
 type PropertiesModalProps = {
   dashboardId: number;
   dashboardTitle?: string;
-  dashboardInfo?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dashboardInfo?: Record<string, any>;
   show?: boolean;
   onHide?: () => void;
   colorScheme?: string;
-  onSubmit?: (params: Record<string, unknown>) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSubmit?: (params: Record<string, any>) => void;
   addSuccessToast: (message: string) => void;
   addDangerToast: (message: string) => void;
   onlyApply?: boolean;
@@ -91,7 +93,8 @@ type DashboardInfo = {
   certifiedBy: string;
   certificationDetails: string;
   isManagedExternally: boolean;
-  metadata: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata: Record<string, any>;
   common?: {
     conf?: {
       SUPERSET_DASHBOARD_PERIODICAL_REFRESH_LIMIT?: number;
@@ -140,7 +143,8 @@ const PropertiesModal = ({
     }>
   >([]);
   const categoricalSchemeRegistry = getCategoricalSchemeRegistry();
-  const originalDashboardMetadata = useRef<Record<string, unknown>>({});
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const originalDashboardMetadata = useRef<Record<string, any>>({});
   const originalCss = useRef<string | null>(null);
   const cssDebounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -165,7 +169,8 @@ const PropertiesModal = ({
   };
 
   const handleDashboardData = useCallback(
-    (dashboardData: Record<string, unknown>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (dashboardData: Record<string, any>) => {
       const {
         id,
         dashboard_title,
@@ -545,8 +550,8 @@ const PropertiesModal = ({
   };
 
   // Section handlers for extracted components
-  const handleThemeChange = (value: unknown) =>
-    setSelectedThemeId(value || null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleThemeChange = (value: any) => setSelectedThemeId(value || null);
   const handleRefreshFrequencyChange = (value: number) =>
     setRefreshFrequency(value);
 

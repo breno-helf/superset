@@ -44,12 +44,14 @@ export const toasters = {
 };
 
 // To work properly the redux state must have a `messageToasts` subtree
-export default function withToasts(
-  BaseComponent: ComponentType<Record<string, unknown>>,
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function withToasts(BaseComponent: ComponentType<any>) {
   return connect(null, dispatch => bindActionCreators(toasters, dispatch))(
     BaseComponent,
-  ) as unknown as ComponentType<Record<string, unknown>>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ) as any;
+  // Redux has some confusing typings that cause problems for consumers of this function.
+  // If someone can fix the types, great, but for now it's just any.
 }
 
 export function useToasts() {

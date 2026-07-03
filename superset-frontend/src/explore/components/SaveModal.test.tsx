@@ -38,7 +38,8 @@ import { GRID_COLUMN_COUNT } from 'src/dashboard/util/constants';
 
 jest.mock('@superset-ui/core/components/Select', () => ({
   ...jest.requireActual('@superset-ui/core/components/Select/AsyncSelect'),
-  AsyncSelect: ({ onChange }: { onChange: (val: unknown) => void }) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  AsyncSelect: ({ onChange }: { onChange: (val: any) => void }) => (
     <input
       data-test="mock-async-select"
       onChange={({ target: { value } }) => onChange({ label: value, value })}
@@ -51,7 +52,8 @@ jest.mock('@superset-ui/core/components/TreeSelect', () => ({
     onChange,
     disabled,
   }: {
-    onChange: (val: unknown) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onChange: (val: any) => void;
     disabled?: boolean;
   }) => (
     <input
@@ -89,7 +91,8 @@ const initialStore = mockStore(initialState);
 const defaultProps = {
   addDangerToast: jest.fn(),
   onHide: () => ({}),
-  actions: bindActionCreators(saveModalActions as unknown, (arg: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  actions: bindActionCreators(saveModalActions as any, (arg: any) => {
     if (typeof arg === 'function') {
       return arg(jest.fn);
     }
@@ -141,10 +144,12 @@ beforeAll(() => {
 afterAll(() => fetchMock.clearHistory());
 
 const setup = (
-  props: Record<string, unknown> = defaultProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: Record<string, any> = defaultProps,
   store = initialStore,
 ) =>
-  render(<SaveModal {...(props as unknown)} />, {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render(<SaveModal {...(props as any)} />, {
     useRouter: true,
     store,
   });
@@ -500,7 +505,8 @@ test('chart placement logic finds row with available space', () => {
   };
 
   const findRowWithSpace = (
-    positionJson: Record<string, unknown>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    positionJson: Record<string, any>,
     tabChildren: string[],
   ) => {
     for (const childKey of tabChildren) {
@@ -648,8 +654,10 @@ test('addChartToDashboard creates new row when no existing row has space', async
     json: { result: mockDashboard },
   });
 
-  let putRequestBody: Record<string, unknown> | null = null;
-  SupersetClient.put = jest.fn().mockImplementationOnce((request: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let putRequestBody: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  SupersetClient.put = jest.fn().mockImplementationOnce((request: any) => {
     putRequestBody = request;
     return Promise.resolve({
       json: { result: mockDashboard },

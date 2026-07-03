@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -194,7 +193,8 @@ function ChartList(props: ChartListProps) {
   } = useListViewResource<Chart>('chart', t('chart'), addDangerToast);
 
   const chartIds = useMemo(() => charts.map(c => c.id), [charts]);
-  const { roles } = useSelector<unknown, UserWithPermissionsAndRoles>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
@@ -342,7 +342,8 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { id },
           },
-        }: CellProps<ChartObject>) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) =>
           userId && (
             <FaveStar
               itemId={id}
@@ -367,7 +368,8 @@ function ChartList(props: ChartListProps) {
               description,
             },
           },
-        }: CellProps<ChartObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <FlexRowContainer>
             <Link to={url} data-test={`${sliceName}-list-chart-title`}>
               {certifiedBy && (
@@ -392,7 +394,8 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { viz_type: vizType, form_data: formData },
           },
-        }: CellProps<ChartObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <>
             {registry.get(vizType)?.name || vizType}
             {formData && isMatrixifyEnabled(formData) && (
@@ -418,7 +421,8 @@ function ChartList(props: ChartListProps) {
               datasource_url: dsUrl,
             },
           },
-        }: CellProps<ChartObject>) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
           // Extract dataset name from datasource_name_text
           // Format can be "schema.name" or just "name"
           const displayName = dsNameTxt
@@ -444,9 +448,8 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { dashboards },
           },
-        }: CellProps<ChartObject>) => (
-          <DashboardCrossLinks dashboards={dashboards} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <DashboardCrossLinks dashboards={dashboards} />,
         Header: t('On dashboards'),
         accessor: 'dashboards',
         disableSortBy: true,
@@ -458,7 +461,8 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { tags = [] },
           },
-        }: CellProps<ChartObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           // Only show custom type tags
           <TagsList
             tags={tags.filter((tag: TagType) =>
@@ -481,7 +485,8 @@ function ChartList(props: ChartListProps) {
           row: {
             original: { owners = [] },
           },
-        }: CellProps<ChartObject>) => <FacePile users={owners} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <FacePile users={owners} />,
         Header: t('Owners'),
         accessor: 'owners',
         disableSortBy: true,
@@ -496,16 +501,16 @@ function ChartList(props: ChartListProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<ChartObject>) => (
-          <ModifiedInfo date={changedOn} user={changedBy} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: CellProps<ChartObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleDelete = () =>
             handleChartDelete(
               original,

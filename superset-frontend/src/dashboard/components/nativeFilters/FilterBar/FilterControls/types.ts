@@ -50,7 +50,8 @@ export interface FilterControlProps extends BaseFilterProps {
   onFilterSelectionChange: (filter: FilterElement, dataMask: DataMask) => void;
   inView?: boolean;
   showOverflow?: boolean;
-  parentRef?: RefObject<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parentRef?: RefObject<any>;
   setFilterActive?: (isActive: boolean) => void;
   validateStatus?: string;
   clearAllTrigger?: boolean;

@@ -20,7 +20,8 @@ import { ReactNode } from 'react';
 
 export interface BaseFilter {
   Header: ReactNode;
-  initialValue: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialValue: any;
 }
 export type FilterHandler = {
   clearFilter: () => void;

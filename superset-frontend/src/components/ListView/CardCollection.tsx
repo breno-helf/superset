@@ -25,7 +25,8 @@ interface CardCollectionProps {
   bulkSelectEnabled?: boolean;
   loading: boolean;
   prepareRow: TableInstance['prepareRow'];
-  renderCard?: (row: unknown) => ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  renderCard?: (row: any) => ReactNode;
   rows: TableInstance['rows'];
   showThumbnails?: boolean;
 }
@@ -91,15 +92,16 @@ export default function CardCollection({
               className={cx({
                 'card-selected':
                   bulkSelectEnabled &&
-                  (row as Row & UseRowSelectRowProps<unknown>).isSelected,
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (row as Row & UseRowSelectRowProps<any>).isSelected,
                 'bulk-select': bulkSelectEnabled,
               })}
               key={row.id}
               onClick={e =>
                 handleClick(
                   e,
-                  (row as Row & UseRowSelectRowProps<unknown>)
-                    .toggleRowSelected,
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (row as Row & UseRowSelectRowProps<any>).toggleRowSelected,
                 )
               }
               role="none"

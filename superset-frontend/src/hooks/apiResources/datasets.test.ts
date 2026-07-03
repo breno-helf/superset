@@ -49,9 +49,12 @@ const mockExtension = jest.fn();
 // Helper to configure extension mock for extension path tests
 function setupExtensionMock() {
   mockGetExtensionsRegistry.mockReturnValue({
-    get: jest.fn((key: unknown) =>
-      key === 'load.drillby.options' ? mockExtension : undefined,
-    ) as unknown,
+    get: jest.fn(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (key: any) =>
+        key === 'load.drillby.options' ? mockExtension : undefined,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ) as any,
   });
 }
 
@@ -116,7 +119,8 @@ test('createVerboseMap creates verbose_map from metrics', () => {
       { metric_name: 'metric2', verbose_name: 'Metric 2' },
       { metric_name: 'metric3' }, // no verbose_name
     ],
-  } as unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any;
 
   const verboseMap = createVerboseMap(dataset);
 
@@ -157,7 +161,8 @@ test('useDatasetDrillInfo fetches dataset drill info successfully', async () => 
     json: {
       result: mockDataset,
     },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(() => useDatasetDrillInfo(123, 456));
 
@@ -216,7 +221,8 @@ test('useDatasetDrillInfo extracts dataset ID from string format', async () => {
     json: {
       result: mockDataset,
     },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(() => useDatasetDrillInfo('123__table', 456));
 
@@ -239,7 +245,8 @@ test('useDatasetDrillInfo does not clear cache on successful fetch', async () =>
     json: {
       result: mockDataset,
     },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(() => useDatasetDrillInfo(123, 456));
 
@@ -263,7 +270,8 @@ test('useDatasetDrillInfo creates new verbose_map from columns and metrics', asy
     json: {
       result: mockDataset,
     },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(() => useDatasetDrillInfo(123, 456));
 
@@ -285,7 +293,8 @@ test('useDatasetDrillInfo handles NaN datasource ID from malformed string', asyn
     json: {
       result: { id: NaN, columns: [], metrics: [] },
     },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(() => useDatasetDrillInfo('abc', 456));
 
@@ -316,7 +325,8 @@ test('useDatasetDrillInfo fetches dataset via extension when extension and formD
 
   mockExtension.mockResolvedValue({
     json: { result: mockDataset },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(() =>
     useDatasetDrillInfo(123, 456, mockFormData),
@@ -378,7 +388,8 @@ test('useDatasetDrillInfo handles extension returning malformed payload with und
   const mockFormData = { viz_type: 'table', datasource: '123__table' };
 
   // Extension returns undefined instead of expected shape
-  mockExtension.mockResolvedValue(undefined as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mockExtension.mockResolvedValue(undefined as any);
 
   const { result } = renderHook(() =>
     useDatasetDrillInfo(123, 456, mockFormData),
@@ -399,7 +410,8 @@ test('useDatasetDrillInfo handles extension returning malformed payload with mis
   const mockFormData = { viz_type: 'table', datasource: '123__table' };
 
   // Extension returns object but missing json.result
-  mockExtension.mockResolvedValue({ json: {} } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mockExtension.mockResolvedValue({ json: {} } as any);
 
   const { result } = renderHook(() =>
     useDatasetDrillInfo(123, 456, mockFormData),
@@ -427,7 +439,8 @@ test('useDatasetDrillInfo falls back to REST API when extension exists but formD
 
   mockedCachedSupersetGet.mockResolvedValue({
     json: { result: mockDataset },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   const { result } = renderHook(
     () => useDatasetDrillInfo(123, 456, undefined), // formData is undefined

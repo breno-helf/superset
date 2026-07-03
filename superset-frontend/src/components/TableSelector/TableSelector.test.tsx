@@ -51,7 +51,8 @@ const getTableMockFunction = () =>
       { label: 'table_c', value: 'table_c' },
       { label: 'table_d', value: 'table_d' },
     ],
-  }) as unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }) as any;
 
 const databaseApiRoute = 'glob:*/api/v1/database/?*';
 const catalogApiRoute = 'glob:*/api/v1/database/*/catalogs/?*';

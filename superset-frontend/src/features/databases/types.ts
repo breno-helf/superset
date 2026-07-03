@@ -56,7 +56,8 @@ export type DatabaseParameters = {
   service_account_info?: string;
   query?: Record<string, string>;
   catalog?: Record<string, string | undefined>;
-  properties?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  properties?: Record<string, any>;
   warehouse?: string;
   role?: string;
   account?: string;
@@ -78,7 +79,8 @@ export type DatabaseObject = {
   id: number;
   uuid?: null | string;
   name: string; // synonym to database_name
-  paramProperties?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  paramProperties?: Record<string, any>;
   sqlalchemy_uri?: string;
   sqlalchemy_uri_placeholder?: string;
   parameters?: DatabaseParameters;
@@ -101,7 +103,8 @@ export type DatabaseObject = {
   allow_file_upload?: boolean;
   impersonate_user?: boolean;
   masked_encrypted_extra?: string;
-  parameters_schema?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parameters_schema?: Record<string, any>;
   server_cert?: string;
 
   // External management
@@ -292,22 +295,29 @@ export type CustomEventHandlerType = EventHandler<
 export interface FieldPropTypes {
   required: boolean;
   hasTooltip?: boolean;
-  tooltipText?: (value: unknown) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tooltipText?: (value: any) => string;
   placeholder?: string;
   onParametersChange: (event: CustomParametersChangeType) => void;
-  onParametersUploadFileChange: (value: unknown) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onParametersUploadFileChange: (value: any) => string;
   changeMethods: {
     onParametersChange: (event: CustomParametersChangeType) => void;
   } & {
-    onChange: (value: unknown) => string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onChange: (value: any) => string;
   } & {
-    onQueryChange: (value: unknown) => string;
-  } & { onParametersUploadFileChange: (value: unknown) => string } & {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onQueryChange: (value: any) => string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } & { onParametersUploadFileChange: (value: any) => string } & {
     onAddTableCatalog: () => void;
     onRemoveTableCatalog: (idx: number) => void;
   } & {
-    onExtraInputChange: (value: unknown) => void;
-    onEncryptedExtraInputChange: (value: unknown) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onExtraInputChange: (value: any) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onEncryptedExtraInputChange: (value: any) => void;
     onClearEncryptedExtraKey: (name: string) => void;
     onSSHTunnelParametersChange: CustomEventHandlerType;
   };
@@ -317,7 +327,8 @@ export interface FieldPropTypes {
   db?: DatabaseObject;
   dbModel?: DatabaseForm;
   field: string;
-  default_value?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default_value?: any;
   description?: string;
   isEditMode?: boolean;
   sslForced?: boolean;

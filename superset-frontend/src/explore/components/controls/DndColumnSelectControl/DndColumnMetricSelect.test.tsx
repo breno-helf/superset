@@ -89,7 +89,8 @@ const defaultProps = {
     },
   ],
   onChange: () => {},
-} as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any;
 
 test('renders with default props', () => {
   render(<DndColumnMetricSelect {...defaultProps} />, {
@@ -139,7 +140,8 @@ test('can drop columns and metrics', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Column,
-    value: { column_name: 'column_b' } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: { column_name: 'column_b' } as any,
   });
   expect(onChange).toHaveBeenLastCalledWith([
     'column_a',
@@ -149,7 +151,8 @@ test('can drop columns and metrics', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_b' } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: { metric_name: 'metric_b' } as any,
   });
   expect(onChange).toHaveBeenLastCalledWith([
     'column_a',
@@ -172,11 +175,13 @@ test('cannot drop duplicate items', () => {
 
   simulateDrop(captured, {
     type: DndItemType.Column,
-    value: { column_name: 'column_a' } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: { column_name: 'column_a' } as any,
   });
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: { metric_name: 'metric_a' } as any,
   });
 
   expect(onChange).not.toHaveBeenCalled();
@@ -197,14 +202,16 @@ test('can drop only selected metrics', () => {
   // metric_c is not in selectedMetrics -> rejected
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_c' } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: { metric_name: 'metric_c' } as any,
   });
   expect(onChange).not.toHaveBeenCalled();
 
   // metric_a is in selectedMetrics -> accepted
   simulateDrop(captured, {
     type: DndItemType.Metric,
-    value: { metric_name: 'metric_a' } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: { metric_name: 'metric_a' } as any,
   });
   expect(onChange).toHaveBeenLastCalledWith(['column_a', 'metric_a']);
 });

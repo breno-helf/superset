@@ -35,7 +35,8 @@ const defaultResponse = {
 };
 
 jest.mock('@superset-ui/core', () => ({
-  ...jest.requireActual<unknown>('@superset-ui/core'),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...jest.requireActual<any>('@superset-ui/core'),
   makeApi: jest.fn(),
 }));
 
@@ -46,15 +47,15 @@ const defaultProps = {
   onHide: mockOnHide,
 };
 const resetMockApi = () => {
-  (makeApi as Record<string, unknown>).mockReturnValue(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (makeApi as any).mockReturnValue(
     jest.fn().mockResolvedValue(defaultResponse),
   );
 };
 const setMockApiNotFound = () => {
   const notFound = new SupersetApiError({ message: 'Not found', status: 404 });
-  (makeApi as Record<string, unknown>).mockReturnValue(
-    jest.fn().mockRejectedValue(notFound),
-  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (makeApi as any).mockReturnValue(jest.fn().mockRejectedValue(notFound));
 };
 
 const setup = () => {

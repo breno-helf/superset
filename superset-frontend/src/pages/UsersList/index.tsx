@@ -28,7 +28,6 @@ import {
   DeleteModal,
   ConfirmStatusChange,
 } from '@superset-ui/core/components';
-import type { CellProps } from 'react-table';
 import {
   ListView,
   ListViewProps,
@@ -196,7 +195,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { first_name },
           },
-        }: CellProps<UserObject>) => <span>{first_name}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{first_name}</span>,
       },
       {
         accessor: 'last_name',
@@ -207,7 +207,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { last_name },
           },
-        }: CellProps<UserObject>) => <span>{last_name}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{last_name}</span>,
       },
       {
         accessor: 'username',
@@ -218,7 +219,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { username },
           },
-        }: CellProps<UserObject>) => <span>{username}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{username}</span>,
       },
       {
         accessor: 'email',
@@ -229,7 +231,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { email },
           },
-        }: CellProps<UserObject>) => <span>{email}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{email}</span>,
       },
       {
         accessor: 'active',
@@ -240,7 +243,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { active },
           },
-        }: CellProps<UserObject>) => <span>{active ? 'Yes' : 'No'}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{active ? 'Yes' : 'No'}</span>,
       },
       {
         accessor: 'roles',
@@ -251,7 +255,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { roles },
           },
-        }: CellProps<UserObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Tooltip
             title={
               roles?.map((role: Role) => role.name).join(', ') || t('No roles')
@@ -271,7 +276,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { groups },
           },
-        }: CellProps<UserObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Tooltip
             title={
               groups?.map((group: Group) => group.name).join(', ') ||
@@ -288,16 +294,16 @@ function UsersList({ user }: UsersListProps) {
         id: 'login_count',
         Header: t('Login count'),
         hidden: true,
-        Cell: ({ row: { original } }: CellProps<UserObject>) =>
-          original.login_count ?? 0,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => original.login_count ?? 0,
       },
       {
         accessor: 'fail_login_count',
         id: 'fail_login_count',
         Header: t('Fail login count'),
         hidden: true,
-        Cell: ({ row: { original } }: CellProps<UserObject>) =>
-          original.fail_login_count ?? 0,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => original.fail_login_count ?? 0,
       },
       {
         accessor: 'created_on',
@@ -308,7 +314,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { created_on },
           },
-        }: CellProps<UserObject>) => created_on,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => created_on,
       },
       {
         accessor: 'changed_on',
@@ -319,7 +326,8 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { changed_on },
           },
-        }: CellProps<UserObject>) => changed_on,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => changed_on,
       },
       {
         accessor: 'last_login',
@@ -330,10 +338,12 @@ function UsersList({ user }: UsersListProps) {
           row: {
             original: { last_login },
           },
-        }: CellProps<UserObject>) => last_login,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => last_login,
       },
       {
-        Cell: ({ row: { original } }: CellProps<UserObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => {
             setCurrentUser(original);
             openModal(ModalType.EDIT);

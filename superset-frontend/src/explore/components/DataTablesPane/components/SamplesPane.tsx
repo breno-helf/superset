@@ -65,7 +65,8 @@ export const SamplesPane = ({
 }: SamplesPaneProps) => {
   const [filterText, setFilterText] = useState('');
   const [rowLimit, setRowLimit] = useState(DEFAULT_ROW_LIMIT);
-  const [data, setData] = useState<Record<string, unknown>[][]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useState<Record<string, any>[][]>([]);
   const [colnames, setColnames] = useState<string[]>([]);
   const [coltypes, setColtypes] = useState<GenericDataType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);

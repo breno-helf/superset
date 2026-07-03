@@ -32,7 +32,8 @@ import DatasourceModalComponent, { buildExtraJsonObject } from '.';
 
 // Cast to accept partial mock props in tests
 const DatasourceModal = DatasourceModalComponent as unknown as React.FC<
-  Record<string, unknown>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, any>
 >;
 
 // Define your constants here
@@ -312,25 +313,25 @@ describe('DatasourceModal', () => {
 
 describe('buildExtraJsonObject', () => {
   test('returns "{}" for an item with no warning and no certification', () => {
-    expect(buildExtraJsonObject({} as unknown)).toBe('{}');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(buildExtraJsonObject({} as any)).toBe('{}');
   });
 
   test('drops warning_markdown when its value is null', () => {
-    expect(buildExtraJsonObject({ warning_markdown: null } as unknown)).toBe(
-      '{}',
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(buildExtraJsonObject({ warning_markdown: null } as any)).toBe('{}');
   });
 
   test('drops warning_markdown when its value is an empty string', () => {
-    expect(buildExtraJsonObject({ warning_markdown: '' } as unknown)).toBe(
-      '{}',
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(buildExtraJsonObject({ warning_markdown: '' } as any)).toBe('{}');
   });
 
   test('preserves a non-empty warning_markdown verbatim', () => {
-    expect(
-      buildExtraJsonObject({ warning_markdown: '⚠ caveat' } as unknown),
-    ).toBe('{"warning_markdown":"⚠ caveat"}');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(buildExtraJsonObject({ warning_markdown: '⚠ caveat' } as any)).toBe(
+      '{"warning_markdown":"⚠ caveat"}',
+    );
   });
 
   test('preserves certification and drops null warning_markdown', () => {
@@ -339,7 +340,8 @@ describe('buildExtraJsonObject', () => {
         certified_by: 'data-team',
         certification_details: 'verified',
         warning_markdown: null,
-      } as unknown),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any),
     ).toBe(
       '{"certification":{"certified_by":"data-team","details":"verified"}}',
     );

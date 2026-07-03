@@ -97,7 +97,8 @@ export const OAuth2ClientField = ({
     return null;
   }
 
-  const handleChange = (key: unknown) => (e: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChange = (key: any) => (e: any) => {
     const updatedInfo = {
       ...oauth2ClientInfo,
       [key]: e.target.value,

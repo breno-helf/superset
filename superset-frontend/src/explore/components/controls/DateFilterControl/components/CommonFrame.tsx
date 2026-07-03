@@ -50,9 +50,8 @@ export function CommonFrame(props: FrameComponentProps) {
         }}
         size="large"
         value={commonRange}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          props.onChange(e.target.value)
-        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onChange={(e: any) => props.onChange(e.target.value)}
         options={COMMON_RANGE_OPTIONS}
       />
     </>

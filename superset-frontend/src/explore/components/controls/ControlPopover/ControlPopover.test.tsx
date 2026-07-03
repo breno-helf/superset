@@ -46,10 +46,12 @@ const setupTest = (props: Partial<PopoverProps> = createProps()) => {
   const setStateMock = jest.fn();
   jest
     .spyOn(global.React, 'useState')
-    .mockImplementation(((state: unknown) => [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .mockImplementation(((state: any) => [
       state,
       state === 'right' ? setStateMock : jest.fn(),
-    ]) as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ]) as any);
 
   const { container, rerender } = render(<TestComponent {...props} />);
 

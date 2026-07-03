@@ -83,7 +83,8 @@ interface ReportProps {
   dashboardId?: number;
   dashboardName?: string;
   creationMethod: ReportCreationMethod;
-  props: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: any;
 }
 
 const TEXT_BASED_VISUALIZATION_TYPES = [
@@ -159,7 +160,8 @@ function ReportModal({
 
   const dispatch = useDispatch();
   // Report fetch logic
-  const report = useSelector<unknown, ReportObject>(state => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const report = useSelector<any, ReportObject>(state => {
     const resourceType = dashboardId
       ? CreationMethod.Dashboards
       : CreationMethod.Charts;

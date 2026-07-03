@@ -38,10 +38,12 @@ function MetricDefinitionOption({
   addWarningToast,
 }: MetricDefinitionOptionProps) {
   if (option.metric_name) {
-    return <StyledMetricOption metric={option as unknown} showType />;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return <StyledMetricOption metric={option as any} showType />;
   }
   if (option.column_name) {
-    return <StyledColumnOption column={option as unknown} showType />;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return <StyledColumnOption column={option as any} showType />;
   }
   if (option.aggregate_name) {
     return (

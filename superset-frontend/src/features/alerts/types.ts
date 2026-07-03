@@ -103,9 +103,11 @@ export type ExtraNativeFilter = {
   filterType?: string;
   columnName?: string;
   columnLabel?: string;
-  filterValues?: unknown[] | [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filterValues?: Array<any> | [];
   nativeFilterId?: string | null;
-  optionFilterValues?: unknown[] | [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  optionFilterValues?: Array<any> | [];
 };
 
 export type Extra = {
@@ -208,7 +210,8 @@ export enum ContentType {
 }
 
 export type NativeFilterObject = {
-  cascadeParentIds: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  cascadeParentIds: any[];
   chartsInScope: number[];
   controlValues: {
     defaultToFirstItem: boolean;
@@ -218,20 +221,25 @@ export type NativeFilterObject = {
     searchAllOptions: boolean;
   };
   defaultDataMask: {
-    extraFormData: Record<string, unknown>;
-    filterState: Record<string, unknown>;
-    ownState: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    extraFormData: Record<string, any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    filterState: Record<string, any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ownState: Record<string, any>;
   };
   description: string;
   filterType: string;
   id: string;
   name: string;
   scope: {
-    excluded: unknown[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    excluded: any[];
     rootPath: string[];
   };
   tabsInScope: string[];
-  adhoc_filters: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  adhoc_filters: any[];
   targets: Array<{
     column: {
       name: string;

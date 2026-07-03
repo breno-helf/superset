@@ -51,7 +51,8 @@ interface VerticalBarConfig {
   filtersOpen: boolean;
   height: number | string;
   offset: number;
-  toggleFiltersBar: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  toggleFiltersBar: any;
   width: number;
 }
 

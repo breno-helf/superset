@@ -293,13 +293,15 @@ test('fetchCompatibility ignores stale async responses', async () => {
     7,
     ['m1'],
     ['d1'],
-  )(dispatch as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  )(dispatch as any);
   const secondThunk = actions.fetchCompatibility(
     'semantic_view',
     7,
     ['m2'],
     ['d2'],
-  )(dispatch as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  )(dispatch as any);
 
   resolveSecond!({
     json: {

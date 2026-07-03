@@ -16,7 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-let scrollTopDashboardInterval: ReturnType<typeof setInterval> | undefined;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let scrollTopDashboardInterval: any;
 const SCROLL_STEP = 120;
 const INTERVAL_DELAY = 50;
 

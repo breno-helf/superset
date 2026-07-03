@@ -104,7 +104,8 @@ export interface ColumnSelectPopoverProps {
   disabledTabs?: Set<string>;
   metrics?: Metric[];
   selectedMetrics?: QueryFormMetric[];
-  datasource?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource?: any;
 }
 
 const getInitialColumnValues = (

@@ -282,10 +282,8 @@ const getDefaultState = (orientation: FilterBarOrientation) => ({
   datasources: {},
 });
 
-function setupWithFilters(
-  overrideState: Record<string, unknown> = {},
-  props: Record<string, unknown> = {},
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function setupWithFilters(overrideState: any = {}, props: any = {}) {
   const state = {
     ...getDefaultState(FilterBarOrientation.Vertical),
     ...overrideState,
@@ -381,7 +379,8 @@ test('FilterControls should correctly pass isOverflowing prop to filter controls
 
 test('FilterControls should handle empty filters list', () => {
   const state = getDefaultState(FilterBarOrientation.Vertical);
-  state.nativeFilters.filters = {} as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state.nativeFilters.filters = {} as any;
 
   const { container } = setupWithFilters(state);
   expect(container).toBeInTheDocument();

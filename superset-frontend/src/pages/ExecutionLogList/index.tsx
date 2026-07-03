@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -66,7 +65,8 @@ function ExecutionLog({
   addSuccessToast,
   isReportEnabled,
 }: ExecutionLogProps) {
-  const { alertId } = useParams<{ alertId: string }>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { alertId }: any = useParams();
   const {
     state: { loading, resourceCount: logCount, resourceCollection: logs },
     fetchData,
@@ -99,7 +99,8 @@ function ExecutionLog({
           row: {
             original: { state },
           },
-        }: CellProps<ExecutionLogObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <AlertStatusIcon state={state} isReportEnabled={isReportEnabled} />
         ),
         accessor: 'state',
@@ -113,8 +114,8 @@ function ExecutionLog({
           row: {
             original: { uuid: executionId },
           },
-        }: CellProps<ExecutionLogObject>) =>
-          executionId ? executionId.slice(0, 6) : 'none',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (executionId ? executionId.slice(0, 6) : 'none'),
         accessor: 'uuid',
         Header: t('Execution ID'),
         size: 'xs',
@@ -126,7 +127,8 @@ function ExecutionLog({
           row: {
             original: { scheduled_dttm: scheduledDttm },
           },
-        }: CellProps<ExecutionLogObject>) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) =>
           dayjs(new Date(scheduledDttm)).format('YYYY-MM-DD hh:mm:ss a'),
         accessor: 'scheduled_dttm',
         Header: t('Scheduled at (UTC)'),
@@ -175,7 +177,8 @@ function ExecutionLog({
           row: {
             original: { error_message = '' },
           },
-        }: CellProps<ExecutionLogObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Tooltip title={error_message} placement="topLeft">
             <span>{error_message}</span>
           </Tooltip>

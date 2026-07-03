@@ -35,26 +35,16 @@ import {
 } from '../styles';
 
 interface DatasetLayoutProps {
-  header?: ReactElement<
-    unknown,
-    string | JSXElementConstructor<unknown>
-  > | null;
-  leftPanel?: ReactElement<
-    unknown,
-    string | JSXElementConstructor<unknown>
-  > | null;
-  datasetPanel?: ReactElement<
-    unknown,
-    string | JSXElementConstructor<unknown>
-  > | null;
-  rightPanel?: ReactElement<
-    unknown,
-    string | JSXElementConstructor<unknown>
-  > | null;
-  footer?: ReactElement<
-    unknown,
-    string | JSXElementConstructor<unknown>
-  > | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  header?: ReactElement<any, string | JSXElementConstructor<any>> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  leftPanel?: ReactElement<any, string | JSXElementConstructor<any>> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasetPanel?: ReactElement<any, string | JSXElementConstructor<any>> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rightPanel?: ReactElement<any, string | JSXElementConstructor<any>> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  footer?: ReactElement<any, string | JSXElementConstructor<any>> | null;
 }
 
 export default function DatasetLayout({

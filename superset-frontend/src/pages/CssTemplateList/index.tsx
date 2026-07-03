@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -145,9 +144,8 @@ function CssTemplatesList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<CssTemplateObject>) => (
-          <ModifiedInfo date={changedOn} user={changedBy} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
@@ -155,7 +153,8 @@ function CssTemplatesList({
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: CellProps<CssTemplateObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => handleCssTemplateEdit(original);
           const handleDelete = () => setTemplateCurrentlyDeleting(original);
 

@@ -26,7 +26,8 @@ interface StyledFormItemWithTipProps {
   tip: string;
   name: string;
   children: ReactNode;
-  rules?: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rules?: any[];
 }
 
 const StyledFormItemWithTip: FC<StyledFormItemWithTipProps> = ({

@@ -33,7 +33,8 @@ import { setItem, LocalStorageKeys } from 'src/utils/localStorageHelpers';
 
 // Cast to accept partial mock props in tests
 const ChartContainer = ChartContainerComponent as unknown as React.FC<
-  Record<string, unknown>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, any>
 >;
 
 const createProps = (overrides = {}) => ({

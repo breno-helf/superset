@@ -62,7 +62,8 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(true);
   });
 
   test('returns false if a parent DOES have adequate width for child', () => {
@@ -90,7 +91,8 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
   });
 
   test('returns false if a child CAN shrink to available parent space', () => {
@@ -118,7 +120,8 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
   });
 
   test('returns true if a child CANNOT shrink to available parent space', () => {
@@ -147,7 +150,8 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(true);
   });
 
   test('returns true if a column has children that CANNOT shrink to available parent space', () => {
@@ -185,13 +189,16 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(true);
     // remove children
     expect(
       dropOverflowsParent(dropResult, {
         ...layout,
-        dragging: { ...layout.dragging, children: [] } as unknown,
-      } as unknown),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        dragging: { ...layout.dragging, children: [] } as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any),
     ).toBe(false);
   });
 
@@ -206,11 +213,13 @@ describe('dropOverflowsParent', () => {
       a: {
         id: 'a',
         type: ROW_TYPE,
-        children: [] as unknown,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        children: [] as any,
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
   });
 
   test('source/destination without widths should not overflow parent', () => {
@@ -231,6 +240,7 @@ describe('dropOverflowsParent', () => {
       },
     };
 
-    expect(dropOverflowsParent(dropResult, layout as unknown)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(dropOverflowsParent(dropResult, layout as any)).toBe(false);
   });
 });

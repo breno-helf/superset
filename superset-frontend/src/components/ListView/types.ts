@@ -25,7 +25,8 @@ export interface SortColumn {
 
 export interface SelectOption {
   label: ReactNode;
-  value: string | number | boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any;
   // Plain-text representation of the option. Callers should set this when
   // `label` is a ReactNode so that the option can be serialized (e.g. into
   // URL filter state) without losing the human-readable name.
@@ -35,9 +36,11 @@ export interface SelectOption {
 
 export interface CardSortSelectOption {
   desc: boolean;
-  id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  id: any;
   label: string;
-  value: string | number | boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any;
 }
 
 export interface ListViewFilter {
@@ -58,7 +61,8 @@ export interface ListViewFilter {
   unfilteredLabel?: string;
   selects?: SelectOption[];
   onFilterOpen?: () => void;
-  onFilterUpdate?: (value?: InnerFilterValue) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onFilterUpdate?: (value?: any) => void;
   fetchSelects?: (
     filterValue: string,
     page: number,

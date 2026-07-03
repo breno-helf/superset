@@ -34,7 +34,8 @@ import AlertListComponent from 'src/pages/AlertReportList';
 jest.setTimeout(30000);
 
 const AlertList = AlertListComponent as unknown as React.FC<
-  Record<string, unknown>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, any>
 >;
 
 // -- Mock data (IDs start at 1 to avoid the `if (data?.id)` falsy guard) --
@@ -149,7 +150,8 @@ const ENDPOINTS = {
 
 // -- Render helper --
 
-const renderAlertList = (props: Record<string, unknown> = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderAlertList = (props: Record<string, any> = {}) => {
   const store = createStore();
   return render(
     <Provider store={store}>
@@ -172,7 +174,8 @@ const setupMocks = (
 
   fetchMock.get(
     ENDPOINTS.LIST,
-    ({ url }: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ({ url }: any) => {
       if (listData) {
         return {
           result: listData,
@@ -321,9 +324,8 @@ test('switching to Reports refetches and renders only report rows', async () => 
   // API called with Report filter
   const listCalls = fetchMock.callHistory.calls('list');
   expect(listCalls.length).toBeGreaterThanOrEqual(1);
-  const reportCall = listCalls.find((c: unknown) =>
-    c.url.includes('value:Report'),
-  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const reportCall = listCalls.find((c: any) => c.url.includes('value:Report'));
   expect(reportCall).toBeDefined();
 });
 
@@ -333,7 +335,8 @@ test('delete removes row after confirmation', async () => {
   fetchMock.removeRoute('list');
   fetchMock.get(
     ENDPOINTS.LIST,
-    (_callLog: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (_callLog: any) => {
       const remaining = mockAlerts.filter(a => !deletedIds.has(a.id));
       return {
         result: remaining,
@@ -348,7 +351,8 @@ test('delete removes row after confirmation', async () => {
   fetchMock.removeRoute('delete-alert');
   fetchMock.delete(
     ENDPOINTS.SINGLE,
-    ({ url }: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ({ url }: any) => {
       const match = url.match(/\/report\/(\d+)/);
       if (match) deletedIds.add(Number(match[1]));
       return {};

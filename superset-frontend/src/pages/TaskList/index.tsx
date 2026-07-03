@@ -455,7 +455,8 @@ function TaskList({ addDangerToast, addSuccessToast, user }: TaskListProps) {
 
           const isSharedTask = original.scope === TaskScope.Shared;
           const userIsSubscribed = original.subscribers?.some(
-            (sub: unknown) => sub.user_id === user.userId,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (sub: any) => sub.user_id === user.userId,
           );
 
           // Check if task is in a non-active state (completed or aborting)

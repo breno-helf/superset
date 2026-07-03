@@ -151,7 +151,8 @@ type UpdateDatasetPayload = {
   dbId: number;
   datasetId: number;
   sql: string;
-  columns: Array<Record<string, unknown>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columns: Array<Record<string, any>>;
   owners: number[];
   overrideColumns: boolean;
   templateParams?: string;
@@ -231,7 +232,8 @@ export const SaveDatasetModal = ({
   );
   const [shouldOverwriteDataset, setShouldOverwriteDataset] = useState(false);
   const [datasetToOverwrite, setDatasetToOverwrite] = useState<
-    Record<string, unknown>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>
   >({});
   const [selectedDatasetToOverwrite, setSelectedDatasetToOverwrite] = useState<
     SelectValue | undefined
@@ -400,10 +402,8 @@ export const SaveDatasetModal = ({
       });
   };
 
-  const handleOverwriteDatasetOption = (
-    value: SelectValue,
-    option: unknown,
-  ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOverwriteDatasetOption = (value: SelectValue, option: any) => {
     setDatasetToOverwrite(option);
     setSelectedDatasetToOverwrite(value);
   };

@@ -29,9 +29,12 @@ export interface ColorType {
 
 export interface ContourType extends OptionValueType {
   color?: ColorType | undefined;
-  lowerThreshold?: number | string | undefined;
-  upperThreshold?: number | string | undefined;
-  strokeWidth?: number | string | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  lowerThreshold?: any | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  upperThreshold?: any | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  strokeWidth?: any | undefined;
 }
 
 export interface ErrorMapType {

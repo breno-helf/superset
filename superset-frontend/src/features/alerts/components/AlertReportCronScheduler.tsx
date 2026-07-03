@@ -31,7 +31,8 @@ import { StyledInputContainer } from '../AlertReportModal';
 
 export interface AlertReportCronSchedulerProps {
   value: string;
-  onChange: (change: string) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (change: string) => any;
 }
 
 enum ScheduleType {

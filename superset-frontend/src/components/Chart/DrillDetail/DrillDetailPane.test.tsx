@@ -32,7 +32,8 @@ import { supersetGetCache } from 'src/utils/cachedSupersetGet';
 import DrillDetailPane from './DrillDetailPane';
 
 const chart = chartQueries[sliceId];
-const setup = (overrides: Record<string, unknown> = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (overrides: Record<string, any> = {}) => {
   const store = getMockStoreWithNativeFilters();
   const props = {
     initialFilters: [],
@@ -45,7 +46,8 @@ const setup = (overrides: Record<string, unknown> = {}) => {
   });
 };
 
-const waitForRender = (overrides: Record<string, unknown> = {}) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const waitForRender = (overrides: Record<string, any> = {}) =>
   waitFor(() => setup(overrides));
 
 const SAMPLES_ENDPOINT =

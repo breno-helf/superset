@@ -317,7 +317,8 @@ export function groupFiltersByTarget(
 }
 
 export function buildFilterScopesFromFilters(
-  filters: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filters: any,
 ): Record<string, string[]> {
   const filterScopes: Record<string, string[]> = {};
 

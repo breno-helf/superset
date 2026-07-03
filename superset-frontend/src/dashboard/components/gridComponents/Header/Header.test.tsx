@@ -35,13 +35,16 @@ describe('Header', () => {
     id: string;
     dashboardId: string;
     parentId: string;
-    component: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    component: any;
     depth: number;
-    parentComponent: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    parentComponent: any;
     index: number;
     editMode: boolean;
     embeddedMode: boolean;
-    filters: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    filters: Record<string, any>;
     handleComponentDrop: () => void;
     deleteComponent: jest.Mock;
     updateComponents: jest.Mock;
@@ -130,7 +133,8 @@ describe('Header', () => {
     expect(updateComponents).toHaveBeenCalledTimes(1);
     const componentUpdates = updateComponents.mock.calls[0][0] as Record<
       string,
-      unknown
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      any
     >;
     expect(componentUpdates[headerId].meta.text).toBe('New title');
   });

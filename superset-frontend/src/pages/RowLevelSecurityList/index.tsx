@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -159,16 +158,16 @@ function RowLevelSecurityList(props: RLSProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<RowLevelSecurityObject>) => (
-          <ModifiedInfo date={changedOn} user={changedBy} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: CellProps<RowLevelSecurityObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleDelete = () =>
             handleRuleDelete(
               original,

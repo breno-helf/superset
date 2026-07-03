@@ -366,7 +366,8 @@ const globalPredicate =
 
 const onDidQueryRun: typeof sqlLabApi.onDidQueryRun = (
   listener: (queryContext: sqlLabApi.QueryContext) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(START_QUERY),
@@ -377,7 +378,8 @@ const onDidQueryRun: typeof sqlLabApi.onDidQueryRun = (
 
 const onDidQuerySuccess: typeof sqlLabApi.onDidQuerySuccess = (
   listener: (queryResultContext: sqlLabApi.QueryResultContext) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(QUERY_SUCCESS),
@@ -389,7 +391,8 @@ const onDidQuerySuccess: typeof sqlLabApi.onDidQuerySuccess = (
 
 const onDidQueryStop: typeof sqlLabApi.onDidQueryStop = (
   listener: (queryContext: sqlLabApi.QueryContext) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(STOP_QUERY),
@@ -402,7 +405,8 @@ const onDidQueryFail: typeof sqlLabApi.onDidQueryFail = (
   listener: (
     queryErrorResultContext: sqlLabApi.QueryErrorResultContext,
   ) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(QUERY_FAILED),
@@ -414,7 +418,8 @@ const onDidQueryFail: typeof sqlLabApi.onDidQueryFail = (
 
 const onDidChangeEditorDatabase: typeof sqlLabApi.onDidChangeEditorDatabase = (
   listener: (e: number) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(QUERY_EDITOR_SETDB),
@@ -426,7 +431,8 @@ const onDidChangeEditorDatabase: typeof sqlLabApi.onDidChangeEditorDatabase = (
 
 const onDidCloseTab: typeof sqlLabApi.onDidCloseTab = (
   listener: (tab: sqlLabApi.Tab) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     globalPredicate(REMOVE_QUERY_EDITOR),
@@ -447,7 +453,8 @@ const onDidCloseTab: typeof sqlLabApi.onDidCloseTab = (
 
 const onDidChangeActiveTab: typeof sqlLabApi.onDidChangeActiveTab = (
   listener: (tab: sqlLabApi.Tab) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     globalPredicate(SET_ACTIVE_QUERY_EDITOR),
@@ -459,7 +466,8 @@ const onDidChangeActiveTab: typeof sqlLabApi.onDidChangeActiveTab = (
 
 const onDidChangeEditorSchema: typeof sqlLabApi.onDidChangeEditorSchema = (
   listener: (schema: string) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(QUERY_EDITOR_SET_SCHEMA),
@@ -470,7 +478,8 @@ const onDidChangeEditorSchema: typeof sqlLabApi.onDidChangeEditorSchema = (
 
 const onDidChangeActivePanel: typeof sqlLabApi.onDidChangeActivePanel = (
   listener: (panel: sqlLabApi.Panel) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     globalPredicate(SET_ACTIVE_SOUTHPANE_TAB),
@@ -481,7 +490,8 @@ const onDidChangeActivePanel: typeof sqlLabApi.onDidChangeActivePanel = (
 
 const onDidChangeTabTitle: typeof sqlLabApi.onDidChangeTabTitle = (
   listener: (title: string) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     predicate(QUERY_EDITOR_SET_TITLE),
@@ -495,7 +505,8 @@ const onDidChangeTabTitle: typeof sqlLabApi.onDidChangeTabTitle = (
  */
 const onDidCreateTab: typeof sqlLabApi.onDidCreateTab = (
   listener: (tab: sqlLabApi.Tab) => void,
-  thisArgs?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArgs?: any,
 ): Disposable =>
   createActionListener(
     globalPredicate(ADD_QUERY_EDITOR),
@@ -559,7 +570,8 @@ const createTab: typeof sqlLabApi.createTab = async (
     name,
   };
 
-  store.dispatch(addQueryEditor(newQueryEditor) as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  store.dispatch(addQueryEditor(newQueryEditor) as any);
 
   // Get the newly created tab
   const updatedState = store.getState() as SqlLabRootState;
@@ -656,7 +668,8 @@ const executeQuery: typeof sqlLabApi.executeQuery = async options => {
   };
 
   // Cast to any because store.dispatch type doesn't include thunk middleware types
-  store.dispatch(runQueryAction(query) as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  store.dispatch(runQueryAction(query) as any);
 
   return queryId;
 };
@@ -669,7 +682,8 @@ const cancelQuery: typeof sqlLabApi.cancelQuery = async (queryId: string) => {
     // Dispatch stopQueryAction to emit STOP_QUERY event for onDidQueryStop listeners
     store.dispatch(stopQueryAction(query));
     // Dispatch postStopQuery to send HTTP request to cancel on server
-    store.dispatch(postStopQuery(query as unknown) as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    store.dispatch(postStopQuery(query as any) as any);
   }
 };
 

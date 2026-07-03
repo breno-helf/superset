@@ -30,7 +30,8 @@ import { RootState } from '../../types';
 import { isChartWithoutGroupBy } from '../../util/charts/chartTypeLimitations';
 
 const getCustomizationDataset = (
-  item: ChartCustomization | unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: ChartCustomization | any,
 ): string | number | null => {
   if (item.targets?.[0]?.datasetId !== undefined) {
     return item.targets[0].datasetId;

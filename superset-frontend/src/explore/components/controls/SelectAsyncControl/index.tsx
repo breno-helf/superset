@@ -37,7 +37,8 @@ interface SelectAsyncControlProps extends SelectAsyncProps {
   dataEndpoint: string;
   default?: SelectValue;
   mutator?: (
-    response: Record<string, unknown>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    response: Record<string, any>,
     value: SelectValue | undefined,
   ) => SelectOptionsType;
   multi?: boolean;

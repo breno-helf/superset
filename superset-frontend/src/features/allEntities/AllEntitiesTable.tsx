@@ -126,7 +126,8 @@ export default function AllEntitiesTable({
               row: {
                 original: { owners = [] },
               },
-            }: unknown) => <FacePile users={owners} />,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            }: any) => <FacePile users={owners} />,
             Header: t('Owners'),
             accessor: 'owners',
             disableSortBy: true,

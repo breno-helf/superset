@@ -268,7 +268,8 @@ export const useFilterControlDisplay = (
       if (overflow) {
         return {
           FilterControlContainer: HorizontalOverflowFilterControlContainer,
-          FormItem: (props: unknown) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          FormItem: (props: any) => (
             <HorizontalOverflowFormItem
               {...props}
               inverseSelection={inverseSelection}
@@ -280,7 +281,8 @@ export const useFilterControlDisplay = (
       }
       return {
         FilterControlContainer: HorizontalFilterControlContainer,
-        FormItem: (props: unknown) => (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        FormItem: (props: any) => (
           <HorizontalFormItem {...props} inverseSelection={inverseSelection} />
         ),
         FilterControlTitleBox: HorizontalFilterControlTitleBox,
@@ -289,7 +291,8 @@ export const useFilterControlDisplay = (
     }
     return {
       FilterControlContainer: VerticalFilterControlContainer,
-      FormItem: (props: unknown) => (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      FormItem: (props: any) => (
         <VerticalFormItem {...props} inverseSelection={inverseSelection} />
       ),
       FilterControlTitleBox: VerticalFilterControlTitleBox,

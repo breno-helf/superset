@@ -25,7 +25,8 @@ type TimeRangeValueType = [string, string];
 
 export interface TimeRangeControlProps extends ControlHeaderProps {
   value?: TimeRangeValueType;
-  onChange?: (value: TimeRangeValueType, errors: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange?: (value: TimeRangeValueType, errors: any) => void;
   allowClear?: boolean;
   showNow?: boolean;
   allowEmpty?: [boolean, boolean];

@@ -20,7 +20,8 @@ import { GenericDataType } from '@apache-superset/core/common';
 
 export type ResultsPage = {
   total: number;
-  data: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>[];
   colNames: string[];
   colTypes: GenericDataType[];
 };

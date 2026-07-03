@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -80,8 +79,10 @@ const StyledCodeSyntaxHighlighter = styled(CodeSyntaxHighlighter)`
 `;
 
 interface QueryListProps {
-  addDangerToast: (msg: string, config?: unknown) => unknown;
-  addSuccessToast: (msg: string, config?: unknown) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addDangerToast: (msg: string, config?: any) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addSuccessToast: (msg: string, config?: any) => any;
 }
 
 const StyledTableLabel = styled.div`
@@ -234,7 +235,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { start_time },
           },
-        }: CellProps<QueryObject>) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
           const start = extendedDayjs.utc(start_time).local();
           const formattedStartTimeData = start
             .format(DATETIME_WITH_TIME_ZONE)
@@ -257,7 +259,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { status, start_time, start_running_time, end_time },
           },
-        }: CellProps<QueryObject>) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
           const timerType = status === QueryState.Failed ? 'danger' : status;
           // Use start_running_time if available for more accurate duration
           const startTime = start_running_time || start_time;
@@ -303,8 +306,10 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { sql_tables: tables = [] },
           },
-        }: CellProps<QueryObject>) => {
-          const names = tables.map((table: unknown) => table.table);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const names = tables.map((table: any) => table.table);
           const main = names.length > 0 ? names.shift() : '';
 
           if (names.length) {
@@ -345,7 +350,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { user },
           },
-        }: CellProps<QueryObject>) => getOwnerName(user),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => getOwnerName(user),
         id: QueryObjectColumns.UserFirstName,
       },
       {
@@ -362,7 +368,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
       {
         accessor: QueryObjectColumns.Sql,
         Header: t('SQL'),
-        Cell: ({ row: { original, id } }: CellProps<QueryObject>) => (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original, id } }: any) => (
           <div
             tabIndex={0}
             role="button"
@@ -399,7 +406,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
           row: {
             original: { id },
           },
-        }: CellProps<QueryObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Tooltip title={t('Open query in SQL Lab')} placement="bottom">
             <Link to={`/sqllab?queryId=${id}`}>
               <Icons.Full iconSize="l" />

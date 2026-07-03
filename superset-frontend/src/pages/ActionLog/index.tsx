@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -148,7 +147,8 @@ function ActionLogList() {
           row: {
             original: { action },
           },
-        }: CellProps<ActionLogObject>) => <span>{action}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{action}</span>,
       },
       {
         accessor: 'user',
@@ -157,7 +157,8 @@ function ActionLogList() {
           row: {
             original: { user },
           },
-        }: CellProps<ActionLogObject>) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
           const username = user?.username ?? '';
           const fullName = [user?.first_name, user?.last_name]
             .filter(Boolean)
@@ -183,7 +184,8 @@ function ActionLogList() {
           row: {
             original: { duration_ms },
           },
-        }: CellProps<ActionLogObject>) => <span>{duration_ms}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{duration_ms}</span>,
       },
       {
         accessor: 'dashboard_id',
@@ -193,7 +195,8 @@ function ActionLogList() {
           row: {
             original: { dashboard_id },
           },
-        }: CellProps<ActionLogObject>) => <span>{dashboard_id}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{dashboard_id}</span>,
       },
       {
         accessor: 'slice_id',
@@ -203,7 +206,8 @@ function ActionLogList() {
           row: {
             original: { slice_id },
           },
-        }: CellProps<ActionLogObject>) => <span>{slice_id}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{slice_id}</span>,
       },
       {
         accessor: 'json',
@@ -213,7 +217,8 @@ function ActionLogList() {
           row: {
             original: { json },
           },
-        }: CellProps<ActionLogObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Typography.Text
             css={css`
               .ant-typography-copy {
@@ -241,7 +246,8 @@ function ActionLogList() {
           row: {
             original: { referrer },
           },
-        }: CellProps<ActionLogObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Typography.Text
             css={css`
               .ant-typography-copy {
@@ -270,7 +276,8 @@ function ActionLogList() {
           row: {
             original: { dttm },
           },
-        }: CellProps<ActionLogObject>) => <span>{dttm}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{dttm}</span>,
       },
     ],
     [],

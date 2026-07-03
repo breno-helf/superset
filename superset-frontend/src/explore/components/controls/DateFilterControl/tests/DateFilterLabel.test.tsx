@@ -37,7 +37,8 @@ const defaultProps = {
 
 function setup(
   props: Omit<DateFilterControlProps, 'name'> = defaultProps,
-  store: unknown = mockStore({}),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  store: any = mockStore({}),
 ) {
   return (
     <Provider store={store}>

@@ -18,17 +18,19 @@
  */
 
 export const cacheWrapper =
-  <T extends unknown[], U>(
-    fn: (...args: T) => U,
-    cache: Map<string, unknown>,
-    keyFn: (...args: T) => string = (...args: T) => JSON.stringify([...args]),
-  ) =>
-  (...args: T): U => {
-    const key = keyFn(...args);
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    const result = fn(...args);
-    cache.set(key, result);
-    return result;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <T extends Array<any>, U>(
+      fn: (...args: T) => U,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      cache: Map<string, any>,
+      keyFn: (...args: T) => string = (...args: T) => JSON.stringify([...args]),
+    ) =>
+    (...args: T): U => {
+      const key = keyFn(...args);
+      if (cache.has(key)) {
+        return cache.get(key);
+      }
+      const result = fn(...args);
+      cache.set(key, result);
+      return result;
+    };

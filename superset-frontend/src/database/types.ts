@@ -41,11 +41,13 @@ export interface Column {
 export interface QueryExecuteResponse {
   status: string;
   query_id: string;
-  data: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
   columns: Column[];
   selected_columns: Column[];
   expanded_columns: Column[];
-  query: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  query: any;
 }
 
 export interface QueryAdhocState {

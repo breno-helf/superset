@@ -41,7 +41,8 @@ const defaultProps = {
   index: 0,
 };
 
-const setup = (overrides?: Record<string, unknown>) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (overrides?: Record<string, any>) =>
   render(<OptionControlLabel {...defaultProps} {...overrides} />, {
     useDndKit: true,
   });

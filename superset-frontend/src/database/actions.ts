@@ -61,9 +61,8 @@ export function setQueryError(error: string) {
   };
 }
 export function executeQuery(payload: QueryExecutePayload) {
-  return async function (
-    dispatch: ThunkDispatch<unknown, undefined, AnyAction>,
-  ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return async function (dispatch: ThunkDispatch<any, undefined, AnyAction>) {
     try {
       dispatch(setQueryIsLoading(true));
       const result = await executeQueryApi(payload);
@@ -77,7 +76,8 @@ export function executeQuery(payload: QueryExecutePayload) {
 }
 
 export function formatQuery(sql: string, options?: { signal?: AbortSignal }) {
-  return function (dispatch: ThunkDispatch<unknown, undefined, AnyAction>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return function (dispatch: ThunkDispatch<any, undefined, AnyAction>) {
     return SupersetClient.post({
       endpoint: `/api/v1/sqllab/format_sql/`,
       body: JSON.stringify({ sql }),

@@ -51,20 +51,24 @@ describe('TimeTable Control Panel', () => {
   test('should have column collection control', () => {
     const querySection = controlPanelConfig.controlPanelSections[1];
     const columnCollectionRow = querySection!.controlSetRows.find(
-      (row: unknown) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (row: any) =>
         Array.isArray(row) &&
         row.length === 1 &&
         row[0].name === 'column_collection',
     );
 
     expect(columnCollectionRow).toBeDefined();
-    expect((columnCollectionRow as unknown)![0].config.type).toBe(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((columnCollectionRow as any)![0].config.type).toBe(
       'CollectionControl',
     );
-    expect((columnCollectionRow as unknown)![0].config.label).toBe(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((columnCollectionRow as any)![0].config.label).toBe(
       'Time series columns',
     );
-    expect((columnCollectionRow as unknown)![0].config.controlName).toBe(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((columnCollectionRow as any)![0].config.controlName).toBe(
       'TimeSeriesColumnControl',
     );
   });
@@ -72,13 +76,16 @@ describe('TimeTable Control Panel', () => {
   test('should have URL control', () => {
     const querySection = controlPanelConfig.controlPanelSections[1];
     const urlRow = querySection!.controlSetRows.find(
-      (row: unknown) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (row: any) =>
         Array.isArray(row) && row.length === 1 && row[0].name === 'url',
     );
 
     expect(urlRow).toBeDefined();
-    expect((urlRow as unknown)![0].config.type).toBe('TextControl');
-    expect((urlRow as unknown)![0].config.label).toBe('URL');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((urlRow as any)![0].config.type).toBe('TextControl');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((urlRow as any)![0].config.label).toBe('URL');
   });
 
   test('should have control overrides for groupby', () => {

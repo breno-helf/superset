@@ -61,7 +61,8 @@ const ExtensionsList: FunctionComponent<ExtensionsListProps> = ({
           row: {
             original: { name },
           },
-        }: unknown) => name,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => name,
       },
     ],
     [loading], // We need to monitor loading to avoid stale state in actions

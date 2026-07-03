@@ -96,8 +96,10 @@ type ConnectionItem = DatabaseObject & {
 };
 
 interface DatabaseDeleteObject extends DatabaseObject {
-  charts: unknown;
-  dashboards: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  charts: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dashboards: any;
   sqllab_tab_count: number;
 }
 interface DatabaseListProps {
@@ -233,10 +235,12 @@ function DatabaseList({
   const fetchData = showSemanticLayers ? combinedFetchData : dbFetchData;
   const refreshData = showSemanticLayers ? combinedRefreshData : dbRefreshData;
 
-  const fullUser = useSelector<unknown, UserWithPermissionsAndRoles>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fullUser = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,
   );
-  const shouldSyncPermsInAsyncMode = useSelector<unknown, boolean>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const shouldSyncPermsInAsyncMode = useSelector<any, boolean>(
     state => state.common?.conf.SYNC_DB_PERMISSIONS_IN_ASYNC_MODE,
   );
   const showDatabaseModal = getUrlParam(URL_PARAMS.showDatabaseModal);
@@ -278,7 +282,8 @@ function DatabaseList({
     COLUMNAR_EXTENSIONS,
     EXCEL_EXTENSIONS,
     ALLOWED_EXTENSIONS,
-  } = useSelector<unknown, ExtensionConfigs>(state => state.common.conf);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } = useSelector<any, ExtensionConfigs>(state => state.common.conf);
 
   useEffect(() => {
     if (query?.databaseAdded) {
@@ -410,13 +415,14 @@ function DatabaseList({
     };
     SupersetClient.get({
       endpoint: `/api/v1/database/?q=${rison.encode(payload)}`,
-    }).then(({ json }: Record<string, unknown>) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then(({ json }: Record<string, any>) => {
       // There might be some existing Gsheets and Clickhouse DBs
       // with allow_file_upload set as True which is not possible from now on
       const allowedDatabasesWithFileUpload =
         json?.result?.filter(
-          (database: unknown) =>
-            database?.engine_information?.supports_file_upload,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (database: any) => database?.engine_information?.supports_file_upload,
         ) || [];
       setAllowUploads(allowedDatabasesWithFileUpload?.length >= 1);
     });

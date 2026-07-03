@@ -1900,10 +1900,8 @@ test('handleChangeWithValidation function clears validation errors when called',
   });
 
   // Test the handleChangeWithValidation function behavior
-  const handleChangeWithValidation = (
-    actionType: unknown,
-    payload: unknown,
-  ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChangeWithValidation = (actionType: any, payload: any) => {
     mockOnChange(actionType, payload);
     handleClearValidationErrors();
   };
@@ -1938,10 +1936,8 @@ test('validates fix by testing all form field types clear validation errors', ()
     mockClearError();
   };
 
-  const handleChangeWithValidation = (
-    actionType: unknown,
-    payload: unknown,
-  ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChangeWithValidation = (actionType: any, payload: any) => {
     handleClearValidationErrors();
   };
 

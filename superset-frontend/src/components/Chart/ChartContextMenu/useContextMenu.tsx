@@ -25,13 +25,18 @@ import ChartContextMenu, {
 
 export const useContextMenu = (
   chartId: number,
-  formData: BaseFormData & { [key: string]: unknown },
-  onSelection?: (...args: unknown) => void,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formData: BaseFormData & { [key: string]: any },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSelection?: (...args: any) => void,
   displayedItems?: ContextMenuItem[] | ContextMenuItem,
   additionalConfig?: {
-    crossFilter?: Record<string, unknown>;
-    drillToDetail?: Record<string, unknown>;
-    drillBy?: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    crossFilter?: Record<string, any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    drillToDetail?: Record<string, any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    drillBy?: Record<string, any>;
   },
 ) => {
   const contextMenuRef = useRef<ChartContextMenuRef>(null);
@@ -46,7 +51,8 @@ export const useContextMenu = (
   };
 
   const handleContextMenuSelected = useCallback(
-    (...args: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (...args: any) => {
       setInContextMenu(false);
       onSelection?.(...args);
     },

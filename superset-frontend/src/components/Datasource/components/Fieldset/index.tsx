@@ -24,8 +24,10 @@ import Field from '../Field';
 
 export interface FieldsetProps {
   children: ReactNode;
-  onChange?: (updatedItem: Record<string, unknown>) => void;
-  item?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange?: (updatedItem: Record<string, any>) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item?: Record<string, any>;
   title?: ReactNode;
   compact?: boolean;
 }
@@ -40,7 +42,8 @@ export default function Fieldset({
   compact = false,
 }: FieldsetProps) {
   const handleChange = useCallback(
-    (fieldKey: fieldKeyType, val: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (fieldKey: fieldKeyType, val: any) => {
       onChange?.({
         ...item,
         [fieldKey]: val,

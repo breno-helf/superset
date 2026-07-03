@@ -940,7 +940,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
     setHasValidated(false);
     dbConfigExtraExtension
       ?.onSave(extraExtensionComponentState, db)
-      .then(({ error }: { error: unknown }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(({ error }: { error: any }) => {
         if (error) {
           dbConfigExtraExtensionOnSaveError = error;
           addDangerToast(error);
@@ -1066,7 +1067,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         if (onDatabaseAdd) onDatabaseAdd();
         dbConfigExtraExtension
           ?.onSave(extraExtensionComponentState, db)
-          .then(({ error }: { error: unknown }) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .then(({ error }: { error: any }) => {
             if (error) {
               dbConfigExtraExtensionOnSaveError = error;
               addDangerToast(error);
@@ -1092,7 +1094,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         if (onDatabaseAdd) onDatabaseAdd();
         dbConfigExtraExtension
           ?.onSave(extraExtensionComponentState, db)
-          .then(({ error }: { error: unknown }) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .then(({ error }: { error: any }) => {
             if (error) {
               dbConfigExtraExtensionOnSaveError = error;
               addDangerToast(error);
@@ -2005,10 +2008,10 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               value: target.value,
             })
           }
-          onEditorChange={(payload: {
-            name: string;
-            json: Record<string, unknown>;
-          }) => handleChangeWithValidation(ActionType.EditorChange, payload)}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onEditorChange={(payload: { name: string; json: any }) =>
+            handleChangeWithValidation(ActionType.EditorChange, payload)
+          }
           onExtraInputChange={(
             e: CheckboxChangeEvent | React.ChangeEvent<HTMLInputElement>,
           ) => {
@@ -2020,10 +2023,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               value: target.value,
             });
           }}
-          onExtraEditorChange={(payload: {
-            name: string;
-            json: Record<string, unknown>;
-          }) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onExtraEditorChange={(payload: { name: string; json: any }) =>
             handleChangeWithValidation(ActionType.ExtraEditorChange, payload)
           }
         />
@@ -2258,10 +2259,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                     value: target.value,
                   })
                 }
-                onEditorChange={(payload: {
-                  name: string;
-                  json: Record<string, unknown>;
-                }) =>
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                onEditorChange={(payload: { name: string; json: any }) =>
                   handleChangeWithValidation(ActionType.EditorChange, payload)
                 }
                 onExtraInputChange={(
@@ -2275,10 +2274,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                     value: target.value,
                   });
                 }}
-                onExtraEditorChange={(payload: {
-                  name: string;
-                  json: Record<string, unknown>;
-                }) =>
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                onExtraEditorChange={(payload: { name: string; json: any }) =>
                   handleChangeWithValidation(
                     ActionType.ExtraEditorChange,
                     payload,

@@ -55,7 +55,8 @@ const mockExportCurrentViewBehavior = () => {
   const registry = getChartMetadataRegistry();
   return jest.spyOn(registry, 'get').mockReturnValue({
     behaviors: ['EXPORT_CURRENT_VIEW'],
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 };
 
 const createProps = (additionalProps = {}) =>
@@ -648,7 +649,8 @@ describe('Additional actions tests', () => {
     const registry = getChartMetadataRegistry();
     const getSpy = jest.spyOn(registry, 'get').mockReturnValue({
       behaviors: ['EXPORT_CURRENT_VIEW'],
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     render(<ExploreHeader {...props} />, { useRedux: true });
 

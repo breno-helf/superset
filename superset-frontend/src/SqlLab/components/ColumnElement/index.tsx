@@ -22,7 +22,8 @@ import { t } from '@apache-superset/core/translation';
 import { styled, useTheme } from '@apache-superset/core/theme';
 import { Flex, Tooltip } from '@superset-ui/core/components';
 
-const StyledTooltip = (props: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const StyledTooltip = (props: any) => {
   const theme = useTheme();
   return (
     <ClassNames>

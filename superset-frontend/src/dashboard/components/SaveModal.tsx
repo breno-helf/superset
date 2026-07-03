@@ -46,15 +46,19 @@ type SaveModalProps = {
   addDangerToast: (arg: string) => void;
   dashboardId: number;
   dashboardTitle: string;
-  dashboardInfo: Record<string, unknown>;
-  expandedSlices: Record<string, unknown>;
-  layout: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dashboardInfo: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expandedSlices: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  layout: Record<string, any>;
   saveType: SaveType;
   triggerNode: JSX.Element;
   customCss: string;
   colorNamespace?: string;
   colorScheme?: string;
-  onSave: (data: unknown, id: number | string, saveType: SaveType) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSave: (data: any, id: number | string, saveType: SaveType) => void;
   canOverwrite: boolean;
   shouldPersistRefreshFrequency: boolean;
   refreshFrequency: number;

@@ -105,7 +105,8 @@ describe('dashboardState actions', () => {
   beforeEach(() => {
     postStub = jest
       .spyOn(SupersetClient, 'post')
-      .mockResolvedValue('the value you want to return' as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockResolvedValue('the value you want to return' as any);
     getStub = jest.spyOn(SupersetClient, 'get').mockResolvedValue({
       json: {
         result: {
@@ -113,12 +114,14 @@ describe('dashboardState actions', () => {
           css: updatedCss,
         },
       },
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
     putStub = jest.spyOn(SupersetClient, 'put').mockResolvedValue({
       json: {
         result: mockDashboardData,
       },
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
   });
   afterEach(() => {
     postStub.mockRestore();
@@ -128,7 +131,8 @@ describe('dashboardState actions', () => {
 
   function setup(stateOverrides: Record<string, unknown> = {}) {
     const state = { ...mockState, ...stateOverrides };
-    const getState = jest.fn(() => state) as unknown as () => unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const getState = jest.fn(() => state) as unknown as () => any;
     const dispatch = jest.fn();
     return { getState, dispatch, state };
   }
@@ -155,23 +159,16 @@ describe('dashboardState actions', () => {
 
       // start with mockDashboardData, it didn't have parents attr
       expect(
-        (
-          newDashboardData.positions[DASHBOARD_GRID_ID] as Record<
-            string,
-            unknown
-          >
-        ).parents,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (newDashboardData.positions[DASHBOARD_GRID_ID] as any).parents,
       ).not.toBeDefined();
 
       // mock redux work: dispatch an event, cause modify redux state
       const mockParentsList = ['ROOT_ID'];
       dispatch.mockImplementation(() => {
-        (
-          mockState.dashboardLayout.present[DASHBOARD_GRID_ID] as Record<
-            string,
-            unknown
-          >
-        ).parents = mockParentsList;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (mockState.dashboardLayout.present[DASHBOARD_GRID_ID] as any).parents =
+          mockParentsList;
       });
 
       // call saveDashboardRequest, it should post dashboard data with updated
@@ -252,7 +249,8 @@ describe('dashboardState actions', () => {
             id: newDashboardId,
           },
         },
-      } as unknown);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any);
 
       const thunk = saveDashboardRequest(
         newDashboardData,
@@ -290,7 +288,8 @@ describe('dashboardState actions', () => {
           result: { ...mockDashboardData, id: updatedId, slug: null },
           last_modified_time: 0,
         },
-      } as unknown);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any);
 
       const thunk = saveDashboardRequest(
         newDashboardData,

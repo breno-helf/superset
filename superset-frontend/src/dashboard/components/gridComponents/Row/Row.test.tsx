@@ -275,7 +275,8 @@ describe('visibility handling for intersection observers', () => {
   });
 
   afterAll(() => {
-    delete (window as Record<string, unknown>).IntersectionObserver;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    delete (window as any).IntersectionObserver;
   });
 
   test('should handle visibility prop changes without crashing', () => {

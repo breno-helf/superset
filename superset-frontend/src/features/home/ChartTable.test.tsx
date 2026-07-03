@@ -98,7 +98,8 @@ const renderOptions = {
   useRouter: true,
 };
 
-const renderChartTable = (props: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderChartTable = (props: any) =>
   // Use of act here prevents an error about state updates inside tests
   act(async () => {
     render(<ChartTable {...props} />, renderOptions);

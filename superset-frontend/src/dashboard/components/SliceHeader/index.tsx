@@ -187,7 +187,8 @@ const SliceHeader = forwardRef<HTMLDivElement, SliceHeaderProps>(
     const [headerTooltip, setHeaderTooltip] = useState<ReactNode | null>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     // TODO: change to indicator field after it will be implemented
-    const crossFilterValue = useSelector<RootState, unknown>(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const crossFilterValue = useSelector<RootState, any>(
       state => state.dataMask[slice?.slice_id]?.filterState?.value,
     );
     const isCrossFiltersEnabled = useSelector<RootState, boolean>(

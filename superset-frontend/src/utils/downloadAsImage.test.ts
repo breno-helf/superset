@@ -46,7 +46,8 @@ Object.defineProperty(document, 'fonts', {
 
 // Build a synthetic React event that resolves `currentTarget.closest()` to a given element
 function syntheticEventFor(el: Element) {
-  return { currentTarget: { closest: () => el } } as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return { currentTarget: { closest: () => el } } as any;
 }
 
 // Build and attach an ag-grid DOM structure; returns cleanup function
@@ -73,9 +74,10 @@ function attachMockApi(
   { firstDataRendered = true } = {},
 ) {
   const api = { setGridOption: jest.fn() };
-  (agContainer as Record<string, unknown>)._agGridApi = api;
-  (agContainer as Record<string, unknown>)._agGridFirstDataRendered =
-    firstDataRendered;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (agContainer as any)._agGridApi = api;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (agContainer as any)._agGridFirstDataRendered = firstDataRendered;
   return api;
 }
 
@@ -194,7 +196,8 @@ test('waitForStableScrollHeight resolves if scrollHeight throws (element removed
 test('shows warning toast when element is not found', async () => {
   const handler = downloadAsImageOptimized('div', 'test');
   // closest() returning null simulates a selector that matches nothing
-  await handler({ currentTarget: { closest: () => null } } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await handler({ currentTarget: { closest: () => null } } as any);
 
   expect(mockAddWarningToast).toHaveBeenCalledWith(
     'Image download failed, please refresh and try again.',
@@ -262,7 +265,8 @@ test('still captures image when _agGridApi is absent (graceful degradation)', as
   jest.useFakeTimers();
   const { container, agContainer, cleanup } = buildAgGridElement();
   // No API — only the first-data-rendered flag
-  (agContainer as Record<string, unknown>)._agGridFirstDataRendered = true;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (agContainer as any)._agGridFirstDataRendered = true;
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -360,13 +364,15 @@ test('derives image width from getColumnState by summing visible column pixel wi
   const api = attachMockApi(agContainer);
 
   // 3 visible columns (200 + 350 + 150 = 700 px) plus one hidden column excluded from sum
-  (api as Record<string, unknown>).getColumnState = jest.fn(() => [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).getColumnState = jest.fn(() => [
     { colId: 'col1', width: 200, hide: false },
     { colId: 'col2', width: 350, hide: false },
     { colId: 'col3', width: 150, hide: false },
     { colId: 'col4', width: 999, hide: true },
   ]);
-  (api as Record<string, unknown>).applyColumnState = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).applyColumnState = jest.fn();
 
   let capturedWidth: number | undefined;
   mockToJpeg.mockImplementation(
@@ -383,7 +389,8 @@ test('derives image width from getColumnState by summing visible column pixel wi
 
   // Width passed to toJpeg is the sum of visible column widths, not agRootWrapper.offsetWidth
   expect(capturedWidth).toBe(700);
-  expect((api as Record<string, unknown>).getColumnState).toHaveBeenCalled();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((api as any).getColumnState).toHaveBeenCalled();
 
   cleanup();
   jest.useRealTimers();
@@ -398,8 +405,10 @@ test('restores column pixel widths via applyColumnState with flex stripped after
     { colId: 'col1', width: 300, flex: 1, hide: false },
     { colId: 'col2', width: 400, flex: 1.5, hide: false },
   ];
-  (api as Record<string, unknown>).getColumnState = jest.fn(() => savedState);
-  (api as Record<string, unknown>).applyColumnState = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).getColumnState = jest.fn(() => savedState);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).applyColumnState = jest.fn();
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -407,9 +416,8 @@ test('restores column pixel widths via applyColumnState with flex stripped after
   await exportPromise;
 
   // flex must be stripped (set to null) so pixel width is used, not flex ratio
-  expect(
-    (api as Record<string, unknown>).applyColumnState,
-  ).toHaveBeenCalledWith({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((api as any).applyColumnState).toHaveBeenCalledWith({
     state: [
       { colId: 'col1', width: 300, flex: null },
       { colId: 'col2', width: 400, flex: null },
@@ -430,8 +438,10 @@ test('restores original column state with flex in finally after capture', async 
     { colId: 'col1', width: 300, flex: 1, hide: false },
     { colId: 'col2', width: 400, flex: 1.5, hide: false },
   ];
-  (api as Record<string, unknown>).getColumnState = jest.fn(() => savedState);
-  (api as Record<string, unknown>).applyColumnState = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).getColumnState = jest.fn(() => savedState);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).applyColumnState = jest.fn();
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -439,9 +449,8 @@ test('restores original column state with flex in finally after capture', async 
   await exportPromise;
 
   // Last call must restore the original state (with flex) so the live grid is unaffected
-  expect(
-    (api as Record<string, unknown>).applyColumnState.mock.calls.at(-1)[0],
-  ).toEqual({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((api as any).applyColumnState.mock.calls.at(-1)[0]).toEqual({
     state: savedState,
     applyOrder: false,
   });
@@ -457,10 +466,12 @@ test('falls back to agRootWrapper.offsetWidth when getColumnState returns no vis
   const api = attachMockApi(agContainer);
 
   // All columns hidden → visible sum is 0 → fall back to offsetWidth
-  (api as Record<string, unknown>).getColumnState = jest.fn(() => [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).getColumnState = jest.fn(() => [
     { colId: 'col1', width: 500, hide: true },
   ]);
-  (api as Record<string, unknown>).applyColumnState = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).applyColumnState = jest.fn();
 
   Object.defineProperty(agRootWrapper, 'offsetWidth', {
     get: () => 600,
@@ -523,7 +534,8 @@ test('calls resetRowHeights after print layout to force ag-grid to re-measure ro
   jest.useFakeTimers();
   const { container, agContainer, cleanup } = buildAgGridElement();
   const api = attachMockApi(agContainer);
-  (api as Record<string, unknown>).resetRowHeights = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (api as any).resetRowHeights = jest.fn();
 
   const handler = downloadAsImageOptimized('div', 'My Chart');
   const exportPromise = handler(syntheticEventFor(container));
@@ -531,7 +543,8 @@ test('calls resetRowHeights after print layout to force ag-grid to re-measure ro
   await exportPromise;
 
   expect(api.setGridOption).toHaveBeenCalledWith('domLayout', 'print');
-  expect((api as Record<string, unknown>).resetRowHeights).toHaveBeenCalled();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((api as any).resetRowHeights).toHaveBeenCalled();
   expect(api.setGridOption).toHaveBeenCalledWith('domLayout', 'normal');
 
   cleanup();
@@ -561,12 +574,14 @@ test('falls through to clone path for dashboard export with a single ag-grid cha
   const agRootWrapper = document.createElement('div');
   agRootWrapper.className = 'ag-root-wrapper';
   agContainer.appendChild(agRootWrapper);
-  (agContainer as Record<string, unknown>)._agGridFirstDataRendered = true;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (agContainer as any)._agGridFirstDataRendered = true;
   dashboard.appendChild(agContainer);
   document.body.appendChild(dashboard);
 
   const handler = downloadAsImageOptimized('.dashboard', 'My Dashboard', true);
-  await handler({ currentTarget: {} } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await handler({ currentTarget: {} } as any);
 
   expect(mockToJpeg).toHaveBeenCalledWith(
     expect.any(HTMLElement),
@@ -587,13 +602,15 @@ test('falls through to clone path for dashboard export with multiple ag-grid cha
     const agRootWrapper = document.createElement('div');
     agRootWrapper.className = 'ag-root-wrapper';
     agContainer.appendChild(agRootWrapper);
-    (agContainer as Record<string, unknown>)._agGridFirstDataRendered = true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (agContainer as any)._agGridFirstDataRendered = true;
     dashboard.appendChild(agContainer);
   }
   document.body.appendChild(dashboard);
 
   const handler = downloadAsImageOptimized('.dashboard', 'My Dashboard', true);
-  await handler({ currentTarget: {} } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await handler({ currentTarget: {} } as any);
 
   expect(mockToJpeg).toHaveBeenCalledWith(
     expect.any(HTMLElement),
@@ -640,7 +657,8 @@ test('ag-grid path uses theme colorBgContainer as background', async () => {
   const { container, agContainer, cleanup } = buildAgGridElement();
   attachMockApi(agContainer);
 
-  const theme = { colorBgContainer: '#1a1a2e' } as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const theme = { colorBgContainer: '#1a1a2e' } as any;
   const handler = downloadAsImageOptimized('div', 'My Chart', false, theme);
   const exportPromise = handler(syntheticEventFor(container));
   await jest.runAllTimersAsync();

@@ -314,7 +314,8 @@ describe('sqlLabReducer', () => {
   // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
   describe('Tables', () => {
     let newState: SqlLabState;
-    let newTable: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let newTable: any;
     beforeEach(() => {
       newTable = { ...table };
       const action = {
@@ -488,8 +489,10 @@ describe('sqlLabReducer', () => {
   describe('Run Query', () => {
     const DENORMALIZED_CHANGED_ON = '2023-06-26T07:53:05.439';
     const CHANGED_ON_TIMESTAMP = 1687765985439;
-    let newState: unknown;
-    let query: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let newState: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let query: any;
     beforeEach(() => {
       newState = { ...initialState };
       query = {
@@ -626,8 +629,10 @@ describe('sqlLabReducer', () => {
   });
   // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
   describe('CLEAR_INACTIVE_QUERIES', () => {
-    let newState: unknown;
-    let query: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let newState: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let query: any;
     beforeEach(() => {
       query = {
         id: 'abcd',

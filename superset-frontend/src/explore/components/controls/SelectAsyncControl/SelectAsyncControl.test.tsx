@@ -24,7 +24,8 @@ const datasetsOwnersEndpoint = 'glob:*/api/v1/dataset/related/owners*';
 
 jest.mock('@superset-ui/core/components/Select/Select', () => ({
   __esModule: true,
-  default: (props: Record<string, unknown>) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: (props: any) => (
     <div
       data-test="select-test"
       data-value={JSON.stringify(props.value)}

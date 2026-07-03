@@ -47,7 +47,8 @@ export type PluginFilterRangeProps = PluginFilterStylesProps & {
   formData: PluginFilterRangeQueryFormData;
   filterState: FilterState;
   behaviors: Behavior[];
-  inputRef: RefObject<HTMLInputElement>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inputRef: RefObject<any>;
   filterBarOrientation?: FilterBarOrientation;
   isOverflowingFilterBar?: boolean;
 } & PluginFilterHooks;

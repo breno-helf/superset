@@ -71,10 +71,12 @@ const StyledModal = styled(Modal)`
 
 interface QueryPreviewModalProps extends ToastProps {
   onHide: () => void;
-  openInSqlLab: (id: number) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  openInSqlLab: (id: number) => any;
   queries: QueryObject[];
   query: QueryObject;
-  fetchData: (id: number) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fetchData: (id: number) => any;
   show: boolean;
 }
 

@@ -23,7 +23,8 @@ const USER_CONTENT_COMPONENT_TYPE: string[] = [
   MARKDOWN_TYPE,
   DYNAMIC_TYPE,
 ];
-export default function isDashboardEmpty(layout: unknown): boolean {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function isDashboardEmpty(layout: any): boolean {
   // has at least one chart or markdown component
   return !Object.values(layout).some(
     ({ type }: { type?: string }) =>

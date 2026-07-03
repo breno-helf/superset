@@ -274,7 +274,8 @@ const AdhocFilterEditPopoverSimpleTabContent: FC<Props> = props => {
   const [comparator, setComparator] = useState(props.adhocFilter.comparator);
   const comparatorInputRef = useRef<InputRef | null>(null);
   const [suggestions, setSuggestions] = useState<
-    Record<'label' | 'value', unknown>[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<'label' | 'value', any>[]
   >([]);
   const [loadingComparatorSuggestions, setLoadingComparatorSuggestions] =
     useState<boolean>(false);

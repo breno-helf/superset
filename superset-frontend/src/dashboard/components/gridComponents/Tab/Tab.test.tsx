@@ -225,7 +225,8 @@ test('Drop on a tab', async () => {
         component={{
           ...props.component,
           id: 'TAB-Next-',
-          meta: { text: 'Next Tab' } as unknown,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          meta: { text: 'Next Tab' } as any,
         }}
         handleComponentDrop={mockOnDropOnTab}
         editMode
@@ -240,7 +241,8 @@ test('Drop on a tab', async () => {
             parents: ['ROOT_ID'],
             children: [],
             meta: {},
-          } as unknown
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any
         }
         depth={0}
         editMode
@@ -251,7 +253,8 @@ test('Drop on a tab', async () => {
           ...props.component,
           type: 'MARKDOWN',
           id: 'MARKDOWN-1',
-          meta: { code: 'Dashboard Component' } as unknown,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          meta: { code: 'Dashboard Component' } as any,
         }}
         logEvent={jest.fn()}
         deleteComponent={jest.fn()}

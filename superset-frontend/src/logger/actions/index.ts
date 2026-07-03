@@ -20,10 +20,8 @@ import { Dispatch } from 'redux';
 
 export const LOG_EVENT = 'LOG_EVENT';
 
-export function logEvent(
-  eventName: string,
-  eventData: Record<string, unknown>,
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function logEvent(eventName: string, eventData: Record<string, any>) {
   return (dispatch: Dispatch) =>
     dispatch({
       type: LOG_EVENT,

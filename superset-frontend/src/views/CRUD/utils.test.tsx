@@ -538,7 +538,8 @@ test('checkUploadExtensions should return valid upload extensions', () => {
   const uploadExtensionTest = ['a', 'b', 'c'];
   const randomExtension = ['a', 'c'];
   const randomExtensionTwo = ['c'];
-  const randomExtensionThree: unknown[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const randomExtensionThree: Array<any> = [];
   expect(
     checkUploadExtensions(randomExtension, uploadExtensionTest),
   ).toBeTruthy();

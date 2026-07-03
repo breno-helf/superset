@@ -208,7 +208,8 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
     setCurrentAnnotation(data);
   };
 
-  const onDateChange = (dates: unknown, dateString: Array<string>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onDateChange = (dates: any, dateString: Array<string>) => {
     if (!dates?.[0] || !dates?.[1]) {
       const data = {
         ...currentAnnotation,

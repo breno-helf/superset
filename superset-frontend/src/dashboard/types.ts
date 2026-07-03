@@ -342,7 +342,8 @@ export type Slice = {
   slice_name: string;
   description: string;
   description_markdown: string;
-  form_data: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form_data: any;
   slice_url: string;
   viz_type: string;
   thumbnail_url: string;

@@ -29,7 +29,8 @@ import {
 import { Constants } from '@superset-ui/core/components';
 
 export const dispatchHoverAction = debounce(
-  (dispatch: Dispatch<unknown>, id?: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (dispatch: Dispatch<any>, id?: string) => {
     if (id) {
       dispatch(setHoveredNativeFilter(id));
     } else {
@@ -40,7 +41,8 @@ export const dispatchHoverAction = debounce(
 );
 
 export const dispatchFocusAction = debounce(
-  (dispatch: Dispatch<unknown>, id?: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (dispatch: Dispatch<any>, id?: string) => {
     if (id) {
       dispatch(setFocusedNativeFilter(id));
     } else {
@@ -51,7 +53,8 @@ export const dispatchFocusAction = debounce(
 );
 
 export const dispatchChartCustomizationHoverAction = debounce(
-  (dispatch: Dispatch<unknown>, id?: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (dispatch: Dispatch<any>, id?: string) => {
     if (id) {
       dispatch(setHoveredChartCustomization(id));
     } else {

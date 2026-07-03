@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -70,7 +69,8 @@ function AnnotationList({
   addDangerToast,
   addSuccessToast,
 }: AnnotationListProps) {
-  const { annotationLayerId } = useParams<{ annotationLayerId: string }>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { annotationLayerId }: any = useParams();
   const {
     state: {
       loading,
@@ -107,11 +107,10 @@ function AnnotationList({
         });
         setAnnotationLayerName(response.json.result.name);
       } catch (response) {
-        await getClientErrorObject(response).then(
-          ({ error }: CellProps<AnnotationObject>) => {
-            addDangerToast(error.error || error.statusText || error);
-          },
-        );
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await getClientErrorObject(response).then(({ error }: any) => {
+          addDangerToast(error.error || error.statusText || error);
+        });
       }
     },
     [annotationLayerId],

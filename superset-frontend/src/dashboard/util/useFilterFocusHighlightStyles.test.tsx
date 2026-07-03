@@ -36,10 +36,12 @@ const TestComponent = ({ chartId }: { chartId: number }) => {
 
 // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
 describe('useFilterFocusHighlightStyles', () => {
-  const createMockStore = (customState: Record<string, unknown> = {}) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const createMockStore = (customState: any = {}) =>
     createStore(
       combineReducers(reducerIndex),
-      { ...mockState, ...(initialState as unknown), ...customState },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      { ...mockState, ...(initialState as any), ...customState },
       compose(applyMiddleware(thunk)),
     );
   const mockGetRelatedCharts = getRelatedCharts as jest.Mock;

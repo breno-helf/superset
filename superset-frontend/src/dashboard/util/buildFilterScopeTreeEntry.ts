@@ -34,8 +34,10 @@ interface FilterScopeMap {
 }
 
 interface FilterScopeTreeEntry {
-  nodes: unknown[];
-  nodesFiltered: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  nodes: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  nodesFiltered: any[];
   checked: string[];
   expanded: string[];
 }

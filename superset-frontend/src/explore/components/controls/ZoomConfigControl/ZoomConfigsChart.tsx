@@ -115,7 +115,8 @@ export const ZoomConfigsChart: FC<ZoomConfigsChartProps> = ({
     chart.setOption(option);
 
     const onDrag = function (
-      this: unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this: any,
       dataIndex: number | undefined,
       itemIndex: number,
     ) {
@@ -146,16 +147,12 @@ export const ZoomConfigsChart: FC<ZoomConfigsChartProps> = ({
       }, 200);
     };
 
-    const onWidthDrag = function (
-      this: unknown,
-      dataIndex: number | undefined,
-    ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onWidthDrag = function (this: any, dataIndex: number | undefined) {
       onDrag.call(this, dataIndex, 0);
     };
-    const onHeightDrag = function (
-      this: unknown,
-      dataIndex: number | undefined,
-    ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onHeightDrag = function (this: any, dataIndex: number | undefined) {
       onDrag.call(this, dataIndex, 1);
     };
 

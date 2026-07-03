@@ -39,19 +39,24 @@ describe('DragDroppable', () => {
     isDragging: false,
     isDraggingOver: false,
     isDraggingOverShallow: false,
-    droppableRef: (() => {}) as unknown,
-    dragSourceRef: (() => {}) as unknown,
-    dragPreviewRef: (() => {}) as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    droppableRef: (() => {}) as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dragSourceRef: (() => {}) as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dragPreviewRef: (() => {}) as any,
   };
 
-  function setup(overrideProps: Record<string, unknown> = {}) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function setup(overrideProps: Record<string, any> = {}) {
     const defaultChildren = (provided: Record<string, unknown>) => (
       <div data-test="child-content" {...provided}>
         Test Content
       </div>
     );
 
-    const allProps = { ...props, ...overrideProps } as unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const allProps = { ...props, ...overrideProps } as any;
 
     const utils = render(
       <DragDroppable {...allProps}>
@@ -115,13 +120,15 @@ describe('DragDroppable', () => {
     class MockDragDroppable extends DragDroppable {
       constructor(mockProps: ConstructorParameters<typeof DragDroppable>[0]) {
         super(mockProps);
-        this.state = { dropIndicator: 'DROP_TOP' as unknown };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.state = { dropIndicator: 'DROP_TOP' as any };
       }
     }
 
     render(
       <MockDragDroppable
-        {...(props as unknown)}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(props as any)}
         editMode
         isDraggingOver
         component={newComponentFactory(TAB_TYPE)}
@@ -164,7 +171,8 @@ describe('DragDroppable', () => {
 
     render(
       <MockDragDroppable
-        {...(props as unknown)}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(props as any)}
         editMode
         isDraggingOver
         component={newComponentFactory(TAB_TYPE)}
@@ -200,13 +208,15 @@ describe('DragDroppable', () => {
     class MockDragDroppable extends DragDroppable {
       constructor(mockProps: ConstructorParameters<typeof DragDroppable>[0]) {
         super(mockProps);
-        this.state = { dropIndicator: 'DROP_TOP' as unknown };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.state = { dropIndicator: 'DROP_TOP' as any };
       }
     }
 
     render(
       <MockDragDroppable
-        {...(props as unknown)}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(props as any)}
         editMode
         isDraggingOver
         disableDragDrop
@@ -250,7 +260,8 @@ describe('DragDroppable', () => {
 
     rerender(
       <DragDroppable
-        {...(props as unknown)}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(props as any)}
         component={newComponentFactory(TAB_TYPE)}
         onDropIndicatorChange={onDropIndicatorChange}
         isDraggingOver

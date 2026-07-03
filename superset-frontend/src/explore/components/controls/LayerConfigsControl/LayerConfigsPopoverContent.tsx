@@ -363,9 +363,11 @@ export const LayerConfigsPopoverContent: FC<
   const attributionDescription = t('The layer attribution');
   const attributionPlaceholder = t('© Layer attribution');
 
-  const wmsVersionOptions: { value: unknown; label: string }[] =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const wmsVersionOptions: { value: any; label: string }[] =
     serviceVersions.WMS.map(version => ({ value: version, label: version }));
-  const wfsVersionOptions: { value: unknown; label: string }[] =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const wfsVersionOptions: { value: any; label: string }[] =
     serviceVersions.WFS.map(version => ({ value: version, label: version }));
 
   return (

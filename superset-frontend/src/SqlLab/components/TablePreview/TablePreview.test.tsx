@@ -29,7 +29,8 @@ import TablePreview from '.';
 
 jest.mock('src/components/FilterableTable', () => ({
   __esModule: true,
-  FilterableTable: ({ data }: { data: Record<string, unknown>[] }) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  FilterableTable: ({ data }: { data: Record<string, any>[] }) => (
     <div>
       {data.map((record, i) => (
         <div key={i} data-test="mock-record-row">

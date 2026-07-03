@@ -285,10 +285,8 @@ function getState(
   };
 }
 
-function useResetOnChangeRef(
-  initialValue: () => unknown,
-  resetOnChangeValue: unknown,
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function useResetOnChangeRef(initialValue: () => any, resetOnChangeValue: any) {
   const value = useRef(initialValue());
   const prevResetOnChangeValue = useRef(resetOnChangeValue);
   if (prevResetOnChangeValue.current !== resetOnChangeValue) {
@@ -509,7 +507,8 @@ export const ControlPanelsContainer = (props: ControlPanelsContainerProps) => {
       description: baseDescription,
       ...restProps
     } = controlData as ControlState & {
-      validationErrors?: unknown[];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      validationErrors?: any[];
     };
 
     const isVisible = visibility
@@ -533,10 +532,13 @@ export const ControlPanelsContainer = (props: ControlPanelsContainerProps) => {
 
     if (name.includes('adhoc_filters')) {
       restProps.canDelete = (
-        valueToBeDeleted: Record<string, unknown>,
-        values: Record<string, unknown>[],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        valueToBeDeleted: Record<string, any>,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        values: Record<string, any>[],
       ) => {
-        const isTemporalRange = (filter: Record<string, unknown>) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const isTemporalRange = (filter: Record<string, any>) =>
           filter.operator === Operators.TemporalRange;
         if (!controls?.time_range?.value && isTemporalRange(valueToBeDeleted)) {
           const count = values.filter(isTemporalRange).length;

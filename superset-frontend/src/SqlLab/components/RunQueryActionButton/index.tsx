@@ -66,7 +66,8 @@ const onClick = (
   isStopAction: boolean,
   runQuery: () => void = () => undefined,
   stopQuery = () => {},
-  logAction: (name: string, payload: Record<string, unknown>) => void,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  logAction: (name: string, payload: Record<string, any>) => void,
 ): void => {
   const eventName = isStopAction
     ? LOG_ACTIONS_SQLLAB_STOP_QUERY

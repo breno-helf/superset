@@ -20,7 +20,8 @@ import { render, screen, userEvent } from 'spec/helpers/testing-library';
 import CollectionControl from '.';
 
 jest.mock('@superset-ui/chart-controls', () => ({
-  InfoTooltip: (props: Record<string, unknown>) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  InfoTooltip: (props: any) => (
     <button
       onClick={props.onClick}
       type="button"
@@ -35,7 +36,8 @@ jest.mock('@superset-ui/chart-controls', () => ({
 jest.mock('..', () => ({
   __esModule: true,
   default: {
-    TestControl: (props: Record<string, unknown>) => (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    TestControl: (props: any) => (
       <button
         type="button"
         onClick={() => props.onChange(0, 'update')}

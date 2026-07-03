@@ -257,7 +257,8 @@ test('enables sorting for Chart and Last modified columns', async () => {
 });
 
 test('shows loading state during pagination fetch', async () => {
-  let resolvePromise: (value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let resolvePromise: (value: any) => void;
   const delayedPromise = new Promise(resolve => {
     resolvePromise = resolve;
   });
@@ -349,7 +350,8 @@ test('shows error toast when fetch fails', async () => {
 });
 
 test('handles slow network without race condition', async () => {
-  let resolvePromise: (value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let resolvePromise: (value: any) => void;
   const slowPromise = new Promise(resolve => {
     resolvePromise = resolve;
   });
@@ -390,7 +392,8 @@ test('scrolls to top after data loads, not before', async () => {
   // Use the global scrollTo mock
   const scrollToMock = Element.prototype.scrollTo as jest.Mock;
 
-  let resolvePromise: (value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let resolvePromise: (value: any) => void;
   const delayedPromise = new Promise(resolve => {
     resolvePromise = resolve;
   });
@@ -461,7 +464,8 @@ test('does not scroll on initial mount, only on page change', async () => {
 test('cleans up animation frame on unmount during loading', async () => {
   const cancelAnimationFrameSpy = jest.spyOn(window, 'cancelAnimationFrame');
 
-  let resolvePromise: (value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let resolvePromise: (value: any) => void;
   const delayedPromise = new Promise(resolve => {
     resolvePromise = resolve;
   });
@@ -506,7 +510,8 @@ test('cleans up animation frame on unmount during loading', async () => {
 test('handles AbortError without setState after unmount', async () => {
   const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
-  let rejectPromise: (reason?: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let rejectPromise: (reason?: any) => void;
   const abortedPromise = new Promise((_, reject) => {
     rejectPromise = reject;
   });

@@ -40,7 +40,8 @@ export type InitialState = {
           longType: string;
         }[];
         dataPreviewQueryId?: string;
-      } & Record<string, unknown>;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } & Record<string, any>;
       catalog?: string | null;
       schema?: string;
       tab_state_id: number;
@@ -54,7 +55,8 @@ export type InitialState = {
     template_params: string | null;
     hide_left_bar?: boolean;
     saved_query: { id: number } | null;
-    extra_json?: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    extra_json?: Record<string, any>;
   };
   databases: object[];
   queries: Record<

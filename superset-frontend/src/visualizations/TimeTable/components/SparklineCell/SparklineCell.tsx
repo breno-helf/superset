@@ -42,7 +42,8 @@ import { SparkType } from '../../types';
 
 interface Entry {
   time: string;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 interface SparklineCellProps {

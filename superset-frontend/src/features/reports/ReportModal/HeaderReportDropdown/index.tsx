@@ -79,7 +79,8 @@ export const useHeaderReportMenuItems = ({
     : CreationMethod.Charts;
 
   // Select the reports state and specific report with proper reactivity
-  const report = useSelector<unknown, ReportObject | null>(state => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const report = useSelector<any, ReportObject | null>(state => {
     if (!resourceId) return null;
     // Select directly from the reports state to ensure reactivity
     const reportsState = state.reports || {};
@@ -89,7 +90,8 @@ export const useHeaderReportMenuItems = ({
   });
 
   const user: UserWithPermissionsAndRoles = useSelector<
-    unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    any,
     UserWithPermissionsAndRoles
   >(state => state.user);
 

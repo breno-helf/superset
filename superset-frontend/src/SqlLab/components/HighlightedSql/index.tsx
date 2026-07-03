@@ -26,7 +26,8 @@ export interface HighlightedSqlProps {
   rawSql?: string;
   maxWidth?: number;
   maxLines?: number;
-  shrink?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  shrink?: any;
 }
 
 interface HighlightedSqlModalTypes {

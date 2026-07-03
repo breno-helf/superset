@@ -181,20 +181,19 @@ test.skip('should render a BackgroundStyleDropdown when focused', () => {
   let wrapper: ReturnType<typeof setup> = setup({
     component: columnWithoutChildren,
   });
-  expect(
-    (wrapper as Record<string, unknown>).find(BackgroundStyleDropdown),
-  ).toBeFalsy();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((wrapper as any).find(BackgroundStyleDropdown)).toBeFalsy();
 
   // we cannot set props on the Row because of the WithDragDropContext wrapper
   wrapper = setup({ component: columnWithoutChildren, editMode: true });
-  (wrapper as unknown)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (wrapper as any)
     .find(IconButton)
     .at(1) // first one is delete button
     .simulate('click');
 
-  expect(
-    (wrapper as Record<string, unknown>).find(BackgroundStyleDropdown),
-  ).toBeTruthy();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((wrapper as any).find(BackgroundStyleDropdown)).toBeTruthy();
 });
 
 test('should call deleteComponent when deleted', () => {

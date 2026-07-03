@@ -63,7 +63,8 @@ export const fetchUserOptions = async (
     const results = response.json?.result || [];
 
     return {
-      data: results.map((user: unknown) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: results.map((user: any) => ({
         value: user.id,
         label: getUserDisplayLabel(user),
       })),

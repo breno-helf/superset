@@ -74,7 +74,8 @@ const DatabaseConnectionForm = ({
   const parameters = dbModel?.parameters as {
     properties: {
       [key: string]: {
-        default?: unknown;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        default?: any;
         description?: string;
       };
     };

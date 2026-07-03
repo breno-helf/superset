@@ -175,7 +175,8 @@ export interface CommonBootstrapData {
 export interface BootstrapData {
   user?: BootstrapUser;
   common: CommonBootstrapData;
-  config?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config?: any;
   embedded?: {
     dashboard_id: string;
     // Domains allowed to embed this dashboard. An empty/undefined list means
@@ -191,12 +192,14 @@ export interface BootstrapThemeData {
   hasCustomThemes: boolean;
 }
 
-export function isUser(user: unknown): user is User {
-  return isPlainObject(user) && 'username' in (user as Record<string, unknown>);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isUser(user: any): user is User {
+  return isPlainObject(user) && 'username' in user;
 }
 
 export function isUserWithPermissionsAndRoles(
-  user: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: any,
 ): user is UserWithPermissionsAndRoles {
   return isUser(user) && 'permissions' in user && 'roles' in user;
 }

@@ -31,7 +31,8 @@ export interface DndAdhocFilterOptionProps {
   onClickClose: (index: number) => void;
   onShiftOptions: (dragIndex: number, hoverIndex: number) => void;
   options: OptionSortType[];
-  datasource: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource: Record<string, any>;
   partitionColumn?: string;
   index: number;
 }

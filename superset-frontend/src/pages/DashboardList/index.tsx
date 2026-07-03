@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -167,7 +166,8 @@ const DASHBOARD_COLUMNS_TO_FETCH = [
 
 function DashboardList(props: DashboardListProps) {
   const { addDangerToast, addSuccessToast, user } = props;
-  const { roles } = useSelector<unknown, UserWithPermissionsAndRoles>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
@@ -342,7 +342,8 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { id },
           },
-        }: CellProps<DashboardObject>) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) =>
           user?.userId && (
             <FaveStar
               itemId={id}
@@ -367,7 +368,8 @@ function DashboardList(props: DashboardListProps) {
               description,
             },
           },
-        }: CellProps<DashboardObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <FlexRowContainer>
             <Link to={url} title={dashboardTitle}>
               {certifiedBy && (
@@ -392,7 +394,8 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { status },
           },
-        }: CellProps<DashboardObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <PublishedLabel isPublished={status === DashboardStatus.PUBLISHED} />
         ),
         Header: t('Status'),
@@ -434,7 +437,8 @@ function DashboardList(props: DashboardListProps) {
           row: {
             original: { owners = [] },
           },
-        }: CellProps<DashboardObject>) => <FacePile users={owners} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <FacePile users={owners} />,
         Header: t('Owners'),
         accessor: 'owners',
         disableSortBy: true,
@@ -448,15 +452,15 @@ function DashboardList(props: DashboardListProps) {
               changed_by: changedBy,
             },
           },
-        }: CellProps<DashboardObject>) => (
-          <ModifiedInfo date={changedOn} user={changedBy} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: CellProps<DashboardObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleDelete = () =>
             handleDashboardDelete(
               original,

@@ -166,7 +166,8 @@ beforeEach(() => {
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
-const setup = (props?: unknown, store?: Store) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (props?: any, store?: Store) =>
   render(<ResultSet {...props} />, {
     useRedux: true,
     ...(store && { store }),

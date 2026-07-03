@@ -115,8 +115,10 @@ const mockedProps = {
   displayName: 'test column',
   progressSort: jest.fn(),
   enableSorting: true,
-  column: mockApi.mockColumn as unknown as Column,
-  api: mockApi as unknown as GridApi,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  column: mockApi.mockColumn as any as Column,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  api: mockApi as any as GridApi,
 } as unknown as IHeaderParams;
 
 test('renders display name for the column', () => {
@@ -189,10 +191,12 @@ test('disable menu when enableFilterButton is false', () => {
 
 test('hide display name for PIVOT_COL_ID', () => {
   const pivotColumn = new MockColumn();
-  (pivotColumn as Record<string, unknown>).getColId = () => PIVOT_COL_ID;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (pivotColumn as any).getColId = () => PIVOT_COL_ID;
 
   const { queryByText } = render(
-    <Header {...mockedProps} column={pivotColumn as unknown as Column} />,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Header {...mockedProps} column={pivotColumn as any as Column} />,
   );
   expect(queryByText(mockedProps.displayName)).not.toBeInTheDocument();
 });

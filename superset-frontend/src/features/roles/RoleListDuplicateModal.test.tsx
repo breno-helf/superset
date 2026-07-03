@@ -37,7 +37,8 @@ const mockUpdateRolePermissions = jest.mocked(updateRolePermissions);
 
 jest.mock('src/components/MessageToasts/withToasts', () => ({
   __esModule: true,
-  default: (Component: unknown) => Component,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: (Component: any) => Component,
   useToasts: () => mockToasts,
 }));
 // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
@@ -85,7 +86,8 @@ describe('RoleListDuplicateModal', () => {
   });
 
   test('calls createRole when save button is clicked', async () => {
-    mockCreateRole.mockResolvedValue({ json: { id: 2 } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockCreateRole.mockResolvedValue({ json: { id: 2 } } as any);
 
     render(<RoleListDuplicateModal {...mockProps} />);
 

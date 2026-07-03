@@ -22,15 +22,15 @@ type BaseQueryObject = {
   id: number;
 };
 
-export default function useQueryPreviewState<
-  D extends BaseQueryObject = unknown,
->({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function useQueryPreviewState<D extends BaseQueryObject = any>({
   queries,
   fetchData,
   currentQueryId,
 }: {
   queries: D[];
-  fetchData: (id: number) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fetchData: (id: number) => any;
   currentQueryId: number;
 }) {
   const index = queries.findIndex(query => query.id === currentQueryId);
@@ -53,7 +53,8 @@ export default function useQueryPreviewState<
     }
   }
 
-  function handleKeyPress(ev: KeyboardEvent) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function handleKeyPress(ev: any) {
     if (currentIndex >= 0 && currentIndex < queries.length) {
       if (ev.key === 'ArrowDown' || ev.key === 'k') {
         ev.preventDefault();

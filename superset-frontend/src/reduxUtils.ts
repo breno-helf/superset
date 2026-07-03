@@ -23,9 +23,11 @@ import { isEqual, omitBy, omit, isEqualWith } from 'lodash-es';
 import { ensureIsArray } from '@superset-ui/core';
 
 export function addToObject(
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   arrKey: string,
-  obj: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj: Record<string, any>,
 ) {
   const newObject = { ...state[arrKey] };
   const copiedObject = { ...obj };
@@ -38,10 +40,13 @@ export function addToObject(
 }
 
 export function alterInObject(
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   arrKey: string,
-  obj: Record<string, unknown>,
-  alterations: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj: Record<string, any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  alterations: Record<string, any>,
 ) {
   const newObject = { ...state[arrKey] };
   newObject[obj.id] = { ...newObject[obj.id], ...alterations };
@@ -49,16 +54,20 @@ export function alterInObject(
 }
 
 export function alterInArr(
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   arrKey: string,
-  obj: Record<string, unknown>,
-  alterations: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj: Record<string, any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  alterations: Record<string, any>,
   idKey = 'id',
 ) {
   // Finds an item in an array in the state and replaces it with a
   // new object with an altered property
   const newArr: unknown[] = [];
-  state[arrKey].forEach((arrItem: Record<string, unknown>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state[arrKey].forEach((arrItem: Record<string, any>) => {
     if (obj[idKey] === arrItem[idKey]) {
       newArr.push({ ...arrItem, ...alterations });
     } else {
@@ -69,13 +78,16 @@ export function alterInArr(
 }
 
 export function removeFromArr(
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   arrKey: string,
-  obj: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj: Record<string, any>,
   idKey = 'id',
 ) {
   const newArr: unknown[] = [];
-  state[arrKey].forEach((arrItem: Record<string, unknown>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state[arrKey].forEach((arrItem: Record<string, any>) => {
     if (!(obj[idKey] === arrItem[idKey])) {
       newArr.push(arrItem);
     }
@@ -84,7 +96,8 @@ export function removeFromArr(
 }
 
 export function getFromArr(
-  arr: Record<string, unknown>[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  arr: Record<string, any>[],
   id: string,
   idKey = 'id',
 ) {
@@ -98,16 +111,19 @@ export function getFromArr(
 }
 
 export function addToArr(
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   arrKey: string,
-  obj: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj: Record<string, any>,
   prepend = false,
 ) {
   const newObj = { ...obj };
   if (!newObj.id) {
     newObj.id = nanoid();
   }
-  const newState: Record<string, unknown[]> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const newState: Record<string, any[]> = {};
   if (prepend) {
     newState[arrKey] = [newObj, ...state[arrKey]];
   } else {
@@ -117,9 +133,11 @@ export function addToArr(
 }
 
 export function extendArr(
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   arrKey: string,
-  arr: Record<string, unknown>[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  arr: Record<string, any>[],
   prepend = false,
 ) {
   const newArr = [...arr];
@@ -129,7 +147,8 @@ export function extendArr(
       el.id = nanoid();
     }
   });
-  const newState: Record<string, unknown[]> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const newState: Record<string, any[]> = {};
   if (prepend) {
     newState[arrKey] = [...newArr, ...state[arrKey]];
   } else {
@@ -183,8 +202,10 @@ export function areArraysShallowEqual(arr1: unknown[], arr2: unknown[]) {
 }
 
 export function areObjectsEqual(
-  obj1: unknown,
-  obj2: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj1: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj2: any,
   opts: {
     ignoreUndefined?: boolean;
     ignoreNull?: boolean;

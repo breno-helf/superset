@@ -108,7 +108,8 @@ test('updateSlice handles success', async () => {
     name: updateSliceEndpoint,
   });
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => {
     dispatchSpy(action);
   };
   const getState = () => mockExploreState;
@@ -137,7 +138,8 @@ test('updateSlice handles success', async () => {
     },
     sliceName,
     [],
-  )(dispatch as Dispatch<unknown>, getState);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  )(dispatch as Dispatch<any>, getState);
   expect(fetchMock.callHistory.calls(updateSliceEndpoint)).toHaveLength(1);
   expect(dispatchSpy.mock.calls.length).toBe(2);
   expect(dispatchSpy.mock.calls[0][0].type).toBe(SAVE_SLICE_SUCCESS);
@@ -157,7 +159,8 @@ test('updateSlice handles failure', async () => {
   );
 
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => {
     dispatchSpy(action);
   };
 
@@ -189,7 +192,8 @@ test('updateSlice handles failure', async () => {
       },
       sliceName,
       [],
-    )(dispatch as Dispatch<unknown>, getState);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    )(dispatch as Dispatch<any>, getState);
   } catch (error) {
     caughtError = error;
   }
@@ -209,7 +213,8 @@ test('createSlice handles success', async () => {
     name: createSliceEndpoint,
   });
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => dispatchSpy(action);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => dispatchSpy(action);
   const getState = () => mockExploreState;
   const slice: Partial<PayloadSlice> = await createSlice(sliceName, [])(
     dispatch as Dispatch,
@@ -231,7 +236,8 @@ test('createSlice handles failure', async () => {
   fetchMock.post(createSliceEndpoint, { throws: sampleError });
 
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => dispatchSpy(action);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => dispatchSpy(action);
   const getState = () => mockExploreState;
 
   let caughtError: Error | undefined;
@@ -263,7 +269,8 @@ test('createDashboard handles success', async () => {
   });
   const dispatch = jest.fn();
   const dashboard = await createDashboard(dashboardName)(
-    dispatch as Dispatch<unknown>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dispatch as Dispatch<any>,
   );
   expect(fetchMock.callHistory.calls(createDashboardEndpoint)).toHaveLength(1);
   expect(dispatch.mock.calls.length).toBe(0);
@@ -279,7 +286,8 @@ test('createDashboard handles failure', async () => {
   const dispatch = jest.fn();
   let caughtError;
   try {
-    await createDashboard(dashboardName)(dispatch as Dispatch<unknown>);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await createDashboard(dashboardName)(dispatch as Dispatch<any>);
   } catch (error) {
     caughtError = error;
   }
@@ -295,7 +303,8 @@ test('updateSlice with add to new dashboard handles success', async () => {
     name: updateSliceEndpoint,
   });
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => dispatchSpy(action);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => dispatchSpy(action);
   const getState = () => mockExploreState;
 
   const slice = await updateSlice(
@@ -331,7 +340,8 @@ test('updateSlice with add to new dashboard handles success', async () => {
       new: true,
       title: dashboardName,
     },
-  )(dispatch as Dispatch<unknown>, getState);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  )(dispatch as Dispatch<any>, getState);
 
   expect(fetchMock.callHistory.calls(updateSliceEndpoint)).toHaveLength(1);
   expect(dispatchSpy.mock.calls.length).toBe(3);
@@ -355,7 +365,8 @@ test('updateSlice with add to existing dashboard handles success', async () => {
     name: updateSliceEndpoint,
   });
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => dispatchSpy(action);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => dispatchSpy(action);
   const getState = () => mockExploreState;
   const slice = await updateSlice(
     {
@@ -390,7 +401,8 @@ test('updateSlice with add to existing dashboard handles success', async () => {
       new: false,
       title: dashboardName,
     },
-  )(dispatch as Dispatch<unknown>, getState);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  )(dispatch as Dispatch<any>, getState);
 
   expect(fetchMock.callHistory.calls(updateSliceEndpoint)).toHaveLength(1);
   expect(dispatchSpy.mock.calls.length).toBe(3);
@@ -425,7 +437,8 @@ test('getSliceDashboards with slice handles success', async () => {
     name: getSliceDashboardsEndpoint,
   });
   const dispatchSpy = jest.fn();
-  const dispatch = (action: unknown) => dispatchSpy(action);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = (action: any) => dispatchSpy(action);
   const sliceDashboards = await getSliceDashboards({
     slice_id: 10,
     owners: [],
@@ -435,7 +448,8 @@ test('getSliceDashboards with slice handles success', async () => {
       adhoc_filters: [],
       dashboards: [],
     },
-  })(dispatch as Dispatch<unknown>);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  })(dispatch as Dispatch<any>);
   expect(fetchMock.callHistory.calls(getSliceDashboardsEndpoint)).toHaveLength(
     1,
   );
@@ -461,7 +475,8 @@ test('getSliceDashboards with slice handles failure', async () => {
         adhoc_filters: [],
         dashboards: [],
       },
-    })(dispatch as Dispatch<unknown>);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    })(dispatch as Dispatch<any>);
   } catch (error) {
     caughtError = error;
   }

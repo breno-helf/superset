@@ -48,7 +48,8 @@ export default function AdhocFilterEditPopoverSqlTabContent({
   onChange: (filter: AdhocFilter) => void;
   options: OptionSortType[];
   height: number;
-  datasource?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource?: any;
 }) {
   const editorRef = useRef<editors.EditorHandle>(null);
   const theme = useTheme();

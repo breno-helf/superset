@@ -128,7 +128,8 @@ const RightMenu = ({
   }) => void;
 }) => {
   const theme = useTheme();
-  const user = useSelector<unknown, UserWithPermissionsAndRoles>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const dashboardId = useSelector<RootState, number | undefined>(
@@ -143,7 +144,8 @@ const RightMenu = ({
     ALLOWED_EXTENSIONS,
     HAS_GSHEETS_INSTALLED,
     SCARF_ANALYTICS,
-  } = useSelector<unknown, ExtensionConfigs>(state => state.common.conf);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } = useSelector<any, ExtensionConfigs>(state => state.common.conf);
   const [showDatabaseModal, setShowDatabaseModal] = useState<boolean>(false);
   const [showCSVUploadModal, setShowCSVUploadModal] = useState<boolean>(false);
   const [showExcelUploadModal, setShowExcelUploadModal] =
@@ -259,13 +261,14 @@ const RightMenu = ({
     };
     SupersetClient.get({
       endpoint: `/api/v1/database/?q=${rison.encode(payload)}`,
-    }).then(({ json }: Record<string, unknown>) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then(({ json }: Record<string, any>) => {
       // There might be some existing Gsheets and Clickhouse DBs
       // with allow_file_upload set as True which is not possible from now on
       const allowedDatabasesWithFileUpload =
         json?.result?.filter(
-          (database: unknown) =>
-            database?.engine_information?.supports_file_upload,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (database: any) => database?.engine_information?.supports_file_upload,
         ) || [];
       setAllowUploads(allowedDatabasesWithFileUpload?.length >= 1);
     });
@@ -277,7 +280,8 @@ const RightMenu = ({
     };
     SupersetClient.get({
       endpoint: `/api/v1/database/?q=${rison.encode(payload)}`,
-    }).then(({ json }: Record<string, unknown>) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then(({ json }: Record<string, any>) => {
       setNonExamplesDBConnected(json.count >= 1);
     });
   };
@@ -294,7 +298,8 @@ const RightMenu = ({
     }
   }, [canDatabase, canDataset]);
 
-  const handleMenuSelection = (itemChose: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleMenuSelection = (itemChose: any) => {
     if (itemChose.key === GlobalMenuDataOptions.DbConnection) {
       setShowDatabaseModal(true);
     } else if (itemChose.key === GlobalMenuDataOptions.GoogleSheets) {

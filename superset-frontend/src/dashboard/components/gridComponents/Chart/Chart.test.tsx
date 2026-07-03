@@ -169,15 +169,18 @@ test('should call refreshChart when SliceHeader calls forceRefresh', () => {
 /* oxlint-disable-next-line jest/no-disabled-tests */
 test.skip('should call changeFilter when ChartContainer calls changeFilter', () => {
   const mockChangeFilter = jest.fn();
-  const wrapper = setup({ changeFilter: mockChangeFilter }) as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const wrapper = setup({ changeFilter: mockChangeFilter }) as any;
   wrapper.instance().changeFilter();
-  expect((mockChangeFilter as Record<string, unknown>).callCount).toBe(1);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((mockChangeFilter as any).callCount).toBe(1);
 });
 
 test('should call exportChart when exportCSV is clicked', async () => {
   const stubbedExportCSV = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .mockImplementation((() => {}) as any);
   const { findByText, getByRole } = setup(
     {},
     {
@@ -202,12 +205,14 @@ test('should call exportChart when exportCSV is clicked', async () => {
 });
 
 test('should call exportChart with row_limit props.maxRows when exportFullCSV is clicked', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   const stubbedExportCSV = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .mockImplementation((() => {}) as any);
   const { findByText, getByRole } = setup(
     {},
     {
@@ -235,7 +240,8 @@ test('should call exportChart with row_limit props.maxRows when exportFullCSV is
 test('should call exportChart when exportXLSX is clicked', async () => {
   const stubbedExportXLSX = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .mockImplementation((() => {}) as any);
   const { findByText, getByRole } = setup(
     {},
     {
@@ -257,12 +263,14 @@ test('should call exportChart when exportXLSX is clicked', async () => {
 });
 
 test('should call exportChart with row_limit props.maxRows when exportFullXLSX is clicked', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   const stubbedExportXLSX = jest
     .spyOn(exploreUtils, 'exportChart')
-    .mockImplementation((() => {}) as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .mockImplementation((() => {}) as any);
   const { findByText, getByRole } = setup(
     {},
     {

@@ -165,9 +165,11 @@ export const dismissDatasourceWarning = async () => {
  * Creates a deferred promise that can be manually resolved/rejected.
  * Useful for controlling timing in abort/unmount tests.
  */
-export function createDeferredPromise<T = unknown>() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function createDeferredPromise<T = any>() {
   let resolve: (value: T) => void;
-  let reject: (reason?: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let reject: (reason?: any) => void;
   const promise = new Promise<T>((res, rej) => {
     resolve = res;
     reject = rej;

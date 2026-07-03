@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -140,7 +139,8 @@ function AnnotationLayersList({
           row: {
             original: { id, name },
           },
-        }: CellProps<AnnotationLayerObject>) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
           let hasHistory = true;
 
           try {
@@ -179,16 +179,16 @@ function AnnotationLayersList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<AnnotationLayerObject>) => (
-          <ModifiedInfo date={changedOn} user={changedBy} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on',
         size: 'xl',
         id: 'changed_on',
       },
       {
-        Cell: ({ row: { original } }: CellProps<AnnotationLayerObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => handleAnnotationLayerEdit(original);
           const handleDelete = () => setLayerCurrentlyDeleting(original);
 

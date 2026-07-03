@@ -76,7 +76,8 @@ test('findTabsWithChartsInScope should handle a recursive layout structure', () 
       parents: ['ROOT_ID'],
       type: 'TABS',
     },
-  } as unknown as DashboardLayout;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any as DashboardLayout;
 
   const chartLayoutItems = Object.values(dashboardLayout).filter(
     item => item.type === CHART_TYPE,
@@ -91,16 +92,14 @@ test('getFormData should include persisted time_grains for time grain filters', 
     dashboardId: 10,
     id: 'NATIVE_FILTER-1',
     filterType: 'filter_timegrain',
-    type: 'NATIVE_FILTER' as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type: 'NATIVE_FILTER' as any,
     controlValues: {},
     defaultDataMask: {},
     datasetId: 11,
     time_grains: ['PT1H', 'P1D', 'P1W'],
   });
 
-  expect((formData as Record<string, unknown>).time_grains).toEqual([
-    'PT1H',
-    'P1D',
-    'P1W',
-  ]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((formData as any).time_grains).toEqual(['PT1H', 'P1D', 'P1W']);
 });

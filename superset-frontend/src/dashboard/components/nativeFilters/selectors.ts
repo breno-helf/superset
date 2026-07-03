@@ -53,7 +53,8 @@ type Datasource = {
 type Filter = {
   chartId: number;
   columns: { [key: string]: string | string[] };
-  scopes: { [key: string]: Record<string, unknown> };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  scopes: { [key: string]: any };
   labels: { [key: string]: string };
   isDateFilter: boolean;
   directPathToFilter: string[];
@@ -78,7 +79,8 @@ const selectIndicatorValue = (
   columnKey: string,
   filter: Filter,
   datasource: Datasource,
-): string[] | string => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any => {
   const values = filter.columns[columnKey];
   const arrValues = Array.isArray(values) ? values : [values];
 
@@ -142,7 +144,8 @@ const selectIndicatorsForChartFromFilter = (
 };
 
 const getQueryFilterMetadata = (
-  chart: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any,
   metadataKey: 'applied_filters' | 'rejected_filters',
 ) =>
   ensureIsArray(chart?.queriesResponse).flatMap(
@@ -152,10 +155,12 @@ const getQueryFilterMetadata = (
         : queryResponse?.rejected_filters) || [],
   );
 
-const getAppliedColumns = (chart: Record<string, unknown>): Set<string> =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getAppliedColumns = (chart: any): Set<string> =>
   new Set(
     getQueryFilterMetadata(chart, 'applied_filters').map(
-      (filter: Record<string, unknown>) => filter.column,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (filter: any) => filter.column,
     ),
   );
 
@@ -166,7 +171,8 @@ const getAppliedColumns = (chart: Record<string, unknown>): Set<string> =>
  * applied_filter_columns populated.
  */
 export const getAppliedColumnsWithFallback = (
-  chart: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any,
   nativeFilters?: Filters,
   dataMask?: DataMaskStateWithId,
   chartId?: number,
@@ -174,11 +180,8 @@ export const getAppliedColumnsWithFallback = (
   // First try to get from query response (preferred source of truth)
   const queryAppliedFilters = getQueryFilterMetadata(chart, 'applied_filters');
   if (queryAppliedFilters.length > 0) {
-    return new Set(
-      queryAppliedFilters.map(
-        (filter: Record<string, unknown>) => filter.column,
-      ),
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return new Set(queryAppliedFilters.map((filter: any) => filter.column));
   }
 
   // Fallback: derive from native filters and dataMask when query response is empty
@@ -203,17 +206,20 @@ export const getAppliedColumnsWithFallback = (
   return new Set<string>();
 };
 
-const getRejectedColumns = (chart: Record<string, unknown>): Set<string> =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getRejectedColumns = (chart: any): Set<string> =>
   new Set(
-    getQueryFilterMetadata(chart, 'rejected_filters').map(
-      (filter: Record<string, unknown>) => getColumnLabel(filter.column),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: any) =>
+      getColumnLabel(filter.column),
     ),
   );
 
 export type Indicator = {
   column?: QueryFormColumn;
   name: string;
-  value?: string | string[] | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value?: any;
   status?: IndicatorStatus;
   path?: string[];
   customColumnLabel?: string;
@@ -266,7 +272,8 @@ export const selectIndicatorsForChart = (
   chartId: number,
   filters: { [key: number]: Filter },
   datasources: { [key: string]: Datasource },
-  chart: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any,
 ): Indicator[] => {
   // for now we only need to know which columns are compatible/incompatible,
   // so grab the columns from the applied/rejected filters
@@ -390,7 +397,8 @@ export const selectChartCrossFilters = (
   return crossFilterIndicators;
 };
 
-const cachedNativeIndicatorsForChart: Record<number, Indicator[]> = {};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const cachedNativeIndicatorsForChart: Record<number, any> = {};
 const cachedNativeFilterDataForChart: Record<
   number,
   {
@@ -407,7 +415,8 @@ export const selectNativeIndicatorsForChart = (
   nativeFilters: Filters,
   dataMask: DataMaskStateWithId,
   chartId: number,
-  chart: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any,
   chartLayoutItems: LayoutItem[],
   chartConfiguration: ChartConfiguration = defaultChartConfig,
 ): Indicator[] => {

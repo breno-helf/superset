@@ -137,7 +137,8 @@ describe('asyncEvent middleware', () => {
         body: { result: [asyncErrorEvent] },
       });
       const errorResponse = parseErrorJson(asyncErrorEvent);
-      let error: unknown = null;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let error: any = null;
       try {
         await asyncEvent.waitForAsyncData(asyncPendingEvent);
       } catch (err) {

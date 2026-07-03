@@ -22,7 +22,8 @@ import { createContext, useContext, FC, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export type LocationState = {
-  requestedQuery?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  requestedQuery?: Record<string, any>;
   isDataset?: boolean;
 };
 

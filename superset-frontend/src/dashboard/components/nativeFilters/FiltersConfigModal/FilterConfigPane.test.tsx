@@ -54,10 +54,8 @@ const defaultState = {
   dashboardLayout,
 };
 
-function defaultRender(
-  initialState: unknown = defaultState,
-  props = defaultProps,
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function defaultRender(initialState: any = defaultState, props = defaultProps) {
   return render(<FilterConfigPane {...props} />, {
     initialState,
     useDnd: true,

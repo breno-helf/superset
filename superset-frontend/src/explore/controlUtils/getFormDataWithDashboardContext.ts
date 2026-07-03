@@ -84,7 +84,8 @@ const mergeFilterBoxToFormData = (
     __time_grain: 'time_grain_sqla',
     __granularity: 'granularity',
   };
-  const appliedTimeExtras: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const appliedTimeExtras: Record<string, any> = {};
 
   const filterBoxData: JsonObject = {};
   ensureIsArray(dashboardFormData.extra_filters).forEach(filter => {

@@ -66,10 +66,13 @@ export type ZoomConfigsControlProps = ControlComponentProps<ZoomConfigs>;
 
 export interface CreateDragGraphicOptions {
   data: number[][];
-  onWidthDrag: (...arg: unknown[]) => void;
-  onHeightDrag: (...args: unknown[]) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onWidthDrag: (...arg: any[]) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onHeightDrag: (...args: any[]) => any;
   barWidth: number;
-  chart: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any;
   fillColor?: string;
   strokeColor?: string;
 }
@@ -78,16 +81,19 @@ export interface CreateDragGraphicOption {
   dataItem: number[];
   dataItemIndex: number;
   dataIndex: number;
-  onDrag: (...arg: unknown[]) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onDrag: (...arg: any[]) => any;
   barWidth: number;
-  chart: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any;
   add: boolean;
   fillColor?: string;
   strokeColor?: string;
 }
 
 export interface GetDragGraphicPositionOptions {
-  chart: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chart: any;
   x: number;
   y: number;
   barWidth: number;

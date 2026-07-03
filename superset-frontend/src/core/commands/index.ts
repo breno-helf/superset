@@ -24,12 +24,15 @@ type Command = commandsApi.Command;
 
 const commandsMap: Map<string, Command> = new Map();
 
-const commandRegistry: Map<string, (...args: unknown[]) => unknown> = new Map();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const commandRegistry: Map<string, (...args: any[]) => any> = new Map();
 
 const registerCommand: typeof commandsApi.registerCommand = (
   command: Command,
-  callback: (...args: unknown[]) => unknown,
-  thisArg?: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  callback: (...args: any[]) => any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thisArg?: any,
 ): Disposable => {
   const { id } = command;
 
@@ -51,7 +54,8 @@ const registerCommand: typeof commandsApi.registerCommand = (
 
 const executeCommand: typeof commandsApi.executeCommand = async <T>(
   command: string,
-  ...args: unknown[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...args: any[]
 ): Promise<T> => {
   const callback = commandRegistry.get(command);
   if (!callback) {

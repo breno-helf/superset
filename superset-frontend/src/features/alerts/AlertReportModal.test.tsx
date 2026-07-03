@@ -337,7 +337,8 @@ const validAlert: AlertObject = {
     id: 1,
     value: 1,
     database_name: 'test_db',
-  } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any,
   sql: 'SELECT COUNT(*) FROM test_table',
   validator_config_json: {
     op: '>',
@@ -350,7 +351,8 @@ const validAlert: AlertObject = {
     label: 'Test Chart',
     slice_name: 'Test Chart',
     viz_type: 'table',
-  } as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any,
 };
 
 jest.mock('./buildErrorTooltipMessage', () => ({
@@ -1272,7 +1274,8 @@ test('dashboard tabs fetch failure shows error toast', async () => {
 
   // Verify danger toast was dispatched for the fetch failure
   await waitFor(() => {
-    const toasts = (store.getState() as Record<string, unknown>).messageToasts;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const toasts = (store.getState() as any).messageToasts;
     expect(toasts.length).toBeGreaterThan(0);
     expect(
       toasts.some((t: { text: string }) =>
@@ -1679,8 +1682,10 @@ test('dashboard content type submits dashboard id and null chart', async () => {
       value: 1,
       label: 'Test Dashboard',
       dashboard_title: 'Test Dashboard',
-    } as unknown,
-    chart: undefined as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    chart: undefined as any,
   };
 
   fetchMock.put(

@@ -271,8 +271,10 @@ export const createHandleCustomizationSave =
         description: (formInputs.description || '').trim(),
         removed: false,
         chartId:
-          (formInputs as Record<string, unknown>).chartId ||
-          (customizationsConfigMap[id] as Record<string, unknown>)?.chartId,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (formInputs as any).chartId ||
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (customizationsConfigMap[id] as any)?.chartId,
         customization: {
           name: formInputs.name || '',
           dataset: datasetValue,

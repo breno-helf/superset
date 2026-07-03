@@ -111,7 +111,8 @@ const renderOptions = {
   useRouter: true,
 };
 
-const renderActivityTable = (props: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderActivityTable = (props: any) =>
   render(<ActivityTable {...props} />, renderOptions);
 
 test('the component renders with ActivityCards', async () => {

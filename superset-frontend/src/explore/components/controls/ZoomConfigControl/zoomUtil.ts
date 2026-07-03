@@ -132,7 +132,8 @@ export const createDragGraphicOptions = ({
   fillColor,
   strokeColor,
 }: CreateDragGraphicOptions) => {
-  const graphics: unknown[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const graphics: any[] = [];
   data.forEach((dataItem: number[], dataIndex: number) => {
     const widthGraphic = createDragGraphicOption({
       dataItem,

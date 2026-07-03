@@ -28,7 +28,8 @@ const mockedGetChartMetadataRegistry = getChartMetadataRegistry as jest.Mock;
 
 test('Should return false', () => {
   const get = jest.fn();
-  mockedGetChartMetadataRegistry.mockReturnValue({ get } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mockedGetChartMetadataRegistry.mockReturnValue({ get } as any);
   expect(get).toHaveBeenCalledTimes(0);
   const [useLegacyApi] = getQuerySettings({ viz_type: 'name_test' });
   expect(useLegacyApi).toBe(false);
@@ -39,7 +40,8 @@ test('Should return false', () => {
 test('Should return true', () => {
   const get = jest.fn();
   get.mockReturnValue({ useLegacyApi: true });
-  mockedGetChartMetadataRegistry.mockReturnValue({ get } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mockedGetChartMetadataRegistry.mockReturnValue({ get } as any);
   expect(get).toHaveBeenCalledTimes(0);
   const [useLegacyApi] = getQuerySettings({ viz_type: 'name_test' });
   expect(useLegacyApi).toBe(true);
@@ -50,7 +52,8 @@ test('Should return true', () => {
 test('Should return false when useLegacyApi:false', () => {
   const get = jest.fn();
   get.mockReturnValue({ useLegacyApi: false });
-  mockedGetChartMetadataRegistry.mockReturnValue({ get } as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mockedGetChartMetadataRegistry.mockReturnValue({ get } as any);
   expect(get).toHaveBeenCalledTimes(0);
   const [useLegacyApi] = getQuerySettings({ viz_type: 'name_test' });
   expect(useLegacyApi).toBe(false);

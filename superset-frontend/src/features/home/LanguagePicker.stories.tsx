@@ -64,7 +64,8 @@ const mockedProps = {
   },
 };
 
-const Template = (args: unknown) => <LanguagePicker {...args} />;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Template = (args: any) => <LanguagePicker {...args} />;
 
 export const Default = Template.bind({});
 Default.args = mockedProps;

@@ -23,7 +23,8 @@ export default {
   component: AnchorLink,
 };
 
-export const InteractiveAnchorLink = (args: unknown) => (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const InteractiveAnchorLink = (args: any) => (
   <AnchorLink id="link" {...args} />
 );
 

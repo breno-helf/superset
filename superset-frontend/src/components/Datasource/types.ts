@@ -30,7 +30,8 @@ export interface DatasourceModalProps {
   addDangerToast: (msg: string) => void;
   datasource: DatasetObject;
   onChange: () => {};
-  onDatasourceSave: (datasource: object, errors?: unknown[]) => {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onDatasourceSave: (datasource: object, errors?: Array<any>) => {};
   onHide: () => {};
   show: boolean;
 }
@@ -39,7 +40,8 @@ export interface ChangeDatasourceModalProps {
   addDangerToast: (msg: string) => void;
   addSuccessToast: (msg: string) => void;
   onChange: (uid: string) => void;
-  onDatasourceSave: (datasource: object, errors?: unknown[]) => {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onDatasourceSave: (datasource: object, errors?: Array<any>) => {};
   onHide: () => void;
   show: boolean;
 }
@@ -47,19 +49,24 @@ export interface ChangeDatasourceModalProps {
 export interface CRUDCollectionProps {
   allowAddItem?: boolean;
   allowDeletes?: boolean;
-  collection: Record<PropertyKey, unknown>[];
-  columnLabels?: Record<PropertyKey, unknown>;
-  columnLabelTooltips?: Record<PropertyKey, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  collection: Record<PropertyKey, any>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columnLabels?: Record<PropertyKey, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columnLabelTooltips?: Record<PropertyKey, any>;
   emptyMessage?: ReactNode;
   expandFieldset?: ReactNode;
   extraButtons?: ReactNode;
-  itemGenerator?: () => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  itemGenerator?: () => any;
   itemCellProps?: Record<
     string,
     (
       val: unknown,
       label: string,
-      record: Record<string, unknown>,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      record: any,
     ) => DetailedHTMLProps<
       TdHTMLAttributes<HTMLTableCellElement>,
       HTMLTableCellElement
@@ -71,11 +78,14 @@ export interface CRUDCollectionProps {
       val: unknown,
       onChange: (value: unknown) => void,
       label: string,
-      record: Record<string, unknown>,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      record: any,
     ) => ReactNode
   >;
-  onChange?: (arg0: unknown) => void;
-  tableColumns: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange?: (arg0: any) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tableColumns: any[];
   tableLayout?: 'fixed' | 'auto';
   sortColumns: string[];
   stickyHeader?: boolean;
@@ -90,7 +100,8 @@ export interface CRUDCollectionProps {
   filterFields?: string[];
 }
 
-export type Sort = number | string | boolean | unknown;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Sort = number | string | boolean | any;
 
 export enum SortOrder {
   Asc = 1,
@@ -99,9 +110,12 @@ export enum SortOrder {
 }
 
 export interface CRUDCollectionState {
-  collection: Record<PropertyKey, unknown>;
-  collectionArray: Record<PropertyKey, unknown>[];
-  expandedColumns: Record<PropertyKey, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  collection: Record<PropertyKey, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  collectionArray: Record<PropertyKey, any>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expandedColumns: Record<PropertyKey, any>;
   sortColumn: string;
   sort: SortOrder;
   currentPage: number;

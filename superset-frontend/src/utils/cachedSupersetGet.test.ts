@@ -64,7 +64,8 @@ describe('cachedSupersetGet', () => {
     test('handles null dataset ID gracefully', () => {
       supersetGetCache.set('/api/v1/dataset/123', { data: 'dataset123' });
 
-      clearDatasetCache(null as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      clearDatasetCache(null as any);
 
       expect(supersetGetCache.has('/api/v1/dataset/123')).toBe(true);
     });
@@ -72,7 +73,8 @@ describe('cachedSupersetGet', () => {
     test('handles undefined dataset ID gracefully', () => {
       supersetGetCache.set('/api/v1/dataset/123', { data: 'dataset123' });
 
-      clearDatasetCache(undefined as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      clearDatasetCache(undefined as any);
 
       expect(supersetGetCache.has('/api/v1/dataset/123')).toBe(true);
     });

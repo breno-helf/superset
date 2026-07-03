@@ -44,7 +44,8 @@ export const chart: ChartState = {
 
 type ChartActionHandler = (state: ChartState) => ChartState;
 
-type AnyChartAction = Record<string, unknown>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyChartAction = Record<string, any>;
 
 export default function chartReducer(
   charts: Record<string, ChartState> = {},

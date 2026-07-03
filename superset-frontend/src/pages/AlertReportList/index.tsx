@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -310,7 +309,8 @@ function AlertList({
           row: {
             original: { last_state: lastState },
           },
-        }: CellProps<AlertObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <AlertStatusIcon
             state={lastState}
             isReportEnabled={isReportEnabled}
@@ -326,7 +326,8 @@ function AlertList({
           row: {
             original: { last_eval_dttm: lastEvalDttm },
           },
-        }: CellProps<AlertObject>) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) =>
           lastEvalDttm
             ? extendedDayjs
                 .utc(lastEvalDttm)
@@ -352,7 +353,8 @@ function AlertList({
           row: {
             original: { crontab_humanized = '', timezone },
           },
-        }: CellProps<AlertObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Tooltip
             title={`${crontab_humanized} (${timezone})`}
             placement="topLeft"
@@ -367,8 +369,10 @@ function AlertList({
           row: {
             original: { recipients },
           },
-        }: CellProps<AlertObject>) =>
-          recipients.map((r: unknown) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          recipients.map((r: any) => (
             <RecipientIcon key={r.id} type={r.type} />
           )),
         accessor: 'recipients',
@@ -382,7 +386,8 @@ function AlertList({
           row: {
             original: { owners = [] },
           },
-        }: CellProps<AlertObject>) => <FacePile users={owners} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <FacePile users={owners} />,
         Header: t('Owners'),
         id: 'owners',
         disableSortBy: true,
@@ -396,16 +401,16 @@ function AlertList({
               changed_by: changedBy,
             },
           },
-        }: CellProps<AlertObject>) => (
-          <ModifiedInfo date={changedOn} user={changedBy} />
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
         Header: t('Last modified'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: CellProps<AlertObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const allowEdit =
             original.owners.map((o: Owner) => o.id).includes(user.userId) ||
             isUserAdmin(user);
@@ -426,7 +431,8 @@ function AlertList({
         size: 'sm',
       },
       {
-        Cell: ({ row: { original } }: CellProps<AlertObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const history = useHistory();
           const handleEdit = () => handleAlertEdit(original);
           const handleDelete = () => setCurrentAlertDeleting(original);

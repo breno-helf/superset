@@ -29,7 +29,8 @@ interface AdhocFilterPopoverTriggerProps {
   operators?: Operators[];
   adhocFilter: AdhocFilter;
   options: OptionSortType[];
-  datasource: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource: Record<string, any>;
   onFilterEdit: (editedFilter: AdhocFilter) => void;
   partitionColumn?: string;
   isControlledComponent?: boolean;

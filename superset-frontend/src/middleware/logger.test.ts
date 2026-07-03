@@ -69,7 +69,8 @@ describe('logger middleware', () => {
   beforeEach(() => {
     postStub = jest
       .spyOn(SupersetClient, 'post')
-      .mockImplementation(() => undefined as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockImplementation(() => undefined as any);
   });
   afterEach(() => {
     next.mockClear();

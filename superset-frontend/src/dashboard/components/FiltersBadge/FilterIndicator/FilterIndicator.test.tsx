@@ -24,7 +24,8 @@ const createProps = () => ({
   indicator: {
     column: 'product_category',
     name: 'Vaccine Approach',
-    value: [] as unknown[],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: [] as any[],
     path: [
       'ROOT_ID',
       'TABS-wUKya7eQ0Z',
@@ -64,7 +65,7 @@ test('Should render "value"', () => {
 
   expect(
     screen.getByRole('button', {
-      name: 'search Vaccine Approach: unknown, string',
+      name: 'search Vaccine Approach: any, string',
     }),
   ).toBeInTheDocument();
 });

@@ -111,15 +111,19 @@ const getCommonElements = () => ({
 });
 
 // Helper function to check element visibility
-const expectElementsVisible = (elements: unknown[]) => {
-  elements.forEach((element: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const expectElementsVisible = (elements: any[]) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  elements.forEach((element: any) => {
     expect(element).toBeInTheDocument();
   });
 };
 
 // Helper function to check element absence
-const expectElementsNotVisible = (elements: unknown[]) => {
-  elements.forEach((element: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const expectElementsNotVisible = (elements: any[]) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  elements.forEach((element: any) => {
     expect(element).not.toBeInTheDocument();
   });
 };

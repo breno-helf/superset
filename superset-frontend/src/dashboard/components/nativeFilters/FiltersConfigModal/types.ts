@@ -39,12 +39,14 @@ export interface NativeFiltersFormItem {
   };
   column: string;
   controlValues: {
-    [key: string]: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
   };
   requiredFirst: {
     [key: string]: boolean;
   };
-  defaultValue: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaultValue: any;
   defaultDataMask: DataMask;
   dependencies?: string[];
   sortMetric: string | null;
@@ -77,12 +79,14 @@ export interface ChartCustomizationsFormItem {
   };
   column: string;
   controlValues: {
-    [key: string]: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
   };
   requiredFirst: {
     [key: string]: boolean;
   };
-  defaultValue: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaultValue: any;
   defaultDataMask: DataMask;
   dependencies?: string[];
   sortMetric: string | null;

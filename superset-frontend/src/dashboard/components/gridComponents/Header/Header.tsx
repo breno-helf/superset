@@ -58,7 +58,8 @@ export interface ComponentMeta {
   headerSize?: HeaderStyleValue;
   background?: BackgroundStyleValue;
   chartId?: number;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 export interface ComponentShape {
@@ -79,7 +80,8 @@ interface HeaderProps {
   index: number;
   editMode: boolean;
   embeddedMode: boolean;
-  handleComponentDrop: (dropResult: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleComponentDrop: (dropResult: any) => void;
   deleteComponent: (id: string, parentId: string) => void;
   updateComponents: (changes: Record<string, ComponentShape>) => void;
 }

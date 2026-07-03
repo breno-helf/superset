@@ -276,12 +276,15 @@ const ViewModeToggle = ({
     </Tooltip>
   </ViewModeContainer>
 );
-export interface ListViewProps<T extends object = unknown> {
-  columns: unknown[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface ListViewProps<T extends object = any> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columns: any[];
   data: T[];
   count: number;
   pageSize: number;
-  fetchData: (conf: FetchDataConfig) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fetchData: (conf: FetchDataConfig) => any;
   refreshData: () => void;
   addSuccessToast: (msg: string) => void;
   addDangerToast: (msg: string) => void;
@@ -292,13 +295,16 @@ export interface ListViewProps<T extends object = unknown> {
   bulkActions?: Array<{
     key: string;
     name: ReactNode;
-    onSelect: (rows: unknown[]) => unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSelect: (rows: any[]) => any;
     type?: 'primary' | 'secondary' | 'danger';
-    hidden?: (rows: unknown[]) => boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    hidden?: (rows: any[]) => boolean;
   }>;
   bulkSelectEnabled?: boolean;
   disableBulkSelect?: () => void;
-  renderBulkSelectCopy?: (selects: unknown[]) => ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  renderBulkSelectCopy?: (selects: any[]) => ReactNode;
   renderCard?: (row: T & { loading: boolean }) => ReactNode;
   cardSortSelectOptions?: Array<CardSortSelectOption>;
   defaultViewMode?: ViewModeType;
@@ -319,7 +325,8 @@ export interface ListViewProps<T extends object = unknown> {
   headerContent?: ReactNode;
 }
 
-export function ListView<T extends object = unknown>({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ListView<T extends object = any>({
   columns,
   data,
   count,
@@ -517,7 +524,8 @@ export function ListView<T extends object = unknown>({
                         .filter(
                           action =>
                             !action.hidden?.(
-                              selectedFlatRows.map((r: unknown) => r.original),
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              selectedFlatRows.map((r: any) => r.original),
                             ),
                         )
                         .map(action => (
@@ -529,9 +537,8 @@ export function ListView<T extends object = unknown>({
                             cta
                             onClick={() =>
                               action.onSelect(
-                                selectedFlatRows.map(
-                                  (r: unknown) => r.original,
-                                ),
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                selectedFlatRows.map((r: any) => r.original),
                               )
                             }
                           >
@@ -613,10 +620,12 @@ export function ListView<T extends object = unknown>({
                   bulkSelectEnabled={bulkSelectEnabled}
                   selectedFlatRows={selectedFlatRows}
                   toggleRowSelected={(rowId, value) => {
-                    const row = rows.find((r: unknown) => r.id === rowId);
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const row = rows.find((r: any) => r.id === rowId);
                     if (row) {
                       prepareRow(row);
-                      (row as Record<string, unknown>).toggleRowSelected(value);
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      (row as any).toggleRowSelected(value);
                     }
                   }}
                   toggleAllRowsSelected={toggleAllRowsSelected}

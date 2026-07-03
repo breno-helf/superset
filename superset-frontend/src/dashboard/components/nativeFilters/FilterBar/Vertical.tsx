@@ -146,7 +146,8 @@ const VerticalFilterBar: FC<VerticalBarProps> = ({
 }) => {
   const theme = useTheme();
   const [isScrolling, setIsScrolling] = useState(false);
-  const timeout = useRef<unknown>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const timeout = useRef<any>();
 
   const openFiltersBar = useCallback(
     () => toggleFiltersBar(true),

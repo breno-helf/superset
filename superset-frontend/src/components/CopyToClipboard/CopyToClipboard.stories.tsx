@@ -26,7 +26,8 @@ export default {
   component: CopyToClipboard,
 };
 
-export const InteractiveCopyToClipboard = ({ copyNode, ...rest }: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const InteractiveCopyToClipboard = ({ copyNode, ...rest }: any) => {
   let node = <Button>Copy</Button>;
   if (copyNode === 'Icon') {
     node = <Icons.CopyOutlined />;

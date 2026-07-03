@@ -100,7 +100,8 @@ const dataset = {
 
 const renderModal = async (
   modalProps: Partial<DrillByModalProps> = {},
-  overrideState: Record<string, unknown> = {},
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  overrideState: Record<string, any> = {},
 ) => {
   const DrillByModalWrapper = () => {
     const [showModal, setShowModal] = useState(false);

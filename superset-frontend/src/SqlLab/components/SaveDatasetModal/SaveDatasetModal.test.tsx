@@ -419,7 +419,8 @@ describe('SaveDatasetModal', () => {
 
     const putSpy = jest
       .spyOn(SupersetClient, 'put')
-      .mockResolvedValue({ json: { result: { id: 0 } } } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockResolvedValue({ json: { result: { id: 0 } } } as any);
 
     renderModal({
       datasource: {
@@ -461,7 +462,8 @@ describe('SaveDatasetModal', () => {
 
     const putSpy = jest
       .spyOn(SupersetClient, 'put')
-      .mockResolvedValue({ json: { result: { id: 0 } } } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockResolvedValue({ json: { result: { id: 0 } } } as any);
 
     renderModal({
       datasource: {

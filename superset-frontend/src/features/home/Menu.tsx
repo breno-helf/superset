@@ -473,7 +473,8 @@ export default function MenuWrapper({ data, ...rest }: MenuProps) {
   // Cycle through menu.menu to build out cleanedMenu and settings
   const cleanedMenu: MenuObjectProps[] = [];
   const settings: MenuObjectProps[] = [];
-  newMenuData.menu.forEach((item: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  newMenuData.menu.forEach((item: any) => {
     if (!item) {
       return;
     }

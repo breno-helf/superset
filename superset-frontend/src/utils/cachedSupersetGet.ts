@@ -20,7 +20,8 @@
 import { SupersetClient } from '@superset-ui/core';
 import { cacheWrapper } from './cacheWrapper';
 
-export const supersetGetCache = new Map<string, unknown>();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const supersetGetCache = new Map<string, any>();
 
 export const cachedSupersetGet = cacheWrapper(
   SupersetClient.get,

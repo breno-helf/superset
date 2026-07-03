@@ -31,7 +31,8 @@ jest.mock('@superset-ui/core', () => ({
   SupersetClient: {
     get: jest.fn(),
   },
-  t: (str: string, ...args: unknown[]) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  t: (str: string, ...args: any[]) => {
     if (args.length > 0 && str.includes('%s')) {
       return str.replace('%s', args[0]);
     }
@@ -43,15 +44,15 @@ jest.mock('@superset-ui/core', () => ({
 // Mock fetchTopNValues utility
 jest.mock('./MatrixifyControl/utils/fetchTopNValues', () => ({
   fetchTopNValues: jest.fn(),
-  extractDimensionValues: jest.fn(values =>
-    values.map((v: unknown) => v.value),
-  ),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extractDimensionValues: jest.fn(values => values.map((v: any) => v.value)),
 }));
 
 // Mock ControlHeader
 jest.mock('src/explore/components/ControlHeader', () => ({
   __esModule: true,
-  default: ({ label, description }: unknown) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: ({ label, description }: any) => (
     <div data-testid="control-header">
       {label && <span data-testid="label">{label}</span>}
       {description && <span data-testid="description">{description}</span>}
@@ -319,7 +320,8 @@ test('should convert string topNValue to number', async () => {
       value={value}
       selectionMode="topn"
       topNMetric="revenue"
-      topNValue={'10' as unknown} // String instead of number
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      topNValue={'10' as any} // String instead of number
       topNOrder="ASC"
     />,
   );

@@ -38,7 +38,8 @@ const defaultProps = {
   id: 'colorScheme',
 };
 
-const setup = (overrides?: Record<string, unknown>) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (overrides?: Record<string, any>) =>
   render(<ColorSchemeLabel {...defaultProps} {...overrides} />);
 
 test('should render', async () => {

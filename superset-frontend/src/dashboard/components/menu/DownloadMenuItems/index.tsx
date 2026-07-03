@@ -187,13 +187,15 @@ export const useDownloadMenuItems = (
           key: 'download-pdf',
           label: imageExportLabel(pdfMenuItemTitle),
           disabled: imageDisabled,
-          onClick: (e: unknown) => onDownloadPdf(e.domEvent),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick: (e: any) => onDownloadPdf(e.domEvent),
         },
         {
           key: 'download-image',
           label: imageExportLabel(imageMenuItemTitle),
           disabled: imageDisabled,
-          onClick: (e: unknown) => onDownloadImage(e.domEvent),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick: (e: any) => onDownloadImage(e.domEvent),
         },
       ];
 

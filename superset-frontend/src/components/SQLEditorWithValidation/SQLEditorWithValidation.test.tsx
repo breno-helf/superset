@@ -101,7 +101,8 @@ describe('SQLEditorWithValidation', () => {
     mockPost.mockImplementation(
       () =>
         new Promise(resolve =>
-          setTimeout(() => resolve({ json: { result: [] } } as unknown), 100),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          setTimeout(() => resolve({ json: { result: [] } } as any), 100),
         ),
     );
 
@@ -122,7 +123,8 @@ describe('SQLEditorWithValidation', () => {
     const mockPost = SupersetClient.post as jest.MockedFunction<
       typeof SupersetClient.post
     >;
-    mockPost.mockResolvedValue({ json: { result: [] } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockPost.mockResolvedValue({ json: { result: [] } } as any);
 
     render(<SQLEditorWithValidation {...defaultProps} />);
 
@@ -154,7 +156,8 @@ describe('SQLEditorWithValidation', () => {
           },
         ],
       },
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     render(<SQLEditorWithValidation {...defaultProps} />);
 
@@ -194,7 +197,8 @@ describe('SQLEditorWithValidation', () => {
     const mockPost = SupersetClient.post as jest.MockedFunction<
       typeof SupersetClient.post
     >;
-    mockPost.mockResolvedValue({ json: { result: [] } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockPost.mockResolvedValue({ json: { result: [] } } as any);
 
     render(
       <SQLEditorWithValidation
@@ -226,7 +230,8 @@ describe('SQLEditorWithValidation', () => {
     const mockPost = SupersetClient.post as jest.MockedFunction<
       typeof SupersetClient.post
     >;
-    mockPost.mockResolvedValue({ json: { result: [] } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockPost.mockResolvedValue({ json: { result: [] } } as any);
 
     render(
       <SQLEditorWithValidation
@@ -257,7 +262,8 @@ describe('SQLEditorWithValidation', () => {
     const mockPost = SupersetClient.post as jest.MockedFunction<
       typeof SupersetClient.post
     >;
-    mockPost.mockResolvedValue({ json: { result: [] } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockPost.mockResolvedValue({ json: { result: [] } } as any);
 
     render(
       <SQLEditorWithValidation
@@ -319,7 +325,8 @@ describe('SQLEditorWithValidation', () => {
     const mockPost = SupersetClient.post as jest.MockedFunction<
       typeof SupersetClient.post
     >;
-    mockPost.mockResolvedValue({ json: { result: [] } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockPost.mockResolvedValue({ json: { result: [] } } as any);
 
     render(
       <SQLEditorWithValidation
@@ -351,7 +358,8 @@ describe('SQLEditorWithValidation', () => {
     };
     mockPost.mockResolvedValue({
       json: { result: [validationError] },
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     render(
       <SQLEditorWithValidation
@@ -390,7 +398,8 @@ describe('SQLEditorWithValidation', () => {
           },
         ],
       },
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     render(<SQLEditorWithValidation {...defaultProps} />);
 
@@ -415,7 +424,8 @@ describe('SQLEditorWithValidation', () => {
     const mockPost = SupersetClient.post as jest.MockedFunction<
       typeof SupersetClient.post
     >;
-    mockPost.mockResolvedValue({ json: { result: null } } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockPost.mockResolvedValue({ json: { result: null } } as any);
 
     render(<SQLEditorWithValidation {...defaultProps} />);
 

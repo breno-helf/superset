@@ -26,8 +26,10 @@ import { calculateCellValue } from '../valueCalculations/valueCalculations';
  * @returns Numeric comparison result
  */
 function compareValues(
-  a: unknown,
-  b: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  a: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  b: any,
   nanTreatment: 'asSmallest' | 'asLargest' | 'alwaysLast' = 'asSmallest',
 ): number {
   const numA = typeof a === 'string' ? parseFloat(a) : a;
@@ -55,8 +57,10 @@ function compareValues(
  * this function, so we only return the raw comparison result.
  */
 export function sortNumberWithMixedTypes(
-  rowA: unknown,
-  rowB: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rowA: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rowB: any,
   columnId: string,
 ) {
   const cellA = rowA.values?.[columnId];

@@ -36,7 +36,8 @@ import {
 import { useFilterConfiguration } from '../state';
 
 export const useFilters = () => {
-  const preselectedNativeFilters = useSelector<unknown, Filters>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const preselectedNativeFilters = useSelector<any, Filters>(
     state => state.dashboardState?.preselectNativeFilters,
   );
   const filterConfiguration = useFilterConfiguration();

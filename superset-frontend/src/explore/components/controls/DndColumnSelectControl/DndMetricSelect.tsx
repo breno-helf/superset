@@ -131,7 +131,8 @@ const getOptionsForSavedMetrics = (
 
 type ValueType = Metric | AdhocMetric | QueryFormMetric;
 
-const DndMetricSelect = (props: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DndMetricSelect = (props: any) => {
   const { onChange, multi, datasource, savedMetrics } = props;
 
   const extra = useMemo<{ disallow_adhoc_metrics?: boolean }>(() => {
@@ -322,7 +323,8 @@ const DndMetricSelect = (props: unknown) => {
       <MetricDefinitionValue
         key={index}
         index={index}
-        option={option as unknown}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        option={option as any}
         onMetricEdit={onMetricEdit}
         onRemoveMetric={onRemoveMetric}
         columns={props.columns}

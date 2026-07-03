@@ -189,14 +189,18 @@ export const addChartToDashboard = async (
 
 interface SaveModalProps {
   addDangerToast: (msg: string) => void;
-  actions: Record<string, unknown>;
-  form_data?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  actions: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form_data?: Record<string, any>;
   user: UserWithPermissionsAndRoles;
   alert?: string;
   sliceName?: string;
-  slice?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  slice?: Record<string, any>;
   can_overwrite?: boolean;
-  datasource?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource?: Record<string, any>;
   dashboardId: '' | number | null;
   isVisible: boolean;
   dispatch: Dispatch;
@@ -904,12 +908,16 @@ const SaveModal = ({
 };
 
 interface StateProps {
-  datasource: unknown;
-  slice: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  slice: any;
   can_overwrite: boolean;
   user: UserWithPermissionsAndRoles;
-  dashboards: unknown;
-  alert: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dashboards: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  alert: any;
   isVisible: boolean;
   metadata?: ExplorePageInitialData['metadata'];
 }
@@ -918,7 +926,8 @@ function mapStateToProps({
   explore,
   saveModal,
   user,
-}: Record<string, unknown>): StateProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}: Record<string, any>): StateProps {
   return {
     datasource: explore.datasource,
     slice: explore.slice,

@@ -206,7 +206,8 @@ test('DELETE_REPORT for alerts_reports keys by report id', () => {
 
 test('unknown action type returns state unchanged', () => {
   const initial: ReportsState = { dashboards: { 1: makeReport({ id: 1 }) } };
-  const action = { type: 'UNKNOWN_ACTION' } as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const action = { type: 'UNKNOWN_ACTION' } as any;
 
   const result = reportsReducer(initial, action);
 

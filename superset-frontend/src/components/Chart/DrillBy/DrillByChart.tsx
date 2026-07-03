@@ -27,7 +27,8 @@ import { css, useTheme } from '@apache-superset/core/theme';
 import { Dataset } from '../types';
 
 interface DrillByChartProps {
-  formData: BaseFormData & { [key: string]: unknown };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formData: BaseFormData & { [key: string]: any };
   result: QueryData[];
   dataset: Dataset;
   onContextMenu: (

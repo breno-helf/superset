@@ -43,7 +43,8 @@ const drillToDetailModalState = {
   },
 };
 
-const renderModal = async (overrideState: Record<string, unknown> = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderModal = async (overrideState: Record<string, any> = {}) => {
   const DrillDetailModalWrapper = () => {
     const [showModal, setShowModal] = useState(false);
     return (

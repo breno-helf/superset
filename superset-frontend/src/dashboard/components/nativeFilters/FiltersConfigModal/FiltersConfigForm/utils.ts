@@ -67,10 +67,12 @@ export const setNativeFilterFieldValues = (
 };
 
 export const getControlItems = (
-  controlConfig: Record<string, unknown> = {},
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  controlConfig: { [key: string]: any } = {},
 ): CustomControlItem[] =>
   (flatMapDeep(controlConfig.controlPanelSections)?.reduce(
-    (acc: unknown, { controlSetRows = [] }: unknown) => [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (acc: any, { controlSetRows = [] }: any) => [
       ...acc,
       ...flatMapDeep(controlSetRows),
     ],

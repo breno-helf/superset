@@ -28,7 +28,8 @@ import FilterScopeSelectorComponent from './FilterScopeSelector';
 
 // Cast to accept partial mock props in tests
 const FilterScopeSelector = FilterScopeSelectorComponent as unknown as React.FC<
-  Record<string, unknown>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, any>
 >;
 
 // Add afterEach cleanup

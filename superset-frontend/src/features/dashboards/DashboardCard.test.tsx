@@ -117,7 +117,8 @@ describe('thumbnail URL construction', () => {
     render(
       <MemoryRouter>
         <DashboardCard
-          dashboard={dashboard as unknown}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          dashboard={dashboard as any}
           hasPerm={() => true}
           bulkSelectEnabled={false}
           loading={false}

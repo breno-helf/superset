@@ -81,8 +81,10 @@ function fetchAllSlicesFailed(error: string) {
   return { type: FETCH_ALL_SLICES_FAILED, payload: { error } };
 }
 
-const parseResult = (result: Record<string, unknown>[]) =>
-  result.reduce((slices, slice: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parseResult = (result: any[]) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  result.reduce((slices, slice: any) => {
     let form_data = JSON.parse(slice.params);
     form_data = {
       ...form_data,

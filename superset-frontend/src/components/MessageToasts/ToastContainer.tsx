@@ -23,7 +23,8 @@ import ToastPresenter from './ToastPresenter';
 import { removeToast } from './actions';
 
 const ToastContainer = connect(
-  ({ messageToasts: toasts }: unknown) => ({ toasts }),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ({ messageToasts: toasts }: any) => ({ toasts }),
   dispatch => bindActionCreators({ removeToast }, dispatch),
 )(ToastPresenter);
 

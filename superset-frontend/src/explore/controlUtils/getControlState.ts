@@ -171,7 +171,8 @@ export function getAllControlsState(
   state: ControlPanelState | null,
   formData: QueryFormData,
 ) {
-  const controlsState: Record<string, ControlState<unknown> | null> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const controlsState: Record<string, ControlState<any> | null> = {};
   getSectionsToRender(vizType, datasourceType).forEach(section => {
     if (!section || !section.controlSetRows) return;
     section.controlSetRows.forEach(fieldsetRow =>
@@ -184,10 +185,12 @@ export function getAllControlsState(
             formData[name],
           );
         } else if (React.isValidElement(field)) {
-          const props = field.props as { name: string; [key: string]: unknown };
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const props = field.props as { name: string; [key: string]: any };
           const { name, ...configProps } = props;
           controlsState[name] = getControlStateFromControlConfig(
-            configProps as ControlConfig<unknown>,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            configProps as ControlConfig<any>,
             state,
             formData[name],
           );

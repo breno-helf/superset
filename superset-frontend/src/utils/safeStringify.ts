@@ -22,7 +22,8 @@
  * unlike JSON.stringify. Circular references are replaced with a '[Circular]' string placeholder.
  * @param object any JSON object to be stringified
  */
-export function safeStringify(object: unknown): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function safeStringify(object: any): string {
   const cache = new Set();
   return JSON.stringify(object, (key, value) => {
     if (typeof value === 'object' && value !== null) {

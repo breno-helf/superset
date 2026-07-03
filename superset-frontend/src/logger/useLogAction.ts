@@ -21,7 +21,8 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { logEvent } from 'src/logger/actions';
 
-export default function useLogAction(staticEventData: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function useLogAction(staticEventData: Record<string, any>) {
   const dispatch = useDispatch();
   const logAction = useCallback<typeof logEvent>(
     (type, payload) =>

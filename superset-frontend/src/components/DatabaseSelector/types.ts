@@ -39,7 +39,8 @@ export interface DatabaseSelectorProps {
   db?: DatabaseObject | null;
   emptyState?: ReactNode;
   formMode?: boolean;
-  getDbList?: (arg0: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getDbList?: (arg0: any) => void;
   handleError: (msg: string) => void;
   isDatabaseSelectEnabled?: boolean;
   onDbChange?: (db: DatabaseObject) => void;

@@ -336,7 +336,8 @@ export function parseUrl(url: string) {
   return url;
 }
 
-export function toQueryString(params: Record<string, unknown>): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function toQueryString(params: Record<string, any>): string {
   const queryParts: string[] = [];
   Object.keys(params).forEach(key => {
     const value = params[key];

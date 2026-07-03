@@ -764,7 +764,8 @@ export default function VizTypeGallery(props: VizTypeGalleryProps) {
       <SearchWrapper>
         <Input
           type="text"
-          ref={searchInputRef as unknown /* cast required because emotion */}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ref={searchInputRef as any /* cast required because emotion */}
           value={searchInputValue}
           placeholder={t('Search all charts')}
           onChange={changeSearch}

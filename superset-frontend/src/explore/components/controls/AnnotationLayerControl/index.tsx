@@ -302,7 +302,8 @@ function mapStateToProps({
 }
 
 function mapDispatchToProps(
-  dispatch: ThunkDispatch<unknown, undefined, AnyAction>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dispatch: ThunkDispatch<any, undefined, AnyAction>,
 ) {
   return {
     // Note: There's a type mismatch between the local Annotation interface

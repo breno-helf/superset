@@ -87,7 +87,8 @@ const rangeProps = {
 // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
 describe('RangeFilterPlugin', () => {
   const setDataMask = jest.fn();
-  const getWrapper = (props: Record<string, unknown> = {}) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getWrapper = (props: any = {}) =>
     render(
       <RangeFilterPlugin
         {...(transformProps({

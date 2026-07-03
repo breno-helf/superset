@@ -51,7 +51,8 @@ import {
   ImportResourceName,
 } from './types';
 
-interface ListViewResourceState<D extends object = unknown> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface ListViewResourceState<D extends object = any> {
   loading: boolean;
   collection: D[];
   count: number;
@@ -77,7 +78,8 @@ const parsedErrorMessage = (
     .join('\n');
 };
 
-export function useListViewResource<D extends object = unknown>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function useListViewResource<D extends object = any>(
   resource: string,
   resourceLabel: string, // resourceLabel for translations
   handleErrorMsg: (errorMsg: string) => void,
@@ -259,13 +261,16 @@ export function useListViewResource<D extends object = unknown>(
 }
 
 // In the same vein as above, a hook for viewing a single instance of a resource (given id)
-interface SingleViewResourceState<D extends object = unknown> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface SingleViewResourceState<D extends object = any> {
   loading: boolean;
   resource: D | null;
-  error: unknown | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error: any | null;
 }
 
-export function useSingleViewResource<D extends object = unknown>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function useSingleViewResource<D extends object = any>(
   resourceName: string,
   resourceLabel: string, // resourceLabel for translations
   handleErrorMsg: (errorMsg: string) => void,
@@ -857,7 +862,8 @@ export function useDatabaseValidation() {
                 if (err.extra?.ssh_tunnel) return true;
                 return allowed.includes(err.error_type) || onCreate;
               })
-              .reduce((acc: JsonObject, err2: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .reduce((acc: JsonObject, err2: any) => {
                 const { message, extra } = err2;
 
                 if (extra?.catalog) {
@@ -946,7 +952,8 @@ export function useDatabaseValidation() {
 }
 
 export const reportSelector = (
-  state: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: Record<string, any>,
   resourceType: string,
   resourceId?: number,
 ) => {

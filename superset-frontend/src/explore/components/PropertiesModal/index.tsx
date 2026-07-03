@@ -141,7 +141,8 @@ function PropertiesModal({
   }, [tags.length]);
 
   const showError = useCallback(
-    ({ error, statusText, message }: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ({ error, statusText, message }: any) => {
       let errorText = error || statusText || t('An error has occurred');
       if (message === 'Forbidden') {
         errorText = t('You do not have permission to edit this chart');
@@ -246,7 +247,8 @@ function PropertiesModal({
     }
 
     setSubmitting(true);
-    const payload: Record<string, unknown> = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const payload: { [key: string]: any } = {
       slice_name: name || null,
       description: description || null,
       cache_timeout: cacheTimeout ? Number(cacheTimeout) : null,

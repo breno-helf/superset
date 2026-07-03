@@ -34,7 +34,8 @@ export type RLSObject = {
 };
 
 export type TableObject = {
-  key: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  key: any;
   id?: number;
   label?: string;
   value?: number | string;
@@ -43,7 +44,8 @@ export type TableObject = {
 };
 
 export type RoleObject = {
-  key: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  key: any;
   id?: number;
   label?: string;
   value?: number | string;

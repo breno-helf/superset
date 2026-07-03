@@ -68,7 +68,8 @@ afterAll(() => {
   getCategoricalSchemeRegistry().clear();
 });
 
-const setup = (overrides?: Record<string, unknown>) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (overrides?: Record<string, any>) =>
   render(<ColorSchemeControl {...defaultProps()} {...overrides} />);
 
 test('should render', async () => {
@@ -225,7 +226,8 @@ test('should show tooltip on hover when text overflows', async () => {
         originalScrollWidthDescriptor,
       );
     } else {
-      delete (HTMLElement.prototype as Record<string, unknown>).scrollWidth;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (HTMLElement.prototype as any).scrollWidth;
     }
 
     if (originalOffsetWidthDescriptor) {
@@ -235,7 +237,8 @@ test('should show tooltip on hover when text overflows', async () => {
         originalOffsetWidthDescriptor,
       );
     } else {
-      delete (HTMLElement.prototype as Record<string, unknown>).offsetWidth;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (HTMLElement.prototype as any).offsetWidth;
     }
   }
 });

@@ -69,8 +69,10 @@ export type PluginFilterSelectProps = PluginFilterStylesProps & {
   filterState: FilterState;
   isRefreshing: boolean;
   showOverflow: boolean;
-  parentRef?: RefObject<HTMLDivElement>;
-  inputRef?: RefObject<HTMLInputElement>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parentRef?: RefObject<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inputRef?: RefObject<any>;
   filterBarOrientation?: FilterBarOrientation;
   isOverflowingFilterBar?: boolean;
   clearAllTrigger?: Record<string, boolean>;

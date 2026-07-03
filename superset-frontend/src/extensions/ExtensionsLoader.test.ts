@@ -49,7 +49,8 @@ function createMockExtension(overrides: Partial<Extension> = {}): Extension {
 }
 
 beforeEach(() => {
-  (ExtensionsLoader as Record<string, unknown>).instance = undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (ExtensionsLoader as any).instance = undefined;
   mockApplicationRoot.mockReturnValue('');
 });
 
@@ -132,7 +133,8 @@ test('handles initialization errors gracefully', async () => {
     .mockImplementation((element: Node) => {
       if (element instanceof HTMLScriptElement && element.onerror) {
         setTimeout(() => {
-          (element.onerror as unknown)('Script load error');
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (element.onerror as any)('Script load error');
         }, 0);
       }
       return element;
@@ -161,7 +163,8 @@ test('logs success after initializeExtensions completes', async () => {
   const infoSpy = jest.spyOn(logging, 'info').mockImplementation();
   jest.spyOn(SupersetClient, 'get').mockResolvedValue({
     json: { result: [] },
-  } as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 
   await loader.initializeExtensions();
 

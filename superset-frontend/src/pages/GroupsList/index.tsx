@@ -1,4 +1,3 @@
-import type { CellProps } from 'react-table';
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -176,7 +175,8 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { name },
           },
-        }: CellProps<GroupObject>) => <span>{name}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{name}</span>,
       },
       {
         accessor: 'label',
@@ -186,7 +186,8 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { label },
           },
-        }: CellProps<GroupObject>) => <span>{label}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{label}</span>,
       },
       {
         accessor: 'description',
@@ -196,7 +197,8 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { description },
           },
-        }: CellProps<GroupObject>) => <span>{description}</span>,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <span>{description}</span>,
         hidden: true,
       },
       {
@@ -207,7 +209,8 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { roles },
           },
-        }: CellProps<GroupObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <Tooltip
             title={
               roles?.map((role: Role) => role.name).join(', ') || t('No roles')
@@ -226,14 +229,16 @@ function GroupsList({ user }: GroupsListProps) {
           row: {
             original: { users },
           },
-        }: CellProps<GroupObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           <span>{users?.map((user: User) => user.username).join(', ')}</span>
         ),
         disableSortBy: true,
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: CellProps<GroupObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handleEdit = () => {
             setCurrentGroup(original);
             openModal(ModalType.EDIT);

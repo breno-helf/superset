@@ -43,7 +43,8 @@ interface WithPopoverMenuProps {
   // like it should be React.FocusEvent<>, however from handleClick() we can also
   // derive that type is EventListenerOrEventListenerObject.
   shouldFocus?: (
-    event: unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    event: any,
     container: ShouldFocusContainer | null,
     menuRef: HTMLDivElement | null,
   ) => boolean;
@@ -52,7 +53,8 @@ interface WithPopoverMenuProps {
 }
 
 const defaultShouldFocus = (
-  event: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  event: any,
   container: ShouldFocusContainer | null,
   menuRef: HTMLDivElement | null,
 ): boolean => {
@@ -139,7 +141,8 @@ function WithPopoverMenu({
   const focusEventRef = useRef<Event | null>(null);
 
   const handleClick = useCallback(
-    (event: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (event: any) => {
       if (!editMode) {
         return;
       }

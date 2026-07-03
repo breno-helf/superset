@@ -65,7 +65,8 @@ if (menuMountPoint) {
                   adapter={ReactRouter5Adapter}
                   options={{
                     searchStringToObject: querystring.parse,
-                    objectToSearchString: (object: Record<string, unknown>) =>
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    objectToSearchString: (object: Record<string, any>) =>
                       querystring.stringify(object, { encode: false }),
                   }}
                 >

@@ -52,7 +52,8 @@ interface ColumnSelectPopoverTriggerProps {
 }
 
 interface ColumnSelectPopoverTriggerInnerProps extends ColumnSelectPopoverTriggerProps {
-  datasource?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  datasource?: any;
 }
 
 const ColumnSelectPopoverTriggerInner = ({
@@ -213,7 +214,8 @@ const ColumnSelectPopoverTriggerWrapper = (
   props: ColumnSelectPopoverTriggerProps,
 ) => {
   const datasource = useSelector(
-    (state: unknown) => state?.explore?.datasource || null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (state: any) => state?.explore?.datasource || null,
   );
 
   return <ColumnSelectPopoverTriggerInner {...props} datasource={datasource} />;

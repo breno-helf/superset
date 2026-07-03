@@ -48,12 +48,11 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
     {
       fetchSlices,
       updateSlices,
-    } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
     dispatch,
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SliceAdder as unknown);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default connect(mapStateToProps, mapDispatchToProps)(SliceAdder as any);

@@ -110,7 +110,8 @@ export function useAutoScroll({
     // Animation frame callback - uses time-based scrolling for consistent speed
     const scrollFrame = (currentTime: number) => {
       const list = listRef.current;
-      const outerElement = (list as unknown)?._outerRef;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const outerElement = (list as any)?._outerRef;
 
       if (!list || !outerElement || !state.direction) {
         // Restore pointer events when scrolling stops

@@ -35,8 +35,10 @@ const extractInvalidValues = (messages: object, payload: object): string[] => {
   const invalidValues: string[] = [];
 
   const recursiveExtract = (
-    messages: Record<string, unknown>,
-    payload: Record<string, unknown>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    messages: Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    payload: Record<string, any>,
   ) => {
     Object.keys(messages).forEach(key => {
       const value = payload[key];
@@ -52,8 +54,10 @@ const extractInvalidValues = (messages: object, payload: object): string[] => {
     });
   };
   recursiveExtract(
-    messages as Record<string, unknown>,
-    payload as Record<string, unknown>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    messages as Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    payload as Record<string, any>,
   );
   return invalidValues;
 };

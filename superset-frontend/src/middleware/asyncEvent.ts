@@ -41,10 +41,13 @@ type AsyncEvent = {
 
 type CachedDataResponse = {
   status: string;
-  data: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
 };
-type AppConfig = Record<string, unknown>;
-type ListenerFn = (asyncEvent: AsyncEvent) => Promise<unknown>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AppConfig = Record<string, any>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ListenerFn = (asyncEvent: AsyncEvent) => Promise<any>;
 
 const TRANSPORT_POLLING = 'polling';
 const TRANSPORT_WS = 'ws';
@@ -189,7 +192,8 @@ const loadEventsFromApi = async () => {
 const wsConnectMaxRetries = 6;
 const wsConnectErrorDelay = 2500;
 let wsConnectRetries = 0;
-let wsConnectTimeout: ReturnType<typeof setTimeout> | undefined;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let wsConnectTimeout: any;
 let ws: WebSocket;
 
 const wsConnect = (): void => {

@@ -52,7 +52,8 @@ test('renders empty state when no dashboards provided', () => {
 });
 
 test('renders empty state when dashboards is null/undefined', () => {
-  render(<DashboardLinksExternal dashboards={null as unknown as never[]} />, {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render(<DashboardLinksExternal dashboards={null as any} />, {
     wrapper: createWrapper({
       useRedux: true,
       useRouter: true,

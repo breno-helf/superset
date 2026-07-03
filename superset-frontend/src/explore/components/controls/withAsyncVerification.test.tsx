@@ -108,7 +108,8 @@ describe('VerifiedMetricsControl', () => {
       baseControl: 'MetricsControl',
       onChange: mockOnChange,
       extraProps: {
-        onChange: (value: unknown) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onChange: (value: any) => {
           // Simulate the MetricsControl onChange
           mockOnChange(value, props);
         },

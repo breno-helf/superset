@@ -28,7 +28,8 @@ const slices = {
   '1': { datasource: 'ds1', slice_id: 1 },
   '2': { datasource: 'ds2', slice_id: 2 },
   '3': { datasource: 'ds1', slice_id: 3 },
-} as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any;
 
 test('Return all chart ids in global scope with native filters', () => {
   const filters = {

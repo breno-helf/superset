@@ -226,7 +226,8 @@ test('HYDRATE_DASHBOARD preserves existing chartsInScope and tabsInScope from st
     },
   };
 
-  const result = nativeFilterReducer(initialState, action as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = nativeFilterReducer(initialState, action as any);
 
   expect(result.filters.filter1.chartsInScope).toEqual([1, 2, 3]);
   expect(result.filters.filter1.tabsInScope).toEqual(['tab1', 'tab2']);
@@ -250,7 +251,8 @@ test('HYDRATE_DASHBOARD uses incoming scopes when provided', () => {
     },
   };
 
-  const result = nativeFilterReducer(initialState, action as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = nativeFilterReducer(initialState, action as any);
 
   expect(result.filters.filter1.chartsInScope).toEqual([4, 5]);
   expect(result.filters.filter1.tabsInScope).toEqual(['tab3']);
@@ -272,7 +274,8 @@ test('HYDRATE_DASHBOARD handles new filters without existing state', () => {
     },
   };
 
-  const result = nativeFilterReducer(initialState, action as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = nativeFilterReducer(initialState, action as any);
 
   expect(result.filters.filter1.chartsInScope).toEqual([1, 2]);
   expect(result.filters.filter1.tabsInScope).toEqual(['tab1']);

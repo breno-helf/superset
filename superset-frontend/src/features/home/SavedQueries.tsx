@@ -52,7 +52,8 @@ import { WelcomeTable } from './types';
 
 interface Query {
   id?: number;
-  sql_tables?: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sql_tables?: Array<any>;
   database?: {
     database_name: string;
   };

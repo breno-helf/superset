@@ -54,9 +54,8 @@ export function CalendarFrame({ onChange, value }: FrameComponentProps) {
         }}
         size="large"
         value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          onChange(e.target.value)
-        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onChange={(e: any) => onChange(e.target.value)}
         options={CALENDAR_RANGE_OPTIONS}
       />
     </>

@@ -26,7 +26,8 @@ import { getDefaultScopeValue } from './utils';
 
 type FilterScopeProps = {
   pathToFormValue?: string[];
-  updateFormValues: (values: unknown, triggerFormChange?: boolean) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateFormValues: (values: any, triggerFormChange?: boolean) => void;
   formFilterScope?: NativeFilterScope;
   forceUpdate: Function;
   filterScope?: NativeFilterScope;
@@ -63,7 +64,8 @@ const FilterScope: FC<FilterScopeProps> = ({
   const [hasScopeBeenModified, setHasScopeBeenModified] = useState(false);
 
   const onUpdateFormValues = useCallback(
-    (formValues: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (formValues: any) => {
       updateFormValues(formValues);
       setHasScopeBeenModified(true);
     },
@@ -71,7 +73,8 @@ const FilterScope: FC<FilterScopeProps> = ({
   );
 
   const updateScopes = useCallback(
-    (updatedFormValues: Record<string, unknown>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (updatedFormValues: Record<string, any>) => {
       if (hasScopeBeenModified) {
         return;
       }

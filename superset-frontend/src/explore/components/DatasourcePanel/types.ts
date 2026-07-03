@@ -28,12 +28,14 @@ export interface DatasourcePanelDndItem {
 }
 
 export function isDatasourcePanelDndItem(
-  item: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: any,
 ): item is DatasourcePanelDndItem {
   return item?.value && item?.type;
 }
 
-export function isSavedMetric(item: unknown): item is Metric {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isSavedMetric(item: any): item is Metric {
   return item?.metric_name;
 }
 

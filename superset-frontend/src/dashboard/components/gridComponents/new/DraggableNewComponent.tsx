@@ -30,8 +30,10 @@ interface DraggableNewComponentProps {
   type: string;
   label: string;
   className?: string;
-  meta?: Record<string, unknown>;
-  IconComponent?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  meta?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  IconComponent?: any;
 }
 
 const NewComponent = styled.div`

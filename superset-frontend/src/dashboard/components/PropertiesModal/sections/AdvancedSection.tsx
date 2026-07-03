@@ -49,7 +49,8 @@ const StyledEditorHost = styled(EditorHost)`
 
 interface AdvancedSectionProps {
   jsonMetadata: string;
-  jsonAnnotations: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  jsonAnnotations: any[];
   validationStatus: ValidationObject;
   onJsonMetadataChange: (value: string) => void;
 }

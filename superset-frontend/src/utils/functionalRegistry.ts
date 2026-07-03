@@ -27,14 +27,14 @@ export interface RegistryMetadata {
 
 export interface ComponentItem<Metadata = RegistryMetadata> {
   metadata: Metadata;
-  loadComponent: () => Promise<{
-    default: ComponentType<Record<string, unknown>>;
-  }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  loadComponent: () => Promise<{ default: ComponentType<any> }>;
 }
 
 export interface ComponentRegistry<Metadata = RegistryMetadata> {
   metadata: Metadata;
-  Component: ComponentType<Record<string, unknown>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: ComponentType<any>;
 }
 
 export type FunctionalRegistryState<RegistryT> = {

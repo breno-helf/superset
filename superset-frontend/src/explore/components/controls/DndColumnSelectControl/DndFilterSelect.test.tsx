@@ -223,7 +223,8 @@ test('cannot drop a column that is not part of the simple column selection', asy
   act(() => {
     simulateDrop(captured, {
       type: DndItemType.Column,
-      value: { column_name: 'address_line1' } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value: { column_name: 'address_line1' } as any,
     });
   });
   expect(screen.queryByTestId('filter-edit-popover')).not.toBeInTheDocument();
@@ -232,7 +233,8 @@ test('cannot drop a column that is not part of the simple column selection', asy
   act(() => {
     simulateDrop(captured, {
       type: DndItemType.Column,
-      value: { column_name: 'order_date' } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value: { column_name: 'order_date' } as any,
     });
   });
   const filterConfigPopup = await screen.findByTestId('filter-edit-popover');
@@ -256,7 +258,8 @@ test('cannot drop a column that is not part of the simple column selection', asy
         metric_name: 'metric_a',
         expression: 'AGG(metric_a)',
         uuid: '1',
-      } as unknown,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any,
     });
   });
   const metricPopup = await screen.findByTestId('filter-edit-popover');
@@ -291,7 +294,8 @@ test('when disallow_adhoc_metrics is set, can drop a column from the simple colu
   act(() => {
     simulateDrop(captured, {
       type: DndItemType.Column,
-      value: { column_name: 'column_b' } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value: { column_name: 'column_b' } as any,
     });
   });
 
@@ -326,7 +330,8 @@ test('when disallow_adhoc_metrics is set, cannot drop anything but a simple colu
   act(() => {
     simulateDrop(captured, {
       type: DndItemType.Metric,
-      value: { metric_name: 'metric_a', uuid: '1' } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value: { metric_name: 'metric_a', uuid: '1' } as any,
     });
   });
   expect(screen.queryByTestId('filter-edit-popover')).not.toBeInTheDocument();
@@ -335,7 +340,8 @@ test('when disallow_adhoc_metrics is set, cannot drop anything but a simple colu
   act(() => {
     simulateDrop(captured, {
       type: DndItemType.AdhocMetricOption,
-      value: { metric_name: 'avg__num', uuid: '2' } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value: { metric_name: 'avg__num', uuid: '2' } as any,
     });
   });
   expect(screen.queryByTestId('filter-edit-popover')).not.toBeInTheDocument();
@@ -344,7 +350,8 @@ test('when disallow_adhoc_metrics is set, cannot drop anything but a simple colu
   act(() => {
     simulateDrop(captured, {
       type: DndItemType.Column,
-      value: { column_name: 'column_c' } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value: { column_name: 'column_c' } as any,
     });
   });
   const filterConfigPopup = await screen.findByTestId('filter-edit-popover');

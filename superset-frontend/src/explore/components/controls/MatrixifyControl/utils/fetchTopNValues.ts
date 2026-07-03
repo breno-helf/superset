@@ -25,7 +25,8 @@ export interface FetchTopNValuesParams {
   metric: string;
   limit: number;
   sortAscending?: boolean;
-  filters?: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filters?: any[];
   timeRange?: string;
 }
 
@@ -72,7 +73,8 @@ export async function fetchTopNValues({
 
     // Extract values from the response data
     // The data is typically an array of objects with column names as keys
-    return result.data.map((row: unknown) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return result.data.map((row: any) => ({
       value: row[column],
       metricValue: row[metric],
     }));

@@ -135,7 +135,8 @@ function SavedQueryList({
     t('Saved queries'),
     addDangerToast,
   );
-  const { roles } = useSelector<unknown, UserWithPermissionsAndRoles>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,
   );
   const canReadTag = findPermission('can_read', 'Tag', roles);
@@ -350,9 +351,8 @@ function SavedQueryList({
           row: {
             original: { id, label },
           },
-        }: CellProps<SavedQueryObject>) => (
-          <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>
-        ),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => <Link to={`/sqllab?savedQueryId=${id}`}>{label}</Link>,
         id: 'label',
       },
       {
@@ -384,8 +384,10 @@ function SavedQueryList({
           row: {
             original: { sql_tables: tables = [] },
           },
-        }: CellProps<SavedQueryObject>) => {
-          const names = tables.map((table: unknown) => table.table);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const names = tables.map((table: any) => table.table);
           const main = names?.shift() || '';
 
           if (names.length) {
@@ -423,7 +425,8 @@ function SavedQueryList({
           row: {
             original: { tags = [] },
           },
-        }: CellProps<SavedQueryObject>) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }: any) => (
           // Only show custom type tags
           <TagsList
             tags={tags.filter(
@@ -470,7 +473,8 @@ function SavedQueryList({
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: CellProps<SavedQueryObject>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Cell: ({ row: { original } }: any) => {
           const handlePreview = () => {
             handleSavedQueryPreview(original.id);
           };

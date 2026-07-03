@@ -31,7 +31,8 @@ import { queries, defaultQueryEditor } from '../fixtures';
 
 // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
 describe('reduxStateToLocalStorageHelper', () => {
-  const queriesObj: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const queriesObj: Record<string, any> = {};
   beforeEach(() => {
     queries.forEach(q => {
       queriesObj[q.id] = q;

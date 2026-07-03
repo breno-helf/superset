@@ -133,7 +133,8 @@ const StyledToastPresenter = styled.div<VisualProps>(
 
 type ToastPresenterProps = Partial<VisualProps> & {
   toasts: Array<ToastMeta>;
-  removeToast: () => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  removeToast: () => any;
 };
 
 export default function ToastPresenter({

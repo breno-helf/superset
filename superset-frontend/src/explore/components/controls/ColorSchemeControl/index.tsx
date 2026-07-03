@@ -51,7 +51,8 @@ export interface ColorSchemeControlProps {
   hasDashboardColorScheme?: boolean;
   hasSharedLabelsColor?: boolean;
   sharedLabelsColors?: string[];
-  mapLabelsColors?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mapLabelsColors?: Record<string, any>;
   colorNamespace?: string;
   chartId?: number;
   dashboardId?: number;

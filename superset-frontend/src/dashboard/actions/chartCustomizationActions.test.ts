@@ -41,7 +41,8 @@ function setup(stateOverrides: Record<string, unknown> = {}) {
     },
     ...stateOverrides,
   };
-  const getState = jest.fn(() => state) as unknown as () => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getState = jest.fn(() => state) as unknown as () => any;
   const dispatch = jest.fn();
   return { getState, dispatch, state };
 }

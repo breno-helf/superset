@@ -26,7 +26,8 @@ describe('cacheWrapper', () => {
   let wrappedFn: (a: number, b: number) => string;
 
   beforeEach(() => {
-    const cache = new Map<string, unknown>();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const cache = new Map<string, any>();
     wrappedFn = cacheWrapper(fn, cache);
   });
 
@@ -63,10 +64,12 @@ describe('cacheWrapper', () => {
 
   // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
   describe('with custom keyFn', () => {
-    let cache: Map<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let cache: Map<string, any>;
 
     beforeEach(() => {
-      cache = new Map<string, unknown>();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      cache = new Map<string, any>();
       wrappedFn = cacheWrapper(fn, cache, (...args) => `key-${args[0]}`);
     });
 

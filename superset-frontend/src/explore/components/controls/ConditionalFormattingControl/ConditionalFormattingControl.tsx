@@ -90,9 +90,8 @@ const ConditionalFormattingControl = ({
     if (removeIrrelevantConditions) {
       // remove formatter when corresponding column is removed from controls
       const newFormattingConfigs = conditionalFormattingConfigs.filter(config =>
-        columnOptions.some(
-          (option: unknown) => option?.value === config?.column,
-        ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        columnOptions.some((option: any) => option?.value === config?.column),
       );
       if (
         newFormattingConfigs.length !== conditionalFormattingConfigs.length &&

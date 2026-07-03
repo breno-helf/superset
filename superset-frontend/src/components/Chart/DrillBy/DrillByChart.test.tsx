@@ -41,7 +41,8 @@ const dataset = {
   ],
 };
 
-const setup = (overrides: Record<string, unknown> = {}, result?: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (overrides: Record<string, any> = {}, result?: any) =>
   render(
     <DrillByChart
       formData={{ ...chart.form_data, ...overrides }}
@@ -55,7 +56,8 @@ const setup = (overrides: Record<string, unknown> = {}, result?: unknown) =>
     },
   );
 
-const waitForRender = (overrides: Record<string, unknown> = {}) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const waitForRender = (overrides: Record<string, any> = {}) =>
   waitFor(() => setup(overrides));
 
 test('should render', async () => {

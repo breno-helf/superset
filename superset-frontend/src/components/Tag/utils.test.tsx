@@ -73,7 +73,8 @@ describe('loadTags', () => {
     const urlObj = new URL(url);
     const queryParam = urlObj.searchParams.get('q');
     expect(queryParam).not.toBeNull();
-    const decodedQuery = rison.decode(queryParam!) as Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const decodedQuery = rison.decode(queryParam!) as Record<string, any>;
 
     // Verify the query structure
     expect(decodedQuery).toEqual({
@@ -123,7 +124,8 @@ describe('loadTags', () => {
     const urlObj = new URL(url);
     const queryParam = urlObj.searchParams.get('q');
     expect(queryParam).not.toBeNull();
-    const decodedQuery = rison.decode(queryParam!) as Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const decodedQuery = rison.decode(queryParam!) as Record<string, any>;
 
     // Should include the search term in the name filter
     expect(decodedQuery.filters[0]).toEqual({
@@ -146,7 +148,8 @@ describe('loadTags', () => {
     const urlObj = new URL(url);
     const queryParam = urlObj.searchParams.get('q');
     expect(queryParam).not.toBeNull();
-    const decodedQuery = rison.decode(queryParam!) as Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const decodedQuery = rison.decode(queryParam!) as Record<string, any>;
 
     expect(decodedQuery.page).toBe(2);
     expect(decodedQuery.page_size).toBe(10);
@@ -171,7 +174,8 @@ describe('loadTags', () => {
       const urlObj = new URL(url);
       const queryParam = urlObj.searchParams.get('q');
       expect(queryParam).not.toBeNull();
-      const decodedQuery = rison.decode(queryParam!) as Record<string, unknown>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const decodedQuery = rison.decode(queryParam!) as Record<string, any>;
 
       // Every call should have the custom tag filter
       expect(decodedQuery.filters).toContainEqual({
@@ -195,7 +199,8 @@ describe('loadTags', () => {
     const urlObj = new URL(url);
     const queryParam = urlObj.searchParams.get('q');
     expect(queryParam).not.toBeNull();
-    const decodedQuery = rison.decode(queryParam!) as Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const decodedQuery = rison.decode(queryParam!) as Record<string, any>;
 
     // Should always order by name ascending
     expect(decodedQuery.order_column).toBe('name');

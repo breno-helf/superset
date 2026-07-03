@@ -28,7 +28,8 @@ const initialState: QueryAdhocState = {
 
 export default function databaseReducer(
   state: QueryAdhocState = initialState,
-  action: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  action: any,
 ): QueryAdhocState {
   switch (action.type) {
     case 'SET_QUERY':

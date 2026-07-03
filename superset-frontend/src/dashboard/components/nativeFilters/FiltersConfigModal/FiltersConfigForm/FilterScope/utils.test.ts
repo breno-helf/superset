@@ -235,7 +235,8 @@ describe('Ensure buildTree does not throw runtime errors when encountering an in
       parents: ['ROOT_ID', 'TABS-97PVJa11D_', 'TAB-2_QXp8aNq', 'ROW-yP9SB89PZ'],
       type: 'COLUMN',
     },
-    DASHBOARD_VERSION_KEY: 'v2' as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    DASHBOARD_VERSION_KEY: 'v2' as any,
     GRID_ID: {
       children: [],
       id: 'GRID_ID',

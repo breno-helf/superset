@@ -37,14 +37,16 @@ import { EMPTY_STATE_QE_ID } from 'src/SqlLab/hooks/useQueryEditor';
 import { ToastType } from '../../components/MessageToasts/types';
 
 const isFeatureEnabledMock = isFeatureEnabled as unknown as jest.Mock;
-const query = { ...queryFixture, id: queryId } as unknown;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const query = { ...queryFixture, id: queryId } as any;
 // Cast fixture to satisfy SqlLabRootState for getState callbacks in thunk tests
 const typedInitialState = initialState as unknown as SqlLabRootState;
 
 type DispatchExts = ThunkDispatch<SqlLabRootState, undefined, AnyAction>;
 
 const middlewares = [thunk];
-const mockStore = configureMockStore<unknown, DispatchExts>(middlewares);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mockStore = configureMockStore<any, DispatchExts>(middlewares);
 
 jest.mock('nanoid', () => ({
   nanoid: () => 'abcd',
@@ -782,7 +784,8 @@ describe('async actions', () => {
     test('calls API endpint with correct params', async () => {
       supersetClientGetSpy.mockResolvedValue({
         json: { result: mockSavedQueryApiResponse },
-      } as unknown);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any);
 
       await makeRequest(123);
 
@@ -794,7 +797,8 @@ describe('async actions', () => {
     test('dispatches addQueryEditor with correct params on successful API call', async () => {
       supersetClientGetSpy.mockResolvedValue({
         json: { result: mockSavedQueryApiResponse },
-      } as unknown);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any);
 
       const expectedParams = {
         name: 'Query 1',
@@ -819,7 +823,8 @@ describe('async actions', () => {
     });
 
     test('should dispatch addDangerToast on API error', async () => {
-      supersetClientGetSpy.mockResolvedValue(new Error() as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      supersetClientGetSpy.mockResolvedValue(new Error() as any);
 
       await makeRequest(1);
 
@@ -880,7 +885,8 @@ describe('async actions', () => {
               schema: defaultQueryEditor.schema,
               autorun: false,
               queryLimit:
-                (defaultQueryEditor as Record<string, unknown>).queryLimit ||
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (defaultQueryEditor as any).queryLimit ||
                 initialState.common.conf.DEFAULT_SQLLAB_LIMIT,
               inLocalStorage: true,
               loaded: true,

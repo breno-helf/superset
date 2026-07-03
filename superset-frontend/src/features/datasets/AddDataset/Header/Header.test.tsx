@@ -23,7 +23,8 @@ import Header, { DEFAULT_TITLE } from 'src/features/datasets/AddDataset/Header';
 describe('Header', () => {
   const mockSetDataset = jest.fn();
 
-  const waitForRender = (props?: Record<string, unknown>) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const waitForRender = (props?: any) =>
     waitFor(() => render(<Header setDataset={mockSetDataset} {...props} />));
 
   test('renders a blank state Header', async () => {

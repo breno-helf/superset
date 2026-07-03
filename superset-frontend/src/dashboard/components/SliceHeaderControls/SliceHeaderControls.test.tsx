@@ -212,7 +212,8 @@ test('Should "export to Excel"', async () => {
 });
 
 test('Export full CSV is under featureflag', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: false,
   };
   const props = createProps(VizType.Table);
@@ -224,7 +225,8 @@ test('Export full CSV is under featureflag', async () => {
 });
 
 test('Should "export full CSV"', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   const props = createProps(VizType.Table);
@@ -238,7 +240,8 @@ test('Should "export full CSV"', async () => {
 });
 
 test('Should not show export full CSV if report is not table', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   renderWrapper();
@@ -249,7 +252,8 @@ test('Should not show export full CSV if report is not table', async () => {
 });
 
 test('Export full Excel is under featureflag', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: false,
   };
   const props = createProps(VizType.Table);
@@ -261,7 +265,8 @@ test('Export full Excel is under featureflag', async () => {
 });
 
 test('Should "export full Excel"', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   const props = createProps(VizType.Table);
@@ -275,7 +280,8 @@ test('Should "export full Excel"', async () => {
 });
 
 test('Should not show export full Excel if report is not table', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.AllowFullCsvExport]: true,
   };
   renderWrapper();
@@ -328,9 +334,8 @@ test('Should sync local state after entering fullscreen', async () => {
     fullscreenElement = mockDiv;
   });
   const originalExitFullscreen = document.exitFullscreen;
-  (document as Record<string, unknown>).exitFullscreen = jest
-    .fn()
-    .mockResolvedValue(undefined);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (document as any).exitFullscreen = jest.fn().mockResolvedValue(undefined);
   const props = {
     ...createProps(),
     chartHolderRef: { current: mockDiv },
@@ -348,7 +353,8 @@ test('Should sync local state after entering fullscreen', async () => {
   await waitFor(() => {
     expect(props.handleToggleFullSize).toHaveBeenCalledTimes(1);
   });
-  (document as Record<string, unknown>).exitFullscreen = originalExitFullscreen;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (document as any).exitFullscreen = originalExitFullscreen;
 });
 
 test('Should sync local state after exiting fullscreen', async () => {
@@ -356,11 +362,10 @@ test('Should sync local state after exiting fullscreen', async () => {
   let fullscreenElement: Element | null = mockDiv;
   mockFullscreenElement(() => fullscreenElement);
   const originalExitFullscreen = document.exitFullscreen;
-  (document as Record<string, unknown>).exitFullscreen = jest
-    .fn()
-    .mockImplementation(async () => {
-      fullscreenElement = null;
-    });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (document as any).exitFullscreen = jest.fn().mockImplementation(async () => {
+    fullscreenElement = null;
+  });
   const props = {
     ...createProps(),
     isFullSize: true,
@@ -378,11 +383,13 @@ test('Should sync local state after exiting fullscreen', async () => {
   await waitFor(() => {
     expect(props.handleToggleFullSize).toHaveBeenCalledTimes(1);
   });
-  (document as Record<string, unknown>).exitFullscreen = originalExitFullscreen;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (document as any).exitFullscreen = originalExitFullscreen;
 });
 
 test('Drill to detail modal is under featureflag', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: false,
   };
   const props = createProps();
@@ -392,7 +399,8 @@ test('Drill to detail modal is under featureflag', () => {
 });
 
 test('Should show "Drill to detail" with `can_explore`, `can_samples` & `can_get_drill_info` perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = createProps();
@@ -409,7 +417,8 @@ test('Should show "Drill to detail" with `can_explore`, `can_samples` & `can_get
 });
 
 test('Should show "Drill to detail" with `can_drill` & `can_samples` & `can_get_drill_info` perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -429,7 +438,8 @@ test('Should show "Drill to detail" with `can_drill` & `can_samples` & `can_get_
 });
 
 test('Should show "Drill to detail" with both `canexplore` + `can_drill` & `can_samples` & `can_get_drill_info` perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -450,7 +460,8 @@ test('Should show "Drill to detail" with both `canexplore` + `can_drill` & `can_
 });
 
 test('Should not show "Drill to detail" with neither of required perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -466,7 +477,8 @@ test('Should not show "Drill to detail" with neither of required perms', () => {
 });
 
 test('Should not show "Drill to detail" only `can_drill` perm', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -482,7 +494,8 @@ test('Should not show "Drill to detail" only `can_drill` perm', () => {
 });
 
 test('Should not show "Drill to detail" with only `can_drill` & `can_samples` perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -501,7 +514,8 @@ test('Should not show "Drill to detail" with only `can_drill` & `can_samples` pe
 });
 
 test('Should not show "Drill to detail" with only `can_explore` & `can_samples` perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -520,7 +534,8 @@ test('Should not show "Drill to detail" with only `can_explore` & `can_samples` 
 });
 
 test('Should not show "Drill to detail" with only `can_explore`, `can_drill` & `can_samples` perms', () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   const props = {
@@ -609,7 +624,8 @@ test('Should not show the "Edit chart" button', () => {
 });
 
 test('Dataset drill info API call is made when user has drill permissions', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   renderWrapper(undefined, {
@@ -630,7 +646,8 @@ test('Dataset drill info API call is made when user has drill permissions', asyn
 });
 
 test('Dataset drill info API call is not made when user lacks drill permissions', async () => {
-  (global as Record<string, unknown>).featureFlags = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).featureFlags = {
     [FeatureFlag.DrillToDetail]: true,
   };
   renderWrapper(undefined, {

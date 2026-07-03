@@ -172,8 +172,10 @@ const SliceHeaderControls = (
   );
   const history = useHistory();
 
-  const queryMenuRef: RefObject<unknown> = useRef(null);
-  const resultsMenuRef: RefObject<unknown> = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const queryMenuRef: RefObject<any> = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const resultsMenuRef: RefObject<any> = useRef(null);
 
   const [modalFilters, setFilters] = useState<BinaryQueryObjectFilterClause[]>(
     [],
@@ -376,10 +378,12 @@ const SliceHeaderControls = (
   const isTable = slice.viz_type === VizType.Table;
   const isPivotTable = slice.viz_type === VizType.PivotTable;
   const cachedWhen = (cachedDttm || []).map(itemCachedDttm =>
-    (extendedDayjs.utc(itemCachedDttm) as Record<string, unknown>).fromNow(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (extendedDayjs.utc(itemCachedDttm) as any).fromNow(),
   );
   const updatedWhen = updatedDttm
-    ? (extendedDayjs.utc(updatedDttm) as Record<string, unknown>).fromNow()
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (extendedDayjs.utc(updatedDttm) as any).fromNow()
     : '';
   const getCachedTitle = (itemCached: boolean, index: number) => {
     if (itemCached) {
@@ -439,7 +443,8 @@ const SliceHeaderControls = (
       disabled: props.chartStatus === 'loading',
       style: { height: 'auto', lineHeight: 'initial' },
       'data-test': 'refresh-chart-menu-item', // Typescript hack to get around MenuItem type
-    } as unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
     {
       key: MenuKeys.Fullscreen,
       label: fullscreenLabel,
@@ -467,7 +472,8 @@ const SliceHeaderControls = (
         </Tooltip>
       ),
       'data-test-edit-chart-name': slice.slice_name,
-    } as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
   }
 
   if (canEditCrossFilters) {

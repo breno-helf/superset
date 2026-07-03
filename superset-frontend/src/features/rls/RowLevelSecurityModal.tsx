@@ -110,7 +110,8 @@ export interface RowLevelSecurityModalProps {
   rule: RLSObject | null;
   addSuccessToast: (msg: string) => void;
   addDangerToast: (msg: string) => void;
-  onAdd?: (alert?: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onAdd?: (alert?: any) => void;
   onHide: () => void;
   show: boolean;
 }
@@ -148,7 +149,8 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
     addDangerToast,
   );
 
-  const updateRuleState = (name: string, value: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateRuleState = (name: string, value: any) => {
     setCurrentRule(currentRuleData => ({
       ...currentRuleData,
       [name]: value,
@@ -256,7 +258,8 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
     currentRule.tables?.forEach(table => tables.push(table.key));
     currentRule.roles?.forEach(role => roles.push(role.key));
 
-    const data: Record<string, unknown> = { ...currentRule, tables, roles };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data: any = { ...currentRule, tables, roles };
 
     if (isEditMode && currentRule.id) {
       const updateId = currentRule.id;

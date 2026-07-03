@@ -54,7 +54,8 @@ interface ChartTableProps {
   addDangerToast: (message: string) => void;
   addSuccessToast: (message: string) => void;
   user?: User;
-  mine: unknown[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mine: Array<any>;
   showThumbnails: boolean;
   otherTabData?: Array<object>;
   otherTabFilters: Filter[];

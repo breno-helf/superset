@@ -128,17 +128,20 @@ const ColorSchemeSelect = ({
         [ColorSchemeGroup.Custom]: {
           title: ColorSchemeGroup.Custom,
           label: t('Custom color palettes'),
-          options: [] as unknown,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          options: [] as any,
         },
         [ColorSchemeGroup.Featured]: {
           title: ColorSchemeGroup.Featured,
           label: t('Featured color palettes'),
-          options: [] as unknown,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          options: [] as any,
         },
         [ColorSchemeGroup.Other]: {
           title: ColorSchemeGroup.Other,
           label: t('Other color palettes'),
-          options: [] as unknown,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          options: [] as any,
         },
       },
     );

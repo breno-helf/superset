@@ -89,7 +89,8 @@ export const getAllActiveFilters = ({
 
   const hasLayerSelectionsInAnyFilter = Object.values(dataMask).some(
     ({ id: filterId }) => {
-      const selectedLayers = (nativeFilters?.[filterId]?.scope as unknown)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const selectedLayers = (nativeFilters?.[filterId]?.scope as any)
         ?.selectedLayers;
       return selectedLayers && selectedLayers.length > 0;
     },
@@ -99,10 +100,12 @@ export const getAllActiveFilters = ({
   let masterExcluded: number[] = [];
   if (hasLayerSelectionsInAnyFilter) {
     Object.values(dataMask).forEach(({ id: filterId }) => {
-      const selectedLayers = (nativeFilters?.[filterId]?.scope as unknown)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const selectedLayers = (nativeFilters?.[filterId]?.scope as any)
         ?.selectedLayers;
       const excluded =
-        (nativeFilters?.[filterId]?.scope as unknown)?.excluded || [];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (nativeFilters?.[filterId]?.scope as any)?.excluded || [];
       if (selectedLayers && selectedLayers.length > 0) {
         masterSelectedLayers = selectedLayers;
         masterExcluded = excluded;
@@ -123,10 +126,12 @@ export const getAllActiveFilters = ({
     const filterType = nativeFilters?.[filterId]?.filterType;
     const targets = nativeFilters?.[filterId]?.targets;
 
-    let selectedLayers = (nativeFilters?.[filterId]?.scope as unknown)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let selectedLayers = (nativeFilters?.[filterId]?.scope as any)
       ?.selectedLayers;
     let excludedCharts =
-      (nativeFilters?.[filterId]?.scope as unknown)?.excluded || [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (nativeFilters?.[filterId]?.scope as any)?.excluded || [];
 
     if (
       hasLayerSelectionsInAnyFilter &&

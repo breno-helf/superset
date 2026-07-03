@@ -195,7 +195,8 @@ const DndFilterSelect = (props: DndFilterSelectProps) => {
             },
           )}`,
         })
-          .then(({ json }: { json: Record<string, unknown> }) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .then(({ json }: { json: Record<string, any> }) => {
             if (json?.partitions) {
               const { partitions } = json;
               // for now only show latest_partition option
@@ -208,7 +209,8 @@ const DndFilterSelect = (props: DndFilterSelectProps) => {
               }
             }
           })
-          .catch((error: Record<string, unknown>) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .catch((error: Record<string, any>) => {
             logging.error('fetch extra_table_metadata:', error.statusText);
           });
       }
@@ -277,7 +279,8 @@ const DndFilterSelect = (props: DndFilterSelectProps) => {
       if (option instanceof AdhocFilter) {
         return option;
       }
-      const filterOptions = option as Record<string, unknown>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const filterOptions = option as Record<string, any>;
       // via datasource saved metric
       if (filterOptions.saved_metric_name) {
         return new AdhocFilter({

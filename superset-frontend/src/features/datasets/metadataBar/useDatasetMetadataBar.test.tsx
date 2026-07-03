@@ -69,7 +69,8 @@ test('renders dataset metadata bar with minimal dataset', async () => {
     table_name: `This is dataset's name`,
     description: undefined,
     owners: [],
-  } as unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any;
 
   const { result } = renderHook(
     () => useDatasetMetadataBar({ dataset: minimalDataset }),

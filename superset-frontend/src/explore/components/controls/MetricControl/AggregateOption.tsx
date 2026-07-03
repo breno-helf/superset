@@ -30,7 +30,8 @@ export default function AggregateOption({
 }: AggregateOptionProps) {
   return (
     <div>
-      {showType && <ColumnTypeLabel type={'aggregate' as unknown} />}
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {showType && <ColumnTypeLabel type={'aggregate' as any} />}
       <span className="option-label">{aggregate.aggregate_name}</span>
     </div>
   );

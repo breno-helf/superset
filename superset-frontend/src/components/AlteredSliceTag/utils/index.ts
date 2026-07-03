@@ -78,7 +78,8 @@ export const formatValueHandler = (
   }
 
   if (Array.isArray(value)) {
-    const formattedValue = value.map((v: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const formattedValue = value.map((v: any) => {
       if (
         typeof v === 'object' &&
         v !== null &&

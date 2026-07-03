@@ -26,7 +26,8 @@ import SliceHeader from '.';
 
 jest.mock('src/dashboard/components/SliceHeaderControls', () => ({
   __esModule: true,
-  default: (props: Record<string, unknown>) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: (props: any) => (
     <div
       data-test="SliceHeaderControls"
       data-slice={JSON.stringify(props.slice)}
@@ -97,7 +98,8 @@ jest.mock('src/dashboard/components/SliceHeaderControls', () => ({
 
 jest.mock('src/dashboard/components/FiltersBadge', () => ({
   __esModule: true,
-  default: (props: Record<string, unknown>) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: (props: any) => (
     <div data-test="FiltersBadge" data-chart-id={props.chartId} />
   ),
 }));
@@ -133,11 +135,14 @@ const initialState = {
   dataMask: {},
 };
 
-const createProps = (overrides: Record<string, unknown> = {}) => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createProps = (overrides: any = {}) => ({
   filters: {}, // is in typing but not being used
   editMode: false,
-  annotationQuery: { param01: 'annotationQuery' } as unknown,
-  annotationError: { param01: 'annotationError' } as unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  annotationQuery: { param01: 'annotationQuery' } as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  annotationError: { param01: 'annotationError' } as any,
   cachedDttm: [] as string[],
   updatedDttm: 1617207718004,
   isCached: [false],

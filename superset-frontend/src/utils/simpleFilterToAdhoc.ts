@@ -31,8 +31,10 @@ import { translateToSql } from '../explore/components/controls/FilterControl/uti
 
 const findMatchingFilterKey = (
   filterClause: QueryObjectFilterClause & {
-    filterDataMapping?: Record<string, unknown[]>;
-    layerFilterScope?: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    filterDataMapping?: Record<string, any[]>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    layerFilterScope?: Record<string, any>;
   },
 ): string | null => {
   if (!filterClause.filterDataMapping) {
@@ -62,8 +64,10 @@ const findMatchingFilterKey = (
 
 export const simpleFilterToAdhoc = (
   filterClause: QueryObjectFilterClause & {
-    filterDataMapping?: Record<string, unknown[]>;
-    layerFilterScope?: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    filterDataMapping?: Record<string, any[]>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    layerFilterScope?: Record<string, any>;
   },
   clause: Clauses = Clauses.Where,
 ) => {

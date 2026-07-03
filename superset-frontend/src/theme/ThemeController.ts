@@ -707,7 +707,8 @@ export class ThemeController {
    * Checks if an object is non-empty (has at least one property).
    */
   private isNonEmptyObject(
-    obj: Record<string, unknown> | undefined | null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    obj: Record<string, any> | undefined | null,
   ): boolean {
     return Boolean(
       obj && typeof obj === 'object' && Object.keys(obj).length > 0,

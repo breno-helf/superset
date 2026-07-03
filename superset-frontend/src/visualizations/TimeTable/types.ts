@@ -40,7 +40,8 @@ export interface ColumnConfig {
 export interface ColumnRow {
   label?: string;
   column_name?: string;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 export interface MetricRow {
@@ -54,7 +55,8 @@ export interface MetricRow {
   is_certified?: boolean;
   certified_by?: string;
   certification_details?: string;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 export type Row = ColumnRow | MetricRow;
@@ -77,7 +79,8 @@ export interface TimeTableProps {
 
 export interface Entry {
   time: string;
-  [metric: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [metric: string]: any;
 }
 
 export interface Stats {

@@ -33,7 +33,8 @@ import AdhocMetric from 'src/explore/components/controls/MetricControl/AdhocMetr
 const isControlValueCompatibleWithDatasource = (
   datasource: Dataset,
   controlState: ControlState,
-  value: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any,
 ) => {
   // A datasource might have been deleted, in which case we can't validate
   // only using the control state since it might have been hydrated with

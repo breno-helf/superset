@@ -318,11 +318,12 @@ const FiltersConfigForm = (
   );
   const [undoFormValues, setUndoFormValues] = useState<Record<
     string,
-    unknown
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    any
   > | null>(null);
   const forceUpdate = useForceUpdate(isActive);
-  const [datasetDetails, setDatasetDetails] =
-    useState<Record<string, unknown>>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [datasetDetails, setDatasetDetails] = useState<Record<string, any>>();
   const defaultFormFilter = useMemo(() => ({}), []);
   const filters = form.getFieldValue('filters');
   const formValues = filters?.[filterId];

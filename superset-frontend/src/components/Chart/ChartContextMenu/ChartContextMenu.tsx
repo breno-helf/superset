@@ -65,12 +65,16 @@ export enum ContextMenuItem {
 export interface ChartContextMenuProps {
   id: number;
   formData: QueryFormData;
-  onSelection: (args?: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSelection: (args?: any) => void;
   onClose: () => void;
   additionalConfig?: {
-    crossFilter?: Record<string, unknown>;
-    drillToDetail?: Record<string, unknown>;
-    drillBy?: Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    crossFilter?: Record<string, any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    drillToDetail?: Record<string, any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    drillBy?: Record<string, any>;
   };
   displayedItems?: ContextMenuItem[] | ContextMenuItem;
 }
@@ -126,7 +130,8 @@ const ChartContextMenu = (
     if (!filters) return filters;
 
     // Check if this is from a matrixified cell
-    const matrixifyContext = (filters as unknown)?.matrixifyContext;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const matrixifyContext = (filters as any)?.matrixifyContext;
     if (!matrixifyContext) return filters;
 
     // Merge cell filters with drill filters
@@ -148,7 +153,8 @@ const ChartContextMenu = (
 
   // Use cell's formData for drill-to-detail if from matrixified cell
   const drillFormData = useMemo(() => {
-    const matrixifyContext = (filters as unknown)?.matrixifyContext;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const matrixifyContext = (filters as any)?.matrixifyContext;
     // If this is from a matrixified cell, use the cell's formData which includes adhoc_filters
     return matrixifyContext?.cellFormData || formData;
   }, [filters, formData]);

@@ -143,9 +143,10 @@ export default function Login() {
       return undefined;
     }
     const iconComponentName = `${capitalize(providerName)}Outlined`;
-    const IconComponent = (
-      Icons as Record<string, React.ComponentType<Record<string, unknown>>>
-    )[iconComponentName];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const IconComponent = (Icons as Record<string, React.ComponentType<any>>)[
+      iconComponentName
+    ];
 
     if (IconComponent && typeof IconComponent === 'function') {
       return <IconComponent />;

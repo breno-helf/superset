@@ -25,7 +25,8 @@ import {
 
 // Cast to accept partial mock data in tests
 const getDetailedComponentWidth = getDetailedComponentWidthOriginal as (
-  params: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: Record<string, any>,
 ) => {
   width: number | undefined;
   occupiedWidth: number | undefined;

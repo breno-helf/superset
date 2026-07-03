@@ -84,7 +84,8 @@ interface StylingSectionProps {
   customCss: string;
   hasCustomLabelsColor: boolean;
   showChartTimestamps: boolean;
-  onThemeChange: (value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onThemeChange: (value: any) => void;
   onColorSchemeChange: (
     colorScheme: string,
     options?: { updateMetadata?: boolean },

@@ -37,7 +37,8 @@ jest.mock('./ColumnSelect', () => ({
   ColumnSelect: ({
     filterValues,
   }: {
-    filterValues: (column: unknown) => boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    filterValues: (column: any) => boolean;
   }) => {
     const columns = [
       { name: 'col1', filterable: true },

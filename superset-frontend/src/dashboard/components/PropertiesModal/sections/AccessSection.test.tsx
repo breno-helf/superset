@@ -65,7 +65,8 @@ test('always renders owners field', () => {
 
 test('renders roles field when DashboardRbac feature is enabled', () => {
   mockedIsFeatureEnabled.mockImplementation(
-    (flag: unknown) => flag === FeatureFlag.DashboardRbac,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (flag: any) => flag === FeatureFlag.DashboardRbac,
   );
 
   render(<AccessSection {...defaultProps} />);
@@ -83,7 +84,8 @@ test('does not render roles field when DashboardRbac feature is disabled', () =>
 
 test('renders tags field when TaggingSystem feature is enabled', () => {
   mockedIsFeatureEnabled.mockImplementation(
-    (flag: unknown) => flag === FeatureFlag.TaggingSystem,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (flag: any) => flag === FeatureFlag.TaggingSystem,
   );
 
   render(<AccessSection {...defaultProps} />);

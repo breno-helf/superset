@@ -46,7 +46,8 @@ const InfoIconWrapper = styled.span`
 `;
 
 interface TaskPayloadPopoverProps {
-  payload: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload: Record<string, any>;
 }
 
 export default function TaskPayloadPopover({

@@ -79,9 +79,11 @@ const EXPLORE_URL_PATH_PARAMS = {
 // we need to "flatten" the search params to use them with /v1/explore endpoint
 const getParsedExploreURLSearchParams = (
   search: string,
-): Record<string, unknown> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Record<string, any> => {
   const urlSearchParams = new URLSearchParams(search);
-  return Array.from(urlSearchParams.keys()).reduce<Record<string, unknown>>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return Array.from(urlSearchParams.keys()).reduce<Record<string, any>>(
     (acc, currentParam) => {
       const paramValue = urlSearchParams.get(currentParam);
       if (paramValue === null) {

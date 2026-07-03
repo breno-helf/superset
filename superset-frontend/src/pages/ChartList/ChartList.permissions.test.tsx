@@ -66,12 +66,16 @@ const createMockUser = (overrides = {}) => ({
   ...overrides,
 });
 
-const createMockStore = (initialState: Record<string, unknown> = {}) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createMockStore = (initialState: any = {}) =>
   configureStore({
     reducer: {
-      user: (state = initialState.user || {}, action: unknown) => state,
-      common: (state = initialState.common || {}, action: unknown) => state,
-      charts: (state = initialState.charts || {}, action: unknown) => state,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      user: (state = initialState.user || {}, action: any) => state,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      common: (state = initialState.common || {}, action: any) => state,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      charts: (state = initialState.charts || {}, action: any) => state,
     },
     preloadedState: initialState,
     middleware: getDefaultMiddleware =>

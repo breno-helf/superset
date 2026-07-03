@@ -23,9 +23,8 @@ export default {
   title: 'Components/AlteredSliceTag',
 };
 
-export const InteractiveSliceTag = (args: unknown) => (
-  <AlteredSliceTag {...args} />
-);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const InteractiveSliceTag = (args: any) => <AlteredSliceTag {...args} />;
 
 InteractiveSliceTag.args = {
   origFormData: defaultProps.origFormData,

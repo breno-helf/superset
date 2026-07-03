@@ -31,13 +31,15 @@ const mockInvisibleColumn = {
   getColId: jest.fn().mockReturnValue('column2'),
   getColDef: jest.fn().mockReturnValue({ headerName: 'column2' }),
   getDataAsCsv: jest.fn().mockReturnValue('csv'),
-} as unknown as Column;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any as Column;
 
 const mockInvisibleColumn3 = {
   getColId: jest.fn().mockReturnValue('column3'),
   getColDef: jest.fn().mockReturnValue({ headerName: 'column3' }),
   getDataAsCsv: jest.fn().mockReturnValue('csv'),
-} as unknown as Column;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any as Column;
 
 const mockGridApi = {
   autoSizeColumns: jest.fn(),
@@ -53,7 +55,8 @@ const mockGridApi = {
   setColumnsVisible: jest.fn(),
   setColumnVisible: jest.fn(),
   moveColumns: jest.fn(),
-} as unknown as GridApi;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any as GridApi;
 
 const mockedProps = {
   colId: 'column1',

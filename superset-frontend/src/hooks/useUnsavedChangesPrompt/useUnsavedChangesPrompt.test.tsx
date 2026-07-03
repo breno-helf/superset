@@ -129,7 +129,8 @@ test('should close modal when handleConfirmNavigation is called', () => {
 test('should preserve pathname, search, and state when confirming navigation', () => {
   const onSave = jest.fn();
   const history = createMemoryHistory();
-  const wrapper = ({ children }: unknown) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const wrapper = ({ children }: any) => (
     <Router history={history}>{children}</Router>
   );
 

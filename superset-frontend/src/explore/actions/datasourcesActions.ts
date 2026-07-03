@@ -63,9 +63,8 @@ export function saveDataset({
   datasourceName,
   columns,
 }: Omit<SaveDatasetRequest['data'], 'dbId'> & { database: { id: number } }) {
-  return async function (
-    dispatch: ThunkDispatch<unknown, undefined, AnyAction>,
-  ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return async function (dispatch: ThunkDispatch<any, undefined, AnyAction>) {
     // Create a dataset object
     try {
       const {

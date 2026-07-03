@@ -25,10 +25,10 @@ interface StrictBroadcastChannelEventMap<T> {
 
 export interface StrictBroadcastChannel<T> extends EventTarget {
   readonly name: string;
-  onmessage: ((this: BroadcastChannel, ev: MessageEvent<T>) => unknown) | null;
-  onmessageerror:
-    | ((this: BroadcastChannel, ev: MessageEvent<T>) => unknown)
-    | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onmessage: ((this: BroadcastChannel, ev: MessageEvent<T>) => any) | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onmessageerror: ((this: BroadcastChannel, ev: MessageEvent<T>) => any) | null;
   close(): void;
   postMessage(message: T): void;
   addEventListener<K extends keyof StrictBroadcastChannelEventMap<T>>(
@@ -36,7 +36,8 @@ export interface StrictBroadcastChannel<T> extends EventTarget {
     listener: (
       this: BroadcastChannel,
       ev: StrictBroadcastChannelEventMap<T>[K],
-    ) => unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ) => any,
     options?: boolean | AddEventListenerOptions,
   ): void;
   addEventListener(
@@ -49,7 +50,8 @@ export interface StrictBroadcastChannel<T> extends EventTarget {
     listener: (
       this: BroadcastChannel,
       ev: StrictBroadcastChannelEventMap<T>[K],
-    ) => unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ) => any,
     options?: boolean | EventListenerOptions,
   ): void;
   removeEventListener(

@@ -27,7 +27,8 @@ export default interface Database {
   server_cert: string;
   sqlalchemy_uri: string;
   catalog: object;
-  parameters: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parameters: any;
   disable_drill_to_detail?: boolean;
   allow_multi_catalog?: boolean;
 }

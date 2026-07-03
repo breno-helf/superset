@@ -44,7 +44,8 @@ import { DashboardState, RootState } from '../types';
 // Type the reducer function properly since it's imported from JS
 type DashboardStateReducer = (
   state: Partial<DashboardState> | undefined,
-  action: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  action: any,
 ) => Partial<DashboardState>;
 const typedDashboardStateReducer =
   dashboardStateReducer as DashboardStateReducer;

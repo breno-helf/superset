@@ -80,7 +80,8 @@ export interface Task {
     last_name: string;
   } | null;
   user_id: number | null;
-  payload: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload: Record<string, any>;
   properties: TaskProperties;
   duration_seconds: number | null;
   subscriber_count: number;

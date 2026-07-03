@@ -25,14 +25,17 @@ import { Dispatch, SetStateAction } from 'react';
 interface FetchPaginatedOptions {
   endpoint: string;
   pageSize?: number;
-  setData: (data: unknown[]) => void;
-  setLoadingState: Dispatch<SetStateAction<unknown>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setData: (data: any[]) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setLoadingState: Dispatch<SetStateAction<any>>;
   filters?: SupersetFilter[];
   orderBy?: { column: string; direction: 'asc' | 'desc' };
   loadingKey: string;
   addDangerToast: (message: string) => void;
   errorMessage?: string;
-  mapResult?: (item: unknown) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mapResult?: (item: any) => any;
 }
 
 interface QueryObj {
@@ -59,7 +62,8 @@ export const fetchPaginatedData = async ({
   loadingKey,
   addDangerToast,
   errorMessage = 'Error while fetching data',
-  mapResult = (item: unknown) => item,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mapResult = (item: any) => item,
 }: FetchPaginatedOptions) => {
   try {
     const fetchPage = async (pageIndex: number) => {

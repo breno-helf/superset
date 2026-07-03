@@ -179,7 +179,8 @@ test('select pill tooltip falls back to static selects on cold URL load (no cach
         {
           id: 'owner',
           operator: ListViewFilterOperator.RelationOneMany,
-          value: { value: 1 } as unknown,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          value: { value: 1 } as any,
         },
       ]}
       updateFilterValue={mockUpdateFilterValue}

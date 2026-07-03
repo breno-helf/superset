@@ -66,7 +66,8 @@ const targetValueValidator =
     rejectMessage: string,
   ) =>
   (targetValue: number | string) =>
-  (_: unknown, compareValue: number | string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (_: any, compareValue: number | string) => {
     if (
       !targetValue ||
       !compareValue ||
@@ -251,7 +252,8 @@ export const FormattingPopoverContent = ({
     config?.useGradient !== undefined ? config.useGradient : true,
   );
 
-  const handleChange = (event: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChange = (event: any) => {
     setShowOperatorFields(
       !(event === ColorSchemeEnum.Green || event === ColorSchemeEnum.Red),
     );

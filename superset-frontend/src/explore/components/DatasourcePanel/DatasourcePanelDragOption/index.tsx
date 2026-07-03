@@ -61,7 +61,8 @@ const DatasourceItemContainer = styled.div<{ isDragging?: boolean }>`
 `;
 
 interface DatasourcePanelDragOptionProps extends DatasourcePanelDndItem {
-  labelRef?: RefObject<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  labelRef?: RefObject<any>;
   showTooltip?: boolean;
 }
 

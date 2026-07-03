@@ -89,7 +89,8 @@ export class Database implements coreType.Database {
 export class Disposable implements coreType.Disposable {
   static from(
     ...disposableLikes: {
-      dispose: () => unknown;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      dispose: () => any;
     }[]
   ): Disposable {
     return new Disposable(() => {
@@ -99,11 +100,13 @@ export class Disposable implements coreType.Disposable {
     });
   }
 
-  constructor(callOnDispose: () => unknown) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(callOnDispose: () => any) {
     this.dispose = callOnDispose;
   }
 
-  dispose(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dispose(): any {
     this.dispose();
   }
 }

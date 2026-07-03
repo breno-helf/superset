@@ -42,7 +42,8 @@ const mockIsFeatureEnabled = isFeatureEnabled as jest.MockedFunction<
 // Mock ColorSchemeSelect component
 jest.mock('src/dashboard/components/ColorSchemeSelect', () => ({
   __esModule: true,
-  default: ({ value, onChange, ...props }: unknown) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: ({ value, onChange, ...props }: any) => (
     <div data-test={props['data-test'] || 'color-scheme-select'}>
       <input
         value={value || ''}

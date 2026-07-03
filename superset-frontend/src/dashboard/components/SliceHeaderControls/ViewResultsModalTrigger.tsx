@@ -35,7 +35,8 @@ export const ViewResultsModalTrigger = ({
   triggerNode: ReactChild;
   modalTitle: string;
   modalBody: ReactChild;
-  modalRef?: RefObject<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  modalRef?: RefObject<any>;
 }) => {
   const history = useHistory();
   const exploreChart = () => history.push(exploreUrl);

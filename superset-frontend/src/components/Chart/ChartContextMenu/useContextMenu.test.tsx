@@ -47,7 +47,8 @@ const setup = ({
 }: {
   onSelection?: () => void;
   displayedItems?: ContextMenuItem | ContextMenuItem[];
-  additionalConfig?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  additionalConfig?: Record<string, any>;
   roles?: Record<string, string[][]>;
 } = {}) => {
   const { result } = renderHook(() =>

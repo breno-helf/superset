@@ -50,7 +50,8 @@ const mockState = (
       isAnonymous: false,
       lastName: 'User',
       username: 'testuser',
-      permissions: {} as Record<string, unknown>,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      permissions: {} as Record<string, any>,
       roles,
     },
   }) as Partial<RootState>;
@@ -204,7 +205,8 @@ test('hides View in SQL Lab button when user does not have SQL Lab access', () =
 test('handles undefined datasource without crashing', () => {
   const propsWithUndefinedDatasource = {
     ...mockProps,
-    datasource: undefined as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    datasource: undefined as any,
   };
 
   expect(() => setup(propsWithUndefinedDatasource)).not.toThrow();

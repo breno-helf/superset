@@ -182,7 +182,8 @@ const TabsRenderer = memo<TabsRendererProps>(
       activationConstraint: { distance: 10 },
     });
 
-    const onDragStart = useCallback((event: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onDragStart = useCallback((event: any) => {
       setActiveId(event.active.id);
     }, []);
 

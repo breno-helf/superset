@@ -47,8 +47,10 @@ import {
 
 // Define custom RisonParam for proper encoding/decoding; note that
 // %, &, +, and # must be encoded to avoid breaking the url
-const RisonParam: QueryParamConfig<string, unknown> = {
-  encode: (data?: unknown | null) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const RisonParam: QueryParamConfig<string, any> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  encode: (data?: any | null) => {
     if (data === undefined || data === null) return undefined;
 
     const cleanData = JSON.parse(
@@ -79,16 +81,14 @@ export class ListViewError extends Error {
 }
 
 // removes element from a list, returns new list
-export function removeFromList(list: unknown[], index: number): unknown[] {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function removeFromList(list: any[], index: number): any[] {
   return list.filter((_, i) => index !== i);
 }
 
 // apply update to elements of object list, returns new list
-function updateInList(
-  list: unknown[],
-  index: number,
-  update: unknown,
-): unknown[] {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function updateInList(list: any[], index: number, update: any): any[] {
   const element = list.find((_, i) => index === i);
 
   return [
@@ -147,7 +147,8 @@ export function convertFilters(fts: InternalFilter[]): FilterValue[] {
 
 // convertFilters but to handle new decoded rison format
 export function convertFiltersRison(
-  filterObj: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filterObj: any,
   list: Filter[],
 ): FilterValue[] {
   const filters: FilterValue[] = [];
@@ -178,10 +179,8 @@ export function convertFiltersRison(
   return filters;
 }
 
-export function extractInputValue(
-  inputType: Filter['input'],
-  event: { currentTarget: { value: unknown; checked: boolean } },
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function extractInputValue(inputType: Filter['input'], event: any) {
   if (!inputType || inputType === 'text') {
     return event.currentTarget.value;
   }
@@ -193,9 +192,12 @@ export function extractInputValue(
 }
 
 interface UseListViewConfig {
-  fetchData: (conf: FetchDataConfig) => unknown;
-  columns: Record<string, unknown>[];
-  data: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fetchData: (conf: FetchDataConfig) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columns: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
   count: number;
   initialPageSize: number;
   initialSort?: SortColumn[];
@@ -272,20 +274,23 @@ export function useListViewState({
       data,
       disableFilters: true,
       disableSortRemove: true,
-      initialState: initialState as Record<string, unknown>,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      initialState: initialState as any,
       manualFilters: true,
       manualPagination: true,
       manualSortBy: true,
       autoResetFilters: false,
       pageCount: Math.ceil(count / initialPageSize),
-      ...({ count } as Record<string, unknown>),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...({ count } as any),
     },
     useFilters,
     useSortBy,
     usePagination,
     useRowState,
     useRowSelect,
-  ) as Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ) as any;
 
   const [internalFilters, setInternalFilters] = useState<InternalFilter[]>(
     query.filters && initialFilters.length
@@ -318,7 +323,8 @@ export function useListViewState({
       }
     });
 
-    const queryParams: Record<string, unknown> = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const queryParams: any = {
       filters: Object.keys(filterObj).length ? filterObj : undefined,
       pageIndex,
     };
@@ -348,7 +354,8 @@ export function useListViewState({
     }
   }, [query]);
 
-  const applyFilterValue = (index: number, value: InnerFilterValue) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const applyFilterValue = (index: number, value: any) => {
     setInternalFilters(currentInternalFilters => {
       // skip redundant updates
       if (currentInternalFilters[index].value === value) {

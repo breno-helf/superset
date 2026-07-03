@@ -130,8 +130,10 @@ export const getColorSchemeDomain = (colorScheme: string) =>
  * @returns true if the labels color map is the same as fresh
  */
 export const isLabelsColorMapSynced = (
-  storedLabelsColors: Record<string, unknown>,
-  freshLabelsColors: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  storedLabelsColors: Record<string, any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  freshLabelsColors: Record<string, any>,
   customLabelColors: Record<string, string>,
 ): boolean => {
   const freshLabelsCount = Object.keys(freshLabelsColors).length;
@@ -203,7 +205,8 @@ export const refreshLabelsColorMap = (
  * @param metadata - the dashboard metadata object
  */
 export const applyColors = (
-  metadata: Record<string, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata: Record<string, any>,
   // Create a fresh color map by changing color scheme
   fresh: boolean | string[] = false,
   // Catch new labels in the color map as they appear
@@ -246,7 +249,8 @@ export const applyColors = (
     refreshLabelsColorMap(metadata?.color_namespace, colorScheme, merge);
   }
 
-  let applicableColorMapEntries: Record<string, unknown> = fullLabelsColor;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let applicableColorMapEntries: Record<string, any> = fullLabelsColor;
   if (fresh) {
     // requires a new map all together
     applicableColorMapEntries = {

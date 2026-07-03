@@ -176,8 +176,8 @@ function flatten(
       parentId,
       depth,
       index,
-      collapsed:
-        'children' in item && (item as Record<string, unknown>).collapsed,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      collapsed: 'children' in item && (item as any).collapsed,
     };
 
     result.push(flatItem);

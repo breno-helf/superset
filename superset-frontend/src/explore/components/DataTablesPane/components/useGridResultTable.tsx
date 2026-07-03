@@ -35,7 +35,8 @@ const CONTRIBUTION_SUFFIX = '__contribution';
 export function useGridColumns(
   colnames: string[] | undefined,
   coltypes: GenericDataType[] | undefined,
-  data: Record<string, unknown>[] | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>[] | undefined,
   columnDisplayNames?: Record<string, string>,
 ) {
   return useMemo(

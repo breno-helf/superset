@@ -95,7 +95,8 @@ export class QueryContext implements sqlLabType.QueryContext {
 
   private templateParams: string;
 
-  private parsedParams: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private parsedParams: Record<string, any>;
 
   constructor(
     clientId: string,

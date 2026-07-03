@@ -424,7 +424,8 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
 
   useEffect(() => {
     if (
-      filterState.value?.every((value?: unknown) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filterState.value?.every((value?: any) =>
         data.some(row => row[col] === value),
       )
     )

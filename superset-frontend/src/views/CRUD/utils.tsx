@@ -58,7 +58,8 @@ import {
     not_idstart: string;
     id_ok: RegExp;
     next_id: RegExp;
-  } = rison as unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } = rison as any;
 
   const l = [];
   for (let hi = 0; hi < 16; hi += 1) {
@@ -216,7 +217,8 @@ export const getUserOwnedObjects = (
   }).then(res => res.json?.result);
 
 export const getFilteredChartsandDashboards = (
-  addDangerToast: (arg1: string, arg2: unknown) => unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addDangerToast: (arg1: string, arg2: any) => any,
   filters: Filter[],
   dashboardSelectColumns?: string[],
   chartSelectColumns?: string[],
@@ -248,11 +250,13 @@ export const getFilteredChartsandDashboards = (
 export const getRecentActivityObjs = (
   userId: string | number,
   recent: string,
-  addDangerToast: (arg1: string, arg2: unknown) => unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addDangerToast: (arg1: string, arg2: any) => any,
   filters: Filter[],
 ) =>
   SupersetClient.get({ endpoint: recent }).then(recentsRes => {
-    const res: Record<string, unknown> = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const res: any = {};
     const distinctRes = lruCache<RecentActivity>(6);
     recentsRes.json.result.reverse().forEach((record: RecentActivity) => {
       distinctRes.set(record.item_url, record);
@@ -451,7 +455,8 @@ export const CardStyles = styled.div`
 `;
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsPassword = (payload: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isNeedsPassword = (payload: any) =>
   typeof payload === 'object' &&
   Array.isArray(payload._schema) &&
   !!payload._schema?.find(
@@ -459,7 +464,8 @@ const isNeedsPassword = (payload: unknown) =>
   );
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsSSHPassword = (payload: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isNeedsSSHPassword = (payload: any) =>
   typeof payload === 'object' &&
   Array.isArray(payload._schema) &&
   !!payload._schema?.find(
@@ -467,7 +473,8 @@ const isNeedsSSHPassword = (payload: unknown) =>
   );
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsSSHPrivateKey = (payload: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isNeedsSSHPrivateKey = (payload: any) =>
   typeof payload === 'object' &&
   Array.isArray(payload._schema) &&
   !!payload._schema?.find(
@@ -475,7 +482,8 @@ const isNeedsSSHPrivateKey = (payload: unknown) =>
   );
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsSSHPrivateKeyPassword = (payload: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isNeedsSSHPrivateKeyPassword = (payload: any) =>
   typeof payload === 'object' &&
   Array.isArray(payload._schema) &&
   !!payload._schema?.find(
@@ -483,25 +491,29 @@ const isNeedsSSHPrivateKeyPassword = (payload: unknown) =>
       e === 'Must provide a private key password for the ssh tunnel',
   );
 
-export const isAlreadyExists = (payload: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isAlreadyExists = (payload: any) =>
   typeof payload === 'string' &&
   payload.includes('already exists and `overwrite=true` was not passed');
 
-export const getPasswordsNeeded = (errors: Record<string, unknown>[]) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getPasswordsNeeded = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsPassword(payload))
       .map(([fileName]) => fileName),
   );
 
-export const getSSHPasswordsNeeded = (errors: Record<string, unknown>[]) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSSHPasswordsNeeded = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsSSHPassword(payload))
       .map(([fileName]) => fileName),
   );
 
-export const getSSHPrivateKeysNeeded = (errors: Record<string, unknown>[]) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSSHPrivateKeysNeeded = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsSSHPrivateKey(payload))
@@ -509,7 +521,8 @@ export const getSSHPrivateKeysNeeded = (errors: Record<string, unknown>[]) =>
   );
 
 export const getSSHPrivateKeyPasswordsNeeded = (
-  errors: Record<string, unknown>[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errors: Record<string, any>[],
 ) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
@@ -517,7 +530,8 @@ export const getSSHPrivateKeyPasswordsNeeded = (
       .map(([fileName]) => fileName),
   );
 
-export const getAlreadyExists = (errors: Record<string, unknown>[]) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getAlreadyExists = (errors: Record<string, any>[]) =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isAlreadyExists(payload))
@@ -531,20 +545,23 @@ const ENCRYPTED_EXTRA_FIELD_REGEX =
   /^Must provide value for masked_encrypted_extra field: (.+?)(?:\s+\((.+)\))?$/;
 
 export /* eslint-disable no-underscore-dangle */
-const isNeedsEncryptedExtraField = (payload: unknown) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isNeedsEncryptedExtraField = (payload: any) =>
   typeof payload === 'object' &&
   Array.isArray(payload._schema) &&
   payload._schema?.some((e: string) => ENCRYPTED_EXTRA_FIELD_REGEX.test(e));
 
 export const getEncryptedExtraFieldsNeeded = (
-  errors: Record<string, unknown>[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errors: Record<string, any>[],
 ): FileEncryptedExtraFields[] =>
   errors.flatMap(error =>
     Object.entries(error.extra)
       .filter(([, payload]) => isNeedsEncryptedExtraField(payload))
       .map(([fileName, payload]) => ({
         fileName,
-        fields: (payload as Record<string, unknown>)._schema
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        fields: (payload as any)._schema
           .filter((e: string) => ENCRYPTED_EXTRA_FIELD_REGEX.test(e))
           .map((e: string) => {
             const match = e.match(ENCRYPTED_EXTRA_FIELD_REGEX);
@@ -556,7 +573,8 @@ export const getEncryptedExtraFieldsNeeded = (
       })),
   );
 
-export const hasTerminalValidation = (errors: Record<string, unknown>[]) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const hasTerminalValidation = (errors: Record<string, any>[]) =>
   errors.some(error => {
     const noIssuesCodes = Object.entries(error.extra).filter(
       ([key]) => key !== 'issue_codes',

@@ -69,7 +69,8 @@ export default function sqlLabReducer(
   state: SqlLabState = {} as SqlLabState,
   action: SqlLabAction,
 ): SqlLabState {
-  const actionHandlers: Record<string, () => unknown> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const actionHandlers: Record<string, () => any> = {
     [actions.ADD_QUERY_EDITOR]() {
       const mergeUnsavedState = alterInArr(
         state,
@@ -94,7 +95,8 @@ export default function sqlLabReducer(
       return alterInArr(
         state,
         'queryEditors',
-        existing as unknown,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        existing as any,
         {
           remoteId: result!.remoteId,
           name: (query as { name: string }).name,
@@ -132,7 +134,8 @@ export default function sqlLabReducer(
         autorun: true,
         sql: action.query!.sql,
         queryLimit: action.query!.queryLimit,
-        maxRow: (action.query as unknown)?.maxRow,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        maxRow: (action.query as any)?.maxRow,
       };
       const stateWithoutUnsavedState = {
         ...state,
@@ -140,7 +143,8 @@ export default function sqlLabReducer(
       };
       return sqlLabReducer(
         stateWithoutUnsavedState,
-        actions.addQueryEditor(qe as unknown),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        actions.addQueryEditor(qe as any),
       );
     },
     [actions.REMOVE_QUERY_EDITOR]() {
@@ -154,7 +158,9 @@ export default function sqlLabReducer(
       const qeIds = newState.queryEditors.map(
         (qe: QueryEditor) => qe.tabViewId ?? qe.id,
       );
-      const queries: Record<string, unknown> = {};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const queries: any = {};
       Object.keys(state.queries).forEach(k => {
         const query = state.queries[k];
         if (qeIds.indexOf(query.sqlEditorId) > -1) {
@@ -391,9 +397,8 @@ export default function sqlLabReducer(
       });
     },
     [actions.CLEAR_QUERY_RESULTS]() {
-      const newResults = {
-        ...(action.query as Record<string, unknown>).results,
-      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const newResults = { ...(action.query as any).results };
       newResults.data = [];
       return alterInObject(state, 'queries', action.query!, {
         results: newResults,
@@ -414,7 +419,8 @@ export default function sqlLabReducer(
       ) {
         return state;
       }
-      const alts: Record<string, unknown> = {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const alts: any = {
         endDttm: now(),
         progress: 100,
         results: action.results,
@@ -715,8 +721,10 @@ export default function sqlLabReducer(
       };
     },
     [actions.SET_DATABASES]() {
-      const databases: Record<string, unknown> = {};
-      (action.databases as unknown[])!.forEach((db: unknown) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const databases: any = {};
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (action.databases as any[])!.forEach((db: any) => {
         databases[db.id] = {
           ...db,
           extra_json: JSON.parse(db.extra || ''),
@@ -729,8 +737,10 @@ export default function sqlLabReducer(
       // Fetch the updates to the queries present in the store.
       let change = false;
       let { queriesLastUpdate } = state;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Object.entries(action.alteredQueries!).forEach(
-        ([id, changedQuery]: [string, unknown]) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ([id, changedQuery]: [string, any]) => {
           if (
             !state.queries.hasOwnProperty(id) ||
             (state.queries[id].state !== QueryState.Stopped &&
@@ -805,7 +815,8 @@ export default function sqlLabReducer(
             }
             return true;
           })
-          .map(([id, query]: [string, unknown]) => [
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .map(([id, query]: [string, any]) => [
             id,
             {
               ...query,

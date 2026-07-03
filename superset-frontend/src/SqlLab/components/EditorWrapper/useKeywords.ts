@@ -116,7 +116,8 @@ export function useKeywords(
     const tables: { value: string; label: string; schema: string }[] = [];
     const seen = new Set<string>();
     const queries = apiState.queries ?? {};
-    for (const entry of Object.values(queries) as unknown[]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for (const entry of Object.values(queries) as any[]) {
       const arg = entry?.originalArgs;
       if (
         arg?.dbId === dbId &&
@@ -146,7 +147,8 @@ export function useKeywords(
     if (skipFetch || !dbId || !apiState) return [];
     const columns = new Set<string>();
     const queries = apiState.queries ?? {};
-    for (const entry of Object.values(queries) as unknown[]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for (const entry of Object.values(queries) as any[]) {
       const arg = entry?.originalArgs;
       if (
         entry?.status === 'fulfilled' &&
@@ -162,7 +164,8 @@ export function useKeywords(
     return [...columns];
   }, [dbId, normalizedCatalog, apiState, skipFetch]);
 
-  const insertMatch = useEffectEvent((editor: Editor, data: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const insertMatch = useEffectEvent((editor: Editor, data: any) => {
     if (data.meta === 'table') {
       dispatch(
         addTable(

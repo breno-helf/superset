@@ -89,7 +89,8 @@ export function CustomFrame(props: FrameComponentProps) {
     }
   }
 
-  function onAnchorMode(option: unknown) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function onAnchorMode(option: any) {
     const radioValue = option.target.value;
     if (radioValue === 'now') {
       props.onChange(

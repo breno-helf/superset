@@ -91,8 +91,10 @@ export type LocalStorageValues = {
  * */
 export function dangerouslyGetItemDoNotUse(
   key: string,
-  defaultValue: unknown,
-): unknown {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaultValue: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
   try {
     const value = localStorage.getItem(key);
     if (value === null) {
@@ -111,7 +113,8 @@ export function dangerouslyGetItemDoNotUse(
  * Instead, use getItem and setItem. Any legacy uses should be updated/migrated in future
  * Superset versions (as they may require breaking changes).
  * */
-export function dangerouslySetItemDoNotUse(key: string, value: unknown): void {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function dangerouslySetItemDoNotUse(key: string, value: any): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {

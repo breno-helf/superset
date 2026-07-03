@@ -46,7 +46,8 @@ const Code = styled.code`
 export type TemplateParamsEditorProps = {
   queryEditorId: string;
   language: 'yaml' | 'json';
-  onChange: (params: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (params: any) => void;
 };
 
 const TemplateParamsEditor = ({
@@ -65,7 +66,8 @@ const TemplateParamsEditor = ({
       setParsedJSON(JSON.parse(code));
       setIsValid(true);
     } catch {
-      setParsedJSON({} as unknown);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setParsedJSON({} as any);
       setIsValid(false);
     }
   }, [code]);

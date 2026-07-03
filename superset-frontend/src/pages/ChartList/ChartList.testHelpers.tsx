@@ -230,7 +230,8 @@ export const mockCharts = [
 ];
 
 // Shared store utilities
-export const createMockStore = (initialState: Record<string, unknown> = {}) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createMockStore = (initialState: any = {}) =>
   configureStore({
     reducer: {
       user: (state = initialState.user || {}) => state,
@@ -245,7 +246,8 @@ export const createMockStore = (initialState: Record<string, unknown> = {}) =>
       }),
   });
 
-export const createDefaultStoreState = (user: unknown) => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createDefaultStoreState = (user: any) => ({
   user,
   common: {
     conf: {
@@ -257,7 +259,8 @@ export const createDefaultStoreState = (user: unknown) => ({
   },
 });
 
-export const renderChartList = (user: unknown, props = {}, storeState = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const renderChartList = (user: any, props = {}, storeState = {}) => {
   const defaultStoreState = createDefaultStoreState(user);
   const storeStateWithUser = {
     ...defaultStoreState,

@@ -23,7 +23,8 @@ import {
   handleDeprecatedControls,
 } from 'src/explore/store';
 
-(window as Record<string, unknown>).featureFlags = {};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(window as any).featureFlags = {};
 
 beforeAll(() => {
   getChartControlPanelRegistry().registerValue('test-chart', {
@@ -42,7 +43,8 @@ afterAll(() => {
 });
 
 // Helper: build ExploreState for getControlsState
-const buildExploreState = (controlOverrides: Record<string, unknown> = {}) => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const buildExploreState = (controlOverrides: Record<string, any> = {}) => ({
   datasource: { type: 'table' },
   controls: Object.fromEntries(
     Object.entries(controlOverrides).map(([k, v]) => [k, { value: v }]),
@@ -93,8 +95,10 @@ test('getControlsState resets stale matrixify_mode_rows to disabled when matrixi
     matrixify_mode_rows: 'dimensions', // stale pre-revamp default
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
-  const modeControl = result.matrixify_mode_rows as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const modeControl = result.matrixify_mode_rows as any;
   expect(modeControl?.value).toBe('disabled');
 });
 
@@ -106,8 +110,10 @@ test('getControlsState resets stale matrixify_mode_columns to disabled when matr
     matrixify_mode_columns: 'metrics', // stale pre-revamp default
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
-  const modeControl = result.matrixify_mode_columns as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const modeControl = result.matrixify_mode_columns as any;
   expect(modeControl?.value).toBe('disabled');
 });
 
@@ -120,8 +126,10 @@ test('getControlsState preserves matrixify mode values when matrixify_enable is 
     matrixify_mode_rows: 'dimensions',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
-  const modeControl = result.matrixify_mode_rows as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const modeControl = result.matrixify_mode_rows as any;
   expect(modeControl?.value).toBe('dimensions');
 });
 
@@ -134,8 +142,10 @@ test('getControlsState preserves matrixify mode values when matrixify_enable is 
     matrixify_mode_rows: 'dimensions',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
-  const modeControl = result.matrixify_mode_rows as unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const modeControl = result.matrixify_mode_rows as any;
   // matrixify_enable key IS present (just false) — migration does NOT fire
   expect(modeControl?.value).toBe('dimensions');
 });
@@ -149,9 +159,12 @@ test('getControlsState is idempotent when matrixify modes already disabled', () 
     matrixify_mode_columns: 'disabled',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
-  expect((result.matrixify_mode_rows as unknown)?.value).toBe('disabled');
-  expect((result.matrixify_mode_columns as unknown)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_rows as any)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_columns as any)?.value).toBe('disabled');
 });
 
 test('getControlsState handles form_data with no matrixify keys', () => {
@@ -161,10 +174,13 @@ test('getControlsState handles form_data with no matrixify keys', () => {
     viz_type: 'test-chart',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
   // Controls should get their defaults — matrixify_mode defaults to 'disabled'
-  expect((result.matrixify_mode_rows as unknown)?.value).toBe('disabled');
-  expect((result.matrixify_mode_columns as unknown)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_rows as any)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_columns as any)?.value).toBe('disabled');
 });
 
 test('getControlsState round-trip: pre-revamp form_data produces no matrixify validation errors', () => {
@@ -179,17 +195,16 @@ test('getControlsState round-trip: pre-revamp form_data produces no matrixify va
     matrixify_mode_columns: 'metrics',
   };
 
-  const result = getControlsState(
-    state as unknown,
-    preRevampFormData as unknown,
-  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, preRevampFormData as any);
 
   // Every matrixify control should have zero validation errors
   const matrixifyControlEntries = Object.entries(result).filter(([name]) =>
     name.startsWith('matrixify_'),
   );
   const controlsWithErrors = matrixifyControlEntries.filter(
-    ([, control]) => (control as unknown)?.validationErrors?.length > 0,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ([, control]) => (control as any)?.validationErrors?.length > 0,
   );
 
   expect(controlsWithErrors).toEqual([]);
@@ -212,7 +227,8 @@ test('applyDefaultFormData normalizes stale matrixify modes for legacy charts', 
     // No matrixify_enable key — legacy chart that never used matrixify
   };
 
-  const outputFormData = applyDefaultFormData(preRevampFormData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const outputFormData = applyDefaultFormData(preRevampFormData as any);
 
   // Stale values are now normalized to 'disabled'
   expect(outputFormData.matrixify_mode_rows).toBe('disabled');
@@ -235,12 +251,16 @@ test('getControlsState preserves modes and sets matrixify_enable when old vertic
     matrixify_mode_columns: 'metrics',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
   // Vertical layout was enabled — rows mode preserved, matrixify_enable migrated
-  expect((result.matrixify_mode_rows as unknown)?.value).toBe('dimensions');
-  expect((result.matrixify_enable as unknown)?.value).toBe(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_rows as any)?.value).toBe('dimensions');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_enable as any)?.value).toBe(true);
   // Horizontal layout was NOT enabled — columns mode reset
-  expect((result.matrixify_mode_columns as unknown)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_columns as any)?.value).toBe('disabled');
 });
 
 test('getControlsState preserves modes and sets matrixify_enable when old horizontal flag is true', () => {
@@ -253,12 +273,16 @@ test('getControlsState preserves modes and sets matrixify_enable when old horizo
     matrixify_mode_columns: 'metrics',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
   // Horizontal layout was enabled — columns mode preserved, matrixify_enable migrated
-  expect((result.matrixify_mode_columns as unknown)?.value).toBe('metrics');
-  expect((result.matrixify_enable as unknown)?.value).toBe(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_columns as any)?.value).toBe('metrics');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_enable as any)?.value).toBe(true);
   // Vertical layout was NOT enabled — rows mode reset
-  expect((result.matrixify_mode_rows as unknown)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_rows as any)?.value).toBe('disabled');
 });
 
 test('getControlsState preserves both modes when both old per-axis flags are true', () => {
@@ -272,10 +296,14 @@ test('getControlsState preserves both modes when both old per-axis flags are tru
     matrixify_mode_columns: 'metrics',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
-  expect((result.matrixify_mode_rows as unknown)?.value).toBe('dimensions');
-  expect((result.matrixify_mode_columns as unknown)?.value).toBe('metrics');
-  expect((result.matrixify_enable as unknown)?.value).toBe(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_rows as any)?.value).toBe('dimensions');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_columns as any)?.value).toBe('metrics');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_enable as any)?.value).toBe(true);
 });
 
 test('getControlsState resets modes when old per-axis flags are explicitly false', () => {
@@ -289,10 +317,13 @@ test('getControlsState resets modes when old per-axis flags are explicitly false
     matrixify_mode_columns: 'metrics',
   };
 
-  const result = getControlsState(state as unknown, formData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = getControlsState(state as any, formData as any);
   // Old flags present but false — chart never used matrixify, reset stale modes
-  expect((result.matrixify_mode_rows as unknown)?.value).toBe('disabled');
-  expect((result.matrixify_mode_columns as unknown)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_rows as any)?.value).toBe('disabled');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  expect((result.matrixify_mode_columns as any)?.value).toBe('disabled');
 });
 
 // ============================================================
@@ -308,7 +339,8 @@ test('applyDefaultFormData preserves modes when old vertical flag is true', () =
     matrixify_mode_columns: 'metrics',
   };
 
-  const outputFormData = applyDefaultFormData(formData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const outputFormData = applyDefaultFormData(formData as any);
   expect(outputFormData.matrixify_mode_rows).toBe('dimensions');
   expect(outputFormData.matrixify_enable).toBe(true);
   // Horizontal not enabled — columns reset
@@ -325,7 +357,8 @@ test('applyDefaultFormData preserves modes when both old flags are true', () => 
     matrixify_mode_columns: 'metrics',
   };
 
-  const outputFormData = applyDefaultFormData(formData as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const outputFormData = applyDefaultFormData(formData as any);
   expect(outputFormData.matrixify_mode_rows).toBe('dimensions');
   expect(outputFormData.matrixify_mode_columns).toBe('metrics');
   expect(outputFormData.matrixify_enable).toBe(true);
@@ -337,7 +370,8 @@ test('applyDefaultFormData preserves modes when both old flags are true', () => 
 // ============================================================
 
 test('handleDeprecatedControls sets matrixify_enable on form_data when old vertical flag is true', () => {
-  const formData: Record<string, unknown> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const formData: any = {
     matrixify_enable_vertical_layout: true,
     matrixify_mode_rows: 'dimensions',
     matrixify_mode_columns: 'metrics',
@@ -351,7 +385,8 @@ test('handleDeprecatedControls sets matrixify_enable on form_data when old verti
 });
 
 test('handleDeprecatedControls resets modes when no matrixify_enable and no old flags', () => {
-  const formData: Record<string, unknown> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const formData: any = {
     matrixify_mode_rows: 'dimensions',
     matrixify_mode_columns: 'metrics',
   };
@@ -363,7 +398,8 @@ test('handleDeprecatedControls resets modes when no matrixify_enable and no old 
 });
 
 test('handleDeprecatedControls is idempotent — no-op when matrixify_enable already present', () => {
-  const formData: Record<string, unknown> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const formData: any = {
     matrixify_enable: true,
     matrixify_mode_rows: 'dimensions',
     matrixify_mode_columns: 'metrics',

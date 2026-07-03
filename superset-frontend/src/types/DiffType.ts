@@ -24,13 +24,15 @@ export type FilterItemType = {
 };
 
 export type DiffItemType<
-  T = FilterItemType | number | string | Record<string | number, unknown>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T = FilterItemType | number | string | Record<string | number, any>,
 > =
   | T[]
   | boolean
   | number
   | string
-  | Record<string | number, unknown>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | Record<string | number, any>
   | null
   | undefined;
 

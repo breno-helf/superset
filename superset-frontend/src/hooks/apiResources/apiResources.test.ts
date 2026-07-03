@@ -30,13 +30,15 @@ const fakeApiResult = {
   name: 'fake api result',
 };
 
-const nameToAllCaps = (thing: unknown) => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const nameToAllCaps = (thing: any) => ({
   ...thing,
   name: thing.name.toUpperCase(),
 });
 
 jest.mock('@superset-ui/core', () => ({
-  ...jest.requireActual<unknown>('@superset-ui/core'),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...jest.requireActual<any>('@superset-ui/core'),
   makeApi: jest
     .fn()
     .mockReturnValue(jest.fn().mockResolvedValue(fakeApiResult)),
@@ -84,9 +86,8 @@ describe('apiResource hooks', () => {
 
     test('handles api errors', async () => {
       const fakeError = new Error('fake api error');
-      (makeApi as Record<string, unknown>).mockReturnValue(
-        jest.fn().mockRejectedValue(fakeError),
-      );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (makeApi as any).mockReturnValue(jest.fn().mockRejectedValue(fakeError));
       const { result } = renderHook(() =>
         useApiResourceFullBody('/test/endpoint'),
       );
@@ -125,7 +126,8 @@ describe('apiResource hooks', () => {
     });
 
     test('works while loading', () => {
-      const nameToAllCaps = (thing: unknown) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const nameToAllCaps = (thing: any) => ({
         ...thing,
         name: thing.name.toUpperCase(),
       });
@@ -150,7 +152,8 @@ describe('apiResource hooks', () => {
   // eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
   describe('useApiV1Endpoint', () => {
     test('resolves to the value from the api', async () => {
-      (makeApi as Record<string, unknown>).mockReturnValue(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (makeApi as any).mockReturnValue(
         jest.fn().mockResolvedValue({
           meta: 'data',
           count: 1,

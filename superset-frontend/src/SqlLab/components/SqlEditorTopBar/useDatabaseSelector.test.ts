@@ -196,7 +196,8 @@ test('dispatches setDatabases action on getDbList', () => {
   };
 
   act(() => {
-    result.current.getDbList(newDatabase as unknown);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    result.current.getDbList(newDatabase as any);
   });
 
   const actions = store.getActions();

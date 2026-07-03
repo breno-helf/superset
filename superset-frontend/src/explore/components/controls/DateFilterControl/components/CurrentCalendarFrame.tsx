@@ -49,7 +49,8 @@ export function CurrentCalendarFrame({ onChange, value }: FrameComponentProps) {
           wrap: true,
         }}
         size="large"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onChange={(e: any) => {
           let newValue = e.target.value;
           newValue = newValue.trim();
           if (newValue === '') return;

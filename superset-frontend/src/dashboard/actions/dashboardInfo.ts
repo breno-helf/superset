@@ -46,7 +46,8 @@ export function dashboardInfoChanged(newInfo: Partial<DashboardInfo>) {
   return { type: DASHBOARD_INFO_UPDATED, newInfo };
 }
 
-export function nativeFiltersConfigChanged(newInfo: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function nativeFiltersConfigChanged(newInfo: Record<string, any>) {
   return { type: DASHBOARD_INFO_FILTERS_CHANGED, newInfo };
 }
 

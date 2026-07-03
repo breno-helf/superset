@@ -97,7 +97,8 @@ test('validateTheme errors on empty theme object', () => {
 });
 
 test('validateTheme errors on null theme config', () => {
-  const result = validateTheme(null as unknown);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = validateTheme(null as any);
 
   expect(result.valid).toBe(false);
   expect(result.errors).toHaveLength(1);
@@ -106,7 +107,8 @@ test('validateTheme errors on null theme config', () => {
 
 test('validateTheme allows theme with only algorithm', () => {
   const theme: AnyThemeConfig = {
-    algorithm: 'dark' as unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    algorithm: 'dark' as any,
   };
 
   const result = validateTheme(theme);

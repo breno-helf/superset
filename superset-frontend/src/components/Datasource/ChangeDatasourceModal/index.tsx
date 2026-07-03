@@ -100,7 +100,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
   onHide,
   show,
 }) => {
-  const [filter, setFilter] = useState<unknown>(undefined);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [filter, setFilter] = useState<any>(undefined);
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [sortBy, setSortBy] = useState<SortByType>(DATASET_SORT_BY);
   const [confirmChange, setConfirmChange] = useState(false);
@@ -184,7 +185,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
       addSuccessToast(t('Successfully changed %s!', datasetLabelLower()));
     } catch (response) {
       getClientErrorObject(response).then(
-        ({ error, message }: { error: unknown; message: string }) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ({ error, message }: { error: any; message: string }) => {
           const errorMessage = error
             ? error.error || error.statusText || error
             : message;
@@ -200,7 +202,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
 
   const columns = [
     {
-      Cell: ({ row: { original } }: unknown) => (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      Cell: ({ row: { original } }: any) => (
         <StyledSpan
           role="button"
           tabIndex={0}
@@ -236,7 +239,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
         row: {
           original: { owners = [] },
         },
-      }: unknown) => <FacePile users={owners} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      }: any) => <FacePile users={owners} />,
       Header: t('Owners'),
       id: 'owners',
       disableSortBy: true,

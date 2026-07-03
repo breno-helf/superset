@@ -149,14 +149,16 @@ const RolesList = lazy(
   () => import(/* webpackChunkName: "RolesList" */ 'src/pages/RolesList'),
 );
 
-const UsersList: LazyExoticComponent<unknown> = lazy(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const UsersList: LazyExoticComponent<any> = lazy(
   () => import(/* webpackChunkName: "UsersList" */ 'src/pages/UsersList'),
 );
 
 const UserInfo = lazy(
   () => import(/* webpackChunkName: "UserInfo" */ 'src/pages/UserInfo'),
 );
-const ActionLogList: LazyExoticComponent<unknown> = lazy(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ActionLogList: LazyExoticComponent<any> = lazy(
   () => import(/* webpackChunkName: "ActionLogList" */ 'src/pages/ActionLog'),
 );
 
@@ -168,7 +170,8 @@ const Register = lazy(
   () => import(/* webpackChunkName: "Register" */ 'src/pages/Register'),
 );
 
-const GroupsList: LazyExoticComponent<unknown> = lazy(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const GroupsList: LazyExoticComponent<any> = lazy(
   () => import(/* webpackChunkName: "GroupsList" */ 'src/pages/GroupsList'),
 );
 const UserRegistrations = lazy(
@@ -191,9 +194,12 @@ const RedirectWarning = lazy(
 
 type Routes = {
   path: string;
-  Component: ComponentType<Record<string, unknown>>;
-  Fallback?: ComponentType<Record<string, unknown>>;
-  props?: ComponentProps<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: ComponentType<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Fallback?: ComponentType<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props?: ComponentProps<any>;
 }[];
 
 export const routes: Routes = [

@@ -95,7 +95,8 @@ export const FilterInput = ({
   onChangeHandler(filterText: string): void;
   shouldFocus?: boolean;
 }) => {
-  const inputRef: RefObject<unknown> = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const inputRef: RefObject<any> = useRef(null);
 
   useEffect(() => {
     if (inputRef.current && shouldFocus) {
@@ -124,7 +125,8 @@ export const FilterInput = ({
     <Input
       prefix={<Icons.SearchOutlined iconSize="l" />}
       placeholder={t('Search')}
-      onChange={(event: unknown) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onChange={(event: any) => {
         const filterText = event.target.value;
         debouncedChangeHandler(filterText);
       }}
@@ -139,11 +141,13 @@ export const FilterInput = ({
 
 export const useFilteredTableData = (
   filterText: string,
-  data?: Record<string, unknown>[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data?: Record<string, any>[],
 ) => {
   const rowsAsStrings = useMemo(
     () =>
-      data?.map((row: Record<string, unknown>) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data?.map((row: Record<string, any>) =>
         Object.values(row).map(value =>
           value ? value.toString().toLowerCase() : t('N/A'),
         ),

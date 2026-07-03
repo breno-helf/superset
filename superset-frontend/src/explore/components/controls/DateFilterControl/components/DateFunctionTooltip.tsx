@@ -104,7 +104,8 @@ holiday("Easter Monday", datetime("2019"), "UK")`}</code>
   </>
 );
 
-const StyledTooltip = (props: Record<string, unknown>) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const StyledTooltip = (props: any) => {
   const theme = useTheme();
   return (
     <ClassNames>
@@ -142,6 +143,7 @@ const StyledTooltip = (props: Record<string, unknown>) => {
   );
 };
 
-export default function DateFunctionTooltip(props: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function DateFunctionTooltip(props: any) {
   return <StyledTooltip title={TIME_PICKER_HELPER} {...props} />;
 }

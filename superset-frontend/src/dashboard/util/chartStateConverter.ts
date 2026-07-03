@@ -145,7 +145,8 @@ export function hasChartStateConverter(vizType: string): boolean {
  * ```
  */
 export function hasStatefulCharts(
-  sliceEntities: Record<string, unknown> | null | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sliceEntities: Record<string, any> | null | undefined,
 ): boolean {
   if (!sliceEntities) {
     return false;

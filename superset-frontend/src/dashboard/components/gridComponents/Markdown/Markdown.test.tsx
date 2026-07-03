@@ -119,7 +119,8 @@ const setup = async (
   let utils: RenderResult | undefined;
   await act(async () => {
     utils = render(
-      <MarkdownConnected {...(defaultProps as unknown)} {...overrideProps} />,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      <MarkdownConnected {...(defaultProps as any)} {...overrideProps} />,
       {
         useDnd: true,
         store: mockStore,
@@ -282,7 +283,8 @@ test('should resize editor when width changes', async () => {
   await act(async () => {
     rerender(
       <MarkdownConnected
-        {...(defaultProps as unknown)}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(defaultProps as any)}
         availableColumnCount={6}
         columnWidth={100}
         component={{
@@ -314,7 +316,8 @@ test('should update content when undo/redo changes occur', async () => {
   await act(async () => {
     rerender(
       <MarkdownConnected
-        {...(defaultProps as unknown)}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(defaultProps as any)}
         undoLength={2}
         redoLength={1}
         component={{
@@ -341,7 +344,8 @@ test('should adjust width based on parent type', async () => {
     rerender(
       <Provider store={mockStore}>
         <MarkdownConnected
-          {...(defaultProps as unknown)}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          {...(defaultProps as any)}
           parentComponent={mockLayout.present.CHART_ID}
         />
       </Provider>,
