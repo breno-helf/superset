@@ -67,14 +67,14 @@ export const setNativeFilterFieldValues = (
 };
 
 export const getControlItems = (
-  controlConfig: { [key: string]: any } = {},
+  controlConfig: { [key: string]: unknown } = {},
 ): CustomControlItem[] =>
-  (flatMapDeep(controlConfig.controlPanelSections)?.reduce(
-    (acc: any, { controlSetRows = [] }: any) => [
+  (flatMapDeep(controlConfig.controlPanelSections as unknown[])?.reduce(
+    (acc: CustomControlItem[], { controlSetRows = [] }: { controlSetRows?: unknown[] }) => [
       ...acc,
       ...flatMapDeep(controlSetRows),
     ],
-    [],
+    [] as CustomControlItem[],
   ) as CustomControlItem[]) ?? [];
 
 // TODO: add column_types field to Dataset

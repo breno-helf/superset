@@ -72,10 +72,17 @@ const getUISchema = () => scheduledQueriesConf?.UISCHEMA;
 
 const getValidationRules = () => scheduledQueriesConf?.VALIDATION || [];
 
+interface ValidationRule {
+  name: string;
+  arguments: string[];
+  container?: string;
+  message: string;
+}
+
 const getValidator = () => {
-  const rules: any = getValidationRules();
-  return (formData: Record<string, any>, errors: FormValidation) => {
-    rules.forEach((rule: any) => {
+  const rules: ValidationRule[] = getValidationRules() as ValidationRule[];
+  return (formData: Record<string, unknown>, errors: FormValidation) => {
+    rules.forEach((rule: ValidationRule) => {
       const test = validators[rule.name as keyof typeof validators];
       const args = rule.arguments.map((name: string) => formData[name]);
       const container = rule.container || rule.arguments.slice(-1)[0];

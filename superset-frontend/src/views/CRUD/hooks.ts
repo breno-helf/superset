@@ -259,13 +259,13 @@ export function useListViewResource<D extends object = any>(
 }
 
 // In the same vein as above, a hook for viewing a single instance of a resource (given id)
-interface SingleViewResourceState<D extends object = any> {
+interface SingleViewResourceState<D extends object = Record<string, unknown>> {
   loading: boolean;
   resource: D | null;
-  error: any | null;
+  error: unknown;
 }
 
-export function useSingleViewResource<D extends object = any>(
+export function useSingleViewResource<D extends object = Record<string, unknown>>(
   resourceName: string,
   resourceLabel: string, // resourceLabel for translations
   handleErrorMsg: (errorMsg: string) => void,
@@ -857,7 +857,7 @@ export function useDatabaseValidation() {
                 if (err.extra?.ssh_tunnel) return true;
                 return allowed.includes(err.error_type) || onCreate;
               })
-              .reduce((acc: JsonObject, err2: any) => {
+              .reduce((acc: JsonObject, err2: { message?: string; extra?: Record<string, unknown>; error_type?: string }) => {
                 const { message, extra } = err2;
 
                 if (extra?.catalog) {

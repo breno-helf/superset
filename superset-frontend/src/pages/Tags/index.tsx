@@ -192,7 +192,7 @@ function TagList(props: TagListProps) {
         id: 'changed_on_delta_humanized',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
           const handleEdit = () => handleTagEdit(original);
           return (
             <Actions className="actions">

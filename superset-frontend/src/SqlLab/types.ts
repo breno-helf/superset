@@ -101,8 +101,8 @@ export interface Table {
 export type SqlLabRootState = {
   sqlLab: {
     activeSouthPaneTab: string | number; // default is string; action.newQuery.id is number
-    alerts: any[];
-    databases: Record<string, any>;
+    alerts: { id: string; msg: string; type: string }[];
+    databases: Record<string, Record<string, unknown>>;
     dbConnect: boolean;
     offline: boolean;
     queries: Record<string, QueryResponse & { inLocalStorage?: boolean }>;

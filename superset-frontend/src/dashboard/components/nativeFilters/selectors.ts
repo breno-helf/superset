@@ -40,6 +40,20 @@ export enum IndicatorStatus {
   CrossFilterApplied = 'CROSS_FILTER_APPLIED',
 }
 
+interface QueryFilterMetadata {
+  column: string;
+}
+
+interface ChartQueryResponse {
+  applied_filters?: QueryFilterMetadata[];
+  rejected_filters?: QueryFilterMetadata[];
+}
+
+interface ChartState {
+  queriesResponse?: ChartQueryResponse[];
+  [key: string]: unknown;
+}
+
 const TIME_GRANULARITY_FIELDS = new Set(Object.values(TIME_FILTER_MAP));
 
 // As of 2020-09-28, the Dataset type in superset-ui is incorrect.
@@ -53,7 +67,7 @@ type Datasource = {
 type Filter = {
   chartId: number;
   columns: { [key: string]: string | string[] };
-  scopes: { [key: string]: any };
+  scopes: { [key: string]: unknown };
   labels: { [key: string]: string };
   isDateFilter: boolean;
   directPathToFilter: string[];
@@ -78,7 +92,7 @@ const selectIndicatorValue = (
   columnKey: string,
   filter: Filter,
   datasource: Datasource,
-): any => {
+): string | string[] | null => {
   const values = filter.columns[columnKey];
   const arrValues = Array.isArray(values) ? values : [values];
 
@@ -142,9 +156,9 @@ const selectIndicatorsForChartFromFilter = (
 };
 
 const getQueryFilterMetadata = (
-  chart: any,
+  chart: ChartState,
   metadataKey: 'applied_filters' | 'rejected_filters',
-) =>
+): QueryFilterMetadata[] =>
   ensureIsArray(chart?.queriesResponse).flatMap(
     queryResponse =>
       (metadataKey === 'applied_filters'
@@ -152,10 +166,10 @@ const getQueryFilterMetadata = (
         : queryResponse?.rejected_filters) || [],
   );
 
-const getAppliedColumns = (chart: any): Set<string> =>
+const getAppliedColumns = (chart: ChartState): Set<string> =>
   new Set(
     getQueryFilterMetadata(chart, 'applied_filters').map(
-      (filter: any) => filter.column,
+      (filter: QueryFilterMetadata) => filter.column,
     ),
   );
 
@@ -166,7 +180,7 @@ const getAppliedColumns = (chart: any): Set<string> =>
  * applied_filter_columns populated.
  */
 export const getAppliedColumnsWithFallback = (
-  chart: any,
+  chart: ChartState,
   nativeFilters?: Filters,
   dataMask?: DataMaskStateWithId,
   chartId?: number,
@@ -174,7 +188,7 @@ export const getAppliedColumnsWithFallback = (
   // First try to get from query response (preferred source of truth)
   const queryAppliedFilters = getQueryFilterMetadata(chart, 'applied_filters');
   if (queryAppliedFilters.length > 0) {
-    return new Set(queryAppliedFilters.map((filter: any) => filter.column));
+    return new Set(queryAppliedFilters.map((filter: QueryFilterMetadata) => filter.column));
   }
 
   // Fallback: derive from native filters and dataMask when query response is empty
@@ -199,9 +213,9 @@ export const getAppliedColumnsWithFallback = (
   return new Set<string>();
 };
 
-const getRejectedColumns = (chart: any): Set<string> =>
+const getRejectedColumns = (chart: ChartState): Set<string> =>
   new Set(
-    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: any) =>
+    getQueryFilterMetadata(chart, 'rejected_filters').map((filter: QueryFilterMetadata) =>
       getColumnLabel(filter.column),
     ),
   );
@@ -209,7 +223,7 @@ const getRejectedColumns = (chart: any): Set<string> =>
 export type Indicator = {
   column?: QueryFormColumn;
   name: string;
-  value?: any;
+  value?: string | string[] | null;
   status?: IndicatorStatus;
   path?: string[];
   customColumnLabel?: string;
@@ -262,7 +276,7 @@ export const selectIndicatorsForChart = (
   chartId: number,
   filters: { [key: number]: Filter },
   datasources: { [key: string]: Datasource },
-  chart: any,
+  chart: ChartState,
 ): Indicator[] => {
   // for now we only need to know which columns are compatible/incompatible,
   // so grab the columns from the applied/rejected filters
@@ -403,7 +417,7 @@ export const selectNativeIndicatorsForChart = (
   nativeFilters: Filters,
   dataMask: DataMaskStateWithId,
   chartId: number,
-  chart: any,
+  chart: ChartState,
   chartLayoutItems: LayoutItem[],
   chartConfiguration: ChartConfiguration = defaultChartConfig,
 ): Indicator[] => {

@@ -468,7 +468,7 @@ function SavedQueryList({
         hidden: true,
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
           const handlePreview = () => {
             handleSavedQueryPreview(original.id);
           };

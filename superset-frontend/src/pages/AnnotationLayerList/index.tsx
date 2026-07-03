@@ -185,7 +185,7 @@ function AnnotationLayersList({
         id: 'changed_on',
       },
       {
-        Cell: ({ row: { original } }: any) => {
+        Cell: ({ row: { original } }: { row: { original: Record<string, unknown> } }) => {
           const handleEdit = () => handleAnnotationLayerEdit(original);
           const handleDelete = () => setLayerCurrentlyDeleting(original);
 

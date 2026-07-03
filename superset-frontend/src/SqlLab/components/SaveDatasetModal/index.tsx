@@ -231,7 +231,7 @@ export const SaveDatasetModal = ({
   );
   const [shouldOverwriteDataset, setShouldOverwriteDataset] = useState(false);
   const [datasetToOverwrite, setDatasetToOverwrite] = useState<
-    Record<string, any>
+    Record<string, unknown>
   >({});
   const [selectedDatasetToOverwrite, setSelectedDatasetToOverwrite] = useState<
     SelectValue | undefined
@@ -400,7 +400,7 @@ export const SaveDatasetModal = ({
       });
   };
 
-  const handleOverwriteDatasetOption = (value: SelectValue, option: any) => {
+  const handleOverwriteDatasetOption = (value: SelectValue, option: Record<string, unknown>) => {
     setDatasetToOverwrite(option);
     setSelectedDatasetToOverwrite(value);
   };
