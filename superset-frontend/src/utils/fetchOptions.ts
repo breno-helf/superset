@@ -25,14 +25,14 @@ import { Dispatch, SetStateAction } from 'react';
 interface FetchPaginatedOptions {
   endpoint: string;
   pageSize?: number;
-  setData: (data: Record<string, unknown>[]) => void;
-  setLoadingState: Dispatch<SetStateAction<boolean | Record<string, boolean>>>;
+  setData: (data: any[]) => void;
+  setLoadingState: Dispatch<SetStateAction<any>>;
   filters?: SupersetFilter[];
   orderBy?: { column: string; direction: 'asc' | 'desc' };
   loadingKey: string;
   addDangerToast: (message: string) => void;
   errorMessage?: string;
-  mapResult?: (item: Record<string, unknown>) => Record<string, unknown>;
+  mapResult?: (item: any) => any;
 }
 
 interface QueryObj {
@@ -59,7 +59,7 @@ export const fetchPaginatedData = async ({
   loadingKey,
   addDangerToast,
   errorMessage = 'Error while fetching data',
-  mapResult = (item: Record<string, unknown>) => item,
+  mapResult = (item: any) => item,
 }: FetchPaginatedOptions) => {
   try {
     const fetchPage = async (pageIndex: number) => {
