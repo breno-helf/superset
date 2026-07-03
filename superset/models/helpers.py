@@ -62,7 +62,6 @@ from sqlalchemy.exc import MultipleResultsFound
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import (
     declared_attr,
-    Mapped,
     Mapper,
     Session,
     validates,
@@ -595,7 +594,7 @@ class AuditMixinNullable(AuditMixin):
     )
 
     @declared_attr
-    def created_by_fk(self) -> Mapped[Optional[int]]:  # pylint: disable=arguments-renamed
+    def created_by_fk(self) -> sa.Column:  # type: ignore[override]  # pylint: disable=arguments-renamed
         return sa.Column(
             sa.Integer,
             sa.ForeignKey("ab_user.id"),
@@ -604,7 +603,7 @@ class AuditMixinNullable(AuditMixin):
         )
 
     @declared_attr
-    def changed_by_fk(self) -> Mapped[Optional[int]]:  # pylint: disable=arguments-renamed
+    def changed_by_fk(self) -> sa.Column:  # type: ignore[override]  # pylint: disable=arguments-renamed
         return sa.Column(
             sa.Integer,
             sa.ForeignKey("ab_user.id"),
