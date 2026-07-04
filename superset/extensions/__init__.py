@@ -34,6 +34,16 @@ except ImportError:
         return SQLAlchemy
 
 
+# Flask-SQLAlchemy 3.x changed session scoping from thread-local to
+# app-context-local.  Superset (and Flask-AppBuilder) rely on thread-local
+# scoping so that the same session is visible across nested app contexts.
+# Restore thread-local scoping to maintain backward compatibility.
+try:
+    from greenlet import getcurrent as _ident_func
+except ImportError:
+    from threading import get_ident as _ident_func
+
+
 from flask_caching.backends.base import BaseCache
 from flask_migrate import Migrate
 from flask_talisman import Talisman
@@ -154,7 +164,7 @@ async_query_manager: AsyncQueryManager = LocalProxy(
 cache_manager = CacheManager()
 celery_app = celery.Celery()
 csrf = CSRFProtect()
-db = get_sqla_class()()
+db = get_sqla_class()(session_options={"scopefunc": _ident_func})
 _event_logger: dict[str, Any] = {}
 encrypted_field_factory = EncryptedFieldFactory()
 event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
