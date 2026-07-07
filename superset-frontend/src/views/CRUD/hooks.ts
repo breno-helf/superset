@@ -920,14 +920,14 @@ export function useDatabaseValidation() {
         }
 
         console.error('Unexpected error during validation:', error);
-        // A request that produced no usable response (network drop, no JSON
-        // body) is not a completed validation cycle, so ``hasValidated``
-        // must stay false: otherwise the Connect button would enable
-        // without any real result. The blur snapshot is not cached for
-        // ``null`` results, so the next blur retries.
+        // On network errors or non-JSON responses, allow the user to
+        // proceed by setting hasValidated to true. The save handler
+        // performs its own validation, so enabling the Connect button
+        // is safe. Keeping hasValidated false would permanently disable
+        // the button with no obvious recovery path.
         if (isLatest()) {
           setIsValidating(false);
-          setHasValidated(false);
+          setHasValidated(true);
         }
         return null;
       }
